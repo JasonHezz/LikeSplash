@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+  <group
+      android:id="@+id/group_primary"
+      android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:checked="true"
+        android:icon="@drawable/ic_nav_home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/nav_collection"
+        android:icon="@drawable/ic_nav_collection"
+        android:title="Collection"/>
+
+    <item
+        android:id="@+id/nav_tag"
+        android:icon="@drawable/ic_nav_tags"
+        android:title="Explore"/>
+
+  </group>
+  <group
+      android:id="@+id/group_secondary"
+      android:checkableBehavior="none">
+    <item
+        android:id="@+id/nav_day_night"
+        android:checkable="false"
+        android:icon="@drawable/ic_nav_night"
+        android:title="Night"/>
+    <item
+        android:id="@+id/nav_download"
+        android:icon="@drawable/ic_nav_download"
+        android:title="Download"/>
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_nav_setting"
+        android:title="Setting"/>
+  </group>
+</menu>

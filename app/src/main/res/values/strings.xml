@@ -1,0 +1,15 @@
+<resources>
+  <string name="app_name">LikeSplash</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+
+  <plurals name="photo_plural">
+    <item quantity="zero">%d photo</item>
+    <item quantity="one">%d photo</item>
+    <item quantity="other">%d photos</item>
+  </plurals>
+
+  <!-- transition shared elements -->
+  <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
+</resources>
