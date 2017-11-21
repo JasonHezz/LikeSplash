@@ -4,4 +4,6 @@
   <color name="colorPrimaryDark">#000000</color>
 
   <color name="splash_brand">#69F0AE</color>
+
+  <color name="mtrl_divider_color">#1fffffff</color>
 </resources>
