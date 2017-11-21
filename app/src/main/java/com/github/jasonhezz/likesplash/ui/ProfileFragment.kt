@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
   private fun initToolbar() {
     user_avatar.setOnClickListener { it.showSnackbar("avatar") }
     profile_toolbar?.apply {
-      setNavigationOnClickListener { activity.supportFinishAfterTransition() }
+      setNavigationOnClickListener { activity?.supportFinishAfterTransition() }
     }
     app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
       override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
@@ -51,9 +51,6 @@ class ProfileFragment : Fragment() {
     })
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-  }
 
   private fun initViewPager() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
@@ -66,6 +63,7 @@ class ProfileFragment : Fragment() {
       addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
     tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
+    tab_layout?.isInlineLabel = true
   }
 
   override fun onAttach(context: Context?) {

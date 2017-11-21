@@ -35,7 +35,7 @@ class SearchFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_search, container, false)
   }
 
-  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     search_view?.apply {
@@ -43,7 +43,7 @@ class SearchFragment : Fragment() {
           EditorInfo.IME_FLAG_NO_EXTRACT_UI or EditorInfo.IME_FLAG_NO_FULLSCREEN
     }
     search_nav?.setOnClickListener {
-      activity.supportFinishAfterTransition()
+      activity?.supportFinishAfterTransition()
     }
   }
 

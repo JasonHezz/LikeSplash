@@ -9,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.util.*
+import com.github.jasonhezz.likesplash.util.isTranslucentNav
+import com.github.jasonhezz.likesplash.util.isTranslucentStatus
+import com.github.jasonhezz.likesplash.util.marginBottom
+import com.github.jasonhezz.likesplash.util.marginTop
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation
@@ -60,15 +63,18 @@ class HomeFragment : Fragment() {
       }
       onNavigationOnClickListener = { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
       onBarClickListener = {
-        val intent = Intent(context, SearchActivity::class.java)
-        startActivity(intent,
-            ActivityOptionsCompat.makeSceneTransitionAnimation(
-                activity,
-                V4Pair<View, String>(search_toolbar,
-                    ViewCompat.getTransitionName(search_toolbar)),
-                V4Pair<View, String>(search_nav,
-                    ViewCompat.getTransitionName(search_toolbar)))
-                .toBundle())
+        activity?.let {
+          val intent = Intent(context, SearchActivity::class.java)
+          startActivity(intent,
+              ActivityOptionsCompat.makeSceneTransitionAnimation(
+                  it,
+                  V4Pair<View, String>(search_toolbar,
+                      ViewCompat.getTransitionName(search_toolbar)),
+                  V4Pair<View, String>(search_nav,
+                      ViewCompat.getTransitionName(search_toolbar)))
+                  .toBundle())
+        }
+
       }
     }
     //BottomNavigation#onSizeChanged will auto set margin -bottomInset which not needed

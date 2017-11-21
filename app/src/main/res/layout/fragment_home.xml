@@ -33,7 +33,6 @@
       android:background="@android:color/transparent"
       app:elevation="0dp"
       >
-
     <com.github.jasonhezz.likesplash.view.SearchBar
         android:id="@+id/search_toolbar"
         android:layout_width="match_parent"
