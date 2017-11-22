@@ -34,7 +34,8 @@ class SearchArrowTransform(context: Context, attrs: AttributeSet) : Transition(c
   override fun createAnimator(sceneRoot: ViewGroup?, startValues: TransitionValues?,
       endValues: TransitionValues?): Animator? {
     if (endValues?.view is ImageButton) {
-      endValues.view.background = background
+      val iv = endValues.view as ImageButton
+      iv.setImageDrawable(background)
       return ObjectAnimator.ofFloat(background, PROGRESS, initialProgress, finalProgress)
     }
     return null
@@ -54,18 +55,15 @@ class SearchArrowTransform(context: Context, attrs: AttributeSet) : Transition(c
     }
   }
 
-  override fun getTransitionProperties(): Array<String> {
-    return arrayOf(PROPNAME_DRAWABLE)
-  }
+  override fun getTransitionProperties(): Array<String> = arrayOf(PROPNAME_DRAWABLE)
 
   companion object {
 
     const val PROPNAME_DRAWABLE = "splash:transform:progress"
 
     var PROGRESS = object : Property<DrawerArrowDrawable, Float>(Float::class.java, "progress") {
-      override fun get(drawerArrowDrawable: DrawerArrowDrawable): Float {
-        return drawerArrowDrawable.progress
-      }
+      override fun get(drawerArrowDrawable: DrawerArrowDrawable): Float =
+          drawerArrowDrawable.progress
 
       override fun set(drawerArrowDrawable: DrawerArrowDrawable, value: Float) {
         drawerArrowDrawable.progress = value
