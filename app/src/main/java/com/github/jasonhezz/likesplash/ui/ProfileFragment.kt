@@ -63,7 +63,6 @@ class ProfileFragment : Fragment() {
       addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
     tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
-    tab_layout?.isInlineLabel = true
   }
 
   override fun onAttach(context: Context?) {
