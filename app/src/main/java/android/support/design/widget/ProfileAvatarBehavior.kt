@@ -150,7 +150,7 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
       state: Parcelable?) {
     if (state is SavedState) {
       fraction = state.fraction
-    }else{
+    } else {
       super.onRestoreInstanceState(parent, child, state)
     }
   }
@@ -159,33 +159,22 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
 
     var fraction = 0f
 
-    constructor(source: Parcel, loader: ClassLoader?) : super(source, loader) {
-      fraction = source.readFloat()
+
+    private constructor(parcel: Parcel) : super(parcel) {
+      fraction = parcel.readFloat()
     }
 
-    constructor(superState: Parcelable) : super(superState) {}
+    constructor(parcelable: Parcelable) : super(parcelable)
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
       super.writeToParcel(dest, flags)
       dest.writeFloat(fraction)
     }
 
+    companion object CREATOR : Parcelable.Creator<SavedState> {
+      override fun createFromParcel(parcel: Parcel): SavedState = SavedState(parcel)
 
-    companion object {
-
-      val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.ClassLoaderCreator<SavedState> {
-        override fun createFromParcel(source: Parcel, loader: ClassLoader): SavedState {
-          return SavedState(source, loader)
-        }
-
-        override fun createFromParcel(source: Parcel): SavedState {
-          return SavedState(source, null)
-        }
-
-        override fun newArray(size: Int): Array<SavedState?> {
-          return arrayOfNulls(size)
-        }
-      }
+      override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
     }
   }
 }
