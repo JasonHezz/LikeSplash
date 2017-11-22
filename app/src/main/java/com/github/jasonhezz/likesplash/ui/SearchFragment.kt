@@ -2,8 +2,8 @@ package com.github.jasonhezz.likesplash.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.SharedElementCallback
-import android.support.v7.graphics.drawable.DrawerArrowDrawable
+import android.support.v7.widget.SearchView
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +25,6 @@ class SearchFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
-//    setEnterSharedElementCallback()
-    setEnterSharedElementCallback(object : SharedElementCallback() {
-      override fun onSharedElementEnd(sharedElementNames: MutableList<String>?,
-          sharedElements: MutableList<View>?, sharedElementSnapshots: MutableList<View>?) {
-        search_nav.setImageDrawable(DrawerArrowDrawable(context).apply { progress = 1f })
-      }
-    })
     return inflater.inflate(R.layout.fragment_search, container, false)
   }
 
@@ -41,10 +34,31 @@ class SearchFragment : Fragment() {
     search_view?.apply {
       imeOptions = imeOptions or EditorInfo.IME_ACTION_SEARCH or
           EditorInfo.IME_FLAG_NO_EXTRACT_UI or EditorInfo.IME_FLAG_NO_FULLSCREEN
+      setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+          searchFor()
+          return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+          return true
+        }
+      })
     }
     search_nav?.setOnClickListener {
+      search_nav.background = null
       activity?.supportFinishAfterTransition()
     }
+
+    scrim.setOnClickListener {
+      search_nav.background = null
+      activity?.supportFinishAfterTransition()
+    }
+  }
+
+  private fun searchFor() {
+    TransitionManager.beginDelayedTransition(container)
+    progress.visibility = View.VISIBLE
   }
 
 
