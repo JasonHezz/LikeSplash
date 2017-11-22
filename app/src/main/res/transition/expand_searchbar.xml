@@ -4,22 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:duration="400"
     android:transitionOrdering="together">
-  <!--<changeBounds>
-    <targets>
-      <target android:targetId="@id/search_toolbar"/>
-    </targets>
-  </changeBounds>-->
   <fade>
     <targets>
       <target android:targetId="@android:id/navigationBarBackground"/>
       <target android:targetId="@android:id/statusBarBackground"/>
     </targets>
   </fade>
-  <transitionSet
-      android:duration="300">
-    <transition
-        class="com.github.jasonhezz.likesplash.ui.transition.SearchArrowTransform"
-        app:finalProgress="1.0"
-        app:initialProgress="0.0"/>
-  </transitionSet>
+  <transition
+      class="com.github.jasonhezz.likesplash.ui.transition.SearchArrowTransform"
+      app:finalProgress="1.0"
+      app:initialProgress="0.0"/>
 </transitionSet>
