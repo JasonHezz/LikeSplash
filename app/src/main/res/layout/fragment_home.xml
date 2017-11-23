@@ -5,42 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    >
+    android:clipToPadding="false">
 
-  <android.support.v4.view.ViewPager
-      android:id="@+id/view_pager"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:clipChildren="false"
-      android:clipToPadding="false"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-  <it.sephiroth.android.library.bottomnavigation.BottomNavigation
-      android:id="@+id/bottom_nav"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
-      app:bbn_entries="@menu/menu_bottom_navigate"
-      app:layout_behavior="it.sephiroth.android.library.bottomnavigation.BottomBehavior"
-      />
-
-  <android.support.design.widget.AppBarLayout
-      android:id="@+id/app_bar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@android:color/transparent"
-      app:elevation="0dp"
-      >
-    <com.github.jasonhezz.likesplash.view.SearchBar
-        android:id="@+id/search_toolbar"
+    <it.sephiroth.android.library.bottomnavigation.BottomNavigation
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:transitionName="search_bar"
-        app:layout_scrollFlags="scroll|enterAlways"
-        />
-  </android.support.design.widget.AppBarLayout>
+        android:layout_gravity="bottom"
+        app:bbn_entries="@menu/menu_bottom_navigate"
+        app:layout_behavior="it.sephiroth.android.library.bottomnavigation.BottomBehavior" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.github.jasonhezz.likesplash.view.SearchBar
+            android:id="@+id/search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:transitionName="search_bar"
+            app:cardElevation="4dp"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 
