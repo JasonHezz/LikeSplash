@@ -16,7 +16,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.github.jasonhezz.likesplash.util
+package com.github.jasonhezz.likesplash.util.extension
 
 import android.app.Activity
 import android.content.Context

@@ -45,7 +45,8 @@ dependencies {
   implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
   implementation "com.android.support:gridlayout-v7:$rootProject.supportLibraryVersion"
   implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
-  implementation ('it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.2', {
+  implementation 'org.koin:koin-android:0.6.0'
+  implementation('it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.2', {
     exclude group: 'com.android.support'
   })
   implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
@@ -53,11 +54,20 @@ dependencies {
   //retrofit
   implementation 'com.squareup.retrofit2:retrofit:2.3.0'
   implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+  implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
+  //arch
   implementation "android.arch.lifecycle:extensions:1.0.0"
+  implementation "android.arch.paging:runtime:1.0.0-alpha3"
+
+  //rx
+  implementation "io.reactivex.rxjava2:rxjava:2.1.7"
+  implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
 
   implementation 'com.github.bumptech.glide:glide:3.8.0'
   implementation 'com.jakewharton.timber:timber:4.6.0'
+
   //epoxy
   implementation('com.airbnb.android:epoxy:2.7.2', {
     exclude group: 'com.android.support'

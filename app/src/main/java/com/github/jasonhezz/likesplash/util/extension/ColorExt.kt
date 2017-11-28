@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.extension
+package com.github.jasonhezz.likesplash.util.extension
 
 import android.graphics.Color
 import java.util.regex.Pattern

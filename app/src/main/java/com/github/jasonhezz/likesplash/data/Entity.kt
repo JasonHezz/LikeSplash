@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.data
 
 import java.io.Serializable
 
+
 /**
  * Created by JasonHezz on 2017/7/11.
  */
@@ -194,4 +195,4 @@ data class MonthStats(var photos: Int?,
     var new_applications: Int?,
     var new_requests: Int?)
 
-data class TrendingFeed(var next_page: String?, var photos: List<Photo>?) 
+data class TrendingFeed(var next_page: String?, var photos: List<Photo>?)

@@ -9,10 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.util.isTranslucentNav
-import com.github.jasonhezz.likesplash.util.isTranslucentStatus
-import com.github.jasonhezz.likesplash.util.marginBottom
-import com.github.jasonhezz.likesplash.util.marginTop
+import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
+import com.github.jasonhezz.likesplash.util.*
+import com.github.jasonhezz.likesplash.util.extension.isTranslucentNav
+import com.github.jasonhezz.likesplash.util.extension.isTranslucentStatus
+import com.github.jasonhezz.likesplash.util.extension.marginBottom
+import com.github.jasonhezz.likesplash.util.extension.marginTop
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation
@@ -40,7 +42,7 @@ class HomeFragment : Fragment() {
 
     tabAdapter = TabFragmentAdapter(childFragmentManager)
     tabAdapter.addFragment(ListFragment.newInstance())
-    tabAdapter.addFragment(BlankFragment.newInstance())
+    tabAdapter.addFragment(TrendingFragment.newInstance())
     tabAdapter.addFragment(BlankFragment.newInstance())
 
     initView()
@@ -55,6 +57,7 @@ class HomeFragment : Fragment() {
       }
       adapter = tabAdapter
       offscreenPageLimit = 3
+      setPageTransformer(false, FadePageTransformer())
     }
 
     search_toolbar?.apply {
@@ -74,7 +77,6 @@ class HomeFragment : Fragment() {
                       ViewCompat.getTransitionName(search_toolbar)))
                   .toBundle())
         }
-
       }
     }
     //BottomNavigation#onSizeChanged will auto set margin -bottomInset which not needed

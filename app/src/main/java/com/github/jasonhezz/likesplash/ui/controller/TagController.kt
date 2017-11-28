@@ -5,8 +5,8 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.github.jasonhezz.likesplash.data.Tag
 import com.github.jasonhezz.likesplash.data.model.TagModel_
 import com.github.jasonhezz.likesplash.data.model.title
-import com.github.jasonhezz.likesplash.util.carousel
-import com.github.jasonhezz.likesplash.util.withModelsFrom
+import com.github.jasonhezz.likesplash.util.extension.carousel
+import com.github.jasonhezz.likesplash.util.extension.withModelsFrom
 
 /**
  * Created by JavaCoder on 2017/10/16.

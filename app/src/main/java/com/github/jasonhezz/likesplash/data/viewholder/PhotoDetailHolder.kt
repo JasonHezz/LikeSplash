@@ -1,12 +1,10 @@
 package com.github.jasonhezz.likesplash.model
 
-import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.extension.hexToMaterialHex
-import com.github.jasonhezz.likesplash.util.showSnackbar
+import com.github.jasonhezz.likesplash.util.extension.hexToMaterialHex
+import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import kotlinx.android.synthetic.main.item_photo_detail.*
 
 /**

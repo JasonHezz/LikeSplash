@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.view.animation.Interpolator
 import android.widget.ImageView
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.util.AppBarStateChangeListener
-import com.github.jasonhezz.likesplash.util.State
+import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
+import com.github.jasonhezz.likesplash.util.extension.State
 import timber.log.Timber
 
 

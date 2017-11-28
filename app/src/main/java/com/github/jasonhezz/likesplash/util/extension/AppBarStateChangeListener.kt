@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.util
+package com.github.jasonhezz.likesplash.util.extension
 
 import android.support.design.widget.AppBarLayout
 
@@ -20,13 +20,15 @@ abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener 
     when {
       i == 0 -> {
         if (state != State.EXPANDED) {
-          onStateChanged(appBarLayout, State.EXPANDED)
+          onStateChanged(appBarLayout,
+              State.EXPANDED)
         }
         state = State.EXPANDED
       }
       Math.abs(i) >= appBarLayout.totalScrollRange -> {
         if (state != State.COLLAPSED) {
-          onStateChanged(appBarLayout, State.COLLAPSED)
+          onStateChanged(appBarLayout,
+              State.COLLAPSED)
         }
         state = State.COLLAPSED
       }

@@ -9,7 +9,7 @@ import android.view.Gravity
 import android.view.MenuItem
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.util.adapter.DrawerNavViewAdapter
-import com.github.jasonhezz.likesplash.util.isInNightMode
+import com.github.jasonhezz.likesplash.util.extension.isInNightMode
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
