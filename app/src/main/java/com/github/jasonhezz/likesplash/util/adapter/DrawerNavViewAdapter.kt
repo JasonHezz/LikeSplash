@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.HomeFragment
-import com.github.jasonhezz.likesplash.profile.ProfileFragment
+import com.github.jasonhezz.likesplash.ui.ProfileFragment
 import com.github.jasonhezz.likesplash.ui.BlankFragment
+import com.github.jasonhezz.likesplash.ui.HomeFragment
 
 
 /**

@@ -19,6 +19,8 @@ import android.os.Build
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 
 
 fun View.setLightStatusBar() {
@@ -85,7 +87,7 @@ infix inline fun View.showIf(condition: Boolean) {
 
 inline fun View.isGone() = visibility == View.GONE
 inline fun View.hide() {
-  visibility = View.VISIBLE
+  visibility = View.INVISIBLE
 }
 
 inline fun View.marginTop(top: Int) {
@@ -107,6 +109,10 @@ infix inline fun View.hideIf(condition: Boolean) {
   } else {
     show()
   }
+}
+
+fun ImageView.loadUrl(url: String?) {
+  Glide.with(context).load(url).into(this)
 }
 
 

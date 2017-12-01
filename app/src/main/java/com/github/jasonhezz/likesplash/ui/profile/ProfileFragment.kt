@@ -1,19 +1,21 @@
-package com.github.jasonhezz.likesplash.ui
+package com.github.jasonhezz.likesplash.ui.profile
 
-import android.content.Context
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.profile.ProfileFragment
-import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
-import com.github.jasonhezz.likesplash.util.extension.State
-import com.github.jasonhezz.likesplash.util.extension.showSnackbar
+import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.ui.ListFragment
+import com.github.jasonhezz.likesplash.util.extension.*
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -22,7 +24,18 @@ import kotlinx.android.synthetic.main.fragment_profile.*
  */
 class ProfileFragment : Fragment() {
 
+  private lateinit var viewModel: ProfileViewModel
   private lateinit var tabAdapter: TabFragmentAdapter
+  private var user: User? = null
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (arguments != null) {
+      user = arguments?.getParcelable(ARG_PARAM_USER)
+    }
+    viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+    viewModel.loadUser(user)
+  }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? =
@@ -32,10 +45,32 @@ class ProfileFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initToolbar()
     initViewPager()
+    viewModel.liveUser.observe(this, Observer {
+      user_avatar.loadUrl(it?.profile_image?.large)
+      collapsing_toolbar.title = it?.name
+      follow_btn.text = if (it?.followedByUser == true) "Following" else "UnFollow"
+      bio.text = it?.bio
+    })
+    viewModel.messages.observe(this, Observer {
+      when (it?.status) {
+        Status.REFRESHING -> {
+          intro_progress.show()
+        }
+        Status.ERROR -> {
+          intro_progress.hide()
+          view_pager.showSnackbar(it.message ?: "")
+        }
+        Status.SUCCESS -> {
+          intro_progress.hide()
+        }
+        else -> {
+        }
+      }
+    })
   }
 
   private fun initToolbar() {
-    user_avatar.setOnClickListener { it.showSnackbar("avatar") }
+//    collapsing_toolbar.title = " "
     profile_toolbar?.apply {
       setNavigationOnClickListener { activity?.supportFinishAfterTransition() }
     }
@@ -64,12 +99,26 @@ class ProfileFragment : Fragment() {
     tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
   }
 
-  override fun onAttach(context: Context?) {
-    super.onAttach(context)
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      android.R.id.home -> {
+        activity?.supportFinishAfterTransition()
+      }
+      else -> {
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 
   companion object {
+    const val ARG_PARAM_USER = "userId"
     @JvmStatic
-    fun newInstance() = ProfileFragment()
+    fun newInstance(user: User?): ProfileFragment {
+      val fragment = ProfileFragment()
+      val args = Bundle()
+      args.putParcelable(ARG_PARAM_USER, user)
+      fragment.arguments = args
+      return fragment
+    }
   }
 }
