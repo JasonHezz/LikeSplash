@@ -1,5 +1,8 @@
 package com.github.jasonhezz.likesplash.data
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 
@@ -77,6 +80,8 @@ data class Exif(
     val make: String? = null
 )
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class User(var id: String?,
     var updated_at: String?,
     var username: String?,
@@ -92,7 +97,7 @@ data class User(var id: String?,
     var total_photos: Int? = 0,
     var total_collections: Int?,
     var profile_image: ProfileImage?,
-    var links: UserLinks?)
+    var links: UserLinks?) : Parcelable
 
 data class Tag(val title: String? = null,
     val url: String? = null)
@@ -114,9 +119,11 @@ data class Me(var id: String? = null,
     var email: String? = null,
     var links: UserLinks? = null)
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class ProfileImage(var small: String?,
     var medium: String?,
-    var large: String)
+    var large: String) : Parcelable
 
 
 data class Urls(var raw: String?,
@@ -163,13 +170,15 @@ data class AccessToken(var access_token: String?,
 
 data class DownLoadLink(var url: String)
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class UserLinks(var self: String?,
     var html: String?,
     var photos: String?,
     var likes: String?,
     var portfolio: String?,
     var following: String?,
-    var followers: String?)
+    var followers: String?) : Parcelable
 
 
 data class TotalStats(var photos: Int?,

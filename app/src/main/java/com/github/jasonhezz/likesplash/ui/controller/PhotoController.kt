@@ -3,6 +3,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.photo
 
@@ -34,7 +35,7 @@ class PhotoController(
         id(it.id)
         photo(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          callback?.onAvatarClick(it.user?.id)
+          callback?.onAvatarClick(it.user)
         }
         photoClickListener { model, parentView, clickedView, position ->
           callback?.onPhotoClick()
@@ -45,7 +46,7 @@ class PhotoController(
   }
 
   interface AdapterCallbacks {
-    fun onAvatarClick(id: String?)
+    fun onAvatarClick(id: User?)
     fun onPhotoClick()
   }
 }

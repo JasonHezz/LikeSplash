@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_coordinator_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -31,17 +32,17 @@
         android:id="@+id/collapsing_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="248dp"
+        android:minHeight="2dp"
         app:expandedTitleGravity="center|top"
         app:expandedTitleMarginTop="112dp"
         app:expandedTitleTextAppearance="@style/TextAppearance.Splash.Title"
         app:layout_scrollFlags="exitUntilCollapsed|scroll"
-        app:title="JasonHezz"
+        app:title=" "
         app:titleEnabled="true"
         >
 
       <LinearLayout
-          android:id="@+id/linearlayout_title"
+          android:id="@+id/info_container"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="136dp"
@@ -58,6 +59,13 @@
             android:textAllCaps="false"
             android:theme="@style/Widget.Splash.BrandButton"
             />
+        <ProgressBar
+            android:id="@+id/intro_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
         <TextView
             android:id="@+id/bio"
             android:layout_width="wrap_content"
@@ -65,7 +73,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="Multimedia  designer. Hobbyist  photographer "
+            tools:text="Multimedia  designer. Hobbyist  photographer "
             />
 
       </LinearLayout>
@@ -77,8 +85,7 @@
           app:contentInsetStartWithNavigation="16dp"
           app:layout_collapseMode="pin"
           app:logo="@drawable/profile_placeholder"
-          app:subtitle="Multimedia  designer. Hobbyist  photographer"
-          app:title="JsonHezz"
+          app:navigationIcon="@drawable/ic_arrow_back"
           app:titleMarginStart="16dp"
           />
 
