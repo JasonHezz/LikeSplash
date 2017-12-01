@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.repository
 
-import com.github.jasonhezz.likesplash.data.*
+import com.github.jasonhezz.likesplash.data.DownLoadLink
+import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
@@ -13,7 +14,7 @@ import io.reactivex.Single
 interface PhotoRepository {
 
   fun getListPhotos(page: Int = 1, perPage: Int = 10,
-      orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      orderBy: String = LATEST): Single<List<Photo>>
 
   fun getListCuratedPhotos(page: Int = 1, perPage: Int = 10,
       orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
@@ -43,7 +44,7 @@ interface PhotoRepository {
 
 class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
   override fun getListPhotos(page: Int, perPage: Int,
-      orderBy: String): Single<ApiResponse<List<Photo>>> =
+      orderBy: String): Single<List<Photo>> =
       service.getListPhotos(page, perPage, orderBy)
 
   override fun getListCuratedPhotos(page: Int, perPage: Int,
