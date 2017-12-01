@@ -1,8 +1,9 @@
-package com.github.jasonhezz.likesplash.ui.trending
+package com.github.jasonhezz.likesplash.ui.timeline
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,23 +13,22 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.common.EndlessRecyclerViewScrollListener
 import com.github.jasonhezz.likesplash.ui.controller.PhotoController
 import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
-import com.github.jasonhezz.likesplash.util.extension.showSnackbar
-import kotlinx.android.synthetic.main.fragment_trending.*
+import kotlinx.android.synthetic.main.fragment_timeline.*
 
 
-class TrendingFragment : Fragment() {
+class TimelineFragment : Fragment() {
 
-  private lateinit var viewModel: TrendingViewModel
+  private lateinit var viewModel: TimelineViewModel
   private lateinit var swipeRefreshLatch: ProgressTimeLatch
   private var controller = PhotoController().apply { setFilterDuplicates(true) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
+    viewModel = ViewModelProviders.of(this).get(TimelineViewModel::class.java)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_trending, container,
+      savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_timeline, container,
       false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class TrendingFragment : Fragment() {
         Status.ERROR -> {
           swipeRefreshLatch.refreshing = false
           controller.isLoading = false
-          rv.showSnackbar(it.message ?: "UNKNOW ERROR")
+          Snackbar.make(rv, it.message ?: "UNKNOW ERROR", Snackbar.LENGTH_SHORT).show()
         }
         Status.REFRESHING -> swipeRefreshLatch.refreshing = true
         Status.LOADING_MORE -> controller.isLoading = true
@@ -64,8 +64,8 @@ class TrendingFragment : Fragment() {
   }
 
   companion object {
-    fun newInstance(): TrendingFragment {
-      val fragment = TrendingFragment()
+    fun newInstance(): TimelineFragment {
+      val fragment = TimelineFragment()
       val args = Bundle()
       fragment.arguments = args
       return fragment

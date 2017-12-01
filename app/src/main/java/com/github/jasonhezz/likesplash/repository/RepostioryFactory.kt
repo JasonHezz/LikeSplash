@@ -10,4 +10,8 @@ object RepostioryFactory {
   fun makeTrendingRepository(): TrendingRepository {
     return TrendingRepositoryIml(NetModule.provideTrendingService())
   }
+
+  fun makePhotoRepository(): PhotoRepository {
+    return PhotoRepositoryIml(NetModule.providePhotoService())
+  }
 }

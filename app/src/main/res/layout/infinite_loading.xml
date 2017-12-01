@@ -21,8 +21,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="64dp"
-    android:layout_marginTop="32dp"
     android:indeterminate="true"
     android:indeterminateTint="?android:textColorSecondary"
     android:indeterminateTintMode="src_in"

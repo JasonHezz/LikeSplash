@@ -9,8 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.ui.timeline.TimelineFragment
 import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
-import com.github.jasonhezz.likesplash.util.*
+import com.github.jasonhezz.likesplash.util.FadePageTransformer
 import com.github.jasonhezz.likesplash.util.extension.isTranslucentNav
 import com.github.jasonhezz.likesplash.util.extension.isTranslucentStatus
 import com.github.jasonhezz.likesplash.util.extension.marginBottom
@@ -41,8 +42,8 @@ class HomeFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     tabAdapter = TabFragmentAdapter(childFragmentManager)
-    tabAdapter.addFragment(ListFragment.newInstance())
     tabAdapter.addFragment(TrendingFragment.newInstance())
+    tabAdapter.addFragment(TimelineFragment.newInstance())
     tabAdapter.addFragment(BlankFragment.newInstance())
 
     initView()

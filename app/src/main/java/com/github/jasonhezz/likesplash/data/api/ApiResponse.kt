@@ -29,7 +29,7 @@ import java.util.regex.Pattern
  */
 class ApiResponse<T> {
   private val code: Int
-  private val body: T?
+   val body: T?
   private val errorMessage: String?
   private val links: MutableMap<String, String>
 
