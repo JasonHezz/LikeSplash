@@ -16,7 +16,7 @@ import android.widget.ImageView
  */
 class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(context, attrs) {
 
-  private var mScrimDarkness: Float = 0.toFloat()
+  private var mScrimDarkness: Float = 0f
   private var mScrimColor = Color.BLACK
   private var mScrollOffset: Int = 0
   private var mImageOffset: Int = 0

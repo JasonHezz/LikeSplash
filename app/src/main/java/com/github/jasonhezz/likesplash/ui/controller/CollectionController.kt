@@ -1,32 +1,51 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.AutoModel
+import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.collection
 
 /**
  * Created by JavaCoder on 2017/10/16.
  */
 
-class CollectionController : TypedEpoxyController<List<Collection>>() {
+class CollectionController(
+    var callback: AdapterCallbacks? = null) : EpoxyController() {
+  @AutoModel
+  lateinit var loadingModel: LoadingModel_
 
-  var onAvatarClick: (() -> Unit)? = null
-  var onCollectionClick: (() -> Unit)? = null
+  var isLoading: Boolean = false
+    set(value) {
+      field = value
+      requestModelBuild()
+    }
 
-  override fun buildModels(collections: List<Collection>?) {
+  var collections = emptyList<Collection>()
+    set(value) {
+      field = value
+      requestModelBuild()
+    }
 
-    collections?.forEach {
+  override fun buildModels() {
+    collections.forEach {
       collection {
         id(it.id)
         collection(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          onAvatarClick?.invoke()
+          callback?.onAvatarClick()
         }
         collectionClickListener { model, parentView, clickedView, position ->
-          onCollectionClick?.invoke()
+          callback?.onCollectionClick()
         }
       }
     }
+    loadingModel.addIf(isLoading, this)
+  }
+
+  interface AdapterCallbacks {
+    fun onAvatarClick()
+    fun onCollectionClick()
   }
 }
 

@@ -136,7 +136,7 @@ interface UserService {
       @Query("per_page") per_page: Int,
       @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
-  @GET("users/{username}/photo")
+  @GET("users/{username}/photos")
   fun getUserPhotos(@Path("username") username: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int,

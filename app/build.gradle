@@ -49,6 +49,7 @@ dependencies {
   implementation('it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.2', {
     exclude group: 'com.android.support'
   })
+  implementation 'de.hdodenhof:circleimageview:2.2.0'
   implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
 
   //retrofit
@@ -59,7 +60,6 @@ dependencies {
 
   //arch
   implementation "android.arch.lifecycle:extensions:1.0.0"
-  implementation "android.arch.paging:runtime:1.0.0-alpha3"
 
   //rx
   implementation "io.reactivex.rxjava2:rxjava:2.1.7"
