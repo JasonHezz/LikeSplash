@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.ProfileFragment
-import com.github.jasonhezz.likesplash.ui.BlankFragment
 import com.github.jasonhezz.likesplash.ui.HomeFragment
+import com.github.jasonhezz.likesplash.ui.ProfileFragment
+import com.github.jasonhezz.likesplash.ui.explore.ExploreFragment
 
 
 /**
@@ -18,7 +18,7 @@ class DrawerNavViewAdapter(fm: FragmentManager, defaultMenuId: Int, containerId:
   override fun getFragment(menuItemId: Int): Fragment = when (menuItemId) {
     R.id.nav_home -> HomeFragment.newInstance()
     R.id.nav_collection -> ProfileFragment.newInstance()
-    else -> BlankFragment.newInstance()
+    else -> ExploreFragment.newInstance()
   }
 
   override fun shouldHandleMenuItem(

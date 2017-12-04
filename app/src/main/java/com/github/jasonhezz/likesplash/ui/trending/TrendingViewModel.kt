@@ -27,7 +27,6 @@ class TrendingViewModel : RxAwareViewModel() {
     // Eagerly refresh the initial page of trending
     if (refreshOnStartup) {
       fullRefresh()
-      refreshOnStartup = false
     }
   }
 

@@ -43,7 +43,7 @@
         tools:text="@sample/json.json/user/name"
         style="@style/Base.TextAppearance.AppCompat.Body2"
         />
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"

@@ -57,8 +57,8 @@ class HomeFragment : Fragment() {
         setPadding(left, top, right, bottom + systemBarTintManager.config.navigationBarHeight)
       }
       adapter = tabAdapter
-      offscreenPageLimit = 3
-      setPageTransformer(false, FadePageTransformer())
+      offscreenPageLimit = 5
+//      setPageTransformer(false, FadePageTransformer())
     }
 
     search_toolbar?.apply {

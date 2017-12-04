@@ -87,7 +87,7 @@ infix inline fun View.showIf(condition: Boolean) {
 
 inline fun View.isGone() = visibility == View.GONE
 inline fun View.hide() {
-  visibility = View.INVISIBLE
+  visibility = View.GONE
 }
 
 inline fun View.marginTop(top: Int) {

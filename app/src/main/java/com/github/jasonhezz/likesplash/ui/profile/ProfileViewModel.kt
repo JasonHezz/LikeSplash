@@ -6,6 +6,7 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepostioryFactory
 import com.github.jasonhezz.likesplash.ui.RxAwareViewModel
+import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
 import com.github.jasonhezz.likesplash.util.extension.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,13 +16,12 @@ import timber.log.Timber
  * Created by JavaCoder on 2017/12/1.
  */
 class ProfileViewModel : RxAwareViewModel() {
-
   val messages = MutableLiveData<Resource>()
   val liveUser = MutableLiveData<User>()
 
   fun loadUser(user: User?) {
     liveUser.value = user
-    disposables += RepostioryFactory.makeUserRepository().getUserProfile(user?.id ?: "")
+    disposables += RepostioryFactory.makeUserRepository().getUserProfile(user?.username ?: "")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }

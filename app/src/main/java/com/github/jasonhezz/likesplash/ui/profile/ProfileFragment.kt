@@ -14,8 +14,13 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.ui.ListFragment
-import com.github.jasonhezz.likesplash.util.extension.*
+import com.github.jasonhezz.likesplash.ui.profile.collections.CollectionFragment
+import com.github.jasonhezz.likesplash.ui.profile.likes.LikeFragment
+import com.github.jasonhezz.likesplash.ui.profile.photos.PhotoFragment
+import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
+import com.github.jasonhezz.likesplash.util.extension.State
+import com.github.jasonhezz.likesplash.util.extension.loadUrl
+import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -48,20 +53,21 @@ class ProfileFragment : Fragment() {
     viewModel.liveUser.observe(this, Observer {
       user_avatar.loadUrl(it?.profile_image?.large)
       collapsing_toolbar.title = it?.name
-      follow_btn.text = if (it?.followedByUser == true) "Following" else "UnFollow"
+      follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
       bio.text = it?.bio
+      tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.total_photos)
+      tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.total_likes)
+      tab_layout.getTabAt(2)?.text = String.format(getString(R.string.collections), it?.total_collections)
     })
     viewModel.messages.observe(this, Observer {
       when (it?.status) {
         Status.REFRESHING -> {
-          intro_progress.show()
+
         }
         Status.ERROR -> {
-          intro_progress.hide()
           view_pager.showSnackbar(it.message ?: "")
         }
         Status.SUCCESS -> {
-          intro_progress.hide()
         }
         else -> {
         }
@@ -70,7 +76,6 @@ class ProfileFragment : Fragment() {
   }
 
   private fun initToolbar() {
-//    collapsing_toolbar.title = " "
     profile_toolbar?.apply {
       setNavigationOnClickListener { activity?.supportFinishAfterTransition() }
     }
@@ -88,9 +93,9 @@ class ProfileFragment : Fragment() {
 
   private fun initViewPager() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
-    tabAdapter.addFragment(ListFragment.newInstance())
-    tabAdapter.addFragment(ListFragment.newInstance())
-    tabAdapter.addFragment(ListFragment.newInstance())
+    tabAdapter.addFragment(PhotoFragment.newInstance(user))
+    tabAdapter.addFragment(LikeFragment.newInstance(user))
+    tabAdapter.addFragment(CollectionFragment.newInstance(user))
     view_pager.apply {
       adapter = tabAdapter
       offscreenPageLimit = 3
