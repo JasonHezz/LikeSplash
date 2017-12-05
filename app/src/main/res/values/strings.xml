@@ -15,11 +15,14 @@
   <string name="collections">%d Collections</string>
 
   <array name="tag_array">
-    <item>Building</item>
+    <item>Business</item>
+    <item>Girl</item>
     <item>Nature</item>
-    <item>Building</item>
-    <item>Building</item>
-    <item>Building</item>
+    <item>Technology</item>
+    <item>Food</item>
+    <item>Travel</item>
+    <item>Happy</item>
+    <item>Cool</item>
   </array>
   <!-- transition shared elements -->
   <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
