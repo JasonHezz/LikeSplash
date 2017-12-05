@@ -1,8 +1,7 @@
-package com.github.jasonhezz.likesplash.ui
+package com.github.jasonhezz.likesplash.ui.search
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.SearchView
 import android.transition.TransitionManager
 import android.view.LayoutInflater
