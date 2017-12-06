@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.util.network
 
-import com.github.jasonhezz.likesplash.data.api.PhotoService
-import com.github.jasonhezz.likesplash.data.api.TrendingService
-import com.github.jasonhezz.likesplash.data.api.UNSPLASH_BASE_URL
-import com.github.jasonhezz.likesplash.data.api.UserService
+import com.github.jasonhezz.likesplash.data.api.*
 import com.github.jasonhezz.likesplash.data.remote.AuthInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -49,4 +46,6 @@ object NetModule {
   fun providePhotoService(): PhotoService = provideRetrofit().create(PhotoService::class.java)
 
   fun provideUserService(): UserService = provideRetrofit().create(UserService::class.java)
+
+  fun provideSearchService(): SearchService = provideRetrofit().create(SearchService::class.java)
 }

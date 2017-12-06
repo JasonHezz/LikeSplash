@@ -205,3 +205,5 @@ data class MonthStats(var photos: Int?,
     var new_requests: Int?)
 
 data class TrendingFeed(var next_page: String?, var photos: List<Photo>?)
+
+data class SearchPhotoResult(var total: Int?, var total_pages: Int?, var results: List<Photo>?)

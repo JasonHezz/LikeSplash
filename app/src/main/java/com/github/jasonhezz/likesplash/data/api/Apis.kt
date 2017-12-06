@@ -218,17 +218,17 @@ interface SearchService {
   @GET("search/photos")
   fun searchPhotos(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<SearchPhotoResult>
 
   @GET("search/collections")
   fun searchCollections(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<List<Collection>>
 
   @GET("search/users")
   fun searchUsers(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<List<User>>
 }
 
 interface StatsService {
