@@ -57,7 +57,8 @@ class ProfileFragment : Fragment() {
       bio.text = it?.bio
       tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.total_photos)
       tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.total_likes)
-      tab_layout.getTabAt(2)?.text = String.format(getString(R.string.collections), it?.total_collections)
+      tab_layout.getTabAt(2)?.text = String.format(getString(R.string.collections),
+          it?.total_collections)
     })
     viewModel.messages.observe(this, Observer {
       when (it?.status) {
