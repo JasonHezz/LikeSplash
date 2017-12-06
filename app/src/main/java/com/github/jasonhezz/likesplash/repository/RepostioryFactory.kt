@@ -18,4 +18,8 @@ object RepostioryFactory {
   fun makeUserRepository(): UserRepository {
     return UserRepositoryIml(NetModule.provideUserService())
   }
+
+  fun makeSearchRepository(): SearchRepository {
+    return SearchRepositoryIml(NetModule.provideSearchService())
+  }
 }
