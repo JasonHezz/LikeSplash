@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.common.EndlessRecyclerViewScrollListener
 import com.github.jasonhezz.likesplash.ui.controller.PhotoController
+import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_explore.*
 
 class ExploreFragment : Fragment() {
@@ -55,6 +58,17 @@ class ExploreFragment : Fragment() {
     rv.addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
       viewModel.onListScrolledToEnd()
     }))
+    controller.callback = object : PhotoController.AdapterCallbacks {
+      override fun onAvatarClick(id: User?) {
+        startActivity(
+            Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+                id))
+      }
+
+      override fun onPhotoClick() {
+
+      }
+    }
     viewModel.photos.observe(this, Observer {
       it?.let { controller.photos = it }
     })
