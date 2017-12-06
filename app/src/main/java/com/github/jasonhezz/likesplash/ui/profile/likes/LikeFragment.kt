@@ -42,33 +42,37 @@ class LikeFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    swipeRefreshLatch = ProgressTimeLatch {
-      refreshLayout?.isRefreshing = it
-    }
+    swipeRefreshLatch = ProgressTimeLatch { refreshLayout?.isRefreshing = it }
     refreshLayout.setOnRefreshListener { viewModel.fullRefresh(user) }
-    rv.adapter = controller.adapter
-    rv.addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
-      viewModel.onListScrolledToEnd(user)
-    }))
 
-    viewModel.messages.observe(this, Observer {
-      when (it?.status) {
-        Status.SUCCESS -> {
-          swipeRefreshLatch.refreshing = false
-          controller.isLoading = false
+    rv.apply {
+      adapter = controller.adapter
+      addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
+        viewModel.onListScrolledToEnd(user)
+      }))
+    }
+
+    viewModel.apply {
+      messages.observe(this@LikeFragment, Observer {
+        when (it?.status) {
+          Status.SUCCESS -> {
+            swipeRefreshLatch.refreshing = false
+            controller.isLoading = false
+          }
+          Status.ERROR -> {
+            swipeRefreshLatch.refreshing = false
+            controller.isLoading = false
+            Snackbar.make(rv, it.message ?: "UNKNOW ERROR", Snackbar.LENGTH_SHORT).show()
+          }
+          Status.REFRESHING -> swipeRefreshLatch.refreshing = true
+          Status.LOADING_MORE -> controller.isLoading = true
         }
-        Status.ERROR -> {
-          swipeRefreshLatch.refreshing = false
-          controller.isLoading = false
-          Snackbar.make(rv, it.message ?: "UNKNOW ERROR", Snackbar.LENGTH_SHORT).show()
-        }
-        Status.REFRESHING -> swipeRefreshLatch.refreshing = true
-        Status.LOADING_MORE -> controller.isLoading = true
-      }
-    })
-    viewModel.photos.observe(this, Observer {
-      it?.let { controller.photos = it }
-    })
+      })
+
+      photos.observe(this@LikeFragment, Observer {
+        it?.let { controller.photos = it }
+      })
+    }
   }
 
 

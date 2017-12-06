@@ -19,7 +19,7 @@
         android:id="@+id/photo_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:aspectRatioEnabled="true"
         app:dominantMeasurement="width"
         app:layout_constrainedHeight="true"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:scaleType="fitXY"
+        tools:scaleType="centerCrop"
         tools:src="@sample/photo[photo.jpg]"
         />
     <TextView
