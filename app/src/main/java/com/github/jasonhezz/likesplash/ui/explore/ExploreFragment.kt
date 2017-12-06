@@ -42,22 +42,29 @@ class ExploreFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
-    val adapter = ArrayAdapter(context, R.layout.toolbar_title, items)
-    adapter.setDropDownViewResource(android.R.layout.simple_list_item_1)
-    spinner_nav.adapter = adapter
-    spinner_nav.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-      override fun onNothingSelected(p0: AdapterView<*>?) {
 
-      }
+    spinner_nav.apply {
+      val spinnerAdapter = ArrayAdapter(context, R.layout.toolbar_title, items)
+      spinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1)
+      adapter = spinnerAdapter
+      onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(p0: AdapterView<*>?) {
 
-      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        viewModel.requery(items[position])
+        }
+
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+          viewModel.requery(items[position])
+        }
       }
     }
-    rv.adapter = controller.adapter
-    rv.addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
-      viewModel.onListScrolledToEnd()
-    }))
+
+    rv.apply {
+      adapter = controller.adapter
+      addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
+        viewModel.onListScrolledToEnd()
+      }))
+    }
+
     controller.callback = object : PhotoController.AdapterCallbacks {
       override fun onAvatarClick(id: User?) {
         startActivity(

@@ -40,10 +40,6 @@ class TrendingFragment : Fragment() {
       refreshLayout?.isRefreshing = it
     }
     refreshLayout.setOnRefreshListener(viewModel::fullRefresh)
-    rv.adapter = controller.adapter
-    rv.addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
-      viewModel.onListScrolledToEnd()
-    }))
     controller.callback = object : PhotoController.AdapterCallbacks {
       override fun onAvatarClick(id: User?) {
         startActivity(
@@ -55,24 +51,33 @@ class TrendingFragment : Fragment() {
 
       }
     }
-    viewModel.messages.observe(this, Observer {
-      when (it?.status) {
-        Status.SUCCESS -> {
-          swipeRefreshLatch.refreshing = false
-          controller.isLoading = false
+    rv.apply {
+      adapter = controller.adapter
+      addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
+        viewModel.onListScrolledToEnd()
+      }))
+    }
+
+    viewModel.apply {
+      messages.observe(this@TrendingFragment, Observer {
+        when (it?.status) {
+          Status.SUCCESS -> {
+            swipeRefreshLatch.refreshing = false
+            controller.isLoading = false
+          }
+          Status.ERROR -> {
+            swipeRefreshLatch.refreshing = false
+            controller.isLoading = false
+            rv.showSnackbar(it.message ?: "UNKNOW ERROR")
+          }
+          Status.REFRESHING -> swipeRefreshLatch.refreshing = true
+          Status.LOADING_MORE -> controller.isLoading = true
         }
-        Status.ERROR -> {
-          swipeRefreshLatch.refreshing = false
-          controller.isLoading = false
-          rv.showSnackbar(it.message ?: "UNKNOW ERROR")
-        }
-        Status.REFRESHING -> swipeRefreshLatch.refreshing = true
-        Status.LOADING_MORE -> controller.isLoading = true
-      }
-    })
-    viewModel.photos.observe(this, Observer {
-      it?.let { controller.photos = it }
-    })
+      })
+      photos.observe(this@TrendingFragment, Observer {
+        it?.let { controller.photos = it }
+      })
+    }
   }
 
   companion object {
