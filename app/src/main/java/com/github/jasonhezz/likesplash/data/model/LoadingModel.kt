@@ -9,6 +9,4 @@ import com.github.jasonhezz.likesplash.model.LoadingModelHolder
  * Created by JavaCoder on 2017/11/28.
  */
 @EpoxyModelClass(layout = R.layout.infinite_loading)
-abstract class LoadingModel : EpoxyModelWithHolder<LoadingModelHolder>() {
-
-}
+abstract class LoadingModel : EpoxyModelWithHolder<LoadingModelHolder>()
