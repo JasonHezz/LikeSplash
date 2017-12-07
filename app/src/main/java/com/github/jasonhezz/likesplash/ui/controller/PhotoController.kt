@@ -27,8 +27,10 @@ class PhotoController(var callback: AdapterCallbacks? = null) : EpoxyController(
 
   var isLoading: Boolean = false
     set(value) {
-      field = value
-      requestModelBuild()
+      if (field != value) {
+        field = value
+        requestModelBuild()
+      }
     }
 
   override fun buildModels() {
