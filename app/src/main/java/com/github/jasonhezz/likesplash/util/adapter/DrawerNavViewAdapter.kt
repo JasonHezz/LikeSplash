@@ -17,7 +17,7 @@ class DrawerNavViewAdapter(fm: FragmentManager, defaultMenuId: Int, containerId:
     savedInstanceState: Bundle?)
   : NavigationViewAdapter(fm, defaultMenuId, containerId, savedInstanceState) {
   override fun getFragment(menuItemId: Int): Fragment = when (menuItemId) {
-    R.id.nav_home -> TrendingFragment.newInstance()
+    R.id.nav_home -> HomeFragment.newInstance()
     R.id.nav_collection -> CollectionFragment.newInstance()
     else -> ExploreFragment.newInstance()
   }
