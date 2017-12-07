@@ -23,8 +23,10 @@ class CollectionController(
 
   var collections = emptyList<Collection>()
     set(value) {
-      field = value
-      requestModelBuild()
+      if (field != value) {
+        field = value
+        requestModelBuild()
+      }
     }
 
   override fun buildModels() {
