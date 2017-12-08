@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.data.model
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.model.LoadingModelHolder
+import com.github.jasonhezz.likesplash.data.viewholder.LoadingModelHolder
 
 /**
  * Created by JavaCoder on 2017/11/28.

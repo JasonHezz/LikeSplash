@@ -1,9 +1,10 @@
-package com.github.jasonhezz.likesplash.model
+package com.github.jasonhezz.likesplash.data.viewholder
 
 import android.graphics.Color
 import android.view.View
 import com.bumptech.glide.Glide
 import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.extension.hexToMaterialHex
 import kotlinx.android.synthetic.main.item_photo.*
 

@@ -26,8 +26,7 @@
           android:id="@+id/spinner_nav"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:popupBackground="@drawable/bg_shadow"
-          android:popupElevation="0dp"
+          android:popupElevation="8dp"
           />
     </android.support.v7.widget.Toolbar>
   </android.support.design.widget.AppBarLayout>

@@ -70,13 +70,6 @@ inline fun View.show() {
   visibility = View.VISIBLE
 }
 
-inline var View.scale: Float
-  get() = Math.min(scaleX, scaleY)
-  set(value) {
-    scaleY = value
-    scaleX = value
-  }
-
 infix inline fun View.showIf(condition: Boolean) {
   if (condition) {
     show()
@@ -111,8 +104,22 @@ infix inline fun View.hideIf(condition: Boolean) {
   }
 }
 
-fun ImageView.loadUrl(url: String?) {
-  Glide.with(context).load(url).into(this)
+fun View.doOnLayout(onLayout: (View) -> Boolean) {
+  addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+    override fun onLayoutChange(view: View, left: Int, top: Int, right: Int, bottom: Int,
+        oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+      if (onLayout(view)) {
+        view.removeOnLayoutChangeListener(this)
+      }
+    }
+  })
+}
+
+
+fun ImageView.loadUrl(url: String?, placeholder: Int? = null) {
+  Glide.with(context).load(url).apply {
+    if (placeholder != null) placeholder(placeholder)
+  }.into(this)
 }
 
 

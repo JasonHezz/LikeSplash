@@ -16,12 +16,12 @@ interface UserRepository {
   fun getUserProfile(username: String, w: Int? = null, h: Int? = null): Single<User>
 
   fun getUserFollowing(username: String,
-      page: Int,
-      per_page: Int): Single<List<User>>
+      page: Int = 1,
+      per_page: Int = 10): Single<List<User>>
 
   fun getUserFollowers(username: String,
-      page: Int,
-      per_page: Int): Single<List<User>>
+      page: Int = 1,
+      per_page: Int = 10): Single<List<User>>
 
   fun getUserLikes(username: String,
       page: Int = 1,

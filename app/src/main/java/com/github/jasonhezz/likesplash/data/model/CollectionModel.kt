@@ -6,7 +6,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
-import com.github.jasonhezz.likesplash.model.CollectionHolder
+import com.github.jasonhezz.likesplash.data.viewholder.CollectionHolder
 
 /**
  * Created by JavaCoder on 2017/10/16.
