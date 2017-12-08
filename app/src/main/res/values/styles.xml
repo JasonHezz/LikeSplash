@@ -1,7 +1,6 @@
 <resources>
 
   <style name="TextAppearance.Splash.Caption" parent="TextAppearance.AppCompat.Caption">
-    <item name="android:fontFamily">sans-serif-medium</item>
     <item name="android:textSize">14sp</item>
   </style>
 
@@ -15,6 +14,13 @@
 
   <style name="TextAppearance.Splash.Tab" parent="TextAppearance.Design.Tab">
     <item name="textAllCaps">false</item>
+  </style>
+
+  <style name="TextAppearance.Splash.ListItemSecondary" parent="TextAppearance.Splash.Caption">
+
+  </style>
+
+  <style name="TextAppearance.Splash.ListItem" parent="TextAppearance.AppCompat.Body1">
   </style>
 
   <style name="Widget.Splash.UserTabLayout" parent="Widget.Design.TabLayout">
@@ -38,6 +44,8 @@
   </style>
 
   <style name="Widget.Splash.TextView.ExploreSpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
-    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem</item>
+    <item name="android:textAppearance">
+      @style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem
+    </item>
   </style>
 </resources>

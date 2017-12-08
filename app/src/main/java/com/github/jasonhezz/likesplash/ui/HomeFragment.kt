@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
   }
 
   private fun initView() {
-
     view_pager?.apply {
       //TODO make it more readable
       if (systemBarTintManager.config.isNavigationAtBottom && context.isTranslucentNav) {
@@ -58,7 +57,6 @@ class HomeFragment : Fragment() {
       }
       adapter = tabAdapter
       offscreenPageLimit = 5
-//      setPageTransformer(false, FadePageTransformer())
     }
 
     search_toolbar?.apply {
