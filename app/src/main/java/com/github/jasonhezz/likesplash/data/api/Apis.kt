@@ -7,6 +7,7 @@ import com.github.jasonhezz.likesplash.data.Collection
 import io.reactivex.Single
 
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 
@@ -163,15 +164,15 @@ interface UserService {
 interface CollectionService {
   @GET("collections/")
   fun getListCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<List<Collection>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated")
   fun getListCuratedCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<List<Collection>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated")
   fun getListFeaturedCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<List<Collection>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated/{id}")
   fun getACollection(@Path("id") id: String, @Query("page") page: Int = 1,
