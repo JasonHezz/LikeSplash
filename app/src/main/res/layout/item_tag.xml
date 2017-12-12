@@ -25,9 +25,9 @@
         android:scaleType="centerCrop"
         app:layout_constrainedHeight="true"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="@id/tag_name"
-        app:layout_constraintLeft_toLeftOf="@id/tag_name"
-        app:layout_constraintRight_toRightOf="@id/tag_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_name"
+        app:layout_constraintLeft_toLeftOf="@+id/tag_name"
+        app:layout_constraintRight_toRightOf="@+id/tag_name"
         app:layout_constraintTop_toTopOf="@id/tag_name"
         tools:src="@sample/collection[collection.jpg]"
         />
