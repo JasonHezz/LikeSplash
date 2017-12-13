@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.jasonhezz.likesplash.util
+package com.github.jasonhezz.likesplash.util.extension
 
 /**
  * Various extension functions for AppCompatActivity.
  */
 
-import android.app.Activity
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
 
 
 /**

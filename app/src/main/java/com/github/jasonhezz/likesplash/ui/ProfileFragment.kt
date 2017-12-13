@@ -11,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.ListFragment
-import com.github.jasonhezz.likesplash.util.AppBarStateChangeListener
-import com.github.jasonhezz.likesplash.util.State
-import com.github.jasonhezz.likesplash.util.showSnackbar
+import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
+import com.github.jasonhezz.likesplash.util.extension.State
+import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -25,9 +25,8 @@ class ProfileFragment : Fragment() {
   private lateinit var tabAdapter: TabFragmentAdapter
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_profile, container, false)
-  }
+      savedInstanceState: Bundle?): View? =
+      inflater.inflate(R.layout.fragment_profile, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

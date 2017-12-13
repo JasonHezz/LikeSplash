@@ -1,7 +1,9 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.AutoModel
+import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.photo
 
 /**
@@ -9,10 +11,25 @@ import com.github.jasonhezz.likesplash.data.model.photo
  */
 
 class PhotoController(
-    var callback: AdapterCallbacks? = null) : TypedEpoxyController<List<Photo>>() {
+    var callback: AdapterCallbacks? = null) : EpoxyController() {
 
-  override fun buildModels(photos: List<Photo>?) {
-    photos?.forEach {
+  @AutoModel
+  lateinit var loadingModel: LoadingModel_
+
+  var photos = emptyList<Photo>()
+    set(value) {
+      field = value
+      requestModelBuild()
+    }
+
+  var isLoading: Boolean = false
+    set(value) {
+      field = value
+      requestModelBuild()
+    }
+
+  override fun buildModels() {
+    photos.forEach {
       photo {
         id(it.id)
         photo(it)
@@ -24,6 +41,7 @@ class PhotoController(
         }
       }
     }
+    loadingModel.addIf(isLoading, this)
   }
 
   interface AdapterCallbacks {

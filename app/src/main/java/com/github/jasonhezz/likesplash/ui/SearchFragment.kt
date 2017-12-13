@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.SearchView
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -23,10 +24,8 @@ class SearchFragment : Fragment() {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_search, container, false)
-  }
+      savedInstanceState: Bundle?): View? =// Inflate the layout for this fragment
+      inflater.inflate(R.layout.fragment_search, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -40,13 +39,11 @@ class SearchFragment : Fragment() {
           return true
         }
 
-        override fun onQueryTextChange(newText: String?): Boolean {
-          return true
-        }
+        override fun onQueryTextChange(newText: String?): Boolean = true
       })
     }
     search_nav?.setOnClickListener {
-      search_nav.background = null
+      search_nav.foreground = null
       activity?.supportFinishAfterTransition()
     }
 

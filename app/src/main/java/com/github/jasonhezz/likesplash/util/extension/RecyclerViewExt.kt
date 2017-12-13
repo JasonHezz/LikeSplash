@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.util
+package com.github.jasonhezz.likesplash.util.extension
 
 import com.airbnb.epoxy.CarouselModelBuilder
 import com.airbnb.epoxy.CarouselModel_

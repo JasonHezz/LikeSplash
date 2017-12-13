@@ -5,7 +5,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
-import com.github.jasonhezz.likesplash.extension.hexToMaterialHex
+import com.github.jasonhezz.likesplash.util.extension.hexToMaterialHex
 import kotlinx.android.synthetic.main.item_collection.*
 
 /**
