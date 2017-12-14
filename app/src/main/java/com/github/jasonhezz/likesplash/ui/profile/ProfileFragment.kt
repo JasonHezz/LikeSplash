@@ -74,14 +74,9 @@ class ProfileFragment : Fragment() {
         }
       }
     })
-
-    follow_btn.setOnClickListener {
-      follow_btn.startAnimation()
-    }
   }
 
   override fun onDestroyView() {
-    follow_btn?.dispose()
     super.onDestroyView()
   }
 

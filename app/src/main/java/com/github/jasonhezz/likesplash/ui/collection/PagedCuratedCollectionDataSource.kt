@@ -38,8 +38,8 @@ class PagedCuratedCollectionDataSource(
 
   override fun loadInitial(params: LoadInitialParams<Int>,
       callback: LoadInitialCallback<Int, Collection>) {
-    networkState.postValue(Resource.LOADING)
-    initialLoad.postValue(Resource.LOADING)
+    networkState.postValue(Resource.INITIAL)
+    initialLoad.postValue(Resource.INITIAL)
     api.getListCuratedCollections(perPage = params.requestedLoadSize).enqueue(
         object : retrofit2.Callback<List<Collection>> {
           override fun onFailure(call: Call<List<Collection>>, t: Throwable) {
@@ -75,7 +75,7 @@ class PagedCuratedCollectionDataSource(
   }
 
   override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Collection>) {
-    networkState.postValue(Resource.LOADING)
+    networkState.postValue(Resource.MORE)
     api.getListCuratedCollections(params.key, params.requestedLoadSize).enqueue(
         object : retrofit2.Callback<List<Collection>> {
           override fun onFailure(call: Call<List<Collection>>, t: Throwable) {
@@ -108,6 +108,5 @@ class PagedCuratedCollectionDataSource(
 
   override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Collection>) {
     // ignored, since we only ever append to our initial load
-
   }
 }

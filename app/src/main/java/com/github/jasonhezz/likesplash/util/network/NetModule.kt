@@ -48,4 +48,7 @@ object NetModule {
   fun provideUserService(): UserService = provideRetrofit().create(UserService::class.java)
 
   fun provideSearchService(): SearchService = provideRetrofit().create(SearchService::class.java)
+
+  fun provideCollectionService(): CollectionService = provideRetrofit().create(
+      CollectionService::class.java)
 }

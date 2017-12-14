@@ -48,9 +48,9 @@ dependencies {
     exclude group: 'com.android.support'
   })
   implementation 'de.hdodenhof:circleimageview:2.2.0'
-  implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
+//  implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
 
-  implementation 'br.com.simplepass:loading-button-android:1.8.4'
+//  implementation 'br.com.simplepass:loading-button-android:1.8.4'
   //retrofit
   implementation 'com.squareup.retrofit2:retrofit:2.3.0'
   implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -73,15 +73,15 @@ dependencies {
   implementation 'com.jakewharton.timber:timber:4.6.0'
 
   //epoxy
-  implementation('com.airbnb.android:epoxy:2.7.2', {
+  implementation('com.airbnb.android:epoxy:2.7.3', {
     exclude group: 'com.android.support'
   })
+  implementation 'com.airbnb.android:epoxy-paging:2.7.3'
   kapt 'com.airbnb.android:epoxy-processor:2.7.2'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.11.0'
   testImplementation "org.robolectric:robolectric:3.5.1"
   testImplementation 'com.squareup.okhttp3:mockwebserver:3.9.1'
   androidTestImplementation 'com.android.support.test:runner:1.0.1'
-  androidTestImplementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

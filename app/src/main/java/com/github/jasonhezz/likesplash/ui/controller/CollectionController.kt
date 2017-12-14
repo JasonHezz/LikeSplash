@@ -21,6 +21,7 @@ class CollectionController(
       requestModelBuild()
     }
 
+
   var collections = emptyList<Collection>()
     set(value) {
       if (field != value) {
