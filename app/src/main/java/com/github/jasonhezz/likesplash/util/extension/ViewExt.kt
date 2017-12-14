@@ -20,7 +20,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import com.github.jasonhezz.likesplash.util.glide.GlideApp
 
 
 fun View.setLightStatusBar() {
@@ -117,7 +117,7 @@ fun View.doOnLayout(onLayout: (View) -> Boolean) {
 
 
 fun ImageView.loadUrl(url: String?, placeholder: Int? = null) {
-  Glide.with(context).load(url).apply {
+  GlideApp.with(context).load(url).apply {
     if (placeholder != null) placeholder(placeholder)
   }.into(this)
 }
