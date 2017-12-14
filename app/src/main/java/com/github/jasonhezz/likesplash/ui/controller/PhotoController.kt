@@ -10,8 +10,10 @@ import com.github.jasonhezz.likesplash.data.model.photo
  * Created by JavaCoder on 2017/10/16.
  */
 
-class PhotoController(
-    var callback: AdapterCallbacks? = null) : EpoxyController() {
+class PhotoController : EpoxyController() {
+
+  var onAvatarClick: ((id: String?) -> Unit)? = null
+  var onPhotoClick: (() -> Unit)? = null
 
   @AutoModel
   lateinit var loadingModel: LoadingModel_
@@ -34,18 +36,13 @@ class PhotoController(
         id(it.id)
         photo(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          callback?.onAvatarClick(it.user?.id)
+          onAvatarClick?.invoke(it.user?.id)
         }
         photoClickListener { model, parentView, clickedView, position ->
-          callback?.onPhotoClick()
+          onPhotoClick?.invoke()
         }
       }
     }
     loadingModel.addIf(isLoading, this)
-  }
-
-  interface AdapterCallbacks {
-    fun onAvatarClick(id: String?)
-    fun onPhotoClick()
   }
 }

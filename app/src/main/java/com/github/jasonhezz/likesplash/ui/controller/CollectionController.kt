@@ -8,9 +8,10 @@ import com.github.jasonhezz.likesplash.data.model.collection
  * Created by JavaCoder on 2017/10/16.
  */
 
-class CollectionController(
-    var callback: AdapterCallbacks? = null) : TypedEpoxyController<List<Collection>>() {
+class CollectionController : TypedEpoxyController<List<Collection>>() {
 
+  var onAvatarClick: (() -> Unit)? = null
+  var onCollectionClick: (() -> Unit)? = null
 
   override fun buildModels(collections: List<Collection>?) {
 
@@ -19,18 +20,13 @@ class CollectionController(
         id(it.id)
         collection(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          callback?.onAvatarClick()
+          onAvatarClick?.invoke()
         }
         collectionClickListener { model, parentView, clickedView, position ->
-          callback?.onCollectionClick()
+          onCollectionClick?.invoke()
         }
       }
     }
-  }
-
-  interface AdapterCallbacks {
-    fun onAvatarClick()
-    fun onCollectionClick()
   }
 }
 
