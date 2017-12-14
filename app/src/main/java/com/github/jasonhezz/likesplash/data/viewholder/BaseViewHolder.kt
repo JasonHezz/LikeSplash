@@ -8,7 +8,7 @@ import kotlinx.android.extensions.LayoutContainer
 /**
  * Created by JavaCoder on 2017/10/16.
  */
-abstract class BaseViewHolder : EpoxyHolder(), LayoutContainer {
+class BaseViewHolder : EpoxyHolder(), LayoutContainer {
 
   //make it private so that child can't find
   private var containerViewBridge: View? = null
