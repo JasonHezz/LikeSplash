@@ -3,6 +3,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.photo
 
@@ -10,8 +11,10 @@ import com.github.jasonhezz.likesplash.data.model.photo
  * Created by JavaCoder on 2017/10/16.
  */
 
-class PhotoController(
-    var callback: AdapterCallbacks? = null) : EpoxyController() {
+class PhotoController(var callback: AdapterCallbacks? = null) : EpoxyController() {
+
+  var onAvatarClick: ((id: String?) -> Unit)? = null
+  var onPhotoClick: (() -> Unit)? = null
 
   @AutoModel
   lateinit var loadingModel: LoadingModel_
@@ -24,8 +27,10 @@ class PhotoController(
 
   var isLoading: Boolean = false
     set(value) {
-      field = value
-      requestModelBuild()
+      if (field != value) {
+        field = value
+        requestModelBuild()
+      }
     }
 
   override fun buildModels() {
@@ -34,10 +39,11 @@ class PhotoController(
         id(it.id)
         photo(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          callback?.onAvatarClick(it.user?.id)
+          onAvatarClick?.invoke(it.user?.id)
+          callback?.onAvatarClick(it.user)
         }
         photoClickListener { model, parentView, clickedView, position ->
-          callback?.onPhotoClick()
+          onPhotoClick?.invoke()
         }
       }
     }
@@ -45,7 +51,7 @@ class PhotoController(
   }
 
   interface AdapterCallbacks {
-    fun onAvatarClick(id: String?)
+    fun onAvatarClick(id: User?)
     fun onPhotoClick()
   }
 }

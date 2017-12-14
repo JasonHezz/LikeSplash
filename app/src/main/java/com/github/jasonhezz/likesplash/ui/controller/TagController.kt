@@ -1,6 +1,5 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
-import android.content.Context
 import com.airbnb.epoxy.TypedEpoxyController
 import com.github.jasonhezz.likesplash.data.Tag
 import com.github.jasonhezz.likesplash.data.model.TagModel_
@@ -11,7 +10,7 @@ import com.github.jasonhezz.likesplash.util.extension.withModelsFrom
 /**
  * Created by JavaCoder on 2017/10/16.
  */
-class TagController(val context: Context) : TypedEpoxyController<List<Tag>>() {
+class TagController : TypedEpoxyController<List<Tag>>() {
 
 
   override fun buildModels(tags: List<Tag>?) {

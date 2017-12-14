@@ -29,7 +29,7 @@ import java.util.regex.Pattern
  */
 class ApiResponse<T> {
   private val code: Int
-  private val body: T?
+  val body: T?
   private val errorMessage: String?
   private val links: MutableMap<String, String>
 
@@ -50,6 +50,52 @@ class ApiResponse<T> {
         null
       }
     }
+
+  val firstPage: Int?
+    get() {
+      val next = links[FIRST_LINK] ?: return null
+      val matcher = PAGE_PATTERN.matcher(next)
+      if (!matcher.find() || matcher.groupCount() != 1) {
+        return null
+      }
+      return try {
+        Integer.parseInt(matcher.group(1))
+      } catch (ex: NumberFormatException) {
+        Timber.w("cannot parse next page from %s", next)
+        null
+      }
+    }
+
+  val prevPage: Int?
+    get() {
+      val next = links[PREV_LINK] ?: return null
+      val matcher = PAGE_PATTERN.matcher(next)
+      if (!matcher.find() || matcher.groupCount() != 1) {
+        return null
+      }
+      return try {
+        Integer.parseInt(matcher.group(1))
+      } catch (ex: NumberFormatException) {
+        Timber.w("cannot parse next page from %s", next)
+        null
+      }
+    }
+
+  val lastPage: Int?
+    get() {
+      val next = links[LAST_LINK] ?: return null
+      val matcher = PAGE_PATTERN.matcher(next)
+      if (!matcher.find() || matcher.groupCount() != 1) {
+        return null
+      }
+      return try {
+        Integer.parseInt(matcher.group(1))
+      } catch (ex: NumberFormatException) {
+        Timber.w("cannot parse next page from %s", next)
+        null
+      }
+    }
+
 
   constructor(error: Throwable) {
     code = 500
@@ -100,5 +146,8 @@ class ApiResponse<T> {
         .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
     private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
     private val NEXT_LINK = "next"
+    private val FIRST_LINK = "first"
+    private val PREV_LINK = "prev"
+    private val LAST_LINK = "last"
   }
 }

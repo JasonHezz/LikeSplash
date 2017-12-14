@@ -9,6 +9,7 @@ import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.widget.ImageView
+import com.github.jasonhezz.likesplash.R
 
 
 /**
@@ -16,12 +17,22 @@ import android.widget.ImageView
  */
 class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(context, attrs) {
 
-  private var mScrimDarkness: Float = 0.toFloat()
+  private var mScrimDarkness: Float = 0f
   private var mScrimColor = Color.BLACK
   private var mScrollOffset: Int = 0
   private var mImageOffset: Int = 0
-
   private val mScrimPaint: Paint = Paint()
+  private var friction = 0.5f
+
+  init {
+    val a = context.obtainStyledAttributes(attrs, R.styleable.BackdropImageView)
+    mScrimColor = a.getColor(R.styleable.BackdropImageView_scrimColor, Color.BLACK)
+    MIN_SCRIM_ALPHA = a.getInteger(R.styleable.BackdropImageView_minScrim, MIN_SCRIM_ALPHA)
+    MAX_SCRIM_ALPHA = a.getInteger(R.styleable.BackdropImageView_maxScrim, MAX_SCRIM_ALPHA)
+    SCRIM_ALPHA_DIFF = MAX_SCRIM_ALPHA - MIN_SCRIM_ALPHA
+    friction = a.getFloat(R.styleable.BackdropImageView_friction, 0.5f)
+    a.recycle()
+  }
 
   fun setScrollOffset(offset: Int) {
     if (offset != mScrollOffset) {
@@ -29,9 +40,13 @@ class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(conte
       mImageOffset = -offset / 2
       mScrimDarkness = Math.abs(offset / height.toFloat())
       offsetTopAndBottom(offset - top)
-
       ViewCompat.postInvalidateOnAnimation(this)
     }
+  }
+
+  fun setOffsetFriction(friction: Float) {
+    if (friction <= 1 && friction > 0)
+      this.friction = friction
   }
 
   override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -68,9 +83,8 @@ class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(conte
   }
 
   companion object {
-
-    private val MIN_SCRIM_ALPHA = 20
-    private val MAX_SCRIM_ALPHA = 180
-    private val SCRIM_ALPHA_DIFF = MAX_SCRIM_ALPHA - MIN_SCRIM_ALPHA
+    private var MIN_SCRIM_ALPHA = 20
+    private var MAX_SCRIM_ALPHA = 180
+    private var SCRIM_ALPHA_DIFF = 0
   }
 }

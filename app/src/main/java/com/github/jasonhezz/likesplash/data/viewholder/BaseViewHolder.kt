@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.model
+package com.github.jasonhezz.likesplash.data.viewholder
 
 import android.support.annotation.CallSuper
 import android.view.View
@@ -8,7 +8,7 @@ import kotlinx.android.extensions.LayoutContainer
 /**
  * Created by JavaCoder on 2017/10/16.
  */
-abstract class BaseViewHolder : EpoxyHolder(), LayoutContainer {
+class BaseViewHolder : EpoxyHolder(), LayoutContainer {
 
   //make it private so that child can't find
   private var containerViewBridge: View? = null

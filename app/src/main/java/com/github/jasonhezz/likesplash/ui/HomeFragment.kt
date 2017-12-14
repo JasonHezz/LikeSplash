@@ -9,8 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.ui.search.SearchActivity
+import com.github.jasonhezz.likesplash.ui.timeline.TimelineFragment
 import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
-import com.github.jasonhezz.likesplash.util.*
 import com.github.jasonhezz.likesplash.util.extension.isTranslucentNav
 import com.github.jasonhezz.likesplash.util.extension.isTranslucentStatus
 import com.github.jasonhezz.likesplash.util.extension.marginBottom
@@ -41,23 +42,21 @@ class HomeFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     tabAdapter = TabFragmentAdapter(childFragmentManager)
-    tabAdapter.addFragment(ListFragment.newInstance())
     tabAdapter.addFragment(TrendingFragment.newInstance())
+    tabAdapter.addFragment(TimelineFragment.newInstance())
     tabAdapter.addFragment(BlankFragment.newInstance())
 
     initView()
   }
 
   private fun initView() {
-
     view_pager?.apply {
       //TODO make it more readable
       if (systemBarTintManager.config.isNavigationAtBottom && context.isTranslucentNav) {
         setPadding(left, top, right, bottom + systemBarTintManager.config.navigationBarHeight)
       }
       adapter = tabAdapter
-      offscreenPageLimit = 3
-      setPageTransformer(false, FadePageTransformer())
+      offscreenPageLimit = 5
     }
 
     search_toolbar?.apply {
