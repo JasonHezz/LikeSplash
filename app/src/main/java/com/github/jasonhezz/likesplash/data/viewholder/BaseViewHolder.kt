@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.model
+package com.github.jasonhezz.likesplash.data.viewholder
 
 import android.support.annotation.CallSuper
 import android.view.View

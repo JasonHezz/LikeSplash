@@ -4,7 +4,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.model.TitleHolder
+import com.github.jasonhezz.likesplash.data.viewholder.TitleHolder
 
 
 /**

@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.model
+package com.github.jasonhezz.likesplash.data.viewholder
 
 import android.graphics.Color
 import android.view.View

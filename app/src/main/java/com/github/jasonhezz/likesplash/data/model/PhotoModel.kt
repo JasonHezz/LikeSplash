@@ -6,7 +6,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.model.PhotoHolder
+import com.github.jasonhezz.likesplash.data.viewholder.PhotoHolder
 
 
 /**

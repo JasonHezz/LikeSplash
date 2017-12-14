@@ -1,5 +1,6 @@
-package com.github.jasonhezz.likesplash.model
+package com.github.jasonhezz.likesplash.data.viewholder
 
+import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import kotlinx.android.synthetic.main.item_title.*
 
 /**
