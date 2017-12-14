@@ -1,7 +1,9 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.AutoModel
+import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.collection
 
 /**
@@ -9,12 +11,27 @@ import com.github.jasonhezz.likesplash.data.model.collection
  */
 
 class CollectionController(
-    var callback: AdapterCallbacks? = null) : TypedEpoxyController<List<Collection>>() {
+    var callback: AdapterCallbacks? = null) : EpoxyController() {
+  @AutoModel
+  lateinit var loadingModel: LoadingModel_
+
+  var isLoading: Boolean = false
+    set(value) {
+      field = value
+      requestModelBuild()
+    }
 
 
-  override fun buildModels(collections: List<Collection>?) {
+  var collections = emptyList<Collection>()
+    set(value) {
+      if (field != value) {
+        field = value
+        requestModelBuild()
+      }
+    }
 
-    collections?.forEach {
+  override fun buildModels() {
+    collections.forEach {
       collection {
         id(it.id)
         collection(it)
@@ -26,6 +43,7 @@ class CollectionController(
         }
       }
     }
+    loadingModel.addIf(isLoading, this)
   }
 
   interface AdapterCallbacks {

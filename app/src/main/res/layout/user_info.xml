@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+  <TextView
+      android:id="@+id/location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:drawableLeft="@drawable/ic_location_on"
+      android:drawablePadding="8dp"
+      android:textColor="#1F000000"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toStartOf="@+id/divider"
+      app:layout_constraintHorizontal_chainStyle="packed"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="America"
+      />
+
+  <View
+      android:id="@+id/divider"
+      android:layout_width="1dp"
+      android:layout_height="16dp"
+      android:layout_marginHorizontal="16dp"
+      android:background="#D8d8d8"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/location"
+      />
+</android.support.constraint.ConstraintLayout>

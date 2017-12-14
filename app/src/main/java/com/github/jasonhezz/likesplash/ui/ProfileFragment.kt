@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.profile
+package com.github.jasonhezz.likesplash.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.ListFragment
+import com.github.jasonhezz.likesplash.ui.profile.ProfileFragment
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 import com.github.jasonhezz.likesplash.util.extension.showSnackbar

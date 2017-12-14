@@ -14,7 +14,10 @@
     <item name="android:windowTranslucentNavigation">true</item>
     <item name="android:windowContentTransitions">true</item>
     <!--daynight theme switch support-->
+<!--
     <item name="android:windowAnimationStyle">@style/HomeWindowAnimation</item>
+-->
+
   </style>
 
   <style name="AppTheme.Search">

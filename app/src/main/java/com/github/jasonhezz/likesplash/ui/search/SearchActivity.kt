@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui
+package com.github.jasonhezz.likesplash.ui.search
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,7 +9,8 @@ class SearchActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 //    setContentView(R.layout.fragment_search)
-    if (savedInstanceState == null) replaceFragmentInActivity(SearchFragment.newInstance(),
+    if (savedInstanceState == null) replaceFragmentInActivity(
+        SearchFragment.newInstance(),
         android.R.id.content)
     //don't know why...if not,transition not working
     /*setEnterSharedElementCallback(object : SharedElementCallback() {

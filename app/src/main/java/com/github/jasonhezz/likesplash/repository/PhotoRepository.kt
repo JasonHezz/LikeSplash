@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.repository
 
-import com.github.jasonhezz.likesplash.data.*
-import com.github.jasonhezz.likesplash.data.api.ApiResponse
+import com.github.jasonhezz.likesplash.data.DownLoadLink
+import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
 import com.github.jasonhezz.likesplash.data.api.PhotoService
@@ -13,10 +13,10 @@ import io.reactivex.Single
 interface PhotoRepository {
 
   fun getListPhotos(page: Int = 1, perPage: Int = 10,
-      orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      orderBy: String = LATEST): Single<List<Photo>>
 
   fun getListCuratedPhotos(page: Int = 1, perPage: Int = 10,
-      orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      orderBy: String = LATEST): Single<List<Photo>>
 
   fun getAPhoto(id: String, w: Int? = null, h: Int? = null):
       Single<Photo>
@@ -28,7 +28,7 @@ interface PhotoRepository {
       orientation: String? = null,
       w: Int? = null,
       h: Int? = null,
-      count: Int = 1): Single<ApiResponse<List<Photo>>>
+      count: Int = 1): Single<List<Photo>>
 
   fun getAPhotoStatistics(id: Int, resolution: String = DAYS, quantity: Int = 30)
 
@@ -43,11 +43,11 @@ interface PhotoRepository {
 
 class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
   override fun getListPhotos(page: Int, perPage: Int,
-      orderBy: String): Single<ApiResponse<List<Photo>>> =
+      orderBy: String): Single<List<Photo>> =
       service.getListPhotos(page, perPage, orderBy)
 
   override fun getListCuratedPhotos(page: Int, perPage: Int,
-      orderBy: String): Single<ApiResponse<List<Photo>>> =
+      orderBy: String): Single<List<Photo>> =
       service.getListCuratedPhotos(page, perPage,
           orderBy)
 
@@ -56,7 +56,7 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
 
   override fun getListRandomPhoto(collections: String?, featured: String?, username: String?,
       query: String?, orientation: String?, w: Int?, h: Int?,
-      count: Int): Single<ApiResponse<List<Photo>>> =
+      count: Int): Single<List<Photo>> =
       service.getListRandomPhoto(collections, featured,
           username, query, orientation, w, h, count)
 
