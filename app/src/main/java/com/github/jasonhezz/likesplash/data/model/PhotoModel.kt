@@ -41,8 +41,8 @@ abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .optionalCircleCrop()
           .into(holder.user_avatar)
       holder.user_name?.text = it.user?.name
-      holder.user_avatar.setOnClickListener { avatarClickListener }
-      holder.card.setOnClickListener { photoClickListener }
+      holder.user_avatar.setOnClickListener(avatarClickListener)
+      holder.card.setOnClickListener(photoClickListener)
     }
   }
 }
