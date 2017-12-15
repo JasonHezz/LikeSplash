@@ -45,8 +45,8 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .into(holder.collection_iv)
       GlideApp.with(holder.user_avatar.context).load(it.user?.profile_image?.medium)
           .into(holder.user_avatar)
-      holder.card.setOnClickListener { collectionClickListener }
-      holder.user_avatar.setOnClickListener { avatarClickListener }
+      holder.card.setOnClickListener(collectionClickListener)
+      holder.user_avatar.setOnClickListener(avatarClickListener)
     }
   }
 }
