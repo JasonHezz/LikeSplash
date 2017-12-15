@@ -28,7 +28,7 @@ abstract class TagModel : EpoxyModelWithHolder<BaseViewHolder>() {
       GlideApp.with(holder.tag_thumbnail?.context)
           .load(it.url)
           .into(holder.tag_thumbnail)
-      holder.card.setOnClickListener { tagClickListener }
+      holder.card.setOnClickListener(tagClickListener)
     }
   }
 }
