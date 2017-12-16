@@ -19,6 +19,8 @@ import android.os.Build
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.github.jasonhezz.likesplash.util.glide.GlideApp
 
 
 fun View.setLightStatusBar() {
@@ -68,13 +70,6 @@ inline fun View.show() {
   visibility = View.VISIBLE
 }
 
-inline var View.scale: Float
-  get() = Math.min(scaleX, scaleY)
-  set(value) {
-    scaleY = value
-    scaleX = value
-  }
-
 infix inline fun View.showIf(condition: Boolean) {
   if (condition) {
     show()
@@ -85,7 +80,7 @@ infix inline fun View.showIf(condition: Boolean) {
 
 inline fun View.isGone() = visibility == View.GONE
 inline fun View.hide() {
-  visibility = View.VISIBLE
+  visibility = View.GONE
 }
 
 inline fun View.marginTop(top: Int) {
@@ -107,6 +102,24 @@ infix inline fun View.hideIf(condition: Boolean) {
   } else {
     show()
   }
+}
+
+fun View.doOnLayout(onLayout: (View) -> Boolean) {
+  addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+    override fun onLayoutChange(view: View, left: Int, top: Int, right: Int, bottom: Int,
+        oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+      if (onLayout(view)) {
+        view.removeOnLayoutChangeListener(this)
+      }
+    }
+  })
+}
+
+
+fun ImageView.loadUrl(url: String?, placeholder: Int? = null) {
+  GlideApp.with(context).load(url).apply {
+    if (placeholder != null) placeholder(placeholder)
+  }.into(this)
 }
 
 
