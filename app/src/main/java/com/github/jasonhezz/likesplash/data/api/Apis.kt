@@ -7,6 +7,7 @@ import com.github.jasonhezz.likesplash.data.Collection
 import io.reactivex.Single
 
 import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.*
 
 
@@ -56,11 +57,11 @@ interface PhotoService {
 
   @GET("photos/")
   fun getListPhotos(@Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
-      @Query("order_by") orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
   @GET("photos/curated")
   fun getListCuratedPhotos(@Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
-      @OrderBy @Query("order_by") orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      @OrderBy @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
   @GET("photos/{id}")
   fun getAPhoto(@Path("id") id: String, @Query("w") w: Int? = null, @Query("h") h: Int? = null):
@@ -75,7 +76,7 @@ interface PhotoService {
       @Query("w") w: Int? = null,
       @Query("h") h: Int? = null,
       @IntRange(from = 1, to = 30) @Query(
-          "count") count: Int = 1): Single<ApiResponse<List<Photo>>>
+          "count") count: Int = 1): Single<List<Photo>>
 
   @GET("photos/{id}/statistics")
   fun getAPhotoStatistics(@Path("id") id: Int, @Query("resolution") resolution: String = DAYS,
@@ -117,55 +118,61 @@ interface UserService {
 
   @GET("users/{username}")
   fun getUserProfile(@Path("username") username: String,
-      @Query("w") w: Int,
-      @Query("h") h: Int): Single<User>
+      @Query("w") w: Int?,
+      @Query("h") h: Int?): Single<User>
 
   @GET("users/{username}/following")
   fun getUserFollowing(@Path("username") username: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<ApiResponse<List<User>>>
+      @Query("per_page") per_page: Int): Single<List<User>>
 
   @GET("users/{username}/followers")
   fun getUserFollowers(@Path("username") username: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<ApiResponse<List<User>>>
+      @Query("per_page") per_page: Int): Single<List<User>>
 
   @GET("users/{username}/likes")
   fun getUserLikes(@Path("username") username: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int,
-      @Query("order_by") orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
-  @GET("users/{username}/photo")
+  @GET("users/{username}/photos")
   fun getUserPhotos(@Path("username") username: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int,
-      @Query("order_by") orderBy: String = LATEST): Single<ApiResponse<List<Photo>>>
+      @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
   @GET("users/{username}/collections")
   fun getUserCollection(@Path("username") username: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int,
-      @Query("order_by") orderBy: String = LATEST): Single<ApiResponse<List<Collection>>>
+      @Query("order_by") orderBy: String = LATEST): Single<List<Collection>>
 
   @GET("users/{username}/statistics")
   fun getUserStatistics(@Path("username") username: String,
       @Query("resolution") resolution: String = DAYS,
       @Query("quantity") quantity: Int = 30)
+
+  @POST("users/{username}/follow")
+  fun followUser(@Path("username") username: String)
+
+  @DELETE("users/{username}/follow")
+  fun unfollowUser(@Path("username") username: String)
 }
 
 interface CollectionService {
   @GET("collections/")
   fun getListCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<ApiResponse<List<Collection>>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated")
   fun getListCuratedCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<ApiResponse<List<Collection>>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated")
   fun getListFeaturedCollections(@Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<ApiResponse<List<Collection>>>
+      @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
   @GET("collections/curated/{id}")
   fun getACollection(@Path("id") id: String, @Query("page") page: Int = 1,
@@ -177,11 +184,11 @@ interface CollectionService {
 
   @GET("collections/{id}/photos")
   fun getCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<ApiResponse<List<Photo>>>
+      @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
   @GET("collections/curated/{id}/photos")
   fun getCuratedCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
-      @Query("per_page") perPage: Int = 10): Single<ApiResponse<List<Photo>>>
+      @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
   @GET("collections/{id}/related")
   fun getRelatedCollections(@Path("id") id: String)
@@ -212,17 +219,17 @@ interface SearchService {
   @GET("search/photos")
   fun searchPhotos(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<SearchPhotoResult>
 
   @GET("search/collections")
   fun searchCollections(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<List<Collection>>
 
   @GET("search/users")
   fun searchUsers(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<Photo>
+      @Query("per_page") per_page: Int): Single<List<User>>
 }
 
 interface StatsService {
@@ -241,10 +248,4 @@ interface TrendingService {
 
   @GET("feeds/following")
   fun getFollowingFeed(@Query("after") after: String? = null)
-
-  @POST("users/{username}/follow")
-  fun followUser(@Path("username") username: String)
-
-  @DELETE("users/{username}/follow")
-  fun unfollowUser(@Path("username") username: String)
 }

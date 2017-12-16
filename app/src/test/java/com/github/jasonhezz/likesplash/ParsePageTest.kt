@@ -3,10 +3,13 @@ package com.github.jasonhezz.likesplash
 import android.net.Uri
 import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 /**
  * Created by JavaCoder on 2017/11/28.
  */
+@RunWith(JUnit4::class)
 class ParsePageTest {
   @Test
   fun parse() {

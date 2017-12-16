@@ -70,53 +70,6 @@ class AspectRatioImageView @JvmOverloads constructor(context: Context,
     setMeasuredDimension(newWidth, newHeight)
   }
 
-  /** Get the aspect ratio for this image view.  */
-  /* fun getAspectRatio(): Float {
-     return aspectRatio
-   }
-
-   */
-  /** Set the aspect ratio for this image view. This will update the view instantly.  *//*
-  fun setAspectRatio(aspectRatio: Float) {
-    this.aspectRatio = aspectRatio
-    if (aspectRatioEnabled) {
-      requestLayout()
-    }
-  }*/
-
-  /** Get whether or not forcing the aspect ratio is enabled.  *//*
-  fun getAspectRatioEnabled(): Boolean {
-    return aspectRatioEnabled
-  }
-
-  */
-  /** set whether or not forcing the aspect ratio is enabled. This will re-layout the view.  *//*
-  fun setAspectRatioEnabled(aspectRatioEnabled: Boolean) {
-    this.aspectRatioEnabled = aspectRatioEnabled
-    requestLayout()
-  }*/
-
-  /** Get the dominant measurement for the aspect ratio.  */
-  /* fun getDominantMeasurement(): Int {
-     return dominantMeasurement
-   }
-
-   */
-  /**
-   * Set the dominant measurement for the aspect ratio.
-
-   * @see .MEASUREMENT_WIDTH
-
-   * @see .MEASUREMENT_HEIGHT
-   *//*
-  fun setDominantMeasurement(dominantMeasurement: Int) {
-    if (dominantMeasurement != MEASUREMENT_HEIGHT && dominantMeasurement != MEASUREMENT_WIDTH) {
-      throw IllegalArgumentException("Invalid measurement type.")
-    }
-    this.dominantMeasurement = dominantMeasurement
-    requestLayout()
-  }*/
-
   companion object {
     // NOTE: These must be kept in sync with the AspectRatioImageView attributes in attrs.xml.
     val MEASUREMENT_WIDTH = 0

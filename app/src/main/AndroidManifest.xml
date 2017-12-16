@@ -3,6 +3,9 @@
     package="com.github.jasonhezz.likesplash">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
   <application
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
@@ -20,8 +23,10 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".ui.SearchActivity"
+        android:name=".ui.search.SearchActivity"
         android:theme="@style/AppTheme.Search">
+    </activity>
+    <activity android:name=".ui.profile.ProfileActivity">
     </activity>
   </application>
 
