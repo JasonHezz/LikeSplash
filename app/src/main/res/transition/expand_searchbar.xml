@@ -11,8 +11,8 @@
       <target android:targetId="@android:id/statusBarBackground"/>
     </targets>
   </fade>
-  <!--<transition
+  <transition
       class="com.github.jasonhezz.likesplash.ui.transition.SearchArrowTransform"
       app:finalProgress="1.0"
-      app:initialProgress="0.0"/>-->
+      app:initialProgress="0.0"/>
 </transitionSet>
