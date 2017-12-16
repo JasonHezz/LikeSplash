@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:bbn_entries="@menu/menu_bottom_navigate"
+        app:bbn_entries="@menu/menu_photo_bottom_navigate"
         app:layout_behavior="it.sephiroth.android.library.bottomnavigation.BottomBehavior" />
 
     <android.support.design.widget.AppBarLayout

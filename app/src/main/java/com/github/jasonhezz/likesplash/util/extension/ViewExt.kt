@@ -91,7 +91,7 @@ inline fun View.marginTop(top: Int) {
 
 inline fun View.marginBottom(bottom: Int) {
   val lp = this.layoutParams as ViewGroup.MarginLayoutParams
-  lp.bottomMargin += bottom
+  lp.bottomMargin = bottom
   this.layoutParams = lp
 }
 
