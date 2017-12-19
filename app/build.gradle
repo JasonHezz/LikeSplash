@@ -45,7 +45,7 @@ dependencies {
   implementation 'de.hdodenhof:circleimageview:2.2.0'
 //  implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
 
-//  implementation 'br.com.simplepass:loading-button-android:1.8.4'
+  implementation 'br.com.simplepass:loading-button-android:1.8.4'
   //retrofit
   implementation 'com.squareup.retrofit2:retrofit:2.3.0'
   implementation 'com.squareup.retrofit2:converter-gson:2.3.0'

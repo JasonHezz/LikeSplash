@@ -47,7 +47,7 @@
           android:layout_marginTop="136dp"
           android:orientation="vertical"
           app:layout_collapseMode="parallax"
-          app:layout_collapseParallaxMultiplier="0.6"
+          app:layout_collapseParallaxMultiplier="0.8"
           >
         <Button
             android:id="@+id/follow_btn"
@@ -57,7 +57,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_person_add"
+            android:drawableStart="@drawable/asl_follow"
             android:text="Follow"
             android:textAllCaps="false"
             android:theme="@style/Widget.Splash.BrandButton"

@@ -7,6 +7,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +24,7 @@ import com.github.jasonhezz.likesplash.util.extension.loadUrl
 import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 /**
  * Created by JavaCoder on 2017/6/28.
@@ -60,6 +62,12 @@ class ProfileFragment : Fragment() {
       tab_layout.getTabAt(2)?.text = String.format(getString(R.string.collections),
           it?.total_collections)
     })
+
+    follow_btn.setOnClickListener {
+      TransitionManager.beginDelayedTransition(profile_coordinator_layout)
+      follow_btn.isActivated = !follow_btn.isActivated
+      follow_btn.text = if(follow_btn.isActivated) "Following" else "Follow"
+    }
     viewModel.messages.observe(this, Observer {
       when (it?.status) {
         Status.REFRESHING -> {
@@ -74,10 +82,6 @@ class ProfileFragment : Fragment() {
         }
       }
     })
-  }
-
-  override fun onDestroyView() {
-    super.onDestroyView()
   }
 
   private fun initToolbar() {
