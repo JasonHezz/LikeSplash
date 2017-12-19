@@ -85,7 +85,7 @@ inline fun View.hide() {
 
 inline fun View.marginTop(top: Int) {
   val lp = this.layoutParams as ViewGroup.MarginLayoutParams
-  lp.topMargin = top
+  lp.topMargin += top
   this.layoutParams = lp
 }
 
