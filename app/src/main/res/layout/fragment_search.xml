@@ -52,7 +52,6 @@
         android:background="@android:color/transparent"
         android:foreground="@drawable/circle_ripple"
         android:src="@drawable/ic_arrow_back"
-        android:transitionName="search_back"
         />
   </android.support.v7.widget.CardView>
 
