@@ -100,7 +100,7 @@ data class User(var id: String?,
     var links: UserLinks?) : Parcelable
 
 data class Tag(val title: String? = null,
-    val url: String? = null)
+    val url: String? = null, val description: String? = null)
 
 data class Me(var id: String? = null,
     var username: String? = null,
@@ -207,3 +207,6 @@ data class MonthStats(var photos: Int?,
 data class TrendingFeed(var next_page: String?, var photos: List<Photo>?)
 
 data class SearchPhotoResult(var total: Int?, var total_pages: Int?, var results: List<Photo>?)
+
+data class ExplorePhoto(val name: String? = null, val descriptionFragment: String? = null,
+    val related: List<Tag>? = null)
