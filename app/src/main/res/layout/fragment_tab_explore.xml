@@ -4,48 +4,48 @@
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
-  <android.support.design.widget.AppBarLayout
-      android:id="@+id/app_bar_layout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:stateListAnimator="@animator/appbar_always_elevated"
-      >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:contentInsetStartWithNavigation="0dp"
-        app:layout_scrollFlags="scroll"
-        >
-    </android.support.v7.widget.Toolbar>
+    android:fitsSystemWindows="true">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabBackground="@android:color/transparent"
-        app:tabGravity="fill"
-        style="@style/Widget.Splash.UserTabLayout"
-        >
-      <android.support.design.widget.TabItem
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Explore"
-          />
+        android:stateListAnimator="@animator/appbar_always_elevated">
 
-      <android.support.design.widget.TabItem
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Popular Collections"
-          />
-    </android.support.design.widget.TabLayout>
-  </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_scrollFlags="scroll"/>
 
-  <include
-      layout="@layout/item_explore_title"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/Widget.Splash.UserTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:tabBackground="@android:color/transparent"
+            app:tabGravity="fill">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Explore" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular Collections" />
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include layout="@layout/item_explore_title"/>
+
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
