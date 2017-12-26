@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
 import com.airbnb.epoxy.AutoModel
-import com.airbnb.epoxy.paging.PagingEpoxyController
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.collection
@@ -20,8 +19,8 @@ class CollectionPagedController : PagingEpoxyController<Collection>() {
       requestModelBuild()
     }
 
-  override fun buildModels(list: MutableList<Collection>?) {
-    list?.forEach {
+  override fun buildModels(list: MutableList<Collection>) {
+    list.forEach {
       collection {
         id(it.id)
         collection(it)
