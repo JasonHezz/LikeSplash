@@ -71,11 +71,10 @@ dependencies {
 
 
   //epoxy
-  implementation('com.airbnb.android:epoxy:2.7.3', {
+  implementation('com.airbnb.android:epoxy:2.8.0', {
     exclude group: 'com.android.support'
   })
-  implementation 'com.airbnb.android:epoxy-paging:2.7.3'
-  kapt 'com.airbnb.android:epoxy-processor:2.7.2'
+  kapt 'com.airbnb.android:epoxy-processor:2.8.0'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.11.0'
   androidTestImplementation 'com.android.support.test:runner:1.0.1'
