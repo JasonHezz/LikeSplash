@@ -26,14 +26,14 @@ abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
       holder.photo_iv.aspectRatio = aspectRatio
       holder.user_name.text = it.user?.name
       GlideApp.with(holder.photo_iv.context)
-          .load(it.urls?.regular)
-          .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
-          .materialPlaceHolder(it.color)
-          .into(holder.photo_iv)
+              .load(it.urls?.regular)
+              .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
+              .materialPlaceHolder(it.color)
+              .into(holder.photo_iv)
       GlideApp.with(holder.user_avatar.context)
-          .load(it.user?.profile_image?.large)
-          .placeholder(R.drawable.avatar_placeholder)
-          .into(holder.user_avatar)
+              .load(it.user?.profile_image?.large)
+              .placeholder(R.drawable.avatar_placeholder)
+              .into(holder.user_avatar)
     }
   }
 }
