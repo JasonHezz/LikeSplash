@@ -87,11 +87,12 @@ class PagedTrendingPhotoDataSource(
             override fun onResponse(call: Call<TrendingFeed>?, response: Response<TrendingFeed>) {
                 if (response.isSuccessful) {
                     val uri = Uri.parse(response.body()?.next_page)
+                    val items = response.body()?.photos ?: emptyList()
                     val page = uri.getQueryParameter("after")
                     retry = null
                     networkState.postValue(Resource.LOADED)
                     initialLoad.postValue(Resource.LOADED)
-                    callback.onResult(response.body()?.photos ?: emptyList(), null, page)
+                    callback.onResult(items, "", page)
                 } else {
                     networkState.postValue(Resource.LOADED)
                     initialLoad.postValue(Resource.LOADED)
