@@ -32,7 +32,7 @@ object NetModule {
 
 
   fun provideRetrofit(): Retrofit = Retrofit.Builder()
-      .baseUrl(UNSPLASH_BASE_URL)
+      .baseUrl(UNSPLASH_NEW_BASE_URL)
       .client(provideOkHttpClient())
       .addConverterFactory(GsonConverterFactory.create(provideGson()))
       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

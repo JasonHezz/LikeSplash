@@ -68,7 +68,7 @@ interface PhotoService {
       Single<Photo>
 
   @GET("photos/random")
-  fun getListRandomPhoto(@Query("collections") collections: String? = null,
+  fun getListRandomPhoto(@Query("photos") collections: String? = null,
       @Query("featured") featured: String? = null,
       @Query("username") username: String? = null,
       @Query("query") query: String? = null,
@@ -143,7 +143,7 @@ interface UserService {
       @Query("per_page") per_page: Int,
       @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
 
-  @GET("users/{username}/collections")
+  @GET("users/{username}/photos")
   fun getUserCollection(@Path("username") username: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int,
@@ -162,54 +162,54 @@ interface UserService {
 }
 
 interface CollectionService {
-  @GET("collections/")
+  @GET("photos/")
   fun getListCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("collections/curated")
+  @GET("photos/curated")
   fun getListCuratedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("collections/curated")
+  @GET("photos/curated")
   fun getListFeaturedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("collections/curated/{id}")
+  @GET("photos/curated/{id}")
   fun getACollection(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<Collection>
 
-  @GET("collections/curated/{id}")
+  @GET("photos/curated/{id}")
   fun getACuratedCollection(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<Collection>
 
-  @GET("collections/{id}/photos")
+  @GET("photos/{id}/photos")
   fun getCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
-  @GET("collections/curated/{id}/photos")
+  @GET("photos/curated/{id}/photos")
   fun getCuratedCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
-  @GET("collections/{id}/related")
+  @GET("photos/{id}/related")
   fun getRelatedCollections(@Path("id") id: String)
 
-  @POST("collections")
+  @POST("photos")
   fun createANewCollection(@Query("title") title: String,
       @Query("description") description: String? = null,
       @Query("private") private: Boolean): Single<Collection>
 
-  @POST("collections/{id}")
+  @POST("photos/{id}")
   fun updateANewCollection(@Path("id") id: String): Single<Collection>
 
-  @DELETE("collections/{id}")
+  @DELETE("photos/{id}")
   fun deleteCollection(@Path("id") id: String): Single<ResponseBody>
 
-  @POST("collections/collection_id/add")
+  @POST("photos/collection_id/add")
   fun addPhotoToCollection(@Path("collection_id") collection_id: Int,
       @Query("photo_id") photo_id: String): Single<ResponseBody>
 
-  //Remove a photo from one of the logged-in user’s collections. Requires the write_collections scope
-  @POST("collections/collection_id/remove")
+  //Remove a photo from one of the logged-in user’s photos. Requires the write_collections scope
+  @POST("photos/collection_id/remove")
   fun removePhotoToCollection(@Path("collection_id") collection_id: Int,
       @Query("photo_id") photo_id: String): Single<ResponseBody>
 }
@@ -221,7 +221,7 @@ interface SearchService {
       @Query("page") page: Int,
       @Query("per_page") per_page: Int): Single<SearchPhotoResult>
 
-  @GET("search/collections")
+  @GET("search/photos")
   fun searchCollections(@Query("query") query: String,
       @Query("page") page: Int,
       @Query("per_page") per_page: Int): Single<List<Collection>>
@@ -245,6 +245,9 @@ interface TrendingService {
 
   @GET("feeds/home")
   fun getTrendingFeed(@Query("after") after: String? = null): Single<TrendingFeed>
+
+  @GET("feeds/home")
+  fun getTrendingFeed(@Query("after") after: String? = null, @Query("per_page") per_page: Int): Call<TrendingFeed>
 
   @GET("feeds/following")
   fun getFollowingFeed(@Query("after") after: String? = null)

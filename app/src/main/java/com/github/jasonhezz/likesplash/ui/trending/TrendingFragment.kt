@@ -10,82 +10,75 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.ui.common.EndlessRecyclerViewScrollListener
-import com.github.jasonhezz.likesplash.ui.controller.PhotoController
+import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
-import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
-import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import kotlinx.android.synthetic.main.fragment_trending.*
+import timber.log.Timber
 
 
 class TrendingFragment : Fragment() {
 
-  private lateinit var viewModel: TrendingViewModel
-  private lateinit var swipeRefreshLatch: ProgressTimeLatch
-  private var controller = PhotoController().apply { setFilterDuplicates(true) }
+    private lateinit var viewModel: TrendingViewModel
+    private var controller = PhotoPagedController()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
-  }
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_trending, container,
-      false)
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    swipeRefreshLatch = ProgressTimeLatch {
-      refreshLayout?.isRefreshing = it
-    }
-    refreshLayout.setOnRefreshListener(viewModel::fullRefresh)
-    controller.callback = object : PhotoController.AdapterCallbacks {
-      override fun onAvatarClick(id: User?) {
-        startActivity(
-            Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-                id))
-      }
-
-      override fun onPhotoClick() {
-
-      }
-    }
-    rv.apply {
-      adapter = controller.adapter
-      addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
-        viewModel.onListScrolledToEnd()
-      }))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
     }
 
-    viewModel.apply {
-      messages.observe(this@TrendingFragment, Observer {
-        when (it?.status) {
-          Status.SUCCESS -> {
-            swipeRefreshLatch.refreshing = false
-            controller.isLoading = false
-          }
-          Status.ERROR -> {
-            swipeRefreshLatch.refreshing = false
-            controller.isLoading = false
-            rv.showSnackbar(it.message ?: "UNKNOW ERROR")
-          }
-          Status.REFRESHING -> swipeRefreshLatch.refreshing = true
-          Status.LOADING_MORE -> controller.isLoading = true
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_trending, container,
+            false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        controller.callback = object : PhotoPagedController.AdapterCallbacks {
+            override fun onAvatarClick(id: User?) {
+                startActivity(
+                        Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+                                id))
+            }
+
+            override fun onPhotoClick() {
+
+            }
         }
-      })
-      photos.observe(this@TrendingFragment, Observer {
-        it?.let { controller.photos = it }
-      })
+        rv.apply {
+            adapter = controller.adapter
+        }
+        swipe_refresh.setOnRefreshListener(viewModel::refresh)
+        viewModel.refreshState.observe(this, Observer {
+            swipe_refresh.isRefreshing = it == Resource.INITIAL
+        })
+        viewModel.photos.observe(this, Observer {
+            controller.setList(it)
+        })
+        viewModel.networkState.observe(this, Observer {
+            when (it?.status) {
+                Status.LOADING_MORE -> {
+                    controller.isLoading = true
+                }
+                Status.SUCCESS -> {
+                    controller.isLoading = false
+                }
+                Status.ERROR -> {
+                    Timber.e(it.message)
+                }
+                else -> {
+                }
+            }
+        })
     }
-  }
 
-  companion object {
-    fun newInstance(): TrendingFragment {
-      val fragment = TrendingFragment()
-      val args = Bundle()
-      fragment.arguments = args
-      return fragment
+    companion object {
+        fun newInstance(): TrendingFragment {
+            val fragment = TrendingFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
-  }
 }

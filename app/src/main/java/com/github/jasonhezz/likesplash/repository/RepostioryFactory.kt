@@ -12,7 +12,7 @@ object RepostioryFactory {
   private val NETWORK_IO = Executors.newFixedThreadPool(5)
 
   fun makeTrendingRepository(): TrendingRepository {
-    return TrendingRepositoryIml(NetModule.provideTrendingService())
+    return TrendingRepositoryIml(NetModule.provideTrendingService(),NETWORK_IO)
   }
 
   fun makePhotoRepository(): PhotoRepository {
