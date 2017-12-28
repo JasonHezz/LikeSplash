@@ -1,6 +1,8 @@
 package com.github.jasonhezz.likesplash.ui.trending
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +14,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.repository.RepostioryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_trending.*
@@ -25,7 +28,7 @@ class TrendingFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
+    viewModel = getViewModel()
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,16 @@ class TrendingFragment : Fragment() {
     swipe_refresh.setOnRefreshListener {
       viewModel.refresh()
     }
+  }
+
+  private fun getViewModel(): TrendingViewModel {
+    return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+      override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        val repo = RepostioryFactory.makeTrendingRepository()
+        @Suppress("UNCHECKED_CAST")
+        return TrendingViewModel(repo) as T
+      }
+    })[TrendingViewModel::class.java]
   }
 
   private fun initController() {
