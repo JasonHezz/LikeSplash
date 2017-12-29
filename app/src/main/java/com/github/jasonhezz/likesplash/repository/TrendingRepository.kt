@@ -16,7 +16,7 @@ import java.util.concurrent.Executor
 interface TrendingRepository {
     fun getTrendingFeed(after: String? = null): Single<TrendingFeed>
 
-    fun getTrendingFeed(fter: String? = null, perPage: Int = 10): Listing<Photo>
+    fun getTrendingFeed(after: String? = null, perPage: Int = 10): Listing<Photo>
 
     fun getFollowingFeed(after: String? = null)
 }
@@ -27,7 +27,7 @@ class TrendingRepositoryIml(val trendingService: TrendingService, private val ne
 
     override fun getFollowingFeed(after: String?) = trendingService.getFollowingFeed(after)
 
-    override fun getTrendingFeed(fter: String?, perPage: Int): Listing<Photo> {
+    override fun getTrendingFeed(after: String?, perPage: Int): Listing<Photo> {
         val sourceFactory = TrendingPhotoDataSourceFactory(trendingService, networkExecutor)
         val livePagedList = LivePagedListBuilder(sourceFactory, PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
                 // provide custom executor for network requests, otherwise it will default to
