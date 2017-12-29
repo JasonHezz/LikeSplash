@@ -10,19 +10,14 @@ import com.github.jasonhezz.likesplash.data.model.photo
  * Created by JavaCoder on 2017/10/16.
  */
 
-class PhotoPagedController(var callback: AdapterCallbacks? = null) : PagingEpoxyController<Photo>() {
+class PhotoPagedController(
+    var callback: AdapterCallbacks? = null) : PagingEpoxyController<Photo>() {
 
   var onAvatarClick: ((id: String?) -> Unit)? = null
   var onPhotoClick: (() -> Unit)? = null
 
   @AutoModel
   lateinit var loadingModel: LoadingModel_
-
-  var photos = emptyList<Photo>()
-    set(value) {
-      field = value
-      requestModelBuild()
-    }
 
   var isLoading: Boolean = false
     set(value) {
@@ -33,7 +28,7 @@ class PhotoPagedController(var callback: AdapterCallbacks? = null) : PagingEpoxy
     }
 
   override fun buildModels(list: MutableList<Photo>) {
-    photos.forEach {
+    list.forEach {
       photo {
         id(it.id)
         photo(it)
