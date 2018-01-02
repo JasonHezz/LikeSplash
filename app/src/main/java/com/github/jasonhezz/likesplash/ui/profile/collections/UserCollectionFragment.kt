@@ -23,7 +23,7 @@ import timber.log.Timber
  */
 class UserCollectionFragment : Fragment() {
 
-  private lateinit var mModelUser: UserCollectionViewModel
+  private lateinit var model: UserCollectionViewModel
   private var controller = CollectionPagedController().apply { setFilterDuplicates(true) }
 
   private var user: User? = null
@@ -33,7 +33,7 @@ class UserCollectionFragment : Fragment() {
     if (arguments != null) {
       user = arguments?.getParcelable(ARG_PARAM_USER)
     }
-    mModelUser = getViewModel()
+    model = getViewModel()
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -47,20 +47,20 @@ class UserCollectionFragment : Fragment() {
   }
 
   private fun initSwipeToRefresh() {
-    mModelUser.refreshState.observe(this, Observer {
+    model.refreshState.observe(this, Observer {
       swipe_refresh.isRefreshing = it == Resource.INITIAL
     })
     swipe_refresh.setOnRefreshListener {
-      mModelUser.refresh()
+      model.refresh()
     }
   }
 
   private fun initController() {
     rv.adapter = controller.adapter
-    mModelUser.collections.observe(this, Observer {
+    model.collections.observe(this, Observer {
       controller.setList(it)
     })
-    mModelUser.networkState.observe(this, Observer {
+    model.networkState.observe(this, Observer {
       when (it?.status) {
         Status.LOADING_MORE -> {
           controller.isLoading = true
