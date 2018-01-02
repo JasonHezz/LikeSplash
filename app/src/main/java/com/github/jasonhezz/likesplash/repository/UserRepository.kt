@@ -9,6 +9,8 @@ import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
 import com.github.jasonhezz.likesplash.data.api.UserService
+import com.github.jasonhezz.likesplash.ui.follower.UserFollowerDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.following.UserFollowingDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoDataSourceFactory
@@ -24,11 +26,11 @@ interface UserRepository {
 
   fun getUserFollowing(username: String,
       page: Int = 1,
-      per_page: Int = 10): Single<List<User>>
+      per_page: Int = 10): Listing<User>
 
   fun getUserFollowers(username: String,
       page: Int = 1,
-      per_page: Int = 10): Single<List<User>>
+      per_page: Int = 10): Listing<User>
 
   fun getUserLikes(username: String,
       page: Int = 1,
@@ -59,12 +61,52 @@ class UserRepositoryIml(private val service: UserService,
     return service.getUserProfile(username, w, h)
   }
 
-  override fun getUserFollowing(username: String, page: Int, per_page: Int): Single<List<User>> {
-    return service.getUserFollowing(username, page, per_page)
+  override fun getUserFollowing(username: String, page: Int, per_page: Int): Listing<User> {
+    val sourceFactory = UserFollowingDataSourceFactory(username, service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
   }
 
-  override fun getUserFollowers(username: String, page: Int, per_page: Int): Single<List<User>> {
-    return service.getUserFollowers(username, page, per_page)
+  override fun getUserFollowers(username: String, page: Int, per_page: Int): Listing<User> {
+    val sourceFactory = UserFollowerDataSourceFactory(username, service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
   }
 
   override fun getUserLikes(username: String, page: Int, per_page: Int,

@@ -129,7 +129,7 @@ interface UserService {
   @GET("users/{username}/followers")
   fun getUserFollowers(@Path("username") username: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<List<User>>
+      @Query("per_page") per_page: Int): Call<List<User>>
 
   @GET("users/{username}/likes")
   fun getUserLikes(@Path("username") username: String,
