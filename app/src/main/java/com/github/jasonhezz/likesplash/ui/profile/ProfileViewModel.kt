@@ -4,9 +4,8 @@ import android.arch.lifecycle.MutableLiveData
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepostioryFactory
+import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.RxAwareViewModel
-import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
 import com.github.jasonhezz.likesplash.util.extension.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,7 +20,7 @@ class ProfileViewModel : RxAwareViewModel() {
 
   fun loadUser(user: User?) {
     liveUser.value = user
-    disposables += RepostioryFactory.makeUserRepository().getUserProfile(user?.username ?: "")
+    disposables += RepositoryFactory.makeUserRepository().getUserProfile(user?.username ?: "")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }

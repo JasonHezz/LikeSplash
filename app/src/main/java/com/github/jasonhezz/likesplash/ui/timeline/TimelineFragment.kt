@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepostioryFactory
+import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_timeline.*
@@ -43,7 +43,7 @@ class TimelineFragment : Fragment() {
   private fun getViewModel(): TimelineViewModel {
     return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepostioryFactory.makePhotoRepository()
+        val repo = RepositoryFactory.makePhotoRepository()
         @Suppress("UNCHECKED_CAST")
         return TimelineViewModel(repo) as T
       }

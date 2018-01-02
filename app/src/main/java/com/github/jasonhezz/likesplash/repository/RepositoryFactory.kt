@@ -6,13 +6,13 @@ import java.util.concurrent.Executors
 /**
  * Created by JavaCoder on 2017/11/28.
  */
-object RepostioryFactory {
+object RepositoryFactory {
 
   private val DISK_IO = Executors.newSingleThreadExecutor()
   private val NETWORK_IO = Executors.newFixedThreadPool(5)
 
   fun makeTrendingRepository(): TrendingRepository {
-    return TrendingRepositoryIml(NetModule.provideTrendingService(),NETWORK_IO)
+    return TrendingRepositoryIml(NetModule.provideTrendingService(), NETWORK_IO)
   }
 
   fun makePhotoRepository(): PhotoRepository {
@@ -20,7 +20,7 @@ object RepostioryFactory {
   }
 
   fun makeUserRepository(): UserRepository {
-    return UserRepositoryIml(NetModule.provideUserService())
+    return UserRepositoryIml(NetModule.provideUserService(), NETWORK_IO)
   }
 
   fun makeSearchRepository(): SearchRepository {
