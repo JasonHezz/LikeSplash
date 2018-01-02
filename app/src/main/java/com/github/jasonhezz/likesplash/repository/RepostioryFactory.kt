@@ -16,7 +16,7 @@ object RepostioryFactory {
   }
 
   fun makePhotoRepository(): PhotoRepository {
-    return PhotoRepositoryIml(NetModule.providePhotoService())
+    return PhotoRepositoryIml(NetModule.providePhotoService(), NETWORK_IO)
   }
 
   fun makeUserRepository(): UserRepository {

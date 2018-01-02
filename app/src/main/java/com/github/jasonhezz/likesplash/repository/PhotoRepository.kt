@@ -1,11 +1,16 @@
 package com.github.jasonhezz.likesplash.repository
 
+import android.arch.lifecycle.Transformations
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import com.github.jasonhezz.likesplash.data.DownLoadLink
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
 import com.github.jasonhezz.likesplash.data.api.PhotoService
+import com.github.jasonhezz.likesplash.ui.timeline.TimelinePhotoDataSourceFactory
 import io.reactivex.Single
+import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/11/27.
@@ -13,7 +18,7 @@ import io.reactivex.Single
 interface PhotoRepository {
 
   fun getListPhotos(page: Int = 1, perPage: Int = 10,
-      orderBy: String = LATEST): Single<List<Photo>>
+      orderBy: String = LATEST): Listing<Photo>
 
   fun getListCuratedPhotos(page: Int = 1, perPage: Int = 10,
       orderBy: String = LATEST): Single<List<Photo>>
@@ -41,10 +46,35 @@ interface PhotoRepository {
   fun unlikeAPhoto(id: String)
 }
 
-class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
+class PhotoRepositoryIml(val service: PhotoService,
+    private val networkExecutor: Executor) : PhotoRepository {
   override fun getListPhotos(page: Int, perPage: Int,
-      orderBy: String): Single<List<Photo>> =
-      service.getListPhotos(page, perPage, orderBy)
+      orderBy: String): Listing<Photo> {
+    val sourceFactory = TimelinePhotoDataSourceFactory(service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
+        // provide custom executor for network requests, otherwise it will default to
+        // Arch Components' IO pool which is also used for disk access
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
+  }
+
 
   override fun getListCuratedPhotos(page: Int, perPage: Int,
       orderBy: String): Single<List<Photo>> =
