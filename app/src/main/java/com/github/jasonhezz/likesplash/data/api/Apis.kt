@@ -57,7 +57,7 @@ interface PhotoService {
 
   @GET("photos/")
   fun getListPhotos(@Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
-      @Query("order_by") orderBy: String = LATEST): Single<List<Photo>>
+      @Query("order_by") orderBy: String = LATEST): Call<List<Photo>>
 
   @GET("photos/curated")
   fun getListCuratedPhotos(@Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
