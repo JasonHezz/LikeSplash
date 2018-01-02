@@ -24,7 +24,7 @@ import timber.log.Timber
 class TrendingFragment : Fragment() {
 
   private lateinit var viewModel: TrendingViewModel
-  private var controller = PhotoPagedController()
+  private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
