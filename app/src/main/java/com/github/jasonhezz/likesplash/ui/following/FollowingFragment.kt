@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.user
+package com.github.jasonhezz.likesplash.ui.following
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_following.*
 /**
  * Created by JavaCoder on 2017/12/8.
  */
-class FollowerFragment : Fragment() {
+class FollowingFragment : Fragment() {
 
   private var user: User? = null
 
@@ -30,9 +30,11 @@ class FollowerFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     if (arguments != null) {
-      user = arguments?.getParcelable(ARG_USER_NAME)
+      user = arguments?.getParcelable(
+          ARG_USER_NAME)
     }
-    viewModel = ViewModelProviders.of(this).get(FollowingViewModel::class.java)
+    viewModel = ViewModelProviders.of(this).get(
+        FollowingViewModel::class.java)
     viewModel.fullRefresh(user)
   }
 
@@ -55,7 +57,7 @@ class FollowerFragment : Fragment() {
     }
 
     viewModel.apply {
-      messages.observe(this@FollowerFragment, Observer {
+      messages.observe(this@FollowingFragment, Observer {
         when (it?.status) {
           Status.SUCCESS -> {
             swipeRefreshLatch.refreshing = false
@@ -71,7 +73,7 @@ class FollowerFragment : Fragment() {
         }
       })
 
-      photos.observe(this@FollowerFragment, Observer {
+      photos.observe(this@FollowingFragment, Observer {
         it?.let { controller.users = it }
       })
     }
@@ -80,10 +82,11 @@ class FollowerFragment : Fragment() {
   companion object {
     private val ARG_USER_NAME = "user_name"
 
-    fun newInstance(user: User?): FollowerFragment {
-      val fragment = FollowerFragment()
+    fun newInstance(user: User?): FollowingFragment {
+      val fragment = FollowingFragment()
       val args = Bundle()
-      args.putParcelable(ARG_USER_NAME, user)
+      args.putParcelable(
+          ARG_USER_NAME, user)
       fragment.arguments = args
       return fragment
     }

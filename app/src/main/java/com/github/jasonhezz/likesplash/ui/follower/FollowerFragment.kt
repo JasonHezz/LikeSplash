@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.user
+package com.github.jasonhezz.likesplash.ui.follower
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -13,13 +13,14 @@ import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.common.EndlessRecyclerViewScrollListener
 import com.github.jasonhezz.likesplash.ui.controller.UserController
+import com.github.jasonhezz.likesplash.ui.following.FollowingViewModel
 import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
 import kotlinx.android.synthetic.main.fragment_following.*
 
 /**
  * Created by JavaCoder on 2017/12/8.
  */
-class FollowingFragment : Fragment() {
+class FollowerFragment : Fragment() {
 
   private var user: User? = null
 
@@ -30,9 +31,11 @@ class FollowingFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     if (arguments != null) {
-      user = arguments?.getParcelable(ARG_USER_NAME)
+      user = arguments?.getParcelable(
+          ARG_USER_NAME)
     }
-    viewModel = ViewModelProviders.of(this).get(FollowingViewModel::class.java)
+    viewModel = ViewModelProviders.of(this).get(
+        FollowingViewModel::class.java)
     viewModel.fullRefresh(user)
   }
 
@@ -55,7 +58,7 @@ class FollowingFragment : Fragment() {
     }
 
     viewModel.apply {
-      messages.observe(this@FollowingFragment, Observer {
+      messages.observe(this@FollowerFragment, Observer {
         when (it?.status) {
           Status.SUCCESS -> {
             swipeRefreshLatch.refreshing = false
@@ -71,7 +74,7 @@ class FollowingFragment : Fragment() {
         }
       })
 
-      photos.observe(this@FollowingFragment, Observer {
+      photos.observe(this@FollowerFragment, Observer {
         it?.let { controller.users = it }
       })
     }
@@ -80,10 +83,11 @@ class FollowingFragment : Fragment() {
   companion object {
     private val ARG_USER_NAME = "user_name"
 
-    fun newInstance(user: User?): FollowingFragment {
-      val fragment = FollowingFragment()
+    fun newInstance(user: User?): FollowerFragment {
+      val fragment = FollowerFragment()
       val args = Bundle()
-      args.putParcelable(ARG_USER_NAME, user)
+      args.putParcelable(
+          ARG_USER_NAME, user)
       fragment.arguments = args
       return fragment
     }

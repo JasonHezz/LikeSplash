@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.user
+package com.github.jasonhezz.likesplash.ui.following
 
 import android.arch.lifecycle.MutableLiveData
 import com.github.jasonhezz.likesplash.data.User
@@ -14,7 +14,7 @@ import timber.log.Timber
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class FollowerViewModel : RxAwareViewModel() {
+class FollowingViewModel : RxAwareViewModel() {
 
   private val nextPage = MutableLiveData<Int>().apply { postValue(1) }
   val photos = MutableLiveData<List<User>>().apply { postValue(emptyList()) }
@@ -23,7 +23,7 @@ class FollowerViewModel : RxAwareViewModel() {
 
   fun onListScrolledToEnd(user: User?) {
     if (nextPage.value != null && user?.username != null) {
-      disposables += RepostioryFactory.makeUserRepository().getUserFollowers(user.username!!,
+      disposables += RepostioryFactory.makeUserRepository().getUserFollowing(user.username!!,
           nextPage.value!!)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
@@ -34,7 +34,7 @@ class FollowerViewModel : RxAwareViewModel() {
 
   fun fullRefresh(user: User?) {
     user?.username?.let {
-      disposables += RepostioryFactory.makeUserRepository().getUserFollowers(it)
+      disposables += RepostioryFactory.makeUserRepository().getUserFollowing(it)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
           .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }
