@@ -32,7 +32,7 @@ class TagController : TypedEpoxyController<List<Tag>>() {
 
     title {
       id("collection_title")
-      title("Featured in 22 collections")
+      title("Featured in 22 photos")
     }
 
 

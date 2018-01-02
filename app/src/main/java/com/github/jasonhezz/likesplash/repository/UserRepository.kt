@@ -10,6 +10,8 @@ import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
 import com.github.jasonhezz.likesplash.data.api.UserService
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoDataSourceFactory
 import io.reactivex.Single
 import java.util.concurrent.Executor
 
@@ -31,12 +33,12 @@ interface UserRepository {
   fun getUserLikes(username: String,
       page: Int = 1,
       per_page: Int = 10,
-      orderBy: String = LATEST): Single<List<Photo>>
+      orderBy: String = LATEST): Listing<Photo>
 
   fun getUserPhotos(username: String,
       page: Int = 1,
       per_page: Int = 10,
-      orderBy: String = LATEST): Single<List<Photo>>
+      orderBy: String = LATEST): Listing<Photo>
 
   fun getUserCollection(username: String,
       page: Int = 1,
@@ -66,13 +68,53 @@ class UserRepositoryIml(private val service: UserService,
   }
 
   override fun getUserLikes(username: String, page: Int, per_page: Int,
-      orderBy: String): Single<List<Photo>> {
-    return service.getUserLikes(username, page, per_page, orderBy)
+      orderBy: String): Listing<Photo> {
+    val sourceFactory = UserLikeDataSourceFactory(username, service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
   }
 
   override fun getUserPhotos(username: String, page: Int, per_page: Int,
-      orderBy: String): Single<List<Photo>> {
-    return service.getUserPhotos(username, page, per_page, orderBy)
+      orderBy: String): Listing<Photo> {
+    val sourceFactory = UserPhotoDataSourceFactory(username, service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
   }
 
   override fun getUserCollection(username: String, page: Int, per_page: Int,
@@ -80,8 +122,6 @@ class UserRepositoryIml(private val service: UserService,
     val sourceFactory = UserCollectionDataSourceFactory(username, service, networkExecutor)
     val livePagedList = LivePagedListBuilder(sourceFactory,
         PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        // provide custom executor for network requests, otherwise it will default to
-        // Arch Components' IO pool which is also used for disk access
         .setBackgroundThreadExecutor(networkExecutor)
         .build()
     val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {

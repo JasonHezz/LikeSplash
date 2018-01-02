@@ -39,7 +39,7 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
       it.relatedCollections?.let {
         title {
           id("collection_title")
-          title("Featured in ${it.total ?: 0} collections")
+          title("Featured in ${it.total ?: 0} photos")
         }
         it.results?.let {
           carousel {
