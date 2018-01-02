@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 
 import com.airbnb.epoxy.AutoModel
 import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.photo
 
@@ -11,7 +12,7 @@ import com.github.jasonhezz.likesplash.data.model.photo
 
 class PhotoPagedController : PagingEpoxyController<Photo>() {
 
-  var onAvatarClick: ((id: String?) -> Unit)? = null
+  var onAvatarClick: ((user: User?) -> Unit)? = null
   var onPhotoClick: (() -> Unit)? = null
 
   @AutoModel
@@ -31,7 +32,7 @@ class PhotoPagedController : PagingEpoxyController<Photo>() {
         id(it.id)
         photo(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          onAvatarClick?.invoke(it.user?.id)
+          onAvatarClick?.invoke(it.user)
         }
         photoClickListener { model, parentView, clickedView, position ->
           onPhotoClick?.invoke()

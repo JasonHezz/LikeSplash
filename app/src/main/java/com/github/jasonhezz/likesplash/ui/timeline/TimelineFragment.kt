@@ -83,7 +83,7 @@ class TimelineFragment : Fragment() {
     controller.onAvatarClick = {
       startActivity(
           Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-              id))
+              it))
     }
   }
 
