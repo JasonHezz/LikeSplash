@@ -86,7 +86,7 @@ class UserPhotoFragment : Fragment() {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repo = RepositoryFactory.makeUserRepository()
         @Suppress("UNCHECKED_CAST")
-        return UserPhotoViewModel(user?.name ?: "", repo) as T
+        return UserPhotoViewModel(user?.username ?: "", repo) as T
       }
     })[UserPhotoViewModel::class.java]
   }
