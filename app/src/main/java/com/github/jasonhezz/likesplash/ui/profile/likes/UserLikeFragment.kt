@@ -87,7 +87,7 @@ class UserLikeFragment : Fragment() {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repo = RepositoryFactory.makeUserRepository()
         @Suppress("UNCHECKED_CAST")
-        return UserLikeViewModel(user?.name ?: "", repo) as T
+        return UserLikeViewModel(user?.username ?: "", repo) as T
       }
     })[UserLikeViewModel::class.java]
   }

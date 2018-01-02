@@ -82,7 +82,7 @@ class UserCollectionFragment : Fragment() {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repo = RepositoryFactory.makeUserRepository()
         @Suppress("UNCHECKED_CAST")
-        return UserCollectionViewModel(user?.name ?: "", repo) as T
+        return UserCollectionViewModel(user?.username ?: "", repo) as T
       }
     })[UserCollectionViewModel::class.java]
   }
