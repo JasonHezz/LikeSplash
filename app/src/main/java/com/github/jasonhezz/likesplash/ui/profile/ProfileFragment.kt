@@ -16,8 +16,8 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionFragment
-import com.github.jasonhezz.likesplash.ui.profile.likes.LikeFragment
-import com.github.jasonhezz.likesplash.ui.profile.photos.PhotoFragment
+import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeFragment
+import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoFragment
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 import com.github.jasonhezz.likesplash.util.extension.loadUrl
@@ -102,8 +102,8 @@ class ProfileFragment : Fragment() {
 
   private fun initViewPager() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
-    tabAdapter.addFragment(PhotoFragment.newInstance(user))
-    tabAdapter.addFragment(LikeFragment.newInstance(user))
+    tabAdapter.addFragment(UserPhotoFragment.newInstance(user))
+    tabAdapter.addFragment(UserLikeFragment.newInstance(user))
     tabAdapter.addFragment(UserCollectionFragment.newInstance(user))
     view_pager.apply {
       adapter = tabAdapter
