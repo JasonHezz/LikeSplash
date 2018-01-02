@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.repository.UserRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class CollectionViewModel(private val userName: String,
+class UserCollectionViewModel(private val userName: String,
     private val repository: UserRepository) : ViewModel() {
 
   private val result = MutableLiveData<Listing<Collection>>()

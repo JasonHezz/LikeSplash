@@ -21,9 +21,9 @@ import timber.log.Timber
 /**
  * Created by JavaCoder on 2017/6/28.
  */
-class CollectionFragment : Fragment() {
+class UserCollectionFragment : Fragment() {
 
-  private lateinit var model: CollectionViewModel
+  private lateinit var mModelUser: UserCollectionViewModel
   private var controller = CollectionPagedController().apply { setFilterDuplicates(true) }
 
   private var user: User? = null
@@ -33,7 +33,7 @@ class CollectionFragment : Fragment() {
     if (arguments != null) {
       user = arguments?.getParcelable(ARG_PARAM_USER)
     }
-    model = getViewModel()
+    mModelUser = getViewModel()
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -47,20 +47,20 @@ class CollectionFragment : Fragment() {
   }
 
   private fun initSwipeToRefresh() {
-    model.refreshState.observe(this, Observer {
+    mModelUser.refreshState.observe(this, Observer {
       swipe_refresh.isRefreshing = it == Resource.INITIAL
     })
     swipe_refresh.setOnRefreshListener {
-      model.refresh()
+      mModelUser.refresh()
     }
   }
 
   private fun initController() {
     rv.adapter = controller.adapter
-    model.collections.observe(this, Observer {
+    mModelUser.collections.observe(this, Observer {
       controller.setList(it)
     })
-    model.networkState.observe(this, Observer {
+    mModelUser.networkState.observe(this, Observer {
       when (it?.status) {
         Status.LOADING_MORE -> {
           controller.isLoading = true
@@ -77,21 +77,21 @@ class CollectionFragment : Fragment() {
     })
   }
 
-  private fun getViewModel(): CollectionViewModel {
+  private fun getViewModel(): UserCollectionViewModel {
     return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repo = RepositoryFactory.makeUserRepository()
         @Suppress("UNCHECKED_CAST")
-        return CollectionViewModel(user?.name ?: "", repo) as T
+        return UserCollectionViewModel(user?.name ?: "", repo) as T
       }
-    })[CollectionViewModel::class.java]
+    })[UserCollectionViewModel::class.java]
   }
 
   companion object {
     const val ARG_PARAM_USER = "userId"
     @JvmStatic
-    fun newInstance(user: User?): CollectionFragment {
-      val fragment = CollectionFragment()
+    fun newInstance(user: User?): UserCollectionFragment {
+      val fragment = UserCollectionFragment()
       val args = Bundle()
       args.putParcelable(ARG_PARAM_USER, user)
       fragment.arguments = args

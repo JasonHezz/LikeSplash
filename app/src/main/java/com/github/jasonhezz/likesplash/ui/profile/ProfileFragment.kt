@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.ui.profile.collections.CollectionFragment
+import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionFragment
 import com.github.jasonhezz.likesplash.ui.profile.likes.LikeFragment
 import com.github.jasonhezz.likesplash.ui.profile.photos.PhotoFragment
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
@@ -104,7 +104,7 @@ class ProfileFragment : Fragment() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
     tabAdapter.addFragment(PhotoFragment.newInstance(user))
     tabAdapter.addFragment(LikeFragment.newInstance(user))
-    tabAdapter.addFragment(CollectionFragment.newInstance(user))
+    tabAdapter.addFragment(UserCollectionFragment.newInstance(user))
     view_pager.apply {
       adapter = tabAdapter
       offscreenPageLimit = 3
