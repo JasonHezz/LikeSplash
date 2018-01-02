@@ -64,7 +64,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_avatar"
         android:layout_width="32dp"
         android:layout_height="32dp"
