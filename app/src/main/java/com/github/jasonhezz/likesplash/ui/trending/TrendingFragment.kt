@@ -11,10 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepostioryFactory
+import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_trending.*
@@ -53,7 +52,7 @@ class TrendingFragment : Fragment() {
   private fun getViewModel(): TrendingViewModel {
     return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepostioryFactory.makeTrendingRepository()
+        val repo = RepositoryFactory.makeTrendingRepository()
         @Suppress("UNCHECKED_CAST")
         return TrendingViewModel(repo) as T
       }
@@ -82,16 +81,10 @@ class TrendingFragment : Fragment() {
       }
     })
 
-    controller.callback = object : PhotoPagedController.AdapterCallbacks {
-      override fun onAvatarClick(id: User?) {
-        startActivity(
-            Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-                id))
-      }
-
-      override fun onPhotoClick() {
-
-      }
+    controller.onAvatarClick = {
+      startActivity(
+          Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+              id))
     }
   }
 

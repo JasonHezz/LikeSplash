@@ -1,12 +1,17 @@
 package com.github.jasonhezz.likesplash.repository
 
+import android.arch.lifecycle.Transformations
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.DAYS
 import com.github.jasonhezz.likesplash.data.api.LATEST
 import com.github.jasonhezz.likesplash.data.api.UserService
+import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionDataSourceFactory
 import io.reactivex.Single
+import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/1.
@@ -36,7 +41,7 @@ interface UserRepository {
   fun getUserCollection(username: String,
       page: Int = 1,
       per_page: Int = 10,
-      orderBy: String = LATEST): Single<List<Collection>>
+      orderBy: String = LATEST): Listing<Collection>
 
   fun getUserStatistics(username: String, resolution: String = DAYS,
       quantity: Int = 30)
@@ -46,7 +51,8 @@ interface UserRepository {
   fun unfollowUser(username: String)
 }
 
-class UserRepositoryIml(val service: UserService) : UserRepository {
+class UserRepositoryIml(private val service: UserService,
+    private val networkExecutor: Executor) : UserRepository {
   override fun getUserProfile(username: String, w: Int?, h: Int?): Single<User> {
     return service.getUserProfile(username, w, h)
   }
@@ -70,8 +76,30 @@ class UserRepositoryIml(val service: UserService) : UserRepository {
   }
 
   override fun getUserCollection(username: String, page: Int, per_page: Int,
-      orderBy: String): Single<List<Collection>> {
-    return service.getUserCollection(username, page, per_page, orderBy)
+      orderBy: String): Listing<Collection> {
+    val sourceFactory = UserCollectionDataSourceFactory(username, service, networkExecutor)
+    val livePagedList = LivePagedListBuilder(sourceFactory,
+        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
+        // provide custom executor for network requests, otherwise it will default to
+        // Arch Components' IO pool which is also used for disk access
+        .setBackgroundThreadExecutor(networkExecutor)
+        .build()
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+          it.networkState
+        }),
+        retry = {
+          sourceFactory.sourceLiveData.value?.retryAllFailed()
+        },
+        refresh = {
+          sourceFactory.sourceLiveData.value?.invalidate()
+        },
+        refreshState = refreshState
+    )
   }
 
   override fun getUserStatistics(username: String, resolution: String, quantity: Int) {

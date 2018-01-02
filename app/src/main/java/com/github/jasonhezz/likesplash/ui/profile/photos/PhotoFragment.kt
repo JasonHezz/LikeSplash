@@ -14,7 +14,7 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.common.EndlessRecyclerViewScrollListener
 import com.github.jasonhezz.likesplash.ui.controller.PhotoController
 import com.github.jasonhezz.likesplash.util.ProgressTimeLatch
-import kotlinx.android.synthetic.main.fragment_timeline.*
+import kotlinx.android.synthetic.main.fragment_like.*
 
 /**
  * Created by JavaCoder on 2017/6/28.
@@ -43,9 +43,9 @@ class PhotoFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     swipeRefreshLatch = ProgressTimeLatch {
-      refreshLayout?.isRefreshing = it
+      swipe_refresh?.isRefreshing = it
     }
-    refreshLayout.setOnRefreshListener { viewModel.fullRefresh(user) }
+    swipe_refresh.setOnRefreshListener { viewModel.fullRefresh(user) }
     rv.adapter = controller.adapter
     rv.addOnScrollListener(EndlessRecyclerViewScrollListener(rv.layoutManager, { _, _ ->
       viewModel.onListScrolledToEnd(user)

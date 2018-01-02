@@ -5,7 +5,7 @@ import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepostioryFactory
+import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.RxAwareViewModel
 import com.github.jasonhezz.likesplash.util.extension.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,7 +24,7 @@ class LikeViewModel : RxAwareViewModel() {
 
   fun onListScrolledToEnd(user: User?) {
     if (nextPage.value != null && user?.username != null) {
-      disposables += RepostioryFactory.makeUserRepository().getUserLikes(user.username!!,
+      disposables += RepositoryFactory.makeUserRepository().getUserLikes(user.username!!,
           nextPage.value!!)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
@@ -35,7 +35,7 @@ class LikeViewModel : RxAwareViewModel() {
 
   fun fullRefresh(user: User?) {
     user?.username?.let {
-      disposables += RepostioryFactory.makeUserRepository().getUserLikes(it)
+      disposables += RepositoryFactory.makeUserRepository().getUserLikes(it)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
           .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }

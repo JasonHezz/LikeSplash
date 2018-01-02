@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepostioryFactory
+import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import kotlinx.android.synthetic.main.fragment_collection.*
 import timber.log.Timber
@@ -79,7 +79,7 @@ class CollectionFragment : Fragment() {
   private fun getViewModel(): CollectionViewModel {
     return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepostioryFactory.makeCollectionRepository()
+        val repo = RepositoryFactory.makeCollectionRepository()
         @Suppress("UNCHECKED_CAST")
         return CollectionViewModel(repo) as T
       }
