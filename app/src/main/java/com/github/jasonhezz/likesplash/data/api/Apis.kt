@@ -68,7 +68,7 @@ interface PhotoService {
       Single<Photo>
 
   @GET("photos/random")
-  fun getListRandomPhoto(@Query("photos") collections: String? = null,
+  fun getListRandomPhoto(@Query("collections") collections: String? = null,
       @Query("featured") featured: String? = null,
       @Query("username") username: String? = null,
       @Query("query") query: String? = null,
@@ -162,54 +162,54 @@ interface UserService {
 }
 
 interface CollectionService {
-  @GET("photos/")
+  @GET("collections/")
   fun getListCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("photos/curated")
+  @GET("collections/curated")
   fun getListCuratedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("photos/curated")
+  @GET("collections/curated")
   fun getListFeaturedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("photos/curated/{id}")
+  @GET("collections/curated/{id}")
   fun getACollection(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<Collection>
 
-  @GET("photos/curated/{id}")
+  @GET("collections/curated/{id}")
   fun getACuratedCollection(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<Collection>
 
-  @GET("photos/{id}/photos")
+  @GET("collections/{id}/photos")
   fun getCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
-  @GET("photos/curated/{id}/photos")
+  @GET("collections/curated/{id}/photos")
   fun getCuratedCollectionPhotos(@Path("id") id: String, @Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Single<List<Photo>>
 
-  @GET("photos/{id}/related")
+  @GET("collections/{id}/related")
   fun getRelatedCollections(@Path("id") id: String)
 
-  @POST("photos")
+  @POST("collections")
   fun createANewCollection(@Query("title") title: String,
       @Query("description") description: String? = null,
       @Query("private") private: Boolean): Single<Collection>
 
-  @POST("photos/{id}")
+  @POST("collections/{id}")
   fun updateANewCollection(@Path("id") id: String): Single<Collection>
 
-  @DELETE("photos/{id}")
+  @DELETE("collections/{id}")
   fun deleteCollection(@Path("id") id: String): Single<ResponseBody>
 
-  @POST("photos/collection_id/add")
+  @POST("collections/collection_id/add")
   fun addPhotoToCollection(@Path("collection_id") collection_id: Int,
       @Query("photo_id") photo_id: String): Single<ResponseBody>
 
-  //Remove a photo from one of the logged-in user’s photos. Requires the write_collections scope
-  @POST("photos/collection_id/remove")
+  //Remove a photo from one of the logged-in user’s collections. Requires the write_collections scope
+  @POST("collections/collection_id/remove")
   fun removePhotoToCollection(@Path("collection_id") collection_id: Int,
       @Query("photo_id") photo_id: String): Single<ResponseBody>
 }
