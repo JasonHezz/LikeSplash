@@ -24,7 +24,7 @@ object RepositoryFactory {
   }
 
   fun makeSearchRepository(): SearchRepository {
-    return SearchRepositoryIml(NetModule.provideSearchService())
+    return SearchRepositoryIml(NetModule.provideSearchService(), NETWORK_IO)
   }
 
   fun makeCollectionRepository(): CollectionRepository {
