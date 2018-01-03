@@ -219,7 +219,7 @@ interface SearchService {
   @GET("search/photos")
   fun searchPhotos(@Query("query") query: String,
       @Query("page") page: Int,
-      @Query("per_page") per_page: Int): Single<SearchPhotoResult>
+      @Query("per_page") per_page: Int): Call<SearchPhotoResult>
 
   @GET("search/photos")
   fun searchCollections(@Query("query") query: String,

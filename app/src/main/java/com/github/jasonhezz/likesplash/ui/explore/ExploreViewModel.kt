@@ -1,73 +1,40 @@
 package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.data.SearchPhotoResult
-import com.github.jasonhezz.likesplash.data.api.Resource
-import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
-import com.github.jasonhezz.likesplash.ui.RxAwareViewModel
-import com.github.jasonhezz.likesplash.util.extension.plusAssign
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
+import com.github.jasonhezz.likesplash.repository.Listing
+import com.github.jasonhezz.likesplash.repository.SearchRepository
 
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class ExploreViewModel : RxAwareViewModel() {
+class ExploreViewModel(private val repository: SearchRepository) : ViewModel() {
 
-  private val nextPage = MutableLiveData<Int>().apply { value = 1 }
-  val photos = MutableLiveData<List<Photo>>().apply { value = emptyList() }
-  val query = MutableLiveData<String>().apply { value = "Business" }
-  val messages = MutableLiveData<Resource>()
+  //  private val nextPage = MutableLiveData<Int>().apply { value = 1 }
+//  val photos = MutableLiveData<List<Photo>>().apply { value = emptyList() }
+//  val defaultQuery = MutableLiveData<String>().apply { value = "Business" }
+  private val result = MutableLiveData<Listing<Photo>>()
+  private val queryLiveData = MutableLiveData<String>()
+  val photos = Transformations.switchMap(result, { it.pagedList })!!
+  val networkState = Transformations.switchMap(result, { it.networkState })!!
+  val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
-  init {
-    fullRefresh()
-  }
-
-  fun onListScrolledToEnd() {
-    if (nextPage.value != null) {
-      disposables += RepositoryFactory.makeSearchRepository().searchPhotos(query.value!!,
-          nextPage.value!!)
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .doOnSubscribe { messages.value = Resource(Status.LOADING_MORE) }
-          .subscribe(this::onSuccess, this::onError)
+  var query: String? = null
+    get() = queryLiveData.value
+    set(value) {
+      field = value
+      queryLiveData.postValue(value)
+      result.postValue(repository.searchPhotos(value ?: ""))
     }
+
+  fun refresh() {
+    result.value?.refresh?.invoke()
   }
 
-  fun fullRefresh() {
-    disposables += RepositoryFactory.makeSearchRepository().searchPhotos(query.value!!)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }
-        .subscribe(this::onRestSuccess, this::onError)
-  }
-
-  fun requery(requery: String) {
-    query.value = requery
-    fullRefresh()
-  }
-
-  private fun onError(t: Throwable) {
-    Timber.e(t)
-    messages.value = Resource(Status.ERROR, t.message)
-  }
-
-  private fun onSuccess(response: SearchPhotoResult) {
-    messages.value = Resource(Status.SUCCESS)
-    nextPage.postValue((nextPage.value ?: 1) + 1)
-    val temp = (photos.value ?: mutableListOf()).toMutableList()
-    response.results?.let {
-      temp.addAll(it)
-    }
-    photos.postValue(temp)
-  }
-
-  private fun onRestSuccess(response: SearchPhotoResult) {
-    messages.value = Resource(Status.SUCCESS)
-    nextPage.postValue(2)
-    photos.value = response.results
+  fun retry() {
+    val listing = result.value
+    listing?.retry?.invoke()
   }
 }
