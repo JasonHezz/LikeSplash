@@ -7,6 +7,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.HomeFragment
 import com.github.jasonhezz.likesplash.ui.collection.CollectionFragment
 import com.github.jasonhezz.likesplash.ui.explore.ExploreFragment
+import com.github.jasonhezz.likesplash.ui.explore.PopularPhotoFragment
 import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
 
 
@@ -19,7 +20,7 @@ class DrawerNavViewAdapter(fm: FragmentManager, defaultMenuId: Int, containerId:
   override fun getFragment(menuItemId: Int): Fragment = when (menuItemId) {
     R.id.nav_home -> HomeFragment.newInstance()
     R.id.nav_collection -> CollectionFragment.newInstance()
-    else -> ExploreFragment.newInstance()
+    else -> PopularPhotoFragment.newInstance()
   }
 
   override fun shouldHandleMenuItem(
