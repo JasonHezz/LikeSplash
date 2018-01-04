@@ -107,11 +107,14 @@ class ExploreController : EpoxyController() {
               "https://images.unsplash.com/photo-1495932574959-fa95bc3c4ac8?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
               "A blue and white wave shot from underwater.")))
 
-  private var businessPhoto = emptyList<Photo>()
-  set(value) {
-    field = value
-    requestModelBuild()
-  }
+  var businessPhoto = emptyList<Photo>()
+  var girlPhoto = emptyList<Photo>()
+  var naturePhoto = emptyList<Photo>()
+  var technologyPhoto = emptyList<Photo>()
+  var foodPhoto = emptyList<Photo>()
+  var travelPhoto = emptyList<Photo>()
+  var happyPhoto = emptyList<Photo>()
+  var coolPhoto = emptyList<Photo>()
 
   override fun buildModels() {
     exploreTitle {
@@ -119,9 +122,10 @@ class ExploreController : EpoxyController() {
       title(businessExplore.name)
       description(businessExplore.descriptionFragment)
     }
-   /* exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("business_photo")
-    }*/
+      photos(businessPhoto)
+    }
     exploreCarouselTag {
       id("business_tag")
       tags(businessExplore.related)
@@ -132,9 +136,10 @@ class ExploreController : EpoxyController() {
       title(girlExplore.name)
       description(girlExplore.descriptionFragment)
     }
-  /*  exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("girl_photo")
-    }*/
+      photos(girlPhoto)
+    }
     exploreCarouselTag {
       id("girl_tag")
       tags(girlExplore.related)
@@ -145,9 +150,10 @@ class ExploreController : EpoxyController() {
       title(natureExplore.name)
       description(natureExplore.descriptionFragment)
     }
-  /*  exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("nature_photo")
-    }*/
+      photos(naturePhoto)
+    }
     exploreCarouselTag {
       id("nature_tag")
       tags(natureExplore.related)
@@ -158,9 +164,10 @@ class ExploreController : EpoxyController() {
       title(technologyExplore.name)
       description(technologyExplore.descriptionFragment)
     }
-   /* exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("technology_photo")
-    }*/
+      photos(technologyPhoto)
+    }
     exploreCarouselTag {
       id("technology_tag")
       tags(technologyExplore.related)
@@ -171,9 +178,10 @@ class ExploreController : EpoxyController() {
       title(foodExplore.name)
       description(foodExplore.descriptionFragment)
     }
-   /* exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("food_photo")
-    }*/
+      photos(foodPhoto)
+    }
     exploreCarouselTag {
       id("food_tag")
       tags(foodExplore.related)
@@ -184,9 +192,10 @@ class ExploreController : EpoxyController() {
       title(travelExplore.name)
       description(travelExplore.descriptionFragment)
     }
-    /*exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("travel_photo")
-    }*/
+      photos(travelPhoto)
+    }
     exploreCarouselTag {
       id("travel_tag")
       tags(travelExplore.related)
@@ -197,9 +206,10 @@ class ExploreController : EpoxyController() {
       title(happyExplore.name)
       description(happyExplore.descriptionFragment)
     }
-   /* exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("happy_photo")
-    }*/
+      photos(happyPhoto)
+    }
     exploreCarouselTag {
       id("happy_tag")
       tags(happyExplore.related)
@@ -210,9 +220,10 @@ class ExploreController : EpoxyController() {
       title(coolExplore.name)
       description(coolExplore.descriptionFragment)
     }
-    /*exploreCarouselPhoto {
+    exploreCarouselPhoto {
       id("cool_photo")
-    }*/
+      photos(coolPhoto)
+    }
     exploreCarouselTag {
       id("cool_tag")
       tags(coolExplore.related)
