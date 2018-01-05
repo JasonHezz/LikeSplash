@@ -4,9 +4,9 @@ import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.ExplorePhoto
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.Tag
-import com.github.jasonhezz.likesplash.data.model.exploreCarouselPhoto
-import com.github.jasonhezz.likesplash.data.model.exploreCarouselTag
+import com.github.jasonhezz.likesplash.data.model.explorePhoto
 import com.github.jasonhezz.likesplash.data.model.exploreTitle
+import com.github.jasonhezz.likesplash.data.model.tag
 
 /**
  * Created by JavaCoder on 2018/1/3.
@@ -32,7 +32,7 @@ class ExploreController : EpoxyController() {
           "A hand makes a silhoutted love sign in front of a sunset."),
           Tag("Man",
               "https://images.unsplash.com/photo-1497631388022-bb9fed46bb28?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
-              "A woman sits in front of a laptop computer working in her office with a cup of coffee next to her"),
+              "A man with a hat stares into the camera."),
           Tag("Family",
               "https://images.unsplash.com/photo-1462598433584-d7ffa5a70489?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
               "A mother plays with her daughter and family in the sun.")))
@@ -122,13 +122,19 @@ class ExploreController : EpoxyController() {
       title(businessExplore.name)
       description(businessExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("business_photo")
-      photos(businessPhoto)
+
+    businessPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("business_tag")
-      tags(businessExplore.related)
+
+    businessExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -136,13 +142,19 @@ class ExploreController : EpoxyController() {
       title(girlExplore.name)
       description(girlExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("girl_photo")
-      photos(girlPhoto)
+
+    girlPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("girl_tag")
-      tags(girlExplore.related)
+
+    girlExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -150,13 +162,19 @@ class ExploreController : EpoxyController() {
       title(natureExplore.name)
       description(natureExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("nature_photo")
-      photos(naturePhoto)
+
+    naturePhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("nature_tag")
-      tags(natureExplore.related)
+
+    natureExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -164,13 +182,19 @@ class ExploreController : EpoxyController() {
       title(technologyExplore.name)
       description(technologyExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("technology_photo")
-      photos(technologyPhoto)
+
+    technologyPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("technology_tag")
-      tags(technologyExplore.related)
+
+    technologyExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -178,13 +202,19 @@ class ExploreController : EpoxyController() {
       title(foodExplore.name)
       description(foodExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("food_photo")
-      photos(foodPhoto)
+
+    foodPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("food_tag")
-      tags(foodExplore.related)
+
+    foodExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -192,13 +222,19 @@ class ExploreController : EpoxyController() {
       title(travelExplore.name)
       description(travelExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("travel_photo")
-      photos(travelPhoto)
+
+    travelPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("travel_tag")
-      tags(travelExplore.related)
+
+    travelExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -206,13 +242,19 @@ class ExploreController : EpoxyController() {
       title(happyExplore.name)
       description(happyExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("happy_photo")
-      photos(happyPhoto)
+
+    happyPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("happy_tag")
-      tags(happyExplore.related)
+
+    happyExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
 
     exploreTitle {
@@ -220,13 +262,19 @@ class ExploreController : EpoxyController() {
       title(coolExplore.name)
       description(coolExplore.descriptionFragment)
     }
-    exploreCarouselPhoto {
-      id("cool_photo")
-      photos(coolPhoto)
+
+    coolPhoto.forEach {
+      explorePhoto {
+        id(it.id)
+        photo(it)
+      }
     }
-    exploreCarouselTag {
-      id("cool_tag")
-      tags(coolExplore.related)
+
+    coolExplore.related?.forEach {
+      tag {
+        id(it.description)
+        tag(it)
+      }
     }
   }
 }
