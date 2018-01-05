@@ -29,4 +29,8 @@ abstract class ExploreTitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
     holder.description.text = description
     holder.more_btn.setOnClickListener(moreClickListener)
   }
+
+  override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int {
+    return totalSpanCount
+  }
 }

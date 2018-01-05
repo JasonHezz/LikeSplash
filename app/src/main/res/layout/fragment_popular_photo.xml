@@ -6,5 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layoutManager="LinearLayoutManager"
+    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+    app:spanCount="@integer/grid_explore_photo_span_count"
     />
