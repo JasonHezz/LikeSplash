@@ -1,17 +1,20 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
+import android.content.Context
 import com.airbnb.epoxy.EpoxyController
+import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.ExplorePhoto
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.Tag
 import com.github.jasonhezz.likesplash.data.model.explorePhoto
+import com.github.jasonhezz.likesplash.data.model.exploreTag
 import com.github.jasonhezz.likesplash.data.model.exploreTitle
-import com.github.jasonhezz.likesplash.data.model.tag
+import com.github.jasonhezz.likesplash.util.recyclerview.NumItemsInGridRow
 
 /**
  * Created by JavaCoder on 2018/1/3.
  */
-class ExploreController : EpoxyController() {
+class ExploreController(val context: Context) : EpoxyController() {
 
   private val businessExplore = ExplorePhoto("Business",
       "Download free business photos of real people getting ready for work in real life. No cheesy or stocky business pictures here.",
@@ -127,13 +130,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     businessExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -147,13 +152,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     girlExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -167,13 +174,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     natureExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -187,13 +196,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     technologyExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -207,13 +218,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     foodExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -227,13 +240,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     travelExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -247,13 +262,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     happyExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
 
@@ -267,13 +284,15 @@ class ExploreController : EpoxyController() {
       explorePhoto {
         id(it.id)
         photo(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
 
     coolExplore.related?.forEach {
-      tag {
+      exploreTag {
         id(it.description)
         tag(it)
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
     }
   }
