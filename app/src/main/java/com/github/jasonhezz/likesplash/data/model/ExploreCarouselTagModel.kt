@@ -4,6 +4,7 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.SimpleEpoxyController
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Tag
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
@@ -17,6 +18,8 @@ abstract class ExploreCarouselTagModel : EpoxyModelWithHolder<BaseViewHolder>() 
   @EpoxyAttribute
   var tags: List<Tag>? = null
 
+  val controller = SimpleEpoxyController()
+
   @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
   var tagClickListener: View.OnClickListener? = null
 
@@ -27,6 +30,8 @@ abstract class ExploreCarouselTagModel : EpoxyModelWithHolder<BaseViewHolder>() 
         ExploreTagModel_().id(it.url).tag(it)
       }
     } ?: emptyList()
-    holder.carousel.setModels(models)
+    holder.carousel.isNestedScrollingEnabled = false
+    holder.carousel.setController(controller)
+    controller.setModels(models)
   }
 }

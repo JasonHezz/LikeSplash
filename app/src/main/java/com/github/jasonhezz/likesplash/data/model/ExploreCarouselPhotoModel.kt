@@ -4,6 +4,7 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.SimpleEpoxyController
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.item_explore_photo_carousel.*
 abstract class ExploreCarouselPhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
   @EpoxyAttribute
   var photos: List<Photo>? = null
+  val controller = SimpleEpoxyController()
 
   @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
   var clickListener: View.OnClickListener? = null
@@ -28,6 +30,7 @@ abstract class ExploreCarouselPhotoModel : EpoxyModelWithHolder<BaseViewHolder>(
       }
     } ?: emptyList()
     holder.carousel.setInitialPrefetchItemCount(3)
-    holder.carousel.setModels(models)
+    holder.carousel.setController(controller)
+    controller.setModels(models)
   }
 }

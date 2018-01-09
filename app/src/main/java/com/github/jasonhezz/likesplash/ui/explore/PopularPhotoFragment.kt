@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_popular_photo.*
 
 class PopularPhotoFragment : Fragment() {
 
-  private val controller = ExploreController()
+  private val controller by lazy { ExploreController(context!!) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,6 +29,7 @@ class PopularPhotoFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     rv.setControllerAndBuildModels(controller)
+    rv.isNestedScrollingEnabled = false
   }
 
   companion object {
