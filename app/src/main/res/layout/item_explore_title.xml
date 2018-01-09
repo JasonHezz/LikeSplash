@@ -43,9 +43,8 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
       android:text="View More"
-      android:textAllCaps="true"
       android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-      android:visibility="gone"
+      android:textColor="#007fff"
       app:layout_constraintBaseline_toBaselineOf="@id/title"
       app:layout_constraintEnd_toEndOf="parent"
       />

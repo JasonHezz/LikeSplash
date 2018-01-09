@@ -210,3 +210,7 @@ data class SearchPhotoResult(var total: Int?, var total_pages: Int?, var results
 
 data class ExplorePhoto(val name: String? = null, val descriptionFragment: String? = null,
     val related: List<Tag>? = null)
+
+
+data class ExploreCollection(val name: String? = null, val descriptionFragment: String? = null,
+    val collections: List<Collection>? = null)

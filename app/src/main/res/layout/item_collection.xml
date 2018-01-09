@@ -20,7 +20,7 @@
     <com.github.jasonhezz.likesplash.view.AspectRatioImageView
         android:id="@+id/collection_iv"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         app:aspectRatioEnabled="true"
         app:dominantMeasurement="width"
