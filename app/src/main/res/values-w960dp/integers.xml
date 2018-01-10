@@ -2,5 +2,5 @@
 <resources>
   <integer name="grid_explore_span">12</integer>
   <integer name="grid_explore_photo_per_screen">3</integer>
-  <integer name="grid_explore_tag_per_screen">4</integer>
+  <integer name="grid_explore_tag_per_screen">3</integer>
 </resources>
