@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_tab_explore.*
 
@@ -32,6 +33,7 @@ class ExploreTabFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
     initViewPager()
   }
 

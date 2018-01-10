@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -27,6 +29,7 @@ abstract class ExploreTagModel : EpoxyModelWithHolder<BaseViewHolder>() {
       holder.tag_name.text = it.title?.capitalize()
       GlideApp.with(holder.tag_thumbnail?.context)
           .load(it.url)
+          .placeholder(ColorDrawable(Color.parseColor("#bdbdbd")))
           .into(holder.tag_thumbnail)
       holder.card.setOnClickListener(tagClickListener)
     }

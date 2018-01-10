@@ -36,7 +36,7 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .into(holder.photo_iv)
       holder.photo_iv.setOnClickListener(photoClickListener)
     } else {
-      holder.photo_iv.background = ColorDrawable(Color.parseColor("#dddddd"))
+      holder.photo_iv.background = ColorDrawable(Color.parseColor("#9e9e9e"))
     }
   }
 }
