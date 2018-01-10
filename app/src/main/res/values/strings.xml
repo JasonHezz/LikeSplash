@@ -28,4 +28,6 @@ We challenged ourselves to create a visual language for our users that synthesiz
   </array>
   <!-- transition shared elements -->
   <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
+
+  <string name="tag_ratio">8:1</string>
 </resources>

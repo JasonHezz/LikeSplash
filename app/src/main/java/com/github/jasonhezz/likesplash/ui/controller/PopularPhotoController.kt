@@ -14,7 +14,7 @@ import com.github.jasonhezz.likesplash.util.recyclerview.NumItemsInGridRow
 /**
  * Created by JavaCoder on 2018/1/3.
  */
-class ExploreController(val context: Context) : EpoxyController() {
+class PopularPhotoController(val context: Context) : EpoxyController() {
 
   private val businessExplore = ExplorePhoto("Business",
       "Download free business photos of real people getting ready for work in real life. No cheesy or stocky business pictures here.",
@@ -110,26 +110,37 @@ class ExploreController(val context: Context) : EpoxyController() {
               "https://images.unsplash.com/photo-1495932574959-fa95bc3c4ac8?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
               "A blue and white wave shot from underwater.")))
 
-  var businessPhoto = emptyList<Photo>()
-  var girlPhoto = emptyList<Photo>()
-  var naturePhoto = emptyList<Photo>()
-  var technologyPhoto = emptyList<Photo>()
-  var foodPhoto = emptyList<Photo>()
-  var travelPhoto = emptyList<Photo>()
-  var happyPhoto = emptyList<Photo>()
-  var coolPhoto = emptyList<Photo>()
+  var businessPhoto = List<Photo?>(3) { null }
+  var girlPhoto = List<Photo?>(3) { null }
+  var naturePhoto = List<Photo?>(3) { null }
+  var technologyPhoto = List<Photo?>(3) { null }
+  var foodPhoto = List<Photo?>(3) { null }
+  var travelPhoto = List<Photo?>(3) { null }
+  var happyPhoto = List<Photo?>(3) { null }
+  var coolPhoto = List<Photo?>(3) { null }
 
+  companion object {
+    const val BUSINESS_PHOTO = "businessPhoto"
+    const val GRIL_PHOTO = "girlPhoto"
+    const val NATURE_PHOTO = "naturePhoto"
+    const val TECHNOLOGY_PHOTO = "technologyPhoto"
+    const val FOOD_PHOTO = "foodPhoto"
+    const val TRAVEL_PHOTO = "travelPhoto"
+    const val HAPPY_PHOTO = "happyPhoto"
+    const val COOL_PHOTO = "coolPhoto"
+  }
   override fun buildModels() {
+
     exploreTitle {
       id("business_title")
       title(businessExplore.name)
       description(businessExplore.descriptionFragment)
     }
 
-    businessPhoto.forEach {
+    businessPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$BUSINESS_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -148,10 +159,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(girlExplore.descriptionFragment)
     }
 
-    girlPhoto.forEach {
+    girlPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$GRIL_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -170,10 +181,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(natureExplore.descriptionFragment)
     }
 
-    naturePhoto.forEach {
+    naturePhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$NATURE_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -192,10 +203,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(technologyExplore.descriptionFragment)
     }
 
-    technologyPhoto.forEach {
+    technologyPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$TECHNOLOGY_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -214,10 +225,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(foodExplore.descriptionFragment)
     }
 
-    foodPhoto.forEach {
+    foodPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$FOOD_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -236,10 +247,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(travelExplore.descriptionFragment)
     }
 
-    travelPhoto.forEach {
+    travelPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$TRAVEL_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -258,10 +269,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(happyExplore.descriptionFragment)
     }
 
-    happyPhoto.forEach {
+    happyPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$HAPPY_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }
@@ -280,10 +291,10 @@ class ExploreController(val context: Context) : EpoxyController() {
       description(coolExplore.descriptionFragment)
     }
 
-    coolPhoto.forEach {
+    coolPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id(it.id)
-        photo(it)
+        id("$COOL_PHOTO$index")
+        photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
       }
     }

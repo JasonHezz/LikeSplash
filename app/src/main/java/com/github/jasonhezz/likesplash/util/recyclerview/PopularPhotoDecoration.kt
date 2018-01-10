@@ -28,8 +28,8 @@ class PopularPhotoDecoration(val context: Context) : RecyclerView.ItemDecoration
       //TODO reduce left and right margin in two column or three column in tablet
       when (model::class.java.superclass) {
         ExploreTitleModel::class.java -> outRect.setEmpty()
-        ExplorePhotoModel::class.java -> outRect.set(resToPx(R.dimen.md_edge_margin), dpToPx(2),
-            resToPx(R.dimen.md_edge_margin), dpToPx(2))
+        ExplorePhotoModel::class.java -> outRect.set(resToPx(R.dimen.md_edge_margin), dpToPx(4),
+            resToPx(R.dimen.md_edge_margin), dpToPx(4))
         ExploreTagModel::class.java -> outRect.set(resToPx(R.dimen.md_edge_margin), dpToPx(4),
             resToPx(R.dimen.md_edge_margin), dpToPx(4))
         else -> outRect.setEmpty()
