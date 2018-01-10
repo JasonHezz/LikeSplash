@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.controller.ExploreController
+import com.github.jasonhezz.likesplash.ui.controller.PopularPhotoController
 import kotlinx.android.synthetic.main.fragment_popular_collection.*
 
 class PopularCollectionFragment : Fragment() {
 
-  private val controller by lazy { ExploreController(context!!) }
+  private val controller by lazy { PopularPhotoController(context!!) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
