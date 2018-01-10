@@ -18,7 +18,6 @@ class NumItemsInGridRow(
       throw IllegalStateException(
           "Total Span Count of : $totalSpanCount can not evenly fit: $numItemsForCurrentScreen cards per row")
     }
-
     return totalSpanCount / numItemsForCurrentScreen
   }
 }
