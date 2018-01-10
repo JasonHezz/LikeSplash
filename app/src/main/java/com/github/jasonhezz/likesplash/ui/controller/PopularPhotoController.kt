@@ -129,6 +129,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
     const val HAPPY_PHOTO = "happyPhoto"
     const val COOL_PHOTO = "coolPhoto"
   }
+
   override fun buildModels() {
 
     exploreTitle {
