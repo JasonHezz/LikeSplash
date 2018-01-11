@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.item_explore_collection.*
 /**
  * Created by JavaCoder on 2017/10/16.
  */
-@EpoxyModelClass(layout = R.layout.item_explore_collection)
-abstract class ExploreCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
+@EpoxyModelClass(layout = R.layout.item_explore_collection_thumbnail)
+abstract class ExploreCollectionThumbModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
   @EpoxyAttribute
   var collection: Collection? = null
@@ -38,9 +38,5 @@ abstract class ExploreCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .into(holder.collection_iv)
       holder.card.setOnClickListener(collectionClickListener)
     }
-  }
-
-  override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int {
-    return 2
   }
 }

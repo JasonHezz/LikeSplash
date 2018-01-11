@@ -4,6 +4,7 @@ import android.support.annotation.IntRange
 import android.support.annotation.StringDef
 import com.github.jasonhezz.likesplash.data.*
 import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import io.reactivex.Single
 
 import okhttp3.ResponseBody
@@ -252,4 +253,9 @@ interface TrendingService {
 
   @GET("feeds/following")
   fun getFollowingFeed(@Query("after") after: String? = null)
+}
+
+interface ExploreService {
+  @GET("${FakeInterceptor.MOCK_API}/popular_collection")
+  fun getExploreCollection(): Call<List<ExploreCollection>>
 }

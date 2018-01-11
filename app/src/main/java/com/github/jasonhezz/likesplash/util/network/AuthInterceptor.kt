@@ -1,16 +1,8 @@
-package com.github.jasonhezz.likesplash.data.remote
+package com.github.jasonhezz.likesplash.util.network
 
 import com.github.jasonhezz.likesplash.data.api.CLIENT_ID
 import okhttp3.Interceptor
 import okhttp3.Response
-
-/**
- *
- * </p>
- */
-const val AUTHORIZATION_HEADER = "Authorization"
-const val AUTHORIZATION_PREFIX = "Client-ID "
-const val BEARER = "Bearer"
 
 class AuthInterceptor : Interceptor {
 
@@ -28,5 +20,11 @@ class AuthInterceptor : Interceptor {
           ?.build()
     }
     return chain.proceed(request)
+  }
+
+  companion object {
+    const val AUTHORIZATION_HEADER = "Authorization"
+    const val AUTHORIZATION_PREFIX = "Client-ID "
+    const val BEARER = "Bearer"
   }
 }
