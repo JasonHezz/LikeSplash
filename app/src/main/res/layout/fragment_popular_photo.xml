@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingEnd="@dimen/md_edge_margin"
+    android:paddingStart="@dimen/md_edge_margin"
+    app:itemSpacing="8dp"
     app:layoutManager="android.support.v7.widget.GridLayoutManager"
     app:spanCount="@integer/grid_explore_span"
     />

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.controller.PopularPhotoController
-import com.github.jasonhezz.likesplash.util.recyclerview.PopularPhotoDecoration
 import kotlinx.android.synthetic.main.fragment_popular_photo.*
 
 class PopularPhotoFragment : Fragment() {
@@ -30,7 +29,7 @@ class PopularPhotoFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     rv.setControllerAndBuildModels(controller)
-    rv.addItemDecoration(PopularPhotoDecoration(context!!))
+//    rv.addItemDecoration(PopularPhotoDecoration(context!!))
   }
 
   companion object {

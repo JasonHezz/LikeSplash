@@ -40,7 +40,7 @@ class ExploreTabFragment : Fragment() {
   private fun initViewPager() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
     tabAdapter.addFragment(PopularPhotoFragment.newInstance())
-    tabAdapter.addFragment(PopularPhotoFragment.newInstance())
+    tabAdapter.addFragment(PopularCollectionFragment.newInstance())
     view_pager.apply {
       adapter = tabAdapter
       offscreenPageLimit = 3

@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.util.network
 
+import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.data.api.*
-import com.github.jasonhezz.likesplash.data.remote.AuthInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -20,7 +20,7 @@ object NetModule {
   private val DEFAULT_READ_TIMEOUT_MILLIS = 20L
   private val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
 
-  fun provideGson(): Gson = GsonBuilder().create()
+  fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
 
   fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()
@@ -28,6 +28,7 @@ object NetModule {
       .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.SECONDS)
       .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.SECONDS)
       .addInterceptor(provideAuthInterceptor())
+      .addInterceptor(FakeInterceptor(App.applicationContext()))
       .build()
 
 
@@ -51,4 +52,7 @@ object NetModule {
 
   fun provideCollectionService(): CollectionService = provideRetrofit().create(
       CollectionService::class.java)
+
+  fun provideExploreService(): ExploreService = provideRetrofit().create(
+      ExploreService::class.java)
 }
