@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <integer name="grid_explore_span">1</integer>
+  <integer name="grid_explore_photo_span">1</integer>
+  <integer name="gird_explore_collection_span">1</integer>
   <integer name="grid_explore_collection_per_row">1</integer>
+  <integer name="grid_explore_collection_thumb_per_row">1</integer>
   <integer name="grid_explore_photo_per_row">1</integer>
   <integer name="grid_explore_tag_per_row">1</integer>
 </resources>

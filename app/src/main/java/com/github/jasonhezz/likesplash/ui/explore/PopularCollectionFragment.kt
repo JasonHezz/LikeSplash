@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class PopularCollectionFragment : Fragment() {
 
-  private val controller by lazy { PopularCollectionController() }
+  private val controller by lazy { PopularCollectionController(context!!) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -45,7 +45,6 @@ class PopularCollectionFragment : Fragment() {
             response?.body()?.let {
               controller.explores = it
             }
-            Timber.e(response?.toString())
           }
         })
     /*rv.setControllerAndBuildModels(controller)
