@@ -70,7 +70,7 @@
             android:visibility="gone"
             />
 
-        <TextView
+        <com.github.jasonhezz.likesplash.view.BaselineGridTextView
             android:id="@+id/bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
