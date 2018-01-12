@@ -8,6 +8,6 @@
   <!--brand color-->
   <color name="splash_brand">#202529</color>
   <color name="scrim_color">#99323232</color>
-
+  <color name="photo_opacity">#46000000</color>
   <color name="mtrl_divider_color">#ffe0e0e0</color>
 </resources>
