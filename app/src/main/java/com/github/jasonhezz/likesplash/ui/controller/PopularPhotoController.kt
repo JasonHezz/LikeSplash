@@ -142,7 +142,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$BUSINESS_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -150,7 +150,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -164,7 +164,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$GRIL_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -172,7 +172,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -186,7 +186,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$NATURE_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -194,7 +194,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -208,7 +208,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$TECHNOLOGY_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -216,7 +216,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -230,7 +230,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$FOOD_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -238,7 +238,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -252,7 +252,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$TRAVEL_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -260,7 +260,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -274,7 +274,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$HAPPY_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -282,7 +282,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
 
@@ -296,7 +296,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       explorePhoto {
         id("$COOL_PHOTO$index")
         photo(photo)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
     }
 
@@ -304,7 +304,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       exploreTag {
         id(it.description)
         tag(it)
-        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
     }
   }
