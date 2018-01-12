@@ -10,5 +10,5 @@
     android:paddingStart="@dimen/md_edge_margin"
     app:itemSpacing="8dp"
     app:layoutManager="android.support.v7.widget.GridLayoutManager"
-    app:spanCount="4"
+    app:spanCount="@integer/gird_explore_collection_span"
     />
