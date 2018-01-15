@@ -12,10 +12,8 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.ui.timeline.TimelineFragment
 import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
-import com.github.jasonhezz.likesplash.util.extension.isTranslucentNav
 import com.github.jasonhezz.likesplash.util.extension.isTranslucentStatus
 import com.github.jasonhezz.likesplash.util.extension.marginBottom
-import com.github.jasonhezz.likesplash.util.extension.marginTop
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation
@@ -51,17 +49,19 @@ class HomeFragment : Fragment() {
 
   private fun initView() {
     view_pager?.apply {
-      //TODO make it more readable
-      if (systemBarTintManager.config.isNavigationAtBottom && context.isTranslucentNav) {
-        setPadding(left, top, right, bottom + systemBarTintManager.config.navigationBarHeight)
-      }
+      /* //TODO make it more readable
+       if (systemBarTintManager.config.isNavigationAtBottom && context.isTranslucentNav) {
+         setPadding(left, top, right, bottom + systemBarTintManager.config.navigationBarHeight)
+       }*/
       adapter = tabAdapter
       offscreenPageLimit = 5
     }
 
     search_toolbar?.apply {
       if (context.isTranslucentStatus) {
-        marginTop(systemBarTintManager.config.statusBarHeight)
+        val lp = this.layoutParams as ViewGroup.MarginLayoutParams
+        lp.topMargin += systemBarTintManager.config.statusBarHeight
+        this.layoutParams = lp
       }
       onNavigationOnClickListener = { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
       onBarClickListener = {
