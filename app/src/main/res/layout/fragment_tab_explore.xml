@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:contentInsetStartWithNavigation="0dp"
-        app:layout_scrollFlags="scroll"
         app:navigationIcon="@drawable/ic_nav_menu"
         app:title="Explore"
         />
@@ -52,6 +51,9 @@
       android:id="@+id/view_pager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:paddingBottom="8dp"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       />
 </android.support.design.widget.CoordinatorLayout>
