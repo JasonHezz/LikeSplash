@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.ui.dialog.AddCollectionFragment
+import kotlinx.android.synthetic.main.fragment_blank.*
 
 /**
  * A simple [Fragment] subclass.
@@ -30,9 +32,15 @@ class BlankFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.item_user, container, false)
+    return inflater.inflate(R.layout.fragment_blank, container, false)
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    tv.setOnClickListener {
+      AddCollectionFragment.newInstance().show(childFragmentManager,"44")
+    }
+  }
   companion object {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
