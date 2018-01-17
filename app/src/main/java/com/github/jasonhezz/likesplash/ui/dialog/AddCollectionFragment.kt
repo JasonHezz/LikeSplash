@@ -17,11 +17,11 @@ class AddCollectionFragment : DialogFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    dialog.window.decorView.setPadding(0, 0, 0, 0)
+//    dialog.window.decorView.setPadding(0, 0, 0, 0)
     dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //    dialog.window.attributes.windowAnimations = R.style.WindowAnimation_Grow
-    dialog.window.setLayout(900, 560)
-    return inflater.inflate(R.layout.dialog_search, container, false)
+//    dialog.window.setLayout(900, 560)
+    return inflater.inflate(R.layout.dialog_add_collection, container, false)
   }
 
   companion object {
