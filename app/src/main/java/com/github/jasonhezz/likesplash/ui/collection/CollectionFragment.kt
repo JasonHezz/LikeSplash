@@ -14,6 +14,7 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
+import com.github.jasonhezz.likesplash.ui.dialog.AddCollectionFragment
 import kotlinx.android.synthetic.main.fragment_collection.*
 import timber.log.Timber
 
@@ -74,6 +75,11 @@ class CollectionFragment : Fragment() {
         }
       }
     })
+
+    controller.onPhotoClick = {
+      AddCollectionFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
+          childFragmentManager, null)
+    }
   }
 
   private fun getViewModel(): CollectionViewModel {

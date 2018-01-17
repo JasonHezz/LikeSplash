@@ -15,6 +15,7 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
+import com.github.jasonhezz.likesplash.ui.dialog.AddCollectionFragment
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_trending.*
 import timber.log.Timber
@@ -85,6 +86,9 @@ class TrendingFragment : Fragment() {
       startActivity(
           Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
               it))
+    }
+    controller.onPhotoClick = {
+      AddCollectionFragment.newInstance(it).show(childFragmentManager, null)
     }
   }
 
