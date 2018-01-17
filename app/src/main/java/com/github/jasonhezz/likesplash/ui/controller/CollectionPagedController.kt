@@ -10,6 +10,8 @@ import com.github.jasonhezz.likesplash.data.model.collection
  */
 class CollectionPagedController : PagingEpoxyController<Collection>() {
 
+  var onPhotoClick: ((collection: Collection) -> Unit)? = null
+
   @AutoModel
   lateinit var loadingModel: LoadingModel_
 
@@ -24,6 +26,9 @@ class CollectionPagedController : PagingEpoxyController<Collection>() {
       collection {
         id(it.id)
         collection(it)
+        collectionClickListener { model, parentView, clickedView, position ->
+          onPhotoClick?.invoke(it)
+        }
       }
     }
     loadingModel.addIf(isLoading, this)

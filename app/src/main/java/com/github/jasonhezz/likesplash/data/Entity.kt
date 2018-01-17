@@ -10,13 +10,14 @@ import java.io.Serializable
  * Created by JasonHezz on 2017/7/11.
  */
 //@Parcelize not work under lolipop will throw install_failed_uid_changed
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Photo(var id: String,
     var created_at: String? = null,
     var updated_at: String? = null,
     var width: Int,
     var height: Int,
     var color: String,
-    val slug: Any? = null,//not use now
     val downloads: Int? = 0,
     var likes: Int? = 0,
     val views: Int? = 0,
@@ -31,7 +32,7 @@ data class Photo(var id: String,
     val story: Story? = null,
     var tags: List<Tag>? = null,
     val relatedCollections: RelatedCollections? = null,
-    var user: User?) : Serializable
+    var user: User?) : Serializable, Parcelable
 
 data class CoverPhoto(var id: String?,
     var width: Int?,
@@ -47,30 +48,40 @@ data class CoverPhoto(var id: String?,
     var links: PhotoLinks?,
     var categories: List<Categories>?)
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Location(
     val country: String? = null,
     val city: String? = null,
     val name: String? = null,
     val position: Position? = null,
     val title: String? = null
-)
+) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Position(
     val latitude: Double? = null,
     val longitude: Double? = null
-)
+) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class RelatedCollections(
     val total: Int? = null,
     val type: String? = null,
     val results: List<Collection>? = null
-)
+) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Story(
-    val description: Any? = null,
-    val title: Any? = null
-)
+    val description: String? = null,
+    val title: String? = null
+) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Exif(
     val exposureTime: String? = null,
     val aperture: String? = null,
@@ -78,7 +89,7 @@ data class Exif(
     val iso: Int? = null,
     val model: String? = null,
     val make: String? = null
-)
+) : Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
@@ -99,9 +110,13 @@ data class User(var id: String? = null,
     var profile_image: ProfileImage? = null,
     var links: UserLinks? = null) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Tag(val title: String? = null,
-    val url: String? = null, val description: String? = null)
+    val url: String? = null, val description: String? = null) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Me(var id: String? = null,
     var username: String? = null,
     var first_name: String? = null,
@@ -117,7 +132,7 @@ data class Me(var id: String? = null,
     var uploads_remaining: Int = 0,
     var instagram_username: String? = null,
     var email: String? = null,
-    var links: UserLinks? = null)
+    var links: UserLinks? = null) : Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
@@ -125,29 +140,38 @@ data class ProfileImage(var small: String?,
     var medium: String?,
     var large: String) : Parcelable
 
-
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Urls(var raw: String?,
     var full: String?,
     var regular: String?,
     var small: String?,
     var thumb: String?,
-    var custom: String?)
+    var custom: String?) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class PhotoLinks(var self: String? = null,
     var html: String? = null,
     var download: String? = null,
-    var download_location: String? = null)
+    var download_location: String? = null) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class CollectionLinks(var self: String?,
     var html: String?,
     var photos: String?,
-    var related: String?)
+    var related: String?) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Categories(var id: Int?,
     var title: String?,
     var photo_count: Int?,
-    var links: PhotoLinks)
+    var links: PhotoLinks) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class Collection(var id: Int?,
     val featured: Boolean? = null,
     var title: String? = null,
@@ -162,14 +186,18 @@ data class Collection(var id: Int?,
     var preview_photos: List<Photo>? = null,
     var user: User? = null,
     var links: CollectionLinks? = null,
-    val tags: List<Tag>? = null)
+    val tags: List<Tag>? = null) : Parcelable
 
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class AccessToken(var access_token: String?,
     var token_type: String?,
     var scope: String?,
-    var created_at: String?)
+    var created_at: String?) : Parcelable
 
-data class DownLoadLink(var url: String)
+@SuppressLint("ParcelCreator")
+@Parcelize
+data class DownLoadLink(var url: String) : Parcelable
 
 @SuppressLint("ParcelCreator")
 @Parcelize
