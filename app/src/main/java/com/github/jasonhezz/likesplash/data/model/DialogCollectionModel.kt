@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -19,6 +20,10 @@ abstract class DialogCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
   @EpoxyAttribute
   var collection: Collection? = null
 
+
+  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+  var collectionClickListener: View.OnClickListener? = null
+
   override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
     collection?.let {
@@ -29,6 +34,7 @@ abstract class DialogCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
       holder.title_tv.text = it.title
       GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
           .into(holder.collection_iv)
+      holder.card.setOnClickListener(collectionClickListener)
     }
   }
 }

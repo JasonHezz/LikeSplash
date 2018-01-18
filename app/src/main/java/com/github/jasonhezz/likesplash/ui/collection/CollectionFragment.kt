@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,14 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
-import com.github.jasonhezz.likesplash.ui.dialog.AddCollectionFragment
+import com.github.jasonhezz.likesplash.ui.dialog.CoverFragment
 import kotlinx.android.synthetic.main.fragment_collection.*
 import timber.log.Timber
 
 /**
  * Created by JavaCoder on 2017/12/7.
  */
-class CollectionFragment : Fragment() {
+class CollectionFragment : DialogFragment() {
 
   private lateinit var model: CollectionViewModel
   private var controller: CollectionPagedController = CollectionPagedController()
@@ -77,7 +78,7 @@ class CollectionFragment : Fragment() {
     })
 
     controller.onPhotoClick = {
-      AddCollectionFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
+      CoverFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
           childFragmentManager, null)
     }
   }
@@ -91,6 +92,7 @@ class CollectionFragment : Fragment() {
       }
     })[CollectionViewModel::class.java]
   }
+
 
   companion object {
 

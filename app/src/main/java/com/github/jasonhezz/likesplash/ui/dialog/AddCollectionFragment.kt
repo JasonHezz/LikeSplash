@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.dialog
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.ui.controller.DialogCollectionController
-import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.dialog_add_collection.*
 
 /**
@@ -19,10 +17,15 @@ import kotlinx.android.synthetic.main.dialog_add_collection.*
 
  */
 class AddCollectionFragment : DialogFragment() {
-
+  private var callback: Callbacks? = null
   private var data: List<Collection>? = null
   private var photo: Photo? = null
-  private val controller = DialogCollectionController()
+  private val controller = DialogCollectionController(
+      object : DialogCollectionController.Companion.AdapterCallbacks {
+        override fun onCollectionClick() {
+          callback?.onCollectionClick()
+        }
+      })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -32,9 +35,15 @@ class AddCollectionFragment : DialogFragment() {
     }
   }
 
+  override fun onAttach(context: Context?) {
+    super.onAttach(context)
+    if (context is Callbacks) callback = context
+    if (parentFragment is Callbacks) callback = parentFragment as Callbacks
+  }
+
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
-    dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     return inflater.inflate(R.layout.dialog_add_collection, container, false)
   }
 
@@ -42,14 +51,16 @@ class AddCollectionFragment : DialogFragment() {
     super.onViewCreated(view, savedInstanceState)
     rv.setController(controller)
     data?.let { controller.collections = it }
-    GlideApp.with(context).load(photo?.urls?.regular)
-        .into(cover)
   }
 
   companion object {
 
     private const val ARG_PARAM_COLLECTION = "collection"
     private const val ARG_PARAM_PHOTO = "photo"
+
+    interface Callbacks {
+      fun onCollectionClick()
+    }
 
     @JvmStatic
     fun newInstance(photo: Photo, data: ArrayList<Collection>? = null): AddCollectionFragment {

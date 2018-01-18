@@ -24,12 +24,17 @@ class DialogCollectionController(
       dialogCollection {
         id(index)
         collection(collection)
+        collectionClickListener { model, parentView, clickedView, position ->
+          callback?.onCollectionClick()
+        }
       }
     }
   }
 
-  interface AdapterCallbacks {
-    fun onCollectionClick()
+  companion object {
+    interface AdapterCallbacks {
+      fun onCollectionClick()
+    }
   }
 }
 
