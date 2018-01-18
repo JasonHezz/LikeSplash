@@ -48,4 +48,16 @@
       @style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem
     </item>
   </style>
+
+  <style name="TextAppearance.Splash.Hint" parent="TextAppearance.Design.Hint">
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
+  </style>
+
+  <style name="TextAppearance.Splash.Error" parent="TextAppearance.Design.Error">
+    <item name="android:textColor">@color/material_text_fields_error</item>
+  </style>
+
+  <style name="TextAppearance.Splash.Counter.Overflow" parent="TextAppearance.Design.Counter.Overflow">
+    <item name="android:textColor">@color/material_text_fields_error</item>
+  </style>
 </resources>
