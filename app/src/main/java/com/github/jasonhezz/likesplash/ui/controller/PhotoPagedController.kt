@@ -13,7 +13,7 @@ import com.github.jasonhezz.likesplash.data.model.photo
 class PhotoPagedController : PagingEpoxyController<Photo>() {
 
   var onAvatarClick: ((user: User?) -> Unit)? = null
-  var onPhotoClick: (() -> Unit)? = null
+  var onPhotoClick: ((photo: Photo) -> Unit)? = null
 
   @AutoModel
   lateinit var loadingModel: LoadingModel_
@@ -35,7 +35,7 @@ class PhotoPagedController : PagingEpoxyController<Photo>() {
           onAvatarClick?.invoke(it.user)
         }
         photoClickListener { model, parentView, clickedView, position ->
-          onPhotoClick?.invoke()
+          onPhotoClick?.invoke(it)
         }
       }
     }

@@ -32,7 +32,6 @@
         tools:scaleType="fitXY"
         tools:src="@sample/photo[photo.jpg]"
         />
-
     <TextView
         android:id="@+id/count_tv"
         android:layout_width="wrap_content"
