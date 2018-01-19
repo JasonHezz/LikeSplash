@@ -25,6 +25,10 @@ class AddCollectionFragment : DialogFragment() {
         override fun onCollectionClick() {
           callback?.onCollectionClick()
         }
+
+        override fun onCreateCollectionClick() {
+          callback?.onCreateCollectionClick()
+        }
       })
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +64,7 @@ class AddCollectionFragment : DialogFragment() {
 
     interface Callbacks {
       fun onCollectionClick()
+      fun onCreateCollectionClick()
     }
 
     @JvmStatic

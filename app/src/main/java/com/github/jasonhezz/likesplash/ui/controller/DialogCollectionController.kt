@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 
 import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.model.createCollection
 import com.github.jasonhezz.likesplash.data.model.dialogCollection
 
 /**
@@ -20,6 +21,12 @@ class DialogCollectionController(
     }
 
   override fun buildModels() {
+    createCollection {
+      id("create_collection")
+      onClickListener { model, parentView, clickedView, position ->
+        callback?.onCreateCollectionClick()
+      }
+    }
     collections.forEachIndexed { index, collection ->
       dialogCollection {
         id(index)
@@ -34,6 +41,7 @@ class DialogCollectionController(
   companion object {
     interface AdapterCallbacks {
       fun onCollectionClick()
+      fun onCreateCollectionClick()
     }
   }
 }

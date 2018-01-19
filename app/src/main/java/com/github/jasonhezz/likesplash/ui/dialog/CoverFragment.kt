@@ -46,11 +46,7 @@ class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callback
   }
 
   override fun onCollectionClick() {
-    //    https@ //issuetracker.google.com/issues/37036000
-    childFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,
-        0, 0, android.R.anim.slide_out_right).replace(
-        R.id.action_panel,
-        CreateCollectionFragment.newInstance()).addToBackStack(null).commit()
+
   }
 
   override fun onCreateButtonClick() {
@@ -59,6 +55,13 @@ class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callback
 
   override fun onCancelButtonClick() {
     childFragmentManager.popBackStack()
+  }
+
+  override fun onCreateCollectionClick() {
+    childFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+        0, R.anim.slide_in_left, 0).replace(
+        R.id.action_panel,
+        CreateCollectionFragment.newInstance()).addToBackStack(null).commit()
   }
 
   companion object {
