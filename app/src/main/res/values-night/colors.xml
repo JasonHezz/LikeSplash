@@ -5,5 +5,8 @@
 
   <color name="splash_brand">#69F0AE</color>
 
-  <color name="mtrl_divider_color">#1fffffff</color>
+  <color name="material_divider_color">#1fffffff</color>
+
+  <!--Color: 100% red (A400)-->
+  <color name="material_text_fields_error">#FF1744</color>
 </resources>
