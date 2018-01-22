@@ -28,19 +28,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:scaleType="centerCrop"
-        tools:src="@sample/photo[photo.jpg]"
+        tools:src="@sample/photo"
         />
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/user_avatar"
         app:layout_constraintStart_toEndOf="@+id/user_avatar"
         app:layout_constraintTop_toTopOf="@+id/user_avatar"
-        tools:text="@sample/json.json/user/name"
+        tools:text="@sample/photos.json/data/user/name"
         style="@style/Base.TextAppearance.AppCompat.Body2"
         />
     <de.hdodenhof.circleimageview.CircleImageView

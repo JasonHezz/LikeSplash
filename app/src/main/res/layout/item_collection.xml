@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:scaleType="fitXY"
-        tools:src="@sample/photo[photo.jpg]"
+        tools:src="@sample/collection"
         />
     <TextView
         android:id="@+id/count_tv"
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/user_avatar"
         app:layout_constraintStart_toEndOf="@+id/user_avatar"
         app:layout_constraintTop_toTopOf="@+id/user_avatar"
-        tools:text="@sample/json.json/user/name"
+        tools:text="@sample/collections.json/data/user/name"
         style="@style/Base.TextAppearance.AppCompat.Body2"
         />
   </android.support.constraint.ConstraintLayout>

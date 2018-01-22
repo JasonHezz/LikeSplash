@@ -32,14 +32,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:scaleType="fitXY"
-        tools:src="@sample/photo[photo.jpg]"
+        tools:src="@sample/collection"
         />
 
     <TextView
         android:id="@+id/count_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textColor="@android:color/white"
@@ -60,7 +59,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/count_tv"
-        tools:text="Education"
+        tools:text="@sample/collections.json/data/title"
         style="@style/TextAppearance.AppCompat.Title"
         />
 
@@ -88,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/user_avatar"
         app:layout_constraintStart_toEndOf="@+id/user_avatar"
         app:layout_constraintTop_toTopOf="@+id/user_avatar"
-        tools:text="@sample/json.json/user/name"
+        tools:text="@sample/collections.json/data/user/name"
         style="@style/Base.TextAppearance.AppCompat.Body2"
         />
   </android.support.constraint.ConstraintLayout>
