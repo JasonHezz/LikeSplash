@@ -61,7 +61,7 @@ abstract class NavigationViewAdapter(val fm: FragmentManager,
         if (attachFragment == null || !attachFragment.isAdded) {
           val detachFragment = fm.findFragmentByTag(getTag(currentlyAttachedId))
           val fragmentTransaction = fm.beginTransaction()
-          if (detachFragment != null && detachFragment !== attachFragment) {
+          if (detachFragment != null && detachFragment != attachFragment) {
             fragmentTransaction.detach(detachFragment)
           }
           if (attachFragment == null) {

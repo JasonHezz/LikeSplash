@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.MainActivity
@@ -26,7 +28,18 @@ class ExploreFragment : Fragment() {
   private val items = listOf("Business", "Girl", "Nature", "Technology", "Food", "Travel", "Happy",
       "Cool")
   private lateinit var model: ExploreViewModel
-  private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
+  private var controller = PhotoPagedController(
+      object : PhotoPagedController.Companion.AdapterCallbacks {
+        override fun onAvatarClick(user: User?) {
+          startActivity(
+              Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+                  user))
+        }
+
+        override fun onPhotoClick(it: Photo) {
+
+        }
+      }).apply { setFilterDuplicates(true) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -97,11 +110,6 @@ class ExploreFragment : Fragment() {
         }
       }
     })
-    controller.onAvatarClick = {
-      startActivity(
-          Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-              it))
-    }
   }
 
   companion object {

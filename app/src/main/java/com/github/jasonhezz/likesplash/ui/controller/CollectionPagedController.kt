@@ -8,9 +8,8 @@ import com.github.jasonhezz.likesplash.data.model.collection
 /**
  * Created by JavaCoder on 2017/12/13.
  */
-class CollectionPagedController : PagingEpoxyController<Collection>() {
-
-  var onPhotoClick: ((collection: Collection) -> Unit)? = null
+class CollectionPagedController(
+    var callback: AdapterCallbacks? = null) : PagingEpoxyController<Collection>() {
 
   @AutoModel
   lateinit var loadingModel: LoadingModel_
@@ -27,10 +26,17 @@ class CollectionPagedController : PagingEpoxyController<Collection>() {
         id(it.id)
         collection(it)
         collectionClickListener { model, parentView, clickedView, position ->
-          onPhotoClick?.invoke(it)
+          callback?.onCollectionClick(it)
         }
       }
     }
     loadingModel.addIf(isLoading, this)
+  }
+
+  companion object {
+    interface AdapterCallbacks {
+      fun onAvatarClick()
+      fun onCollectionClick(it: Collection)
+    }
   }
 }
