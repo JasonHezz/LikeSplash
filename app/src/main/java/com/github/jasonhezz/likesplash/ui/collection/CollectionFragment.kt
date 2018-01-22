@@ -6,11 +6,11 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
@@ -25,7 +25,17 @@ import timber.log.Timber
 class CollectionFragment : DialogFragment() {
 
   private lateinit var model: CollectionViewModel
-  private var controller: CollectionPagedController = CollectionPagedController()
+  private var controller: CollectionPagedController = CollectionPagedController(
+      object : CollectionPagedController.Companion.AdapterCallbacks {
+        override fun onAvatarClick() {
+
+        }
+
+        override fun onCollectionClick(it: Collection) {
+          CoverFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
+              childFragmentManager, null)
+        }
+      })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -76,11 +86,6 @@ class CollectionFragment : DialogFragment() {
         }
       }
     })
-
-    controller.onPhotoClick = {
-      CoverFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
-          childFragmentManager, null)
-    }
   }
 
   private fun getViewModel(): CollectionViewModel {
