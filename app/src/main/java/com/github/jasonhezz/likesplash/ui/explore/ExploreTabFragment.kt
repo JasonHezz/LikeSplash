@@ -33,8 +33,12 @@ class ExploreTabFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
+    initToolbar()
     initViewPager()
+  }
+
+  private fun initToolbar() {
+    toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
   }
 
   private fun initViewPager() {
