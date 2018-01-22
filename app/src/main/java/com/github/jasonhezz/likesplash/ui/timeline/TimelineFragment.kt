@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
@@ -23,7 +25,18 @@ import timber.log.Timber
 class TimelineFragment : Fragment() {
 
   private lateinit var model: TimelineViewModel
-  private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
+  private var controller = PhotoPagedController(
+      object : PhotoPagedController.Companion.AdapterCallbacks {
+        override fun onAvatarClick(user: User?) {
+          startActivity(
+              Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+                  user))
+        }
+
+        override fun onPhotoClick(it: Photo) {
+
+        }
+      }).apply { setFilterDuplicates(true) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -79,12 +92,6 @@ class TimelineFragment : Fragment() {
         }
       }
     })
-
-    controller.onAvatarClick = {
-      startActivity(
-          Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-              it))
-    }
   }
 
   companion object {

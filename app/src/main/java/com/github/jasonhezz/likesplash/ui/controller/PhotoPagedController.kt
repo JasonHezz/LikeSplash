@@ -10,7 +10,8 @@ import com.github.jasonhezz.likesplash.data.model.photo
  * Created by JavaCoder on 2017/10/16.
  */
 
-class PhotoPagedController : PagingEpoxyController<Photo>() {
+class PhotoPagedController(
+    var callback: AdapterCallbacks? = null) : PagingEpoxyController<Photo>() {
 
   var onAvatarClick: ((user: User?) -> Unit)? = null
   var onPhotoClick: ((photo: Photo) -> Unit)? = null
@@ -32,13 +33,20 @@ class PhotoPagedController : PagingEpoxyController<Photo>() {
         id(it.id)
         photo(it)
         avatarClickListener { model, parentView, clickedView, position ->
-          onAvatarClick?.invoke(it.user)
+          callback?.onAvatarClick(it.user)
         }
         photoClickListener { model, parentView, clickedView, position ->
-          onPhotoClick?.invoke(it)
+          callback?.onPhotoClick(it)
         }
       }
     }
     loadingModel.addIf(isLoading, this)
+  }
+
+  companion object {
+    interface AdapterCallbacks {
+      fun onAvatarClick(user: User?)
+      fun onPhotoClick(it: Photo)
+    }
   }
 }

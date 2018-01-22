@@ -4,26 +4,34 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
-import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_like.*
 import timber.log.Timber
 
 class UserPhotoFragment : Fragment() {
 
   private lateinit var model: UserPhotoViewModel
-  private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
+  private var controller = PhotoPagedController(
+      object : PhotoPagedController.Companion.AdapterCallbacks {
+        override fun onAvatarClick(user: User?) {
+
+        }
+
+        override fun onPhotoClick(it: Photo) {
+
+        }
+      }).apply { setFilterDuplicates(true) }
 
   private var user: User? = null
 
@@ -74,11 +82,6 @@ class UserPhotoFragment : Fragment() {
         }
       }
     })
-    controller.onAvatarClick = {
-      startActivity(
-          Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-              it))
-    }
   }
 
   private fun getViewModel(): UserPhotoViewModel {
