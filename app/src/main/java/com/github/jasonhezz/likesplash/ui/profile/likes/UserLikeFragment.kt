@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
@@ -23,7 +24,18 @@ import timber.log.Timber
 class UserLikeFragment : Fragment() {
 
   private lateinit var model: UserLikeViewModel
-  private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
+  private var controller = PhotoPagedController(
+      object : PhotoPagedController.Companion.AdapterCallbacks {
+        override fun onAvatarClick(user: User?) {
+          startActivity(
+              Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
+                  user))
+        }
+
+        override fun onPhotoClick(it: Photo) {
+
+        }
+      }).apply { setFilterDuplicates(true) }
 
   private var user: User? = null
 
@@ -75,11 +87,6 @@ class UserLikeFragment : Fragment() {
         }
       }
     })
-    controller.onAvatarClick = {
-      startActivity(
-          Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER,
-              it))
-    }
   }
 
   private fun getViewModel(): UserLikeViewModel {
