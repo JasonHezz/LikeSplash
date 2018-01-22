@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +7,6 @@
     tools:layout_height="400dp"
     tools:layout_width="600dp"
     >
-
 
   <TextView
       android:id="@+id/headline"
@@ -43,7 +41,7 @@
         android:layout_height="wrap_content"
         android:hint="Name"
         android:maxLines="1"
-        tools:text="dsfsdfsdfsda"
+        tools:text="@tools:sample/full_names"
         />
   </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
 
@@ -60,7 +58,6 @@
       app:errorEnabled="true"
       app:hintTextAppearance="@style/TextAppearance.Splash.Hint"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHeight_max="42dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/name"
       >
@@ -70,6 +67,7 @@
         android:layout_height="wrap_content"
         android:hint="Description(optional)"
         android:maxLines="3"
+        tools:text="@tools:sample/lorem/random"
         />
   </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
 

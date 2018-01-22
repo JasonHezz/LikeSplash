@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:scaleType="centerCrop"
-        tools:src="@sample/photo[photo.jpg]"
+        tools:src="@sample/collection"
         />
 
     <TextView
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toEndOf="@id/is_private"
         app:layout_constraintTop_toBottomOf="@+id/count_tv"
         app:layout_goneMarginStart="16dp"
-        tools:text="Education"
+        tools:text="@sample/collections.json/data/title"
         style="@style/TextAppearance.AppCompat.Title"
         />
   </android.support.constraint.ConstraintLayout>

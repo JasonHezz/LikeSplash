@@ -29,7 +29,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/tag_name"
         app:layout_constraintRight_toRightOf="@+id/tag_name"
         app:layout_constraintTop_toTopOf="@id/tag_name"
-        tools:src="@sample/collection[collection.jpg]"
+        tools:src="@sample/tag"
         />
     <TextView
         android:id="@+id/tag_name"

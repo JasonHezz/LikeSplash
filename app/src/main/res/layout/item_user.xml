@@ -17,9 +17,8 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:src="@drawable/avatar_placeholder"
+      tools:src="@tools:sample/avatars"
       />
-
 
   <TextView
       android:id="@+id/name"
@@ -36,24 +35,24 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_chainStyle="packed"
-      tools:text="JsonHezz"
+      tools:text="@tools:sample/full_names"
       />
   <TextView
       android:id="@+id/bio"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
       android:layout_marginStart="72dp"
       android:ellipsize="end"
-      android:maxLines="1"
+      android:singleLine="true"
       android:textAppearance="@style/TextAppearance.Splash.ListItemSecondary"
       app:layout_constrainedWidth="true"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintHorizontal_bias="0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/name"
-      tools:text="Bio"
+      tools:text="@tools:sample/lorem/random"
       />
 
 </android.support.constraint.ConstraintLayout>
