@@ -38,7 +38,6 @@ abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .into(holder.photo_iv)
       GlideApp.with(holder.user_avatar.context)
           .load(it.user?.profile_image?.large)
-          .optionalCircleCrop()
           .into(holder.user_avatar)
       holder.user_name?.text = it.user?.name
       holder.user_avatar.setOnClickListener(avatarClickListener)
