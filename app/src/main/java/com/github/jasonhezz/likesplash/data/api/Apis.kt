@@ -171,7 +171,7 @@ interface CollectionService {
   fun getListCuratedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
-  @GET("collections/curated")
+  @GET("collections/featured")
   fun getListFeaturedCollections(@Query("page") page: Int = 1,
       @Query("per_page") perPage: Int = 10): Call<List<Collection>>
 
