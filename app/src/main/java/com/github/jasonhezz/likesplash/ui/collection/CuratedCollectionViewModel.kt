@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.repository.Listing
 /**
  * Created by JavaCoder on 2017/12/12.
  */
-class CollectionViewModel(private val repository: CollectionRepository) : ViewModel() {
+class CuratedCollectionViewModel(private val repository: CollectionRepository) : ViewModel() {
 
   private val result = MutableLiveData<Listing<Collection>>()
   val collections = Transformations.switchMap(result, { it.pagedList })!!
@@ -18,7 +18,7 @@ class CollectionViewModel(private val repository: CollectionRepository) : ViewMo
   val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
   init {
-    result.postValue(repository.getListCollections())
+    result.postValue(repository.getListCuratedCollections())
   }
 
   fun refresh() {

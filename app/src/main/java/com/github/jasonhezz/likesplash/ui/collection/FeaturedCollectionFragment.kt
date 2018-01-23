@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +16,15 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import com.github.jasonhezz.likesplash.ui.dialog.CoverFragment
-import kotlinx.android.synthetic.main.fragment_collection.*
+import kotlinx.android.synthetic.main.fragment_featured_collection.*
 import timber.log.Timber
 
 /**
  * Created by JavaCoder on 2017/12/7.
  */
-class CollectionFragment : DialogFragment() {
+class FeaturedCollectionFragment : Fragment() {
 
-  private lateinit var model: CollectionViewModel
+  private lateinit var model: FeaturedCollectionViewModel
   private var controller: CollectionPagedController = CollectionPagedController(
       object : CollectionPagedController.Companion.AdapterCallbacks {
         override fun onAvatarClick() {
@@ -48,7 +48,7 @@ class CollectionFragment : DialogFragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_collection, container, false)
+    return inflater.inflate(R.layout.fragment_featured_collection, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,21 +88,21 @@ class CollectionFragment : DialogFragment() {
     })
   }
 
-  private fun getViewModel(): CollectionViewModel {
+  private fun getViewModel(): FeaturedCollectionViewModel {
     return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
       override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repo = RepositoryFactory.makeCollectionRepository()
         @Suppress("UNCHECKED_CAST")
-        return CollectionViewModel(repo) as T
+        return FeaturedCollectionViewModel(repo) as T
       }
-    })[CollectionViewModel::class.java]
+    })[FeaturedCollectionViewModel::class.java]
   }
 
 
   companion object {
 
-    fun newInstance(): CollectionFragment {
-      val fragment = CollectionFragment()
+    fun newInstance(): FeaturedCollectionFragment {
+      val fragment = FeaturedCollectionFragment()
       val args = Bundle()
       fragment.arguments = args
       return fragment
