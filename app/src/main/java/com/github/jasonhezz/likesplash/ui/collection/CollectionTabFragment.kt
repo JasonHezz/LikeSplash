@@ -37,8 +37,8 @@ class CollectionTabFragment : Fragment() {
 
   private fun initViewPager() {
     tabAdapter = TabFragmentAdapter(childFragmentManager)
-    tabAdapter.addFragment(CollectionFragment.newInstance())
-    tabAdapter.addFragment(CollectionFragment.newInstance())
+    tabAdapter.addFragment(FeaturedCollectionFragment.newInstance())
+    tabAdapter.addFragment(CuratedCollectionFragment.newInstance())
     view_pager.apply {
       adapter = tabAdapter
       addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
