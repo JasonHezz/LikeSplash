@@ -39,15 +39,10 @@ dependencies {
   implementation "com.android.support:design:$rootProject.supportLibraryVersion"
   implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
   implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
-  implementation('it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.2', {
-    exclude group: 'com.android.support'
-  })
-
 
   implementation 'de.hdodenhof:circleimageview:2.2.0'
 //  implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
 
-  implementation 'br.com.simplepass:loading-button-android:1.8.4'
   //retrofit
   implementation 'com.squareup.retrofit2:retrofit:2.3.0'
   implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
