@@ -6,6 +6,7 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Tag
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
@@ -30,6 +31,7 @@ abstract class ExploreTagModel : EpoxyModelWithHolder<BaseViewHolder>() {
       GlideApp.with(holder.tag_thumbnail?.context)
           .load(it.url)
           .placeholder(ColorDrawable(Color.parseColor("#bdbdbd")))
+          .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.tag_thumbnail)
       holder.card.setOnClickListener(tagClickListener)
     }
