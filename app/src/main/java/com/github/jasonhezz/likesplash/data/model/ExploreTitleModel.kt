@@ -6,6 +6,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
+import com.github.jasonhezz.likesplash.util.extension.showIf
 import kotlinx.android.synthetic.main.item_explore_title.*
 
 /**
@@ -20,6 +21,9 @@ abstract class ExploreTitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
   @EpoxyAttribute
   var description: String? = null
 
+  @EpoxyAttribute
+  var showViewMore: Boolean = false
+
   @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
   var moreClickListener: View.OnClickListener? = null
 
@@ -27,6 +31,7 @@ abstract class ExploreTitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
     super.bind(holder)
     holder.title.text = title
     holder.description.text = description
+    holder.more_btn.showIf(showViewMore)
     holder.more_btn.setOnClickListener(moreClickListener)
   }
 
