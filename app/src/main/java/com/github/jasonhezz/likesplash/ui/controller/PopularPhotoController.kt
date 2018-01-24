@@ -6,6 +6,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.ExplorePhoto
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.Tag
+import com.github.jasonhezz.likesplash.data.model.exploreMore
 import com.github.jasonhezz.likesplash.data.model.explorePhoto
 import com.github.jasonhezz.likesplash.data.model.exploreTag
 import com.github.jasonhezz.likesplash.data.model.exploreTitle
@@ -154,6 +155,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       }
     }
 
+    exploreMore {
+      id("business_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+    }
+
     exploreTitle {
       id("girl_title")
       title(girlExplore.name)
@@ -174,6 +180,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
+    }
+
+    exploreMore {
+      id("girl_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
     }
 
     exploreTitle {
@@ -198,6 +209,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       }
     }
 
+    exploreMore {
+      id("nature_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+    }
+
     exploreTitle {
       id("technology_title")
       title(technologyExplore.name)
@@ -218,6 +234,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
+    }
+
+    exploreMore {
+      id("technology_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
     }
 
     exploreTitle {
@@ -242,6 +263,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       }
     }
 
+    exploreMore {
+      id("food_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+    }
+
     exploreTitle {
       id("travel_title")
       title(travelExplore.name)
@@ -262,6 +288,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
+    }
+
+    exploreMore {
+      id("travel_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
     }
 
     exploreTitle {
@@ -286,6 +317,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
       }
     }
 
+    exploreMore {
+      id("happy_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
+    }
+
     exploreTitle {
       id("cool_title")
       title(coolExplore.name)
@@ -306,6 +342,11 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
       }
+    }
+
+    exploreMore {
+      id("cool_more")
+      spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_screen))
     }
   }
 }
