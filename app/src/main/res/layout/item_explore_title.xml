@@ -43,7 +43,7 @@
       android:textColor="#007fff"
       app:layout_constraintBaseline_toBaselineOf="@id/title"
       app:layout_constraintEnd_toEndOf="parent"
-      />
+      android:visibility="gone"/>
 
 
 </android.support.constraint.ConstraintLayout>
