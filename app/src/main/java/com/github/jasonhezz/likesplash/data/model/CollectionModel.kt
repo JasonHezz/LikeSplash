@@ -5,6 +5,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
@@ -41,6 +42,7 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
       GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
           .thumbnail(
               Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
+          .transition(DrawableTransitionOptions.withCrossFade(500))
           .materialPlaceHolder(it.cover_photo?.color ?: "#26292c")
           .into(holder.collection_iv)
       GlideApp.with(holder.user_avatar.context).load(it.user?.profile_image?.medium)

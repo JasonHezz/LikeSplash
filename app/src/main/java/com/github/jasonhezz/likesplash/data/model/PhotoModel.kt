@@ -5,6 +5,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
@@ -35,6 +36,7 @@ abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
       GlideApp.with(holder.photo_iv.context).load(it.urls?.regular)
           .thumbnail(Glide.with(holder.photo_iv.context).load(it.urls?.thumb))
           .materialPlaceHolder(it.color)
+          .transition(withCrossFade(500))
           .into(holder.photo_iv)
       GlideApp.with(holder.user_avatar.context)
           .load(it.user?.profile_image?.large)
