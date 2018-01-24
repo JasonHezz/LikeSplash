@@ -22,7 +22,7 @@ abstract class ExploreTitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
   var description: String? = null
 
   @EpoxyAttribute
-  var showViewMore: Boolean = false
+  var showViewMore: Boolean = true
 
   @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
   var moreClickListener: View.OnClickListener? = null
