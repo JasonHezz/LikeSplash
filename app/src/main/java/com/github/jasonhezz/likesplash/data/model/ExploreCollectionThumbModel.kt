@@ -4,7 +4,6 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
@@ -33,9 +32,6 @@ abstract class ExploreCollectionThumbModel : EpoxyModelWithHolder<BaseViewHolder
           getQuantityString(R.plurals.photo_plural, count, count)
       holder.title_tv.text = it.title
       GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
-          .thumbnail(
-              Glide.with(holder.collection_iv.context).load(it.cover_photo?.urls?.thumb))
-          .materialPlaceHolder(it.cover_photo?.color ?: "#26292c")
           .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.collection_iv)
       holder.card.setOnClickListener(collectionClickListener)
