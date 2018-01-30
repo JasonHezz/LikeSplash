@@ -23,7 +23,7 @@ class PopularCollectionController(val context: Context) : EpoxyController() {
   override fun buildModels() {
     explores.forEach {
       exploreTitle {
-        id(it.name?:"")
+        id(it.name ?: "error")
         title(it.name)
         description(it.descriptionFragment)
       }

@@ -28,10 +28,10 @@ class UserController : EpoxyController() {
     }
 
   override fun buildModels() {
-    users.forEach {
+    users.forEachIndexed { index, user ->
       user {
-        id(it.id?:"")
-        user(it)
+        id(index)
+        user(user)
       }
     }
     loadingModel.addIf(isLoading, this)

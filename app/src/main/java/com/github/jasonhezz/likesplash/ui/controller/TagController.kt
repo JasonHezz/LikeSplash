@@ -25,7 +25,7 @@ class TagController : TypedEpoxyController<List<Tag>>() {
         id("tag_carousel")
         paddingDp(8)
         withModelsFrom(it) {
-          TagModel_().id(it.title?:"").tag(it)
+          TagModel_().id(it.title ?: "Error").tag(it)
         }
       }
     }

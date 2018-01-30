@@ -31,7 +31,7 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
           id("tag_carousel")
           paddingDp(16)
           withModelsFrom(it) {
-            TagModel_().id(it.title?:"").tag(it)
+            TagModel_().id(it.title ?: "error").tag(it)
           }
         }
       }

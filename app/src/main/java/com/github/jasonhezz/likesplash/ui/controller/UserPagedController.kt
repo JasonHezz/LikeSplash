@@ -22,10 +22,10 @@ class UserPagedController : PagingEpoxyController<User>() {
     }
 
   override fun buildModels(list: MutableList<User>) {
-    list.forEach {
+    list.forEachIndexed { index, user ->
       user {
-        id(it.id?:"")
-        user(it)
+        id(index)
+        user(user)
       }
     }
     loadingModel.addIf(isLoading, this)

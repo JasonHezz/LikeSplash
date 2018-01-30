@@ -150,7 +150,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     businessExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -178,7 +178,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     girlExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -207,7 +207,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     natureExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -235,7 +235,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     technologyExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -262,7 +262,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     foodExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -290,7 +290,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     travelExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -318,7 +318,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     happyExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
@@ -346,7 +346,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     coolExplore.related?.forEach {
       exploreTag {
-        id(it.description?:"")
+        id(it.description ?: "error")
         tag(it)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
       }
