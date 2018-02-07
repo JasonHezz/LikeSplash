@@ -16,8 +16,6 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        app:itemSpacing="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/item_preview"
         />
