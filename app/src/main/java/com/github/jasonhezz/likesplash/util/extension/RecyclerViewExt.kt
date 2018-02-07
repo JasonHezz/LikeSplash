@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.util.extension
 
-import com.airbnb.epoxy.CarouselModelBuilder
-import com.airbnb.epoxy.CarouselModel_
-import com.airbnb.epoxy.EpoxyController
-import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.*
 
 /**
  * Created by JavaCoder on 2017/11/15.
@@ -27,4 +24,12 @@ inline fun <T> CarouselModelBuilder.withModelsFrom(
     modelBuilder: (T) -> EpoxyModel<*>
 ) {
   models(items.map { modelBuilder(it) })
+}
+
+fun EpoxyRecyclerView.withModels(buildModelsCallback: EpoxyController.() -> Unit) {
+  setControllerAndBuildModels(object : EpoxyController() {
+    override fun buildModels() {
+      buildModelsCallback()
+    }
+  })
 }

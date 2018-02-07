@@ -12,13 +12,14 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
-    <android.support.v7.widget.RecyclerView
+    <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:padding="8dp"
+        app:itemSpacing="8dp"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_collection"
+        tools:listitem="@layout/item_preview"
         />
   </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

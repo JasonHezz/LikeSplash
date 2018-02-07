@@ -10,12 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
-import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
-import com.github.jasonhezz.likesplash.ui.dialog.CoverFragment
+import com.github.jasonhezz.likesplash.ui.controller.PreviewCollectionPagedController
 import kotlinx.android.synthetic.main.fragment_featured_collection.*
 import timber.log.Timber
 
@@ -25,17 +23,7 @@ import timber.log.Timber
 class FeaturedCollectionFragment : Fragment() {
 
   private lateinit var model: FeaturedCollectionViewModel
-  private var controller: CollectionPagedController = CollectionPagedController(
-      object : CollectionPagedController.Companion.AdapterCallbacks {
-        override fun onAvatarClick() {
-
-        }
-
-        override fun onCollectionClick(it: Collection) {
-          CoverFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
-              childFragmentManager, null)
-        }
-      })
+  private var controller = PreviewCollectionPagedController()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
