@@ -40,6 +40,9 @@ dependencies {
   implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
   implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
+  //Android KTX
+  implementation 'androidx.core:core-ktx:0.1'
+
   implementation 'de.hdodenhof:circleimageview:2.2.0'
 //  implementation 'com.getkeepsafe.taptargetview:taptargetview:1.10.0'
 
