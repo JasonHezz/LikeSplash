@@ -7,7 +7,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
-import com.github.jasonhezz.likesplash.util.extension.showIf
+import com.github.jasonhezz.likesplash.util.extension.isVisible
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_dialog_collection.*
 
@@ -28,9 +28,9 @@ abstract class DialogCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
     super.bind(holder)
     collection?.let {
       val count = it.total_photos ?: 0
-      holder.is_private.showIf(collection?.private ?: false)
-      holder.count_tv.text = holder.count_tv.context.resources.
-          getQuantityString(R.plurals.photo_plural, count, count)
+      holder.is_private.isVisible = collection?.private ?: false
+      holder.count_tv.text = holder.count_tv.context.resources.getQuantityString(
+          R.plurals.photo_plural, count, count)
       holder.title_tv.text = it.title
       GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
           .into(holder.collection_iv)

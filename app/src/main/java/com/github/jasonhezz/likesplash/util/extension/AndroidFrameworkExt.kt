@@ -18,34 +18,11 @@
 
 package com.github.jasonhezz.likesplash.util.extension
 
-import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
-import android.support.annotation.AttrRes
-import android.support.annotation.ColorInt
-import android.support.annotation.UiThread
 import android.util.TypedValue
 import android.view.View
-
-
-/**
- * Queries on-device packages for a handler for the supplied [Intent].
- */
-private fun Context.hasHandler(intent: Intent) =
-    !packageManager.queryIntentActivities(intent, 0).isEmpty()
-
-private val typedValue = TypedValue()
-
-@ColorInt
-@UiThread
-fun Context.resolveAttribute(@AttrRes resId: Int): Int {
-  theme.resolveAttribute(resId, typedValue, true)
-  return typedValue.data
-}
 
 fun Context.isInNightMode(): Boolean {
   val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -56,17 +33,6 @@ fun Context.isInNightMode(): Boolean {
   }
 }
 
-/**
- * Determine if the navigation bar will be on the bottom of the screen, based on logic in
- * PhoneWindowManager.
- */
-fun Context.isNavBarOnBottom(): Boolean {
-  val res = resources
-  val cfg = resources.configuration
-  val dm = res.displayMetrics
-  val canMove = dm.widthPixels != dm.heightPixels && cfg.smallestScreenWidthDp < 600
-  return !canMove || dm.widthPixels < dm.heightPixels
-}
 
 inline fun Context.dp2px(dipValue: Float) = resources.dp2px(dipValue)
 
@@ -76,29 +42,4 @@ inline fun Resources.dp2px(dipValue: Float) =
 inline fun View.dp2px(dipValue: Float) = context.dp2px(dipValue)
 
 
-fun Context.getActivity(): Activity? {
-  if (this is Activity) return this
-  if (this is ContextWrapper) {
-    return this.baseContext.getActivity()
-  }
-  return null
-}
-
-val Context.isTranslucentStatus: Boolean
-  get() {
-    return when {
-      null == this.getActivity() -> false
-      Build.VERSION.SDK_INT >= 19 -> (this.getActivity()!!.window.attributes.flags and 67108864) == 67108864
-      else -> false
-    }
-  }
-
-val Context.isTranslucentNav: Boolean
-  get() {
-    return when {
-      null == this.getActivity() -> false
-      Build.VERSION.SDK_INT >= 19 -> (this.getActivity()!!.window.attributes.flags and 134217728) == 134217728
-      else -> false
-    }
-  }
 
