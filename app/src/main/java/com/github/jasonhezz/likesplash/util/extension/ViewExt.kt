@@ -26,12 +26,6 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int = 250) {
   Snackbar.make(this, snackbarText, timeLength).show()
 }
 
-inline var View.isVisible: Boolean
-  get() = visibility == View.VISIBLE
-  set(value) {
-    visibility = if (value) View.VISIBLE else View.GONE
-  }
-
 fun ImageView.loadUrl(url: String?, placeholder: Int? = null) {
   GlideApp.with(context).load(url).apply {
     if (placeholder != null) placeholder(placeholder)

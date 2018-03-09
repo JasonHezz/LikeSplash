@@ -1,13 +1,13 @@
 package com.github.jasonhezz.likesplash.data.model
 
 import android.view.View
+import androidx.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
-import com.github.jasonhezz.likesplash.util.extension.isVisible
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_dialog_collection.*
 
