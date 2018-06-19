@@ -27,7 +27,7 @@ abstract class ExploreTagModel : EpoxyModelWithHolder<BaseViewHolder>() {
     super.bind(holder)
     tag?.let {
       holder.tag_name.text = it.title?.capitalize()
-      GlideApp.with(holder.tag_thumbnail?.context)
+      GlideApp.with(holder.tag_thumbnail.context)
           .load(it.url)
           .placeholder(ColorDrawable(Color.parseColor("#bdbdbd")))
           .into(holder.tag_thumbnail)

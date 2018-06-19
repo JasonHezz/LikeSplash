@@ -37,7 +37,7 @@ class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callback
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    GlideApp.with(context).load(photo?.urls?.regular)
+    GlideApp.with(view.context).load(photo?.urls?.regular)
         .into(cover)
     if (savedInstanceState == null) {
       childFragmentManager.beginTransaction().add(R.id.action_panel,

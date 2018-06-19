@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
  */
 class TrendingPhotoDataSourceFactory(
         private val api: TrendingService,
-        private val retryExecutor: Executor) : DataSource.Factory<String, Photo> {
+        private val retryExecutor: Executor) : DataSource.Factory<String, Photo>() {
     val sourceLiveData = MutableLiveData<PagedTrendingPhotoDataSource>()
     override fun create(): DataSource<String, Photo> {
         val source = PagedTrendingPhotoDataSource(api, retryExecutor)

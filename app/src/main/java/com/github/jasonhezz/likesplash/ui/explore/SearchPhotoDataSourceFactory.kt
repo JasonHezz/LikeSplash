@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
  */
 class SearchPhotoDataSourceFactory(private val query: String,
     private val api: SearchService,
-    private val retryExecutor: Executor) : DataSource.Factory<Int, Photo> {
+    private val retryExecutor: Executor) : DataSource.Factory<Int, Photo>() {
   val sourceLiveData = MutableLiveData<PagedSearchPhotoDataSource>()
   override fun create(): DataSource<Int, Photo> {
     val source = PagedSearchPhotoDataSource(query, api, retryExecutor)
