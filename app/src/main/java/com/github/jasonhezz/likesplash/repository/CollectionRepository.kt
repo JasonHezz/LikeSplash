@@ -14,63 +14,63 @@ import java.util.concurrent.Executor
  */
 interface CollectionRepository {
 
-  fun getListCuratedCollections(perPage: Int = 10): Listing<Collection>
+    fun getListCuratedCollections(perPage: Int = 10): Listing<Collection>
 
-  fun getListFeaturedCollections(perPage: Int = 10): Listing<Collection>
+    fun getListFeaturedCollections(perPage: Int = 10): Listing<Collection>
 }
 
 class CollectionRepositoryIml(private val api: CollectionService,
-    private val networkExecutor: Executor) : CollectionRepository {
+                              private val networkExecutor: Executor) : CollectionRepository {
 
-  override fun getListCuratedCollections(perPage: Int): Listing<Collection> {
-    val sourceFactory = CuratedCollectionDataSourceFactory(api, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
-        // provide custom executor for network requests, otherwise it will default to
-        // Arch Components' IO pool which is also used for disk access
-        .setBackgroundThreadExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getListCuratedCollections(perPage: Int): Listing<Collection> {
+        val sourceFactory = CuratedCollectionDataSourceFactory(api, networkExecutor)
+        val livePagedList = LivePagedListBuilder(sourceFactory,
+                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
+                // provide custom executor for network requests, otherwise it will default to
+                // Arch Components' IO pool which is also used for disk access
+                .setFetchExecutor(networkExecutor)
+                .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+                pagedList = livePagedList,
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+                    it.networkState
+                }),
+                retry = {
+                    sourceFactory.sourceLiveData.value?.retryAllFailed()
+                },
+                refresh = {
+                    sourceFactory.sourceLiveData.value?.invalidate()
+                },
+                refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getListFeaturedCollections(perPage: Int): Listing<Collection> {
-    val sourceFactory = FeaturedCollectionDataSourceFactory(api, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
-        // provide custom executor for network requests, otherwise it will default to
-        // Arch Components' IO pool which is also used for disk access
-        .setBackgroundThreadExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getListFeaturedCollections(perPage: Int): Listing<Collection> {
+        val sourceFactory = FeaturedCollectionDataSourceFactory(api, networkExecutor)
+        val livePagedList = LivePagedListBuilder(sourceFactory,
+                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
+                // provide custom executor for network requests, otherwise it will default to
+                // Arch Components' IO pool which is also used for disk access
+                .setFetchExecutor(networkExecutor)
+                .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+                pagedList = livePagedList,
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+                    it.networkState
+                }),
+                retry = {
+                    sourceFactory.sourceLiveData.value?.retryAllFailed()
+                },
+                refresh = {
+                    sourceFactory.sourceLiveData.value?.invalidate()
+                },
+                refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 }

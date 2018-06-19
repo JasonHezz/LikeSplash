@@ -55,7 +55,7 @@ class PhotoRepositoryIml(val service: PhotoService,
         PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
         // provide custom executor for network requests, otherwise it will default to
         // Arch Components' IO pool which is also used for disk access
-        .setBackgroundThreadExecutor(networkExecutor)
+        .setFetchExecutor(networkExecutor)
         .build()
     val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
       it.initialLoad
