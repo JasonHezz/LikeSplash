@@ -17,10 +17,10 @@ abstract class UserModel : EpoxyModelWithHolder<BaseViewHolder>() {
   @EpoxyAttribute
   var user: User? = null
 
-  override fun bind(holder: BaseViewHolder?) {
+  override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
-    holder?.avatar?.loadUrl(user?.profile_image?.medium)
-    holder?.name?.text = user?.name
-    holder?.bio?.text = user?.bio
+    holder.avatar?.loadUrl(user?.profile_image?.medium)
+    holder.name?.text = user?.name
+    holder.bio?.text = user?.bio
   }
 }

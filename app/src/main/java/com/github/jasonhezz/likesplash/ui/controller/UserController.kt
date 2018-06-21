@@ -30,7 +30,7 @@ class UserController : EpoxyController() {
   override fun buildModels() {
     users.forEach {
       user {
-        id(it.id)
+        id(it.id?:"")
         user(it)
       }
     }

@@ -17,8 +17,8 @@ abstract class TitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
   @EpoxyAttribute
   var title: String? = null
 
-  override fun bind(holder: BaseViewHolder?) {
+  override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
-    holder?.title?.text = title
+    holder.title?.text = title
   }
 }
