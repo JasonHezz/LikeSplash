@@ -27,7 +27,8 @@ object NetModule {
       .connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLIS, TimeUnit.SECONDS)
       .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.SECONDS)
       .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-      .addInterceptor(provideAuthInterceptor())
+//      .addInterceptor(provideAuthInterceptor())
+      .addInterceptor(UserAgentInterceptor())
       .addInterceptor(FakeInterceptor(App.applicationContext()))
       .build()
 
