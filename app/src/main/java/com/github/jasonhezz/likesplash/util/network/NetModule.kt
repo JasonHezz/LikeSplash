@@ -30,6 +30,7 @@ object NetModule {
 //      .addInterceptor(provideAuthInterceptor())
       .addInterceptor(UserAgentInterceptor())
       .addInterceptor(FakeInterceptor(App.applicationContext()))
+      .followRedirects(false)
       .build()
 
 

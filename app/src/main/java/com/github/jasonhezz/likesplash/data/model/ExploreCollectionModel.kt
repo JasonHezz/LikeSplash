@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -32,6 +34,7 @@ abstract class ExploreCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
           getQuantityString(R.plurals.photo_plural, count, count)
       holder.title_tv.text = it.title
       GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
+           .placeholder(ColorDrawable(Color.parseColor("#9e9e9e")))
           .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.collection_iv)
       holder.card.setOnClickListener(collectionClickListener)
