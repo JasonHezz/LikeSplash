@@ -30,10 +30,8 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
   override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
     if (photo != null) {
-//      holder.photo_iv.background = null
-      GlideApp.with(holder.photo_iv.context).load(photo!!.urls?.regular)
-          .thumbnail(Glide.with(holder.photo_iv.context).load(photo!!.urls?.thumb))
-          .materialPlaceHolder(photo!!.color)
+      GlideApp.with(holder.photo_iv.context).load(photo?.urls?.regular)
+          .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
           .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.photo_iv)
       holder.photo_iv.setOnClickListener(photoClickListener)
