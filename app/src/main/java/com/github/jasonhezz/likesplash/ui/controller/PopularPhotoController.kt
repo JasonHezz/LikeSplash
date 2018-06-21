@@ -122,7 +122,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
   companion object {
     const val BUSINESS_PHOTO = "businessPhoto"
-    const val GRIL_PHOTO = "girlPhoto"
+    const val GIRL_PHOTO = "girlPhoto"
     const val NATURE_PHOTO = "naturePhoto"
     const val TECHNOLOGY_PHOTO = "technologyPhoto"
     const val FOOD_PHOTO = "foodPhoto"
@@ -170,7 +170,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
 
     girlPhoto.forEachIndexed { index, photo ->
       explorePhoto {
-        id("$GRIL_PHOTO$index")
+        id("$GIRL_PHOTO$index")
         photo(photo)
         spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
       }
@@ -185,7 +185,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
     }
 
     exploreMore {
-      id("${GRIL_PHOTO}_more")
+      id("${GIRL_PHOTO}_more")
       spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
     }
 
