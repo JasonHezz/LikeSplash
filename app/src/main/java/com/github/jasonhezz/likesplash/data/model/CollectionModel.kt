@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -43,7 +45,7 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
           .thumbnail(
               Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
           .transition(DrawableTransitionOptions.withCrossFade(500))
-          .materialPlaceHolder(it.cover_photo?.color ?: "#26292c")
+          .placeholder(ColorDrawable(Color.parseColor("#9e9e9e")))
           .into(holder.collection_iv)
       GlideApp.with(holder.user_avatar.context).load(it.user?.profile_image?.medium)
           .into(holder.user_avatar)

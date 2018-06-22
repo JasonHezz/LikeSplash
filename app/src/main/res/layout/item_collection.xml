@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusableInTouchMode="true"
-    app:cardBackgroundColor="@color/splash_brand"
     app:cardCornerRadius="0dp"
     >
   <android.support.constraint.ConstraintLayout

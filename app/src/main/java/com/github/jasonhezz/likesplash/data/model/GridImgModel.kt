@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -31,7 +33,7 @@ abstract class GridImgModel : EpoxyModelWithHolder<BaseViewHolder>() {
     super.bind(holder)
     GlideApp.with(holder.photo_iv.context).load(photo?.urls?.regular)
 //        .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
-//        .placeholder(R.drawable.avatar_placeholder)
+//        .placeholder(ColorDrawable(Color.parseColor("#9e9e9e")))
         .into(holder.photo_iv)
     holder.containerView?.layoutParams = SpanLayoutParams(SpanSize(spans, spans))
   }
