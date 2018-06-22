@@ -68,7 +68,8 @@ dependencies {
     transitive = false
   }
   implementation 'com.jakewharton.timber:timber:4.6.0'
-
+  implementation 'com.google.android:flexbox:0.3.2'
+  implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
 
   //epoxy
   implementation('com.airbnb.android:epoxy:2.13.0', {
