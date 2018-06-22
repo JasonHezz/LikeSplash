@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.unofficialsplash.home.TabFragmentAdapter
-import kotlinx.android.synthetic.main.fragment_tab_explore.*
+import kotlinx.android.synthetic.main.fragment_explore_tab.*
 
 /**
  * Created by JavaCoder on 2017/12/21.
@@ -28,7 +28,7 @@ class ExploreTabFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_tab_explore, container, false)
+    return inflater.inflate(R.layout.fragment_explore_tab, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
