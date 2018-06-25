@@ -83,7 +83,7 @@ class Adapter(var itemModelList: ArrayList<ItemModel>) : RecyclerView.Adapter<My
   }
 }
 
-class MyViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(
+class MyViewHolder(override val containerView: View) : RecyclerView.ViewHolder(
     containerView), LayoutContainer {
   fun bind(item: ItemModel) {
     title.text = item.title

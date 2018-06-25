@@ -1,11 +1,13 @@
 package android.support.design.widget
 
+import android.animation.TimeInterpolator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.graphics.RectF
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.design.animation.AnimationUtils
 import android.support.v4.view.AbsSavedState
 import android.support.v4.widget.ViewGroupUtils
 import android.support.v7.widget.Toolbar
@@ -33,15 +35,15 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
     private var fraction = 0f
     private var appbarChangeListener: AppBarStateChangeListener? = null
 
-    override fun layoutDependsOn(parent: CoordinatorLayout?, child: ImageView,
-                                 dependency: View?): Boolean {
+    override fun layoutDependsOn(parent: CoordinatorLayout, child: ImageView,
+                                 dependency: View): Boolean {
         if (dependency is AppBarLayout) {
             return true
         }
         return super.layoutDependsOn(parent, child, dependency)
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout?, child: ImageView,
+    override fun onDependentViewChanged(parent: CoordinatorLayout, child: ImageView,
                                         dependency: View): Boolean {
         interpolateBounds(fraction)
         calculateAvatarSize(child)
@@ -86,6 +88,7 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
 
     private fun findAvatarRec(viewGroup: ViewGroup, child: ImageView) {
         child.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+            @SuppressLint("RestrictedApi")
             override fun onLayoutChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int, p5: Int, p6: Int,
                                         p7: Int, p8: Int) {
                 if (expandRec == null) {
@@ -133,30 +136,30 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun lerp(startValue: Float, endValue: Float, fraction: Float,
-                     interpolator: Interpolator?): Float {
+                     interpolator: TimeInterpolator): Float {
         var f = fraction
-        if (interpolator != null) {
-            f = interpolator.getInterpolation(f)
-        }
+        f = interpolator.getInterpolation(f)
         return AnimationUtils.lerp(startValue, endValue, f)
     }
 
-    override fun onSaveInstanceState(parent: CoordinatorLayout?, child: ImageView?): Parcelable {
+    override fun onSaveInstanceState(parent: CoordinatorLayout, child: ImageView): Parcelable {
         val superState = super.onSaveInstanceState(parent, child)
-        val state = SavedState(superState)
+        val state = SavedState(superState!!)
         state.fraction = this.fraction
         return state
     }
 
-    override fun onRestoreInstanceState(parent: CoordinatorLayout?, child: ImageView?,
-                                        state: Parcelable?) {
+    override fun onRestoreInstanceState(parent: CoordinatorLayout, child: ImageView,
+                                        state: Parcelable) {
         if (state is SavedState) {
             fraction = state.fraction
         } else {
             super.onRestoreInstanceState(parent, child, state)
         }
     }
+
 
     private class SavedState : AbsSavedState {
 

@@ -20,7 +20,7 @@ import com.github.jasonhezz.likesplash.data.model.ExploreTitleModel
 class PopularPhotoDecoration(val context: Context) : RecyclerView.ItemDecoration() {
 
   override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-      state: RecyclerView.State?) {
+      state: RecyclerView.State) {
     val position = parent.getChildAdapterPosition(view)
     val adapter = parent.adapter
     if (adapter is EpoxyControllerAdapter) {
