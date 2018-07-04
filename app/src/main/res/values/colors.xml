@@ -15,4 +15,6 @@
 
   <!--Color: 87% red (A400)-->
   <color name="material_text_fields_error">#DEFF1744</color>
+
+  <color name="grid_item_background_color">#424242</color>
 </resources>

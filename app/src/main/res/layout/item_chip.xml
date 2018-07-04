@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chip"
-    style="@style/Widget.MaterialComponents.Chip.Action"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:text="@string/app_name" />
+    app:chipCornerRadius="4dp"
+    tools:text="@string/app_name"
+    style="@style/Widget.MaterialComponents.Chip.Action"
+    />

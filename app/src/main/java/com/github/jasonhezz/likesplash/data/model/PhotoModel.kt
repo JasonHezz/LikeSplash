@@ -5,13 +5,14 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
-import kotlinx.android.synthetic.main.item_photo.*
-
+import kotlinx.android.synthetic.main.item_photo.card
+import kotlinx.android.synthetic.main.item_photo.photo_iv
+import kotlinx.android.synthetic.main.item_photo.user_avatar
+import kotlinx.android.synthetic.main.item_photo.user_name
 
 /**
  * Created by JavaCoder on 2017/10/16.
@@ -30,13 +31,14 @@ abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
   override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
+
     photo?.let {
       val aspectRatio = it.height.toFloat() / it.width.toFloat()
       holder.photo_iv.aspectRatio = aspectRatio
-      GlideApp.with(holder.photo_iv.context).load(it.urls?.regular)
+      GlideApp.with(holder.photo_iv.context)
+          .saturateOnLoad()
+          .load(it.urls?.regular)
           .thumbnail(Glide.with(holder.photo_iv.context).load(it.urls?.thumb))
-          .materialPlaceHolder(it.color)
-          .transition(withCrossFade(500))
           .into(holder.photo_iv)
       GlideApp.with(holder.user_avatar.context)
           .load(it.user?.profile_image?.large)

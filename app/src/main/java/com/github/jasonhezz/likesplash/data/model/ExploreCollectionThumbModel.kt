@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -28,11 +30,11 @@ abstract class ExploreCollectionThumbModel : EpoxyModelWithHolder<BaseViewHolder
     collection?.let {
 
       val count = it.total_photos ?: 0
-      holder.count_tv.text = holder.count_tv.context.resources.
-          getQuantityString(R.plurals.photo_plural, count, count)
+      holder.count_tv.text =
+          holder.count_tv.context.resources.getQuantityString(R.plurals.photo_plural, count, count)
       holder.title_tv.text = it.title
-      GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
-          .transition(DrawableTransitionOptions.withCrossFade(500))
+      GlideApp.with(holder.collection_iv.context)
+          .load(it.cover_photo?.urls?.regular)
           .into(holder.collection_iv)
       holder.card.setOnClickListener(collectionClickListener)
     }

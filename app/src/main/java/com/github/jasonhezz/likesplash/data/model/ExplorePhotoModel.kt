@@ -14,7 +14,6 @@ import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_explore_photo.*
 
-
 /**
  * Created by JavaCoder on 2017/10/16.
  */
@@ -30,9 +29,10 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
   override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
     if (photo != null) {
-      GlideApp.with(holder.photo_iv.context).load(photo?.urls?.regular)
+      GlideApp.with(holder.photo_iv.context)
+          .saturateOnLoad()
+          .load(photo?.urls?.regular)
           .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
-          .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.photo_iv)
       holder.photo_iv.setOnClickListener(photoClickListener)
     } else {

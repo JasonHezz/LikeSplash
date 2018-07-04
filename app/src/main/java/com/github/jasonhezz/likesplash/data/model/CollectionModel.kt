@@ -37,17 +37,17 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
         holder.collection_iv.aspectRatio = aspectRatio
       }
       val count = it.total_photos ?: 0
-      holder.count_tv.text = holder.count_tv.context.resources.
-          getQuantityString(R.plurals.photo_plural, count, count)
+      holder.count_tv.text =
+          holder.count_tv.context.resources.getQuantityString(R.plurals.photo_plural, count, count)
       holder.title_tv.text = it.title
       holder.user_name.text = it.user?.name
-      GlideApp.with(holder.collection_iv.context).load(it.cover_photo?.urls?.regular)
-          .thumbnail(
-              Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
-          .transition(DrawableTransitionOptions.withCrossFade(500))
-          .placeholder(ColorDrawable(Color.parseColor("#9e9e9e")))
+      GlideApp.with(holder.collection_iv.context)
+          .saturateOnLoad()
+          .load(it.cover_photo?.urls?.regular)
+          .thumbnail(Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
           .into(holder.collection_iv)
-      GlideApp.with(holder.user_avatar.context).load(it.user?.profile_image?.medium)
+      GlideApp.with(holder.user_avatar.context)
+          .load(it.user?.profile_image?.medium)
           .into(holder.user_avatar)
       holder.card.setOnClickListener(collectionClickListener)
       holder.user_avatar.setOnClickListener(avatarClickListener)

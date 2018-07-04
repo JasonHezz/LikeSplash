@@ -24,7 +24,7 @@ abstract class ChipModel : EpoxyModelWithHolder<BaseViewHolder>() {
   override fun bind(holder: BaseViewHolder) {
     super.bind(holder)
     tag?.let {
-      holder.chip.chipText = it.title
+      holder.chip.chipText = it.title?.capitalize()
       //holder.chip.setOnClickListener(tagClickListener)
       holder.chip.setOnClickListener {
         Toast.makeText(it.context, tag?.title, Toast.LENGTH_SHORT).show()

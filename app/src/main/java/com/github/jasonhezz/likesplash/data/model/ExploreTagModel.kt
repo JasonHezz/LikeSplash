@@ -31,7 +31,6 @@ abstract class ExploreTagModel : EpoxyModelWithHolder<BaseViewHolder>() {
       GlideApp.with(holder.tag_thumbnail.context)
           .load(it.url)
           .placeholder(ColorDrawable(Color.parseColor("#bdbdbd")))
-          .transition(DrawableTransitionOptions.withCrossFade(500))
           .into(holder.tag_thumbnail)
       holder.card.setOnClickListener(tagClickListener)
     }
