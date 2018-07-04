@@ -54,7 +54,7 @@ dependencies {
 
   //arch
   implementation "android.arch.lifecycle:extensions:1.1.1"
-  implementation "android.arch.paging:runtime:1.0.0"
+  implementation "android.arch.paging:runtime:1.0.1"
   //rx
   implementation "io.reactivex.rxjava2:rxjava:2.1.7"
   implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
@@ -72,11 +72,11 @@ dependencies {
   implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
 
   //epoxy
-  implementation('com.airbnb.android:epoxy:2.13.0', {
+  implementation('com.airbnb.android:epoxy:2.14.0', {
     exclude group: 'com.android.support'
   })
   implementation 'com.airbnb.android:epoxy-paging:2.13.0'
-  kapt 'com.airbnb.android:epoxy-processor:2.13.0'
+  kapt 'com.airbnb.android:epoxy-processor:2.14.0'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.11.0'
   androidTestImplementation 'com.android.support.test:runner:1.0.1'
