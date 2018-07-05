@@ -4,6 +4,10 @@
     <item name="android:textSize">14sp</item>
   </style>
 
+  <style name="TextAppearance.Splash.Chip" parent="TextAppearance.AppCompat.Caption">
+    <item name="android:textSize">14sp</item>
+  </style>
+
   <style name="TextAppearance.Splash.Title" parent="Base.TextAppearance.AppCompat.Title">
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
