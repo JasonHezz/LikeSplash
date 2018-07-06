@@ -11,11 +11,13 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.github.jasonhezz.likesplash.R
 
-
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(context, attrs) {
+class BackdropImageView(
+  context: Context,
+  attrs: AttributeSet
+) : ImageView(context, attrs) {
 
   private var mScrimDarkness: Float = 0f
   private var mScrimColor = Color.BLACK
@@ -49,7 +51,13 @@ class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(conte
       this.friction = friction
   }
 
-  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+  override fun onLayout(
+    changed: Boolean,
+    left: Int,
+    top: Int,
+    right: Int,
+    bottom: Int
+  ) {
     super.onLayout(changed, left, top, right, bottom)
 
     if (mScrollOffset != 0) {
@@ -66,8 +74,10 @@ class BackdropImageView(context: Context, attrs: AttributeSet) : ImageView(conte
 
   override fun onDraw(canvas: Canvas) {
     // Update the scrim paint
-    mScrimPaint.color = ColorUtils.setAlphaComponent(mScrimColor,
-        MIN_SCRIM_ALPHA + (SCRIM_ALPHA_DIFF * mScrimDarkness).toInt())
+    mScrimPaint.color = ColorUtils.setAlphaComponent(
+        mScrimColor,
+        MIN_SCRIM_ALPHA + (SCRIM_ALPHA_DIFF * mScrimDarkness).toInt()
+    )
 
     if (mImageOffset != 0) {
       canvas.save()

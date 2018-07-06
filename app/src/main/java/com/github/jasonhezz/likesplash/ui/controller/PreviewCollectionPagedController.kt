@@ -11,22 +11,22 @@ import com.github.jasonhezz.likesplash.data.model.previewCollection
  */
 class PreviewCollectionPagedController : PagingEpoxyController<Collection>() {
 
-  @AutoModel
-  lateinit var loadingModel: LoadingModel_
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
 
-  var isLoading: Boolean = false
-    set(value) {
-      field = value
-      requestModelBuild()
-    }
+    var isLoading: Boolean = false
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
 
-  override fun buildModels(list: MutableList<Collection>) {
-    list.forEach {
-      previewCollection {
-        id(it.id)
-        collection(it)
-      }
+    override fun buildModels(list: MutableList<Collection>) {
+        list.forEach {
+            previewCollection {
+                id(it.id)
+                collection(it)
+            }
+        }
+        loadingModel.addIf(isLoading, this)
     }
-    loadingModel.addIf(isLoading, this)
-  }
 }

@@ -16,24 +16,24 @@ import kotlinx.android.synthetic.main.item_photo_detail.*
 @EpoxyModelClass(layout = R.layout.item_photo_detail)
 abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
-  @EpoxyAttribute
-  var photo: Photo? = null
+    @EpoxyAttribute
+    var photo: Photo? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    photo?.let {
-      val aspectRatio = it.height.toFloat() / it.width.toFloat()
-      holder.photo_iv.aspectRatio = aspectRatio
-      holder.user_name.text = it.user?.name
-      GlideApp.with(holder.photo_iv.context)
-              .load(it.urls?.regular)
-              .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
-              .materialPlaceHolder(it.color)
-              .into(holder.photo_iv)
-      GlideApp.with(holder.user_avatar.context)
-              .load(it.user?.profile_image?.large)
-              .placeholder(R.drawable.avatar_placeholder)
-              .into(holder.user_avatar)
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        photo?.let {
+            val aspectRatio = it.height.toFloat() / it.width.toFloat()
+            holder.photo_iv.aspectRatio = aspectRatio
+            holder.user_name.text = it.user?.name
+            GlideApp.with(holder.photo_iv.context)
+                .load(it.urls?.regular)
+                .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
+                .materialPlaceHolder(it.color)
+                .into(holder.photo_iv)
+            GlideApp.with(holder.user_avatar.context)
+                .load(it.user?.profile_image?.large)
+                .placeholder(R.drawable.avatar_placeholder)
+                .into(holder.user_avatar)
+        }
     }
-  }
 }

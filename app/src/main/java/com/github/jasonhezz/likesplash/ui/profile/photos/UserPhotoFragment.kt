@@ -21,88 +21,88 @@ import timber.log.Timber
 
 class UserPhotoFragment : Fragment() {
 
-  private lateinit var model: UserPhotoViewModel
-  private var controller = PhotoPagedController(
-      object : PhotoPagedController.Companion.AdapterCallbacks {
-        override fun onAvatarClick(user: User?) {
+    private lateinit var model: UserPhotoViewModel
+    private var controller = PhotoPagedController(
+        object : PhotoPagedController.Companion.AdapterCallbacks {
+            override fun onAvatarClick(user: User?) {
+            }
 
+            override fun onPhotoClick(it: Photo) {
+            }
+        }).apply { setFilterDuplicates(true) }
+
+    private var user: User? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            user = arguments?.getParcelable(ARG_PARAM_USER)
         }
-
-        override fun onPhotoClick(it: Photo) {
-
-        }
-      }).apply { setFilterDuplicates(true) }
-
-  private var user: User? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (arguments != null) {
-      user = arguments?.getParcelable(ARG_PARAM_USER)
+        model = getViewModel()
     }
-    model = getViewModel()
-  }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? =
-      inflater.inflate(R.layout.fragment_like, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(R.layout.fragment_like, container, false)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    initSwipeToRefresh()
-    initController()
-  }
-
-  private fun initSwipeToRefresh() {
-    model.refreshState.observe(this, Observer<Resource?> {
-      swipe_refresh.isRefreshing = it == Resource.INITIAL
-    })
-    swipe_refresh.setOnRefreshListener {
-      model.refresh()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSwipeToRefresh()
+        initController()
     }
-  }
 
-  private fun initController() {
-    rv.adapter = controller.adapter
-    model.photos.observe(this, Observer {
-      controller.setList(it)
-    })
-    model.networkState.observe(this, Observer {
-      when (it?.status) {
-        Status.LOADING_MORE -> {
-          controller.isLoading = true
+    private fun initSwipeToRefresh() {
+        model.refreshState.observe(this, Observer<Resource?> {
+            swipe_refresh.isRefreshing = it == Resource.INITIAL
+        })
+        swipe_refresh.setOnRefreshListener {
+            model.refresh()
         }
-        Status.SUCCESS -> {
-          controller.isLoading = false
-        }
-        Status.ERROR -> {
-          Timber.e(it.message)
-        }
-        else -> {
-        }
-      }
-    })
-  }
-
-  private fun getViewModel(): UserPhotoViewModel {
-    return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-      override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepositoryFactory.makeUserRepository()
-        @Suppress("UNCHECKED_CAST")
-        return UserPhotoViewModel(user?.username ?: "", repo) as T
-      }
-    })[UserPhotoViewModel::class.java]
-  }
-
-  companion object {
-    const val ARG_PARAM_USER = "userId"
-    @JvmStatic
-    fun newInstance(user: User?): UserPhotoFragment {
-      val fragment = UserPhotoFragment()
-      val args = Bundle()
-      args.putParcelable(ARG_PARAM_USER, user)
-      fragment.arguments = args
-      return fragment
     }
-  }
+
+    private fun initController() {
+        rv.adapter = controller.adapter
+        model.photos.observe(this, Observer {
+            controller.setList(it)
+        })
+        model.networkState.observe(this, Observer {
+            when (it?.status) {
+                Status.LOADING_MORE -> {
+                    controller.isLoading = true
+                }
+                Status.SUCCESS -> {
+                    controller.isLoading = false
+                }
+                Status.ERROR -> {
+                    Timber.e(it.message)
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    private fun getViewModel(): UserPhotoViewModel {
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val repo = RepositoryFactory.makeUserRepository()
+                @Suppress("UNCHECKED_CAST")
+                return UserPhotoViewModel(user?.username ?: "", repo) as T
+            }
+        })[UserPhotoViewModel::class.java]
+    }
+
+    companion object {
+        const val ARG_PARAM_USER = "userId"
+        @JvmStatic
+        fun newInstance(user: User?): UserPhotoFragment {
+            val fragment = UserPhotoFragment()
+            val args = Bundle()
+            args.putParcelable(ARG_PARAM_USER, user)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }

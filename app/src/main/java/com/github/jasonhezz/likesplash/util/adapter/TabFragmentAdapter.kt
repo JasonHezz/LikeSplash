@@ -1,10 +1,9 @@
-package com.github.jasonhezz.unofficialsplash.home
+package com.github.jasonhezz.likesplash.util.adapter
 
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.design.widget.TabLayout
-
 
 /**
  * Created by JavaCoder on 2017/6/16.

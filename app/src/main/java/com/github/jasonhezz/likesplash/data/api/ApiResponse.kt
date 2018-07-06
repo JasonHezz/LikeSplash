@@ -20,134 +20,131 @@ import android.util.ArrayMap
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
-import java.util.*
+import java.util.Collections
 import java.util.regex.Pattern
-
 
 /**
  * Created by JavaCoder on 2017/11/27.
  */
 class ApiResponse<T> {
-  private val code: Int
-  val body: T?
-  private val errorMessage: String?
-  private val links: MutableMap<String, String>
+    private val code: Int
+    val body: T?
+    private val errorMessage: String?
+    private val links: MutableMap<String, String>
 
-  val isSuccessful: Boolean
-    get() = code in 200..299
+    val isSuccessful: Boolean
+        get() = code in 200..299
 
-  val nextPage: Int?
-    get() {
-      val next = links[NEXT_LINK] ?: return null
-      val matcher = PAGE_PATTERN.matcher(next)
-      if (!matcher.find() || matcher.groupCount() != 1) {
-        return null
-      }
-      return try {
-        Integer.parseInt(matcher.group(1))
-      } catch (ex: NumberFormatException) {
-        Timber.w("cannot parse next page from %s", next)
-        null
-      }
-    }
-
-  val firstPage: Int?
-    get() {
-      val next = links[FIRST_LINK] ?: return null
-      val matcher = PAGE_PATTERN.matcher(next)
-      if (!matcher.find() || matcher.groupCount() != 1) {
-        return null
-      }
-      return try {
-        Integer.parseInt(matcher.group(1))
-      } catch (ex: NumberFormatException) {
-        Timber.w("cannot parse next page from %s", next)
-        null
-      }
-    }
-
-  val prevPage: Int?
-    get() {
-      val next = links[PREV_LINK] ?: return null
-      val matcher = PAGE_PATTERN.matcher(next)
-      if (!matcher.find() || matcher.groupCount() != 1) {
-        return null
-      }
-      return try {
-        Integer.parseInt(matcher.group(1))
-      } catch (ex: NumberFormatException) {
-        Timber.w("cannot parse next page from %s", next)
-        null
-      }
-    }
-
-  val lastPage: Int?
-    get() {
-      val next = links[LAST_LINK] ?: return null
-      val matcher = PAGE_PATTERN.matcher(next)
-      if (!matcher.find() || matcher.groupCount() != 1) {
-        return null
-      }
-      return try {
-        Integer.parseInt(matcher.group(1))
-      } catch (ex: NumberFormatException) {
-        Timber.w("cannot parse next page from %s", next)
-        null
-      }
-    }
-
-
-  constructor(error: Throwable) {
-    code = 500
-    body = null
-    errorMessage = error.message
-    links = Collections.emptyMap()
-  }
-
-  constructor(response: Response<T>) {
-    code = response.code()
-    if (response.isSuccessful) {
-      body = response.body()
-      errorMessage = null
-    } else {
-      var message: String? = null
-      if (response.errorBody() != null) {
-        try {
-          message = response.errorBody()?.string()
-        } catch (ignored: IOException) {
-          Timber.e(ignored, "error while parsing response")
+    val nextPage: Int?
+        get() {
+            val next = links[NEXT_LINK] ?: return null
+            val matcher = PAGE_PATTERN.matcher(next)
+            if (!matcher.find() || matcher.groupCount() != 1) {
+                return null
+            }
+            return try {
+                Integer.parseInt(matcher.group(1))
+            } catch (ex: NumberFormatException) {
+                Timber.w("cannot parse next page from %s", next)
+                null
+            }
         }
 
-      }
-      if (message == null || message.trim { it <= ' ' }.isEmpty()) {
-        message = response.message()
-      }
-      errorMessage = message
-      body = null
-    }
-    val linkHeader = response.headers().get("link")
-    if (linkHeader == null) {
-      links = Collections.emptyMap()
-    } else {
-      links = ArrayMap()
-      val matcher = LINK_PATTERN.matcher(linkHeader)
-
-      while (matcher.find()) {
-        val count = matcher.groupCount()
-        if (count == 2) {
-          links.put(matcher.group(2), matcher.group(1))
+    val firstPage: Int?
+        get() {
+            val next = links[FIRST_LINK] ?: return null
+            val matcher = PAGE_PATTERN.matcher(next)
+            if (!matcher.find() || matcher.groupCount() != 1) {
+                return null
+            }
+            return try {
+                Integer.parseInt(matcher.group(1))
+            } catch (ex: NumberFormatException) {
+                Timber.w("cannot parse next page from %s", next)
+                null
+            }
         }
-      }
-    }
-  }
 
-  companion object {
-    private val LINK_PATTERN = Pattern
-        .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
-    private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
-    private val NEXT_LINK = "next"
-    private val FIRST_LINK = "first"
-    private val PREV_LINK = "prev"
-    private val LAST_LINK = "last"
-  }
+    val prevPage: Int?
+        get() {
+            val next = links[PREV_LINK] ?: return null
+            val matcher = PAGE_PATTERN.matcher(next)
+            if (!matcher.find() || matcher.groupCount() != 1) {
+                return null
+            }
+            return try {
+                Integer.parseInt(matcher.group(1))
+            } catch (ex: NumberFormatException) {
+                Timber.w("cannot parse next page from %s", next)
+                null
+            }
+        }
+
+    val lastPage: Int?
+        get() {
+            val next = links[LAST_LINK] ?: return null
+            val matcher = PAGE_PATTERN.matcher(next)
+            if (!matcher.find() || matcher.groupCount() != 1) {
+                return null
+            }
+            return try {
+                Integer.parseInt(matcher.group(1))
+            } catch (ex: NumberFormatException) {
+                Timber.w("cannot parse next page from %s", next)
+                null
+            }
+        }
+
+    constructor(error: Throwable) {
+        code = 500
+        body = null
+        errorMessage = error.message
+        links = Collections.emptyMap()
+    }
+
+    constructor(response: Response<T>) {
+        code = response.code()
+        if (response.isSuccessful) {
+            body = response.body()
+            errorMessage = null
+        } else {
+            var message: String? = null
+            if (response.errorBody() != null) {
+                try {
+                    message = response.errorBody()?.string()
+                } catch (ignored: IOException) {
+                    Timber.e(ignored, "error while parsing response")
+                }
+            }
+            if (message == null || message.trim { it <= ' ' }.isEmpty()) {
+                message = response.message()
+            }
+            errorMessage = message
+            body = null
+        }
+        val linkHeader = response.headers().get("link")
+        if (linkHeader == null) {
+            links = Collections.emptyMap()
+        } else {
+            links = ArrayMap()
+            val matcher = LINK_PATTERN.matcher(linkHeader)
+
+            while (matcher.find()) {
+                val count = matcher.groupCount()
+                if (count == 2) {
+                    links.put(matcher.group(2), matcher.group(1))
+                }
+            }
+        }
+    }
+
+    companion object {
+        private val LINK_PATTERN = Pattern
+            .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
+        private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")
+        private val NEXT_LINK = "next"
+        private val FIRST_LINK = "first"
+        private val PREV_LINK = "prev"
+        private val LAST_LINK = "last"
+    }
 }

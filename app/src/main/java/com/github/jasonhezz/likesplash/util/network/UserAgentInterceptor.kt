@@ -9,9 +9,9 @@ class UserAgentInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
-                .removeHeader("User-Agent")//移除旧的
-                .addHeader("User-Agent", WebSettings.getDefaultUserAgent(App.applicationContext()))
-                .build()
+            .removeHeader("User-Agent")//移除旧的
+            .addHeader("User-Agent", WebSettings.getDefaultUserAgent(App.applicationContext()))
+            .build()
         return chain.proceed(request)
     }
 }

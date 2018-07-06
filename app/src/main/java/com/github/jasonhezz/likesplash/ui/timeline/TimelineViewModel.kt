@@ -12,21 +12,21 @@ import com.github.jasonhezz.likesplash.repository.PhotoRepository
  */
 class TimelineViewModel(private val repository: PhotoRepository) : ViewModel() {
 
-  private val result = MutableLiveData<Listing<Photo>>()
-  val photos = Transformations.switchMap(result, { it.pagedList })!!
-  val networkState = Transformations.switchMap(result, { it.networkState })!!
-  val refreshState = Transformations.switchMap(result, { it.refreshState })!!
+    private val result = MutableLiveData<Listing<Photo>>()
+    val photos = Transformations.switchMap(result, { it.pagedList })!!
+    val networkState = Transformations.switchMap(result, { it.networkState })!!
+    val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
-  init {
-    result.postValue(repository.getListPhotos())
-  }
+    init {
+        result.postValue(repository.getListPhotos())
+    }
 
-  fun refresh() {
-    result.value?.refresh?.invoke()
-  }
+    fun refresh() {
+        result.value?.refresh?.invoke()
+    }
 
-  fun retry() {
-    val listing = result.value
-    listing?.retry?.invoke()
-  }
+    fun retry() {
+        val listing = result.value
+        listing?.retry?.invoke()
+    }
 }

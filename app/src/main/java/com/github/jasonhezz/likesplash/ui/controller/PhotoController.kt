@@ -13,45 +13,45 @@ import com.github.jasonhezz.likesplash.data.model.photo
 
 class PhotoController(var callback: AdapterCallbacks? = null) : EpoxyController() {
 
-  var onAvatarClick: ((id: String?) -> Unit)? = null
-  var onPhotoClick: (() -> Unit)? = null
+    var onAvatarClick: ((id: String?) -> Unit)? = null
+    var onPhotoClick: (() -> Unit)? = null
 
-  @AutoModel
-  lateinit var loadingModel: LoadingModel_
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
 
-  var photos = emptyList<Photo>()
-    set(value) {
-      field = value
-      requestModelBuild()
-    }
-
-  var isLoading: Boolean = false
-    set(value) {
-      if (field != value) {
-        field = value
-        requestModelBuild()
-      }
-    }
-
-  override fun buildModels() {
-    photos.forEach {
-      photo {
-        id(it.id)
-        photo(it)
-        avatarClickListener { model, parentView, clickedView, position ->
-          onAvatarClick?.invoke(it.user?.id)
-          callback?.onAvatarClick(it.user)
+    var photos = emptyList<Photo>()
+        set(value) {
+            field = value
+            requestModelBuild()
         }
-        photoClickListener { model, parentView, clickedView, position ->
-          onPhotoClick?.invoke()
-        }
-      }
-    }
-    loadingModel.addIf(isLoading, this)
-  }
 
-  interface AdapterCallbacks {
-    fun onAvatarClick(id: User?)
-    fun onPhotoClick()
-  }
+    var isLoading: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
+        }
+
+    override fun buildModels() {
+        photos.forEach {
+            photo {
+                id(it.id)
+                photo(it)
+                avatarClickListener { model, parentView, clickedView, position ->
+                    onAvatarClick?.invoke(it.user?.id)
+                    callback?.onAvatarClick(it.user)
+                }
+                photoClickListener { model, parentView, clickedView, position ->
+                    onPhotoClick?.invoke()
+                }
+            }
+        }
+        loadingModel.addIf(isLoading, this)
+    }
+
+    interface AdapterCallbacks {
+        fun onAvatarClick(id: User?)
+        fun onPhotoClick()
+    }
 }

@@ -15,20 +15,20 @@ import kotlinx.android.synthetic.main.item_chip.*
  */
 @EpoxyModelClass(layout = R.layout.item_chip)
 abstract class ChipModel : EpoxyModelWithHolder<BaseViewHolder>() {
-  @EpoxyAttribute
-  var tag: Tag? = null
+    @EpoxyAttribute
+    var tag: Tag? = null
 
-  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-  var tagClickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var tagClickListener: View.OnClickListener? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    tag?.let {
-      holder.chip.chipText = it.title?.capitalize()
-      //holder.chip.setOnClickListener(tagClickListener)
-      holder.chip.setOnClickListener {
-        Toast.makeText(it.context, tag?.title, Toast.LENGTH_SHORT).show()
-      }
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        tag?.let {
+            holder.chip.chipText = it.title?.capitalize()
+            //holder.chip.setOnClickListener(tagClickListener)
+            holder.chip.setOnClickListener {
+                Toast.makeText(it.context, tag?.title, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-  }
 }

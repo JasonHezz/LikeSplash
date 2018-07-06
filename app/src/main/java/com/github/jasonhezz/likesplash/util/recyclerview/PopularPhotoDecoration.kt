@@ -19,8 +19,12 @@ import com.github.jasonhezz.likesplash.data.model.ExploreTitleModel
  */
 class PopularPhotoDecoration(val context: Context) : RecyclerView.ItemDecoration() {
 
-  override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-      state: RecyclerView.State) {
+  override fun getItemOffsets(
+    outRect: Rect,
+    view: View,
+    parent: RecyclerView,
+    state: RecyclerView.State
+  ) {
     val position = parent.getChildAdapterPosition(view)
     val adapter = parent.adapter
     if (adapter is EpoxyControllerAdapter) {
@@ -28,10 +32,14 @@ class PopularPhotoDecoration(val context: Context) : RecyclerView.ItemDecoration
       //TODO reduce left and right margin in two column or three column in tablet
       when (model::class.java.superclass) {
         ExploreTitleModel::class.java -> outRect.setEmpty()
-        ExplorePhotoModel::class.java -> outRect.set(resToPx(R.dimen.md_edge_margin), dpToPx(4),
-            resToPx(R.dimen.md_edge_margin), dpToPx(4))
-        ExploreTagModel::class.java -> outRect.set(resToPx(R.dimen.md_edge_margin), dpToPx(4),
-            resToPx(R.dimen.md_edge_margin), dpToPx(4))
+        ExplorePhotoModel::class.java -> outRect.set(
+            resToPx(R.dimen.md_edge_margin), dpToPx(4),
+            resToPx(R.dimen.md_edge_margin), dpToPx(4)
+        )
+        ExploreTagModel::class.java -> outRect.set(
+            resToPx(R.dimen.md_edge_margin), dpToPx(4),
+            resToPx(R.dimen.md_edge_margin), dpToPx(4)
+        )
         else -> outRect.setEmpty()
       }
     } else {
@@ -56,8 +64,11 @@ class PopularPhotoDecoration(val context: Context) : RecyclerView.ItemDecoration
   @Px
   fun dpToPx(@Dimension(unit = Dimension.DP) dp: Int): Int {
     return TypedValue
-        .applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
-            context.resources.displayMetrics).toInt()
+        .applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+            context.resources.displayMetrics
+        )
+        .toInt()
   }
 
   @Px

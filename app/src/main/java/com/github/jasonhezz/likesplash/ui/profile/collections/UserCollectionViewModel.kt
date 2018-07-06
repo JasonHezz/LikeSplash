@@ -10,24 +10,26 @@ import com.github.jasonhezz.likesplash.repository.UserRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class UserCollectionViewModel(private val userName: String,
-    private val repository: UserRepository) : ViewModel() {
+class UserCollectionViewModel(
+    userName: String,
+    repository: UserRepository
+) : ViewModel() {
 
-  private val result = MutableLiveData<Listing<Collection>>()
-  val collections = Transformations.switchMap(result, { it.pagedList })!!
-  val networkState = Transformations.switchMap(result, { it.networkState })!!
-  val refreshState = Transformations.switchMap(result, { it.refreshState })!!
+    private val result = MutableLiveData<Listing<Collection>>()
+    val collections = Transformations.switchMap(result, { it.pagedList })!!
+    val networkState = Transformations.switchMap(result, { it.networkState })!!
+    val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
-  init {
-    result.postValue(repository.getUserCollection(userName))
-  }
+    init {
+        result.postValue(repository.getUserCollection(userName))
+    }
 
-  fun refresh() {
-    result.value?.refresh?.invoke()
-  }
+    fun refresh() {
+        result.value?.refresh?.invoke()
+    }
 
-  fun retry() {
-    val listing = result.value
-    listing?.retry?.invoke()
-  }
+    fun retry() {
+        val listing = result.value
+        listing?.retry?.invoke()
+    }
 }

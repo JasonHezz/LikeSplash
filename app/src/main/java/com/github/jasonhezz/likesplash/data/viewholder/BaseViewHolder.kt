@@ -10,15 +10,15 @@ import kotlinx.android.extensions.LayoutContainer
  */
 class BaseViewHolder : EpoxyHolder(), LayoutContainer {
 
-  //make it private so that child can't find
-  private var containerViewBridge: View? = null
+    //make it private so that child can't find
+    private var containerViewBridge: View? = null
 
-  //rewrite containerView get method
-  override val containerView: View?
-    get() = containerViewBridge
+    //rewrite containerView get method
+    override val containerView: View?
+        get() = containerViewBridge
 
-  @CallSuper
-  override fun bindView(itemView: View?) {
-    containerViewBridge = itemView
-  }
+    @CallSuper
+    override fun bindView(itemView: View?) {
+        containerViewBridge = itemView
+    }
 }

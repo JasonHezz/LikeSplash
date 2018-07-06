@@ -10,24 +10,26 @@ import com.github.jasonhezz.likesplash.repository.UserRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class UserPhotoViewModel(private val userName: String,
-    private val repository: UserRepository) : ViewModel() {
+class UserPhotoViewModel(
+    userName: String,
+    repository: UserRepository
+) : ViewModel() {
 
-  private val result = MutableLiveData<Listing<Photo>>()
-  val photos = Transformations.switchMap(result, { it.pagedList })!!
-  val networkState = Transformations.switchMap(result, { it.networkState })!!
-  val refreshState = Transformations.switchMap(result, { it.refreshState })!!
+    private val result = MutableLiveData<Listing<Photo>>()
+    val photos = Transformations.switchMap(result, { it.pagedList })!!
+    val networkState = Transformations.switchMap(result, { it.networkState })!!
+    val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
-  init {
-    result.postValue(repository.getUserPhotos(userName))
-  }
+    init {
+        result.postValue(repository.getUserPhotos(userName))
+    }
 
-  fun refresh() {
-    result.value?.refresh?.invoke()
-  }
+    fun refresh() {
+        result.value?.refresh?.invoke()
+    }
 
-  fun retry() {
-    val listing = result.value
-    listing?.retry?.invoke()
-  }
+    fun retry() {
+        val listing = result.value
+        listing?.retry?.invoke()
+    }
 }

@@ -39,9 +39,9 @@ class TrendingRepositoryIml(val trendingService: TrendingService, private val ne
         }
         return Listing(
                 pagedList = livePagedList,
-                networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-                    it.networkState
-                }),
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                  it.networkState
+                },
                 retry = {
                     sourceFactory.sourceLiveData.value?.retryAllFailed()
                 },

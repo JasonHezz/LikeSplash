@@ -14,11 +14,11 @@
 
 <resources>
 
-  <declare-styleable name="ElasticDragDismissFrameLayout">
-    <attr format="dimension" name="dragDismissDistance"/>
-    <attr format="float" name="dragDismissFraction"/>
-    <attr format="float" name="dragDismissScale"/>
-    <attr format="float" name="dragElasticity"/>
-  </declare-styleable>
+    <declare-styleable name="ElasticDragDismissFrameLayout">
+        <attr format="dimension" name="dragDismissDistance"/>
+        <attr format="float" name="dragDismissFraction"/>
+        <attr format="float" name="dragDismissScale"/>
+        <attr format="float" name="dragElasticity"/>
+    </declare-styleable>
 
 </resources>

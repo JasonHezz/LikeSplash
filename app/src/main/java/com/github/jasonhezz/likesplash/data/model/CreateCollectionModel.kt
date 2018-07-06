@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.item_dialog_create_collection.*
 @EpoxyModelClass(layout = R.layout.item_dialog_create_collection)
 abstract class CreateCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
-  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-  var onClickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var onClickListener: View.OnClickListener? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    holder.card.setOnClickListener(onClickListener)
-  }
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        holder.card.setOnClickListener(onClickListener)
+    }
 }

@@ -23,79 +23,81 @@ import timber.log.Timber
  */
 class UserCollectionFragment : Fragment() {
 
-  private lateinit var model: UserCollectionViewModel
-  private var controller = CollectionPagedController().apply { setFilterDuplicates(true) }
+    private lateinit var model: UserCollectionViewModel
+    private var controller = CollectionPagedController().apply { setFilterDuplicates(true) }
 
-  private var user: User? = null
+    private var user: User? = null
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (arguments != null) {
-      user = arguments?.getParcelable(ARG_PARAM_USER)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            user = arguments?.getParcelable(ARG_PARAM_USER)
+        }
+        model = getViewModel()
     }
-    model = getViewModel()
-  }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? =
-      inflater.inflate(R.layout.fragment_like, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(R.layout.fragment_like, container, false)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    initSwipeToRefresh()
-    initController()
-  }
-
-  private fun initSwipeToRefresh() {
-    model.refreshState.observe(this, Observer {
-      swipe_refresh.isRefreshing = it == Resource.INITIAL
-    })
-    swipe_refresh.setOnRefreshListener {
-      model.refresh()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSwipeToRefresh()
+        initController()
     }
-  }
 
-  private fun initController() {
-    rv.adapter = controller.adapter
-    model.collections.observe(this, Observer {
-      controller.setList(it)
-    })
-    model.networkState.observe(this, Observer {
-      when (it?.status) {
-        Status.LOADING_MORE -> {
-          controller.isLoading = true
+    private fun initSwipeToRefresh() {
+        model.refreshState.observe(this, Observer {
+            swipe_refresh.isRefreshing = it == Resource.INITIAL
+        })
+        swipe_refresh.setOnRefreshListener {
+            model.refresh()
         }
-        Status.SUCCESS -> {
-          controller.isLoading = false
-        }
-        Status.ERROR -> {
-          Timber.e(it.message)
-        }
-        else -> {
-        }
-      }
-    })
-  }
-
-  private fun getViewModel(): UserCollectionViewModel {
-    return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-      override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepositoryFactory.makeUserRepository()
-        @Suppress("UNCHECKED_CAST")
-        return UserCollectionViewModel(user?.username ?: "", repo) as T
-      }
-    })[UserCollectionViewModel::class.java]
-  }
-
-  companion object {
-    const val ARG_PARAM_USER = "userId"
-    @JvmStatic
-    fun newInstance(user: User?): UserCollectionFragment {
-      val fragment = UserCollectionFragment()
-      val args = Bundle()
-      args.putParcelable(ARG_PARAM_USER, user)
-      fragment.arguments = args
-      return fragment
     }
-  }
+
+    private fun initController() {
+        rv.adapter = controller.adapter
+        model.collections.observe(this, Observer {
+            controller.setList(it)
+        })
+        model.networkState.observe(this, Observer {
+            when (it?.status) {
+                Status.LOADING_MORE -> {
+                    controller.isLoading = true
+                }
+                Status.SUCCESS -> {
+                    controller.isLoading = false
+                }
+                Status.ERROR -> {
+                    Timber.e(it.message)
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    private fun getViewModel(): UserCollectionViewModel {
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val repo = RepositoryFactory.makeUserRepository()
+                @Suppress("UNCHECKED_CAST")
+                return UserCollectionViewModel(user?.username ?: "", repo) as T
+            }
+        })[UserCollectionViewModel::class.java]
+    }
+
+    companion object {
+        const val ARG_PARAM_USER = "userId"
+        @JvmStatic
+        fun newInstance(user: User?): UserCollectionFragment {
+            val fragment = UserCollectionFragment()
+            val args = Bundle()
+            args.putParcelable(ARG_PARAM_USER, user)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }

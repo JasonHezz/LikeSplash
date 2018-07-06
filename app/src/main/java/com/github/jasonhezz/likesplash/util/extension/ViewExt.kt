@@ -20,16 +20,15 @@ import android.view.View
 import android.widget.ImageView
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 
-
 //support library 25.3.1 is different from 26.1.0 under lolipop
 fun View.showSnackbar(snackbarText: String, timeLength: Int = 250) {
-  Snackbar.make(this, snackbarText, timeLength).show()
+    Snackbar.make(this, snackbarText, timeLength).show()
 }
 
 fun ImageView.loadUrl(url: String?, placeholder: Int? = null) {
-  GlideApp.with(context).load(url).apply {
-    if (placeholder != null) placeholder(placeholder)
-  }.into(this)
+    GlideApp.with(context).load(url).apply {
+        if (placeholder != null) placeholder(placeholder)
+    }.into(this)
 }
 
 

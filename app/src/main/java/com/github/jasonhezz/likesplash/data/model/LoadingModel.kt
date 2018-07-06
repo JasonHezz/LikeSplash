@@ -10,5 +10,5 @@ import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
  */
 @EpoxyModelClass(layout = R.layout.infinite_loading)
 abstract class LoadingModel : EpoxyModelWithHolder<BaseViewHolder>() {
-  override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int = totalSpanCount
+    override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int = totalSpanCount
 }

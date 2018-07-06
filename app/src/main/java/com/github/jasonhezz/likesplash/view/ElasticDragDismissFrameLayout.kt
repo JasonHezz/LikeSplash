@@ -30,10 +30,12 @@ import java.util.ArrayList
  * Applies an elasticity factor to reduce movement as you approach the given dismiss distance.
  * Optionally also scales down content during drag.
  */
-class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+class ElasticDragDismissFrameLayout @JvmOverloads constructor(
+  context: Context,
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = 0,
+  defStyleRes: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
   // configurable attribs
   private var dragDismissDistance = java.lang.Float.MAX_VALUE
@@ -55,20 +57,27 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
 
     if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance)) {
       dragDismissDistance = a.getDimensionPixelSize(
-          R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance, 0).toFloat()
+          R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance, 0
+      )
+          .toFloat()
     } else if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissFraction)) {
       dragDismissFraction = a.getFloat(
           R.styleable.ElasticDragDismissFrameLayout_dragDismissFraction,
-          dragDismissFraction)
+          dragDismissFraction
+      )
     }
     if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissScale)) {
-      dragDismissScale = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragDismissScale,
-          dragDismissScale)
+      dragDismissScale = a.getFloat(
+          R.styleable.ElasticDragDismissFrameLayout_dragDismissScale,
+          dragDismissScale
+      )
       shouldScale = dragDismissScale != 1f
     }
     if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragElasticity)) {
-      dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
-          dragElacticity)
+      dragElacticity = a.getFloat(
+          R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
+          dragElacticity
+      )
     }
     a.recycle()
   }
@@ -86,10 +95,12 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
      * dismiss distance has been reached.
      * @param rawOffsetPixels The raw distance the user has dragged
      */
-    open fun onDrag(elasticOffset: Float,
-        elasticOffsetPixels: Float,
-        rawOffset: Float,
-        rawOffsetPixels: Float) {
+    open fun onDrag(
+      elasticOffset: Float,
+      elasticOffsetPixels: Float,
+      rawOffset: Float,
+      rawOffsetPixels: Float
+    ) {
     }
 
     /**
@@ -98,11 +109,20 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
     open fun onDragDismissed() {}
   }
 
-  override fun onStartNestedScroll(child: View, target: View, nestedScrollAxes: Int): Boolean {
+  override fun onStartNestedScroll(
+    child: View,
+    target: View,
+    nestedScrollAxes: Int
+  ): Boolean {
     return nestedScrollAxes and View.SCROLL_AXIS_VERTICAL != 0
   }
 
-  override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray) {
+  override fun onNestedPreScroll(
+    target: View,
+    dx: Int,
+    dy: Int,
+    consumed: IntArray
+  ) {
     // if we're in a drag gesture and the user reverses up the we should take those events
     if (draggingDown && dy > 0 || draggingUp && dy < 0) {
       dragScale(dy)
@@ -110,11 +130,13 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
     }
   }
 
-  override fun onNestedScroll(target: View,
-      dxConsumed: Int,
-      dyConsumed: Int,
-      dxUnconsumed: Int,
-      dyUnconsumed: Int) {
+  override fun onNestedScroll(
+    target: View,
+    dxConsumed: Int,
+    dyConsumed: Int,
+    dxUnconsumed: Int,
+    dyUnconsumed: Int
+  ) {
     dragScale(dyUnconsumed)
   }
 
@@ -136,7 +158,12 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
     }
   }
 
-  override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+  override fun onSizeChanged(
+    w: Int,
+    h: Int,
+    oldw: Int,
+    oldh: Int
+  ) {
     super.onSizeChanged(w, h, oldw, oldh)
     if (dragDismissFraction > 0f) {
       dragDismissDistance = h * dragDismissFraction
@@ -174,7 +201,9 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
     // how far have we dragged relative to the distance to perform a dismiss
     // (0–1 where 1 = dismiss distance). Decreasing logarithmically as we approach the limit
     var dragFraction = Math.log10(
-        (1 + Math.abs(totalDrag) / dragDismissDistance).toDouble()).toFloat()
+        (1 + Math.abs(totalDrag) / dragDismissDistance).toDouble()
+    )
+        .toFloat()
 
     // calculate the desired translation given the drag fraction
     var dragTo = dragFraction * dragDismissDistance * dragElacticity
@@ -204,16 +233,20 @@ class ElasticDragDismissFrameLayout @JvmOverloads constructor(context: Context,
       scaleX = 1f
       scaleY = 1f
     }
-    dispatchDragCallback(dragFraction,
+    dispatchDragCallback(
+        dragFraction,
         dragTo,
         Math.min(1f, Math.abs(totalDrag) / dragDismissDistance),
-        totalDrag)
+        totalDrag
+    )
   }
 
-  private fun dispatchDragCallback(elasticOffset: Float,
-      elasticOffsetPixels: Float,
-      rawOffset: Float,
-      rawOffsetPixels: Float) {
+  private fun dispatchDragCallback(
+    elasticOffset: Float,
+    elasticOffsetPixels: Float,
+    rawOffset: Float,
+    rawOffsetPixels: Float
+  ) {
     if (callbacks != null && !callbacks!!.isEmpty()) {
       for (callback in callbacks!!) {
         callback.onDrag(elasticOffset, elasticOffsetPixels, rawOffset, rawOffsetPixels)

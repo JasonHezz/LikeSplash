@@ -26,15 +26,14 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 
-
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
  * performed by the `fragmentManager`.
  */
 fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
-  supportFragmentManager.transact {
-    replace(frameId, fragment)
-  }
+    supportFragmentManager.transact {
+        replace(frameId, fragment)
+    }
 }
 
 /**
@@ -42,26 +41,25 @@ fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int
  * performed by the `fragmentManager`.
  */
 fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
-  supportFragmentManager.transact {
-    add(fragment, tag)
-  }
+    supportFragmentManager.transact {
+        add(fragment, tag)
+    }
 }
 
 fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.() -> Unit) {
-  setSupportActionBar(findViewById(toolbarId))
-  supportActionBar?.run {
-    action()
-  }
+    setSupportActionBar(findViewById(toolbarId))
+    supportActionBar?.run {
+        action()
+    }
 }
-
 
 /**
  * Runs a FragmentTransaction, then calls commit().
  */
 inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
-  beginTransaction().apply {
-    action()
-  }.commit()
+    beginTransaction().apply {
+        action()
+    }.commit()
 }
 
 /*

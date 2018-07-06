@@ -10,8 +10,9 @@ import java.util.concurrent.Executor
  * Created by JavaCoder on 2017/12/12.
  */
 class TrendingPhotoDataSourceFactory(
-        private val api: TrendingService,
-        private val retryExecutor: Executor) : DataSource.Factory<String, Photo>() {
+    private val api: TrendingService,
+    private val retryExecutor: Executor
+) : DataSource.Factory<String, Photo>() {
     val sourceLiveData = MutableLiveData<PagedTrendingPhotoDataSource>()
     override fun create(): DataSource<String, Photo> {
         val source = PagedTrendingPhotoDataSource(api, retryExecutor)

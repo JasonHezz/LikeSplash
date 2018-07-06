@@ -14,20 +14,20 @@ import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Interpolator
 import android.widget.ImageView
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 import timber.log.Timber
 
-
 /**
  * Created by JavaCoder on 2017/11/1.
  */
 
-class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
-                                                      attrs: AttributeSet? = null) : CoordinatorLayout.Behavior<ImageView>(context, attrs) {
+class ProfileAvatarBehavior @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : CoordinatorLayout.Behavior<ImageView>(context, attrs) {
 
     private var expandRec: Rect? = null
     private var collapsedRec: Rect = Rect()
@@ -35,23 +35,29 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
     private var fraction = 0f
     private var appbarChangeListener: AppBarStateChangeListener? = null
 
-    override fun layoutDependsOn(parent: CoordinatorLayout, child: ImageView,
-                                 dependency: View): Boolean {
+    override fun layoutDependsOn(
+        parent: CoordinatorLayout, child: ImageView,
+        dependency: View
+    ): Boolean {
         if (dependency is AppBarLayout) {
             return true
         }
         return super.layoutDependsOn(parent, child, dependency)
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout, child: ImageView,
-                                        dependency: View): Boolean {
+    override fun onDependentViewChanged(
+        parent: CoordinatorLayout, child: ImageView,
+        dependency: View
+    ): Boolean {
         interpolateBounds(fraction)
         calculateAvatarSize(child)
         return true
     }
 
-    override fun onLayoutChild(parent: CoordinatorLayout, child: ImageView,
-                               layoutDirection: Int): Boolean {
+    override fun onLayoutChild(
+        parent: CoordinatorLayout, child: ImageView,
+        layoutDirection: Int
+    ): Boolean {
         val appbarLayout = parent.findViewById<AppBarLayout?>(R.id.app_bar_layout)
         handleBounds(parent, child)
         if (appbarChangeListener == null) {
@@ -67,8 +73,10 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
         return super.onLayoutChild(parent, child, layoutDirection)
     }
 
-    private fun handleBounds(parent: CoordinatorLayout,
-                             child: ImageView) {
+    private fun handleBounds(
+        parent: CoordinatorLayout,
+        child: ImageView
+    ) {
         findToolbarLogoRec(parent)
         findAvatarRec(parent, child)
     }
@@ -89,8 +97,10 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
     private fun findAvatarRec(viewGroup: ViewGroup, child: ImageView) {
         child.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
             @SuppressLint("RestrictedApi")
-            override fun onLayoutChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int, p5: Int, p6: Int,
-                                        p7: Int, p8: Int) {
+            override fun onLayoutChange(
+                p0: View?, p1: Int, p2: Int, p3: Int, p4: Int, p5: Int, p6: Int,
+                p7: Int, p8: Int
+            ) {
                 if (expandRec == null) {
                     expandRec = Rect()
                     ViewGroupUtils.getDescendantRect(viewGroup, child, expandRec)
@@ -111,34 +121,47 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
             target.layoutParams.height = currentBounds.height().toInt()
             target.requestLayout()
             target.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-                override fun onLayoutChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int, p5: Int, p6: Int,
-                                            p7: Int, p8: Int) {
+                override fun onLayoutChange(
+                    p0: View?, p1: Int, p2: Int, p3: Int, p4: Int, p5: Int, p6: Int,
+                    p7: Int, p8: Int
+                ) {
                     calculateOffsets(target)
                     p0?.removeOnLayoutChangeListener(this)
                 }
             })
             Timber.d(
-                    "left ${collapsedRec.left} right ${collapsedRec.right} top ${collapsedRec.top} bottom ${collapsedRec.bottom}")
+                "left ${collapsedRec.left} right ${collapsedRec.right} top ${collapsedRec.top} bottom ${collapsedRec.bottom}"
+            )
         }
     }
 
     private fun interpolateBounds(fraction: Float) {
         if (expandRec != null) {
-            currentBounds.left = lerp(expandRec!!.left.toFloat(), collapsedRec.left.toFloat(),
-                    fraction, AnimationUtils.DECELERATE_INTERPOLATOR)
-            currentBounds.top = lerp(expandRec!!.top.toFloat(), collapsedRec.top.toFloat(),
-                    fraction, AnimationUtils.DECELERATE_INTERPOLATOR)
-            currentBounds.right = lerp(expandRec!!.right.toFloat(), collapsedRec.right.toFloat(),
-                    fraction, AnimationUtils.DECELERATE_INTERPOLATOR)
-            currentBounds.bottom = lerp(expandRec!!.bottom.toFloat(),
-                    collapsedRec.bottom.toFloat(),
-                    fraction, AnimationUtils.DECELERATE_INTERPOLATOR)
+            currentBounds.left = lerp(
+                expandRec!!.left.toFloat(), collapsedRec.left.toFloat(),
+                fraction, AnimationUtils.DECELERATE_INTERPOLATOR
+            )
+            currentBounds.top = lerp(
+                expandRec!!.top.toFloat(), collapsedRec.top.toFloat(),
+                fraction, AnimationUtils.DECELERATE_INTERPOLATOR
+            )
+            currentBounds.right = lerp(
+                expandRec!!.right.toFloat(), collapsedRec.right.toFloat(),
+                fraction, AnimationUtils.DECELERATE_INTERPOLATOR
+            )
+            currentBounds.bottom = lerp(
+                expandRec!!.bottom.toFloat(),
+                collapsedRec.bottom.toFloat(),
+                fraction, AnimationUtils.DECELERATE_INTERPOLATOR
+            )
         }
     }
 
     @SuppressLint("RestrictedApi")
-    private fun lerp(startValue: Float, endValue: Float, fraction: Float,
-                     interpolator: TimeInterpolator): Float {
+    private fun lerp(
+        startValue: Float, endValue: Float, fraction: Float,
+        interpolator: TimeInterpolator
+    ): Float {
         var f = fraction
         f = interpolator.getInterpolation(f)
         return AnimationUtils.lerp(startValue, endValue, f)
@@ -151,8 +174,10 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
         return state
     }
 
-    override fun onRestoreInstanceState(parent: CoordinatorLayout, child: ImageView,
-                                        state: Parcelable) {
+    override fun onRestoreInstanceState(
+        parent: CoordinatorLayout, child: ImageView,
+        state: Parcelable
+    ) {
         if (state is SavedState) {
             fraction = state.fraction
         } else {
@@ -160,11 +185,9 @@ class ProfileAvatarBehavior @JvmOverloads constructor(context: Context,
         }
     }
 
-
     private class SavedState : AbsSavedState {
 
         var fraction = 0f
-
 
         private constructor(parcel: Parcel) : super(parcel) {
             fraction = parcel.readFloat()

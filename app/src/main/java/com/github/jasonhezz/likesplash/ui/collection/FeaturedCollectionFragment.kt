@@ -22,78 +22,79 @@ import timber.log.Timber
  */
 class FeaturedCollectionFragment : Fragment() {
 
-  private lateinit var model: FeaturedCollectionViewModel
-  private var controller = PreviewCollectionPagedController()
+    private lateinit var model: FeaturedCollectionViewModel
+    private var controller = PreviewCollectionPagedController()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (arguments != null) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
 
+        }
+        model = getViewModel()
     }
-    model = getViewModel()
-  }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_featured_collection, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    initSwipeToRefresh()
-    initController()
-  }
-
-  private fun initSwipeToRefresh() {
-    model.refreshState.observe(this, Observer {
-      swipe_refresh.isRefreshing = it == Resource.INITIAL
-    })
-    swipe_refresh.setOnRefreshListener {
-      model.refresh()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_featured_collection, container, false)
     }
-  }
 
-  private fun initController() {
-    list.adapter = controller.adapter
-    model.collections.observe(this, Observer {
-      controller.setList(it)
-    })
-    model.networkState.observe(this, Observer {
-      when (it?.status) {
-        Status.LOADING_MORE -> {
-          controller.isLoading = true
-        }
-        Status.SUCCESS -> {
-          controller.isLoading = false
-        }
-        Status.ERROR -> {
-          Timber.e(it.message)
-        }
-        else -> {
-        }
-      }
-    })
-  }
-
-  private fun getViewModel(): FeaturedCollectionViewModel {
-    return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-      override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repo = RepositoryFactory.makeCollectionRepository()
-        @Suppress("UNCHECKED_CAST")
-        return FeaturedCollectionViewModel(repo) as T
-      }
-    })[FeaturedCollectionViewModel::class.java]
-  }
-
-
-  companion object {
-
-    fun newInstance(): FeaturedCollectionFragment {
-      val fragment = FeaturedCollectionFragment()
-      val args = Bundle()
-      fragment.arguments = args
-      return fragment
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSwipeToRefresh()
+        initController()
     }
-  }
+
+    private fun initSwipeToRefresh() {
+        model.refreshState.observe(this, Observer {
+            swipe_refresh.isRefreshing = it == Resource.INITIAL
+        })
+        swipe_refresh.setOnRefreshListener {
+            model.refresh()
+        }
+    }
+
+    private fun initController() {
+        list.adapter = controller.adapter
+        model.collections.observe(this, Observer {
+            controller.setList(it)
+        })
+        model.networkState.observe(this, Observer {
+            when (it?.status) {
+                Status.LOADING_MORE -> {
+                    controller.isLoading = true
+                }
+                Status.SUCCESS -> {
+                    controller.isLoading = false
+                }
+                Status.ERROR -> {
+                    Timber.e(it.message)
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    private fun getViewModel(): FeaturedCollectionViewModel {
+        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val repo = RepositoryFactory.makeCollectionRepository()
+                @Suppress("UNCHECKED_CAST")
+                return FeaturedCollectionViewModel(repo) as T
+            }
+        })[FeaturedCollectionViewModel::class.java]
+    }
+
+    companion object {
+
+        fun newInstance(): FeaturedCollectionFragment {
+            val fragment = FeaturedCollectionFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }// Required empty public constructor

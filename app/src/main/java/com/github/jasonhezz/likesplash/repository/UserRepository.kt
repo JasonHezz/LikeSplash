@@ -22,177 +22,207 @@ import java.util.concurrent.Executor
  */
 interface UserRepository {
 
-  fun getUserProfile(username: String, w: Int? = null, h: Int? = null): Single<User>
+    fun getUserProfile(username: String, w: Int? = null, h: Int? = null): Single<User>
 
-  fun getUserFollowing(username: String,
-      page: Int = 1,
-      per_page: Int = 10): Listing<User>
+    fun getUserFollowing(
+        username: String,
+        page: Int = 1,
+        per_page: Int = 10
+    ): Listing<User>
 
-  fun getUserFollowers(username: String,
-      page: Int = 1,
-      per_page: Int = 10): Listing<User>
+    fun getUserFollowers(
+        username: String,
+        page: Int = 1,
+        per_page: Int = 10
+    ): Listing<User>
 
-  fun getUserLikes(username: String,
-      page: Int = 1,
-      per_page: Int = 10,
-      orderBy: String = LATEST): Listing<Photo>
+    fun getUserLikes(
+        username: String,
+        page: Int = 1,
+        per_page: Int = 10,
+        orderBy: String = LATEST
+    ): Listing<Photo>
 
-  fun getUserPhotos(username: String,
-      page: Int = 1,
-      per_page: Int = 10,
-      orderBy: String = LATEST): Listing<Photo>
+    fun getUserPhotos(
+        username: String,
+        page: Int = 1,
+        per_page: Int = 10,
+        orderBy: String = LATEST
+    ): Listing<Photo>
 
-  fun getUserCollection(username: String,
-      page: Int = 1,
-      per_page: Int = 10,
-      orderBy: String = LATEST): Listing<Collection>
+    fun getUserCollection(
+        username: String,
+        page: Int = 1,
+        per_page: Int = 10,
+        orderBy: String = LATEST
+    ): Listing<Collection>
 
-  fun getUserStatistics(username: String, resolution: String = DAYS,
-      quantity: Int = 30)
+    fun getUserStatistics(
+        username: String, resolution: String = DAYS,
+        quantity: Int = 30
+    )
 
-  fun followUser(username: String)
+    fun followUser(username: String)
 
-  fun unfollowUser(username: String)
+    fun unfollowUser(username: String)
 }
 
-class UserRepositoryIml(private val service: UserService,
-    private val networkExecutor: Executor) : UserRepository {
-  override fun getUserProfile(username: String, w: Int?, h: Int?): Single<User> {
-    return service.getUserProfile(username, w, h)
-  }
-
-  override fun getUserFollowing(username: String, page: Int, per_page: Int): Listing<User> {
-    val sourceFactory = UserFollowingDataSourceFactory(username, service, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        .setFetchExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+class UserRepositoryIml(
+    private val service: UserService,
+    private val networkExecutor: Executor
+) : UserRepository {
+    override fun getUserProfile(username: String, w: Int?, h: Int?): Single<User> {
+        return service.getUserProfile(username, w, h)
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getUserFollowers(username: String, page: Int, per_page: Int): Listing<User> {
-    val sourceFactory = UserFollowerDataSourceFactory(username, service, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        .setFetchExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getUserFollowing(username: String, page: Int, per_page: Int): Listing<User> {
+        val sourceFactory = UserFollowingDataSourceFactory(username, service, networkExecutor)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+        )
+            .setFetchExecutor(networkExecutor)
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getUserLikes(username: String, page: Int, per_page: Int,
-      orderBy: String): Listing<Photo> {
-    val sourceFactory = UserLikeDataSourceFactory(username, service, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        .setFetchExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getUserFollowers(username: String, page: Int, per_page: Int): Listing<User> {
+        val sourceFactory = UserFollowerDataSourceFactory(username, service, networkExecutor)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+        )
+            .setFetchExecutor(networkExecutor)
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getUserPhotos(username: String, page: Int, per_page: Int,
-      orderBy: String): Listing<Photo> {
-    val sourceFactory = UserPhotoDataSourceFactory(username, service, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        .setFetchExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getUserLikes(
+        username: String, page: Int, per_page: Int,
+        orderBy: String
+    ): Listing<Photo> {
+        val sourceFactory = UserLikeDataSourceFactory(username, service, networkExecutor)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+        )
+            .setFetchExecutor(networkExecutor)
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getUserCollection(username: String, page: Int, per_page: Int,
-      orderBy: String): Listing<Collection> {
-    val sourceFactory = UserCollectionDataSourceFactory(username, service, networkExecutor)
-    val livePagedList = LivePagedListBuilder(sourceFactory,
-        PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        .setFetchExecutor(networkExecutor)
-        .build()
-    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoad
+    override fun getUserPhotos(
+        username: String, page: Int, per_page: Int,
+        orderBy: String
+    ): Listing<Photo> {
+        val sourceFactory = UserPhotoDataSourceFactory(username, service, networkExecutor)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+        )
+            .setFetchExecutor(networkExecutor)
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
-    return Listing(
-        pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-          it.networkState
-        }),
-        retry = {
-          sourceFactory.sourceLiveData.value?.retryAllFailed()
-        },
-        refresh = {
-          sourceFactory.sourceLiveData.value?.invalidate()
-        },
-        refreshState = refreshState
-    )
-  }
 
-  override fun getUserStatistics(username: String, resolution: String, quantity: Int) {
-    return service.getUserStatistics(username, resolution, quantity)
-  }
+    override fun getUserCollection(
+        username: String, page: Int, per_page: Int,
+        orderBy: String
+    ): Listing<Collection> {
+        val sourceFactory = UserCollectionDataSourceFactory(username, service, networkExecutor)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+        )
+            .setFetchExecutor(networkExecutor)
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
+    }
 
-  override fun followUser(username: String) {
-    return service.followUser(username)
-  }
+    override fun getUserStatistics(username: String, resolution: String, quantity: Int) {
+        return service.getUserStatistics(username, resolution, quantity)
+    }
 
-  override fun unfollowUser(username: String) {
-    return service.unfollowUser(username)
-  }
+    override fun followUser(username: String) {
+        return service.followUser(username)
+    }
+
+    override fun unfollowUser(username: String) {
+        return service.unfollowUser(username)
+    }
 }

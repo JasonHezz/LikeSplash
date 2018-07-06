@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#F5F5F5</color>
-  <color name="colorPrimaryDark">#E0E0E0</color>
-  <!--<color name="colorAccent">#FF4081</color>-->
-  <color name="colorAccent">@color/splash_brand</color>
+    <color name="colorPrimary">#F5F5F5</color>
+    <color name="colorPrimaryDark">#E0E0E0</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">@color/splash_brand</color>
 
-  <!--brand color-->
-  <color name="splash_brand">#202529</color>
-  <color name="scrim_color">#99323232</color>
-  <color name="photo_opacity">#46000000</color>
-  <color name="mtrl_divider_color">#ffe0e0e0</color>
+    <!--brand color-->
+    <color name="splash_brand">#202529</color>
+    <color name="scrim_color">#99323232</color>
+    <color name="photo_opacity">#46000000</color>
+    <color name="mtrl_divider_color">#ffe0e0e0</color>
 
-  <color name="material_divider_color">#ffe0e0e0</color>
+    <color name="material_divider_color">#ffe0e0e0</color>
 
-  <!--Color: 87% red (A400)-->
-  <color name="material_text_fields_error">#DEFF1744</color>
+    <!--Color: 87% red (A400)-->
+    <color name="material_text_fields_error">#DEFF1744</color>
 
-  <color name="grid_item_background_color">#424242</color>
+    <color name="item_background_color">#424242</color>
 </resources>

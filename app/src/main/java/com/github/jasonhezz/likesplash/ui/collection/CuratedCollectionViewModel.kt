@@ -12,21 +12,21 @@ import com.github.jasonhezz.likesplash.repository.Listing
  */
 class CuratedCollectionViewModel(private val repository: CollectionRepository) : ViewModel() {
 
-  private val result = MutableLiveData<Listing<Collection>>()
-  val collections = Transformations.switchMap(result, { it.pagedList })!!
-  val networkState = Transformations.switchMap(result, { it.networkState })!!
-  val refreshState = Transformations.switchMap(result, { it.refreshState })!!
+    private val result = MutableLiveData<Listing<Collection>>()
+    val collections = Transformations.switchMap(result, { it.pagedList })!!
+    val networkState = Transformations.switchMap(result, { it.networkState })!!
+    val refreshState = Transformations.switchMap(result, { it.refreshState })!!
 
-  init {
-    result.postValue(repository.getListCuratedCollections())
-  }
+    init {
+        result.postValue(repository.getListCuratedCollections())
+    }
 
-  fun refresh() {
-    result.value?.refresh?.invoke()
-  }
+    fun refresh() {
+        result.value?.refresh?.invoke()
+    }
 
-  fun retry() {
-    val listing = result.value
-    listing?.retry?.invoke()
-  }
+    fun retry() {
+        val listing = result.value
+        listing?.retry?.invoke()
+    }
 }

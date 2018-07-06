@@ -25,14 +25,13 @@ import android.util.TypedValue
 import android.view.View
 
 fun Context.isInNightMode(): Boolean {
-  val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-  return when (currentNightMode) {
-    Configuration.UI_MODE_NIGHT_NO -> false // Night mode is not active, we're in day time
-    Configuration.UI_MODE_NIGHT_YES -> true // Night mode is active, we're at night!
-    else -> false // We don't know what mode we're in, assume notnight
-  }
+    val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+    return when (currentNightMode) {
+        Configuration.UI_MODE_NIGHT_NO -> false // Night mode is not active, we're in day time
+        Configuration.UI_MODE_NIGHT_YES -> true // Night mode is active, we're at night!
+        else -> false // We don't know what mode we're in, assume notnight
+    }
 }
-
 
 inline fun Context.dp2px(dipValue: Float) = resources.dp2px(dipValue)
 

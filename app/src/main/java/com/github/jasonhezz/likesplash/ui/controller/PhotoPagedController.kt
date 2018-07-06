@@ -12,42 +12,43 @@ import com.github.jasonhezz.likesplash.data.model.photo
  */
 
 class PhotoPagedController(
-    var callback: AdapterCallbacks? = null) : PagingEpoxyController<Photo>() {
+    var callback: AdapterCallbacks? = null
+) : PagingEpoxyController<Photo>() {
 
-  var onAvatarClick: ((user: User?) -> Unit)? = null
-  var onPhotoClick: ((photo: Photo) -> Unit)? = null
+    var onAvatarClick: ((user: User?) -> Unit)? = null
+    var onPhotoClick: ((photo: Photo) -> Unit)? = null
 
-  @AutoModel
-  lateinit var loadingModel: LoadingModel_
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
 
-  var isLoading: Boolean = false
-    set(value) {
-      if (field != value) {
-        field = value
-        requestModelBuild()
-      }
-    }
-
-  override fun buildModels(list: MutableList<Photo>) {
-    list.forEach {
-      photo {
-        id(it.id)
-        photo(it)
-        avatarClickListener { model, parentView, clickedView, position ->
-          callback?.onAvatarClick(it.user)
+    var isLoading: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
         }
-        photoClickListener { model, parentView, clickedView, position ->
-          callback?.onPhotoClick(it)
-        }
-      }
-    }
-    loadingModel.addIf(isLoading, this)
-  }
 
-  companion object {
-    interface AdapterCallbacks {
-      fun onAvatarClick(user: User?)
-      fun onPhotoClick(it: Photo)
+    override fun buildModels(list: MutableList<Photo>) {
+        list.forEach {
+            photo {
+                id(it.id)
+                photo(it)
+                avatarClickListener { model, parentView, clickedView, position ->
+                    callback?.onAvatarClick(it.user)
+                }
+                photoClickListener { model, parentView, clickedView, position ->
+                    callback?.onPhotoClick(it)
+                }
+            }
+        }
+        loadingModel.addIf(isLoading, this)
     }
-  }
+
+    companion object {
+        interface AdapterCallbacks {
+            fun onAvatarClick(user: User?)
+            fun onPhotoClick(it: Photo)
+        }
+    }
 }

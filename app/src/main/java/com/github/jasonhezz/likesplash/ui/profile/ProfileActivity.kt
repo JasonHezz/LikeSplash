@@ -7,15 +7,15 @@ import com.github.jasonhezz.likesplash.util.extension.replaceFragmentInActivity
 
 class ProfileActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (savedInstanceState == null) {
-      val user = intent.getParcelableExtra<User>(ARG_PARAM_USER)
-      replaceFragmentInActivity(ProfileFragment.newInstance(user), android.R.id.content)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) {
+            val user = intent.getParcelableExtra<User>(ARG_PARAM_USER)
+            replaceFragmentInActivity(ProfileFragment.newInstance(user), android.R.id.content)
+        }
     }
-  }
 
-  companion object {
-    const val ARG_PARAM_USER = "userId"
-  }
+    companion object {
+        const val ARG_PARAM_USER = "userId"
+    }
 }

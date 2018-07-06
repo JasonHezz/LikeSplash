@@ -8,9 +8,9 @@ package com.github.jasonhezz.likesplash.data.api
  * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
  */
 enum class Status {
-  SUCCESS,
-  ERROR,
-  RUNNING,
-  REFRESHING,
-  LOADING_MORE
+    SUCCESS,
+    ERROR,
+    RUNNING,
+    REFRESHING,
+    LOADING_MORE
 }

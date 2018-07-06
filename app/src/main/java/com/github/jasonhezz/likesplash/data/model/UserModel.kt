@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.item_user.*
  */
 @EpoxyModelClass(layout = R.layout.item_user)
 abstract class UserModel : EpoxyModelWithHolder<BaseViewHolder>() {
-  @EpoxyAttribute
-  var user: User? = null
+    @EpoxyAttribute
+    var user: User? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    holder.avatar?.loadUrl(user?.profile_image?.medium)
-    holder.name?.text = user?.name
-    holder.bio?.text = user?.bio
-  }
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        holder.avatar?.loadUrl(user?.profile_image?.medium)
+        holder.name?.text = user?.name
+        holder.bio?.text = user?.bio
+    }
 }

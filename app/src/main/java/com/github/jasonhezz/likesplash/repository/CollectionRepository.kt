@@ -35,9 +35,9 @@ class CollectionRepositoryIml(private val api: CollectionService,
         }
         return Listing(
                 pagedList = livePagedList,
-                networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-                    it.networkState
-                }),
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                  it.networkState
+                },
                 retry = {
                     sourceFactory.sourceLiveData.value?.retryAllFailed()
                 },
@@ -61,9 +61,9 @@ class CollectionRepositoryIml(private val api: CollectionService,
         }
         return Listing(
                 pagedList = livePagedList,
-                networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
-                    it.networkState
-                }),
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                  it.networkState
+                },
                 retry = {
                     sourceFactory.sourceLiveData.value?.retryAllFailed()
                 },

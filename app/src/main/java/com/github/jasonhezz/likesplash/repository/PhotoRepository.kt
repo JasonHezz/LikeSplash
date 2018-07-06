@@ -62,9 +62,9 @@ class PhotoRepositoryIml(val service: PhotoService,
     }
     return Listing(
         pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
           it.networkState
-        }),
+        },
         retry = {
           sourceFactory.sourceLiveData.value?.retryAllFailed()
         },

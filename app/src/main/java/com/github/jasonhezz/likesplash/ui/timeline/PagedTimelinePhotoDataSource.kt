@@ -15,98 +15,107 @@ import java.util.concurrent.Executor
  */
 class PagedTimelinePhotoDataSource(
     val api: PhotoService,
-    private val retryExecutor: Executor) : PageKeyedDataSource<Int, Photo>() {
+    private val retryExecutor: Executor
+) : PageKeyedDataSource<Int, Photo>() {
 
-  // keep a function reference for the retry event
-  private var retry: (() -> Any)? = null
-  /**
-   * There is no sync on the state because paging will always call loadInitial first then wait
-   * for it to return some success value before calling loadAfter.
-   */
-  val networkState = MutableLiveData<Resource>()
-  val initialLoad = MutableLiveData<Resource>()
+    // keep a function reference for the retry event
+    private var retry: (() -> Any)? = null
+    /**
+     * There is no sync on the state because paging will always call loadInitial first then wait
+     * for it to return some success value before calling loadAfter.
+     */
+    val networkState = MutableLiveData<Resource>()
+    val initialLoad = MutableLiveData<Resource>()
 
-  fun retryAllFailed() {
-    val prevRetry = retry
-    retry = null
-    prevRetry?.let {
-      retryExecutor.execute {
-        it.invoke()
-      }
+    fun retryAllFailed() {
+        val prevRetry = retry
+        retry = null
+        prevRetry?.let {
+            retryExecutor.execute {
+                it.invoke()
+            }
+        }
     }
-  }
 
-  override fun loadInitial(params: LoadInitialParams<Int>,
-      callback: LoadInitialCallback<Int, Photo>) {
-    networkState.postValue(Resource.INITIAL)
-    initialLoad.postValue(Resource.INITIAL)
-    api.getListPhotos(perPage = params.requestedLoadSize).enqueue(
-        object : retrofit2.Callback<List<Photo>> {
-          override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
-            retry = {
-              loadInitial(params, callback)
+    override fun loadInitial(
+        params: LoadInitialParams<Int>,
+        callback: LoadInitialCallback<Int, Photo>
+    ) {
+        networkState.postValue(Resource.INITIAL)
+        initialLoad.postValue(Resource.INITIAL)
+        api.getListPhotos(perPage = params.requestedLoadSize).enqueue(
+            object : retrofit2.Callback<List<Photo>> {
+                override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
+                    retry = {
+                        loadInitial(params, callback)
+                    }
+                    networkState.postValue(Resource.LOADED)
+                    initialLoad.postValue(Resource.LOADED)
+                    networkState.postValue(Resource.error(t.message ?: "unknown err"))
+                }
+
+                override fun onResponse(
+                    call: Call<List<Photo>>,
+                    response: Response<List<Photo>>
+                ) {
+                    if (response.isSuccessful) {
+                        val apiResponse = ApiResponse(response)
+                        val items = apiResponse.body ?: emptyList()
+                        retry = null
+                        networkState.postValue(Resource.LOADED)
+                        initialLoad.postValue(Resource.LOADED)
+                        callback.onResult(items, apiResponse.prevPage, apiResponse.nextPage)
+                    } else {
+                        networkState.postValue(Resource.LOADED)
+                        initialLoad.postValue(Resource.LOADED)
+                        retry = {
+                            loadInitial(params, callback)
+                        }
+                        networkState.postValue(
+                            Resource.error("error code: ${response.code()}")
+                        )
+                    }
+                }
             }
-            networkState.postValue(Resource.LOADED)
-            initialLoad.postValue(Resource.LOADED)
-            networkState.postValue(Resource.error(t.message ?: "unknown err"))
-          }
+        )
+    }
 
-          override fun onResponse(call: Call<List<Photo>>,
-              response: Response<List<Photo>>) {
-            if (response.isSuccessful) {
-              val apiResponse = ApiResponse(response)
-              val items = apiResponse.body ?: emptyList()
-              retry = null
-              networkState.postValue(Resource.LOADED)
-              initialLoad.postValue(Resource.LOADED)
-              callback.onResult(items, apiResponse.prevPage, apiResponse.nextPage)
-            } else {
-              networkState.postValue(Resource.LOADED)
-              initialLoad.postValue(Resource.LOADED)
-              retry = {
-                loadInitial(params, callback)
-              }
-              networkState.postValue(
-                  Resource.error("error code: ${response.code()}"))
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
+        networkState.postValue(Resource.MORE)
+        api.getListPhotos(params.key, params.requestedLoadSize).enqueue(
+            object : retrofit2.Callback<List<Photo>> {
+                override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
+                    retry = {
+                        loadAfter(params, callback)
+                    }
+                    networkState.postValue(Resource.error(t.message ?: "unknown err"))
+                }
+
+                override fun onResponse(
+                    call: Call<List<Photo>>,
+                    response: Response<List<Photo>>
+                ) {
+                    if (response.isSuccessful) {
+                        val apiResponse = ApiResponse(response)
+                        val items = apiResponse.body ?: emptyList()
+                        retry = null
+                        networkState.postValue(Resource.LOADED)
+                        callback.onResult(items, apiResponse.nextPage)
+                    } else {
+                        networkState.postValue(Resource.LOADED)
+                        retry = {
+                            loadAfter(params, callback)
+                        }
+                        networkState.postValue(
+                            Resource.error("error code: ${response.code()}")
+                        )
+                    }
+                }
             }
-          }
-        }
-    )
-  }
+        )
+    }
 
-  override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
-    networkState.postValue(Resource.MORE)
-    api.getListPhotos(params.key, params.requestedLoadSize).enqueue(
-        object : retrofit2.Callback<List<Photo>> {
-          override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
-            retry = {
-              loadAfter(params, callback)
-            }
-            networkState.postValue(Resource.error(t.message ?: "unknown err"))
-          }
-
-          override fun onResponse(call: Call<List<Photo>>,
-              response: Response<List<Photo>>) {
-            if (response.isSuccessful) {
-              val apiResponse = ApiResponse(response)
-              val items = apiResponse.body ?: emptyList()
-              retry = null
-              networkState.postValue(Resource.LOADED)
-              callback.onResult(items, apiResponse.nextPage)
-            } else {
-              networkState.postValue(Resource.LOADED)
-              retry = {
-                loadAfter(params, callback)
-              }
-              networkState.postValue(
-                  Resource.error("error code: ${response.code()}"))
-            }
-          }
-        }
-    )
-  }
-
-  override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
-    // ignored, since we only ever append to our initial load
-  }
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
+        // ignored, since we only ever append to our initial load
+    }
 }

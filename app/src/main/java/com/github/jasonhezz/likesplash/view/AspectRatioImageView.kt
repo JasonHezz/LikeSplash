@@ -11,8 +11,10 @@ import android.util.AttributeSet
 import com.github.jasonhezz.likesplash.R
 
 /** Maintains an aspect ratio based on either width or height. Disabled by default.   */
-class AspectRatioImageView @JvmOverloads constructor(context: Context,
-    attrs: AttributeSet? = null) : AppCompatImageView(context, attrs) {
+class AspectRatioImageView @JvmOverloads constructor(
+  context: Context,
+  attrs: AttributeSet? = null
+) : AppCompatImageView(context, attrs) {
 
   var aspectRatio = 0f
     /** Set the aspect ratio for this image view. This will update the view instantly.  */
@@ -40,14 +42,21 @@ class AspectRatioImageView @JvmOverloads constructor(context: Context,
 
     val a = context.obtainStyledAttributes(attrs, R.styleable.AspectRatioImageView)
     aspectRatio = a.getFloat(R.styleable.AspectRatioImageView_aspectRatio, DEFAULT_ASPECT_RATIO)
-    aspectRatioEnabled = a.getBoolean(R.styleable.AspectRatioImageView_aspectRatioEnabled,
-        DEFAULT_ASPECT_RATIO_ENABLED)
-    dominantMeasurement = a.getInt(R.styleable.AspectRatioImageView_dominantMeasurement,
-        DEFAULT_DOMINANT_MEASUREMENT)
+    aspectRatioEnabled = a.getBoolean(
+        R.styleable.AspectRatioImageView_aspectRatioEnabled,
+        DEFAULT_ASPECT_RATIO_ENABLED
+    )
+    dominantMeasurement = a.getInt(
+        R.styleable.AspectRatioImageView_dominantMeasurement,
+        DEFAULT_DOMINANT_MEASUREMENT
+    )
     a.recycle()
   }
 
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+  override fun onMeasure(
+    widthMeasureSpec: Int,
+    heightMeasureSpec: Int
+  ) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     if (!aspectRatioEnabled) return
 

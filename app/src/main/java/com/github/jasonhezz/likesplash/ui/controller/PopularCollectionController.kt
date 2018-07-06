@@ -14,35 +14,36 @@ import com.github.jasonhezz.likesplash.util.recyclerview.NumItemsInGridRow
  */
 class PopularCollectionController(val context: Context) : EpoxyController() {
 
-  var explores = emptyList<ExploreCollection>()
-    set(value) {
-      field = value
-      requestModelBuild()
-    }
-
-  override fun buildModels() {
-    explores.forEach {
-      exploreTitle {
-        id(it.name ?: "error")
-        title(it.name)
-        description(it.descriptionFragment)
-      }
-      it.collections?.forEachIndexed { index, collection ->
-        if (index < 2) {
-          exploreCollection {
-            id(collection.id)
-            collection(collection)
-            spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_collection_per_row))
-          }
-        } else {
-          exploreCollectionThumb {
-            id(collection.id)
-            collection(collection)
-            spanSizeOverride(
-                NumItemsInGridRow(context, R.integer.grid_explore_collection_thumb_per_row))
-          }
+    var explores = emptyList<ExploreCollection>()
+        set(value) {
+            field = value
+            requestModelBuild()
         }
-      }
+
+    override fun buildModels() {
+        explores.forEach {
+            exploreTitle {
+                id(it.name ?: "error")
+                title(it.name)
+                description(it.descriptionFragment)
+            }
+            it.collections?.forEachIndexed { index, collection ->
+                if (index < 2) {
+                    exploreCollection {
+                        id(collection.id)
+                        collection(collection)
+                        spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_collection_per_row))
+                    }
+                } else {
+                    exploreCollectionThumb {
+                        id(collection.id)
+                        collection(collection)
+                        spanSizeOverride(
+                            NumItemsInGridRow(context, R.integer.grid_explore_collection_thumb_per_row)
+                        )
+                    }
+                }
+            }
+        }
     }
-  }
 }

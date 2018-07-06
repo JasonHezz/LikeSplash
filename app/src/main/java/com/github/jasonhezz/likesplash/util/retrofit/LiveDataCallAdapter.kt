@@ -9,12 +9,12 @@ import retrofit2.Response
 import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
-
 /**
  * Created by JavaCoder on 2017/11/27.
  */
 class LiveDataCallAdapter<R>(
-    private val responseType: Type) : CallAdapter<R, LiveData<ApiResponse<R>>> {
+  private val responseType: Type
+) : CallAdapter<R, LiveData<ApiResponse<R>>> {
 
   override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
     return object : LiveData<ApiResponse<R>>() {
@@ -23,11 +23,17 @@ class LiveDataCallAdapter<R>(
         super.onActive()
         if (started.compareAndSet(false, true)) {
           call.enqueue(object : Callback<R> {
-            override fun onResponse(call: Call<R>, response: Response<R>) {
+            override fun onResponse(
+              call: Call<R>,
+              response: Response<R>
+            ) {
               postValue(ApiResponse(response))
             }
 
-            override fun onFailure(call: Call<R>, throwable: Throwable) {
+            override fun onFailure(
+              call: Call<R>,
+              throwable: Throwable
+            ) {
               postValue(ApiResponse(throwable))
             }
           })

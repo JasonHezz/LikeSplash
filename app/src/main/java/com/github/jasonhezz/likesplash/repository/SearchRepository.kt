@@ -41,9 +41,9 @@ class SearchRepositoryIml(private val service: SearchService,
     }
     return Listing(
         pagedList = livePagedList,
-        networkState = Transformations.switchMap(sourceFactory.sourceLiveData, {
+        networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
           it.networkState
-        }),
+        },
         retry = {
           sourceFactory.sourceLiveData.value?.retryAllFailed()
         },

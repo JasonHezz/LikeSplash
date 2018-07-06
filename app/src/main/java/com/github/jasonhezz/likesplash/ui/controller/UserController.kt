@@ -10,30 +10,30 @@ import com.github.jasonhezz.likesplash.data.model.user
  * Created by JavaCoder on 2017/12/8.
  */
 class UserController : EpoxyController() {
-  @AutoModel
-  lateinit var loadingModel: LoadingModel_
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
 
-  var users = emptyList<User>()
-    set(value) {
-      field = value
-      requestModelBuild()
-    }
+    var users = emptyList<User>()
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
 
-  var isLoading: Boolean = false
-    set(value) {
-      if (field != value) {
-        field = value
-        requestModelBuild()
-      }
-    }
+    var isLoading: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
+        }
 
-  override fun buildModels() {
-    users.forEachIndexed { index, user ->
-      user {
-        id(index)
-        user(user)
-      }
+    override fun buildModels() {
+        users.forEachIndexed { index, user ->
+            user {
+                id(index)
+                user(user)
+            }
+        }
+        loadingModel.addIf(isLoading, this)
     }
-    loadingModel.addIf(isLoading, this)
-  }
 }

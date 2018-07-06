@@ -11,11 +11,12 @@ import java.util.concurrent.Executor
  */
 class TimelinePhotoDataSourceFactory(
     private val api: PhotoService,
-    private val retryExecutor: Executor) : DataSource.Factory<Int, Photo>() {
-  val sourceLiveData = MutableLiveData<PagedTimelinePhotoDataSource>()
-  override fun create(): DataSource<Int, Photo> {
-    val source = PagedTimelinePhotoDataSource(api, retryExecutor)
-    sourceLiveData.postValue(source)
-    return source
-  }
+    private val retryExecutor: Executor
+) : DataSource.Factory<Int, Photo>() {
+    val sourceLiveData = MutableLiveData<PagedTimelinePhotoDataSource>()
+    override fun create(): DataSource<Int, Photo> {
+        val source = PagedTimelinePhotoDataSource(api, retryExecutor)
+        sourceLiveData.postValue(source)
+        return source
+    }
 }

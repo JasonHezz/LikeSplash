@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.item_explore_more.*
 @EpoxyModelClass(layout = R.layout.item_explore_more)
 abstract class ExploreMoreModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
-  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-  var clickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var clickListener: View.OnClickListener? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    holder.card.setOnClickListener(clickListener)
-  }
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        holder.card.setOnClickListener(clickListener)
+    }
 }

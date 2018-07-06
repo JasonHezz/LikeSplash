@@ -7,7 +7,6 @@ import com.airbnb.epoxy.EpoxyController
  */
 class ExploreCollectionController : EpoxyController() {
 
-  override fun buildModels() {
-
-  }
+    override fun buildModels() {
+    }
 }

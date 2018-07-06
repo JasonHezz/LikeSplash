@@ -8,10 +8,10 @@ import io.reactivex.disposables.CompositeDisposable
  */
 open class RxAwareViewModel : ViewModel() {
 
-  val disposables = CompositeDisposable()
+    val disposables = CompositeDisposable()
 
-  override fun onCleared() {
-    super.onCleared()
-    disposables.clear()
-  }
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
+    }
 }

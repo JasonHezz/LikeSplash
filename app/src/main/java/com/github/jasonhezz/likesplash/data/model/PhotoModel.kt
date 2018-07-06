@@ -9,10 +9,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
-import kotlinx.android.synthetic.main.item_photo.card
-import kotlinx.android.synthetic.main.item_photo.photo_iv
-import kotlinx.android.synthetic.main.item_photo.user_avatar
-import kotlinx.android.synthetic.main.item_photo.user_name
+import kotlinx.android.synthetic.main.item_photo.*
 
 /**
  * Created by JavaCoder on 2017/10/16.
@@ -20,32 +17,32 @@ import kotlinx.android.synthetic.main.item_photo.user_name
 @EpoxyModelClass(layout = R.layout.item_photo)
 abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
-  @EpoxyAttribute
-  var photo: Photo? = null
+    @EpoxyAttribute
+    var photo: Photo? = null
 
-  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-  var avatarClickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var avatarClickListener: View.OnClickListener? = null
 
-  @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-  var photoClickListener: View.OnClickListener? = null
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var photoClickListener: View.OnClickListener? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
 
-    photo?.let {
-      val aspectRatio = it.height.toFloat() / it.width.toFloat()
-      holder.photo_iv.aspectRatio = aspectRatio
-      GlideApp.with(holder.photo_iv.context)
-          .saturateOnLoad()
-          .load(it.urls?.regular)
-          .thumbnail(Glide.with(holder.photo_iv.context).load(it.urls?.thumb))
-          .into(holder.photo_iv)
-      GlideApp.with(holder.user_avatar.context)
-          .load(it.user?.profile_image?.large)
-          .into(holder.user_avatar)
-      holder.user_name?.text = it.user?.name
-      holder.user_avatar.setOnClickListener(avatarClickListener)
-      holder.card.setOnClickListener(photoClickListener)
+        photo?.let {
+            val aspectRatio = it.height.toFloat() / it.width.toFloat()
+            holder.photo_iv.aspectRatio = aspectRatio
+            GlideApp.with(holder.photo_iv.context)
+                .saturateOnLoad()
+                .load(it.urls?.regular)
+                .thumbnail(Glide.with(holder.photo_iv.context).load(it.urls?.thumb))
+                .into(holder.photo_iv)
+            GlideApp.with(holder.user_avatar.context)
+                .load(it.user?.profile_image?.large)
+                .into(holder.user_avatar)
+            holder.user_name?.text = it.user?.name
+            holder.user_avatar.setOnClickListener(avatarClickListener)
+            holder.card.setOnClickListener(photoClickListener)
+        }
     }
-  }
 }

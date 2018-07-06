@@ -15,37 +15,39 @@ import kotlinx.android.synthetic.main.dialog_create_collection.*
  */
 class CreateCollectionFragment : Fragment() {
 
-  var call: Callbacks? = null
+    var call: Callbacks? = null
 
-  override fun onAttach(context: Context?) {
-    super.onAttach(context)
-    if (context is Callbacks) call = context
-    if (parentFragment is Callbacks) call = parentFragment as Callbacks
-  }
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.dialog_create_collection, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    create_btn.setOnClickListener { call?.onCreateButtonClick() }
-    cancel_btn.setOnClickListener { call?.onCancelButtonClick() }
-  }
-
-  companion object {
-
-    interface Callbacks {
-      fun onCreateButtonClick()
-      fun onCancelButtonClick()
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is Callbacks) call = context
+        if (parentFragment is Callbacks) call = parentFragment as Callbacks
     }
 
-    fun newInstance(): CreateCollectionFragment {
-      val fragment = CreateCollectionFragment()
-      val args = Bundle()
-      fragment.arguments = args
-      return fragment
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.dialog_create_collection, container, false)
     }
-  }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        create_btn.setOnClickListener { call?.onCreateButtonClick() }
+        cancel_btn.setOnClickListener { call?.onCancelButtonClick() }
+    }
+
+    companion object {
+
+        interface Callbacks {
+            fun onCreateButtonClick()
+            fun onCancelButtonClick()
+        }
+
+        fun newInstance(): CreateCollectionFragment {
+            val fragment = CreateCollectionFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }

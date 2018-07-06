@@ -12,33 +12,32 @@ import com.github.jasonhezz.likesplash.util.extension.withModelsFrom
  */
 class TagController : TypedEpoxyController<List<Tag>>() {
 
+    override fun buildModels(tags: List<Tag>?) {
 
-  override fun buildModels(tags: List<Tag>?) {
-
-    title {
-      id("tag_title")
-      title("Related tags")
-    }
-
-    tags?.let {
-      carousel {
-        id("tag_carousel")
-        paddingDp(8)
-        withModelsFrom(it) {
-          TagModel_().id(it.title ?: "Error").tag(it)
+        title {
+            id("tag_title")
+            title("Related tags")
         }
-      }
-    }
 
-    title {
-      id("collection_title")
-      title("Featured in 22 photos")
-    }
+        tags?.let {
+            carousel {
+                id("tag_carousel")
+                paddingDp(8)
+                withModelsFrom(it) {
+                    TagModel_().id(it.title ?: "Error").tag(it)
+                }
+            }
+        }
+
+        title {
+            id("collection_title")
+            title("Featured in 22 photos")
+        }
 
 
-    carousel {
-      id("collection_carousel")
-      initialPrefetchItemCount(Math.round(2.5f))
+        carousel {
+            id("collection_carousel")
+            initialPrefetchItemCount(Math.round(2.5f))
+        }
     }
-  }
 }

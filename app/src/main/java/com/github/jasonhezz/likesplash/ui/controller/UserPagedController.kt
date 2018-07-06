@@ -10,24 +10,24 @@ import com.github.jasonhezz.likesplash.data.model.user
  * Created by JavaCoder on 2017/12/8.
  */
 class UserPagedController : PagingEpoxyController<User>() {
-  @AutoModel
-  lateinit var loadingModel: LoadingModel_
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
 
-  var isLoading: Boolean = false
-    set(value) {
-      if (field != value) {
-        field = value
-        requestModelBuild()
-      }
-    }
+    var isLoading: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
+        }
 
-  override fun buildModels(list: MutableList<User>) {
-    list.forEachIndexed { index, user ->
-      user {
-        id(index)
-        user(user)
-      }
+    override fun buildModels(list: MutableList<User>) {
+        list.forEachIndexed { index, user ->
+            user {
+                id(index)
+                user(user)
+            }
+        }
+        loadingModel.addIf(isLoading, this)
     }
-    loadingModel.addIf(isLoading, this)
-  }
 }

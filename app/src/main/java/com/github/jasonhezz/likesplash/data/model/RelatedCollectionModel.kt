@@ -16,26 +16,26 @@ import kotlinx.android.synthetic.main.item_related_collection.*
 @EpoxyModelClass(layout = R.layout.item_related_collection)
 abstract class RelatedCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
-  @EpoxyAttribute
-  var collection: Collection? = null
+    @EpoxyAttribute
+    var collection: Collection? = null
 
-  override fun bind(holder: BaseViewHolder) {
-    super.bind(holder)
-    collection?.let {
-      val count = it.total_photos ?: 0
-      holder.count_tv.text = holder.count_tv.context.resources
-          .getQuantityString(R.plurals.photo_plural, count, count)
-      holder.title_tv.text = it.title
-      holder.user_name.text = it.user?.name
-      GlideApp.with(holder.collection_iv.context)
-          .saturateOnLoad()
-          .load(it.cover_photo?.urls?.regular)
-          .thumbnail(Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
-          .materialPlaceHolder(it.cover_photo?.color ?: "#26292c")
-          .into(holder.collection_iv)
-      GlideApp.with(holder.user_avatar.context)
-          .load(it.user?.profile_image?.medium)
-          .into(holder.user_avatar)
+    override fun bind(holder: BaseViewHolder) {
+        super.bind(holder)
+        collection?.let {
+            val count = it.total_photos ?: 0
+            holder.count_tv.text = holder.count_tv.context.resources
+                .getQuantityString(R.plurals.photo_plural, count, count)
+            holder.title_tv.text = it.title
+            holder.user_name.text = it.user?.name
+            GlideApp.with(holder.collection_iv.context)
+                .saturateOnLoad()
+                .load(it.cover_photo?.urls?.regular)
+                .thumbnail(Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
+                .materialPlaceHolder(it.cover_photo?.color ?: "#26292c")
+                .into(holder.collection_iv)
+            GlideApp.with(holder.user_avatar.context)
+                .load(it.user?.profile_image?.medium)
+                .into(holder.user_avatar)
+        }
     }
-  }
 }

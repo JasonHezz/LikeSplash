@@ -3,13 +3,12 @@ package com.github.jasonhezz.likesplash.util.extension
 import android.graphics.Color
 import java.util.regex.Pattern
 
-
 /**
  * Created by JavaCoder on 2017/10/23.
  */
 
-
-val materialDataHex = listOf("#f44336", "#ffebee", "#ffcdd2", "#ef9a9a", "#e57373", "#ef5350",
+val materialDataHex = listOf(
+    "#f44336", "#ffebee", "#ffcdd2", "#ef9a9a", "#e57373", "#ef5350",
     "#e53935", "#d32f2f", "#c62828", "#b71c1c", "#ff8a80", "#ff5252", "#ff1744", "#d50000",
     "#e91e63", "#fce4ec", "#f8bbd0", "#f48fb1", "#f06292", "#ec407a", "#d81b60", "#c2185b",
     "#ad1457", "#880e4f", "#ff80ab", "#ff4081", "#f50057", "#c51162", "#9c27b0", "#f3e5f5",
@@ -41,24 +40,26 @@ val materialDataHex = listOf("#f44336", "#ffebee", "#ffcdd2", "#ef9a9a", "#e5737
     "#6d4c41", "#5d4037", "#4e342e", "#3e2723", "#9e9e9e", "#fafafa", "#f5f5f5", "#eeeeee",
     "#e0e0e0", "#bdbdbd", "#757575", "#616161", "#424242", "#212121", "#607d8b", "#eceff1",
     "#cfd8dc", "#b0bec5", "#90a4ae", "#78909c", "#546e7a", "#455a64", "#37474f", "#263238",
-    "#000000", "#ffffff")
+    "#000000", "#ffffff"
+)
 
 fun String.hexToMaterialHex(): Int {
-  if (Pattern.matches("^#([0-9a-fA-F]{6}|[A-F0-9a-f]{8})", this)) {
-    val color = Color.parseColor(this)
-    val originalRed = Color.red(color)
-    val originalBlue = Color.blue(color)
-    val originalGreen = Color.green(color)
-    return materialDataHex.map {
-      Color.parseColor(it)
-    }.minBy {
-      val red = Color.red(it)
-      val green = Color.green(it)
-      val blue = Color.blue(it)
-      Math.abs(originalRed - red) + Math.abs(
-          (originalGreen - green)) + Math.abs(originalBlue - blue)
-    } ?: Color.parseColor("#26292c")
-  }
-  return Color.parseColor("#26292c")
+    if (Pattern.matches("^#([0-9a-fA-F]{6}|[A-F0-9a-f]{8})", this)) {
+        val color = Color.parseColor(this)
+        val originalRed = Color.red(color)
+        val originalBlue = Color.blue(color)
+        val originalGreen = Color.green(color)
+        return materialDataHex.map {
+            Color.parseColor(it)
+        }.minBy {
+            val red = Color.red(it)
+            val green = Color.green(it)
+            val blue = Color.blue(it)
+            Math.abs(originalRed - red) + Math.abs(
+                (originalGreen - green)
+            ) + Math.abs(originalBlue - blue)
+        } ?: Color.parseColor("#26292c")
+    }
+    return Color.parseColor("#26292c")
 }
 

@@ -15,8 +15,9 @@ import java.util.concurrent.Executor
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedTrendingPhotoDataSource(
-        val api: TrendingService,
-        private val retryExecutor: Executor) : PageKeyedDataSource<String, Photo>() {
+    val api: TrendingService,
+    private val retryExecutor: Executor
+) : PageKeyedDataSource<String, Photo>() {
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
@@ -39,36 +40,37 @@ class PagedTrendingPhotoDataSource(
 
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Photo>) {
         networkState.postValue(Resource.MORE)
-        api.getTrendingFeed(params.key,per_page = params.requestedLoadSize).enqueue(object : retrofit2.Callback<TrendingFeed> {
-            override fun onFailure(call: Call<TrendingFeed>?, t: Throwable?) {
-                retry = {
-                    loadAfter(params, callback)
-                }
-                networkState.postValue(Resource.LOADED)
-                initialLoad.postValue(Resource.LOADED)
-                networkState.postValue(Resource.error(t?.message ?: "unknown err"))
-            }
-
-            override fun onResponse(call: Call<TrendingFeed>?, response: Response<TrendingFeed>) {
-                if (response.isSuccessful) {
-                    val uri = Uri.parse(response.body()?.next_page)
-                    val page = uri.getQueryParameter("after")
-                    retry = null
-                    networkState.postValue(Resource.LOADED)
-                    initialLoad.postValue(Resource.LOADED)
-                    callback.onResult(response.body()?.photos ?: emptyList(), page)
-                } else {
-                    networkState.postValue(Resource.LOADED)
-                    initialLoad.postValue(Resource.LOADED)
+        api.getTrendingFeed(params.key, per_page = params.requestedLoadSize)
+            .enqueue(object : retrofit2.Callback<TrendingFeed> {
+                override fun onFailure(call: Call<TrendingFeed>?, t: Throwable?) {
                     retry = {
                         loadAfter(params, callback)
                     }
-                    networkState.postValue(
-                            Resource.error("error code: ${response.code()}"))
+                    networkState.postValue(Resource.LOADED)
+                    initialLoad.postValue(Resource.LOADED)
+                    networkState.postValue(Resource.error(t?.message ?: "unknown err"))
                 }
 
-            }
-        })
+                override fun onResponse(call: Call<TrendingFeed>?, response: Response<TrendingFeed>) {
+                    if (response.isSuccessful) {
+                        val uri = Uri.parse(response.body()?.next_page)
+                        val page = uri.getQueryParameter("after")
+                        retry = null
+                        networkState.postValue(Resource.LOADED)
+                        initialLoad.postValue(Resource.LOADED)
+                        callback.onResult(response.body()?.photos ?: emptyList(), page)
+                    } else {
+                        networkState.postValue(Resource.LOADED)
+                        initialLoad.postValue(Resource.LOADED)
+                        retry = {
+                            loadAfter(params, callback)
+                        }
+                        networkState.postValue(
+                            Resource.error("error code: ${response.code()}")
+                        )
+                    }
+                }
+            })
     }
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Photo>) {
@@ -100,9 +102,9 @@ class PagedTrendingPhotoDataSource(
                         loadInitial(params, callback)
                     }
                     networkState.postValue(
-                            Resource.error("error code: ${response.code()}"))
+                        Resource.error("error code: ${response.code()}")
+                    )
                 }
-
             }
         })
     }
