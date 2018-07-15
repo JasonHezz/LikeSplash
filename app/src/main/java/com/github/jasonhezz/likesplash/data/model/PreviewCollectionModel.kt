@@ -28,6 +28,9 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var chipClickListener: View.OnClickListener? = null
 
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var collectionClickListener: View.OnClickListener? = null
+
     val tagDivider = FlexboxItemDecoration(App.applicationContext()).apply {
         setDrawable(
             ContextCompat.getDrawable(App.applicationContext(), R.drawable.chip_divider)
@@ -63,6 +66,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
                 orientation = SpannedGridLayoutManager.Orientation.VERTICAL,
                 spans = 3
             )
+            holder.preview_rv.setOnClickListener(collectionClickListener)
             holder.preview_rv.addItemDecoration(previewImagHDivider)
             holder.preview_rv.addItemDecoration(previewImagVDivider)
             holder.preview_rv.withModels {

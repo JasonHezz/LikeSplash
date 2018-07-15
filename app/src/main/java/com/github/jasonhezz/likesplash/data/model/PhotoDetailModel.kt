@@ -28,7 +28,6 @@ abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
             GlideApp.with(holder.photo_iv.context)
                 .load(it.urls?.regular)
                 .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
-                .materialPlaceHolder(it.color)
                 .into(holder.photo_iv)
             GlideApp.with(holder.user_avatar.context)
                 .load(it.user?.profile_image?.large)

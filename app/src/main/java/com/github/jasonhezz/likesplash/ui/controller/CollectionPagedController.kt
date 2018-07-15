@@ -18,8 +18,10 @@ class CollectionPagedController(
 
     var isLoading: Boolean = false
         set(value) {
-            field = value
-            requestModelBuild()
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
         }
 
     override fun buildModels(list: MutableList<Collection>) {

@@ -18,9 +18,13 @@
 
 package com.github.jasonhezz.likesplash.util.extension
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.support.v4.app.FragmentActivity
 import android.util.TypedValue
 import android.view.View
 
@@ -41,4 +45,10 @@ inline fun Resources.dp2px(dipValue: Float) =
 inline fun View.dp2px(dipValue: Float) = context.dp2px(dipValue)
 
 
-
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(crossinline factory: () -> T): T {
+    val vmFactory = object : ViewModelProvider.Factory {
+        override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
+    }
+    return ViewModelProviders.of(this, vmFactory)[T::class.java]
+}

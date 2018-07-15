@@ -2,7 +2,7 @@ package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
-import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.CollectionService
 import com.github.jasonhezz.likesplash.data.api.Resource
@@ -12,10 +12,11 @@ import java.util.concurrent.Executor
 /**
  * Created by JavaCoder on 2017/12/12.
  */
-class PagedCuratedCollectionDataSource(
+class PagedCollectionDetailDataSource(
+    val id: String,
     val api: CollectionService,
     private val retryExecutor: Executor
-) : PageKeyedDataSource<Int, Collection>() {
+) : PageKeyedDataSource<Int, Photo>() {
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
@@ -38,12 +39,12 @@ class PagedCuratedCollectionDataSource(
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, Collection>
+        callback: LoadInitialCallback<Int, Photo>
     ) {
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         try {
-            val response = api.getListCuratedCollections(perPage = params.requestedLoadSize).execute()
+            val response = api.getCuratedCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
                 val apiResponse = ApiResponse(response)
                 val items = apiResponse.body ?: emptyList()
@@ -64,10 +65,10 @@ class PagedCuratedCollectionDataSource(
         }
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Collection>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         networkState.postValue(Resource.MORE)
         try {
-            val response = api.getListCuratedCollections(params.key, params.requestedLoadSize).execute()
+            val response = api.getCuratedCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
                 val apiResponse = ApiResponse(response)
                 val items = apiResponse.body ?: emptyList()
@@ -84,10 +85,11 @@ class PagedCuratedCollectionDataSource(
             retry = { loadAfter(params, callback) }
         } finally {
             networkState.postValue(Resource.LOADED)
+            initialLoad.postValue(Resource.LOADED)
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Collection>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         // ignored, since we only ever append to our initial load
     }
 }

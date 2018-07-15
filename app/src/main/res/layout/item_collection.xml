@@ -6,7 +6,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:focusableInTouchMode="true"
+    app:cardBackgroundColor="@color/item_background_color"
     app:cardCornerRadius="0dp"
     >
   <android.support.constraint.ConstraintLayout

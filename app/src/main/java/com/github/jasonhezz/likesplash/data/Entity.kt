@@ -16,7 +16,7 @@ data class Photo(
     var updated_at: String? = null,
     var width: Int,
     var height: Int,
-    var color: String,
+    var color: String?,
     val downloads: Int? = 0,
     var likes: Int? = 0,
     val views: Int? = 0,

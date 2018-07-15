@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
-import com.github.jasonhezz.likesplash.ui.dialog.CoverFragment
 import kotlinx.android.synthetic.main.fragment_curated_collection.*
 import timber.log.Timber
 
@@ -31,9 +31,10 @@ class CuratedCollectionFragment : DialogFragment() {
             }
 
             override fun onCollectionClick(it: Collection) {
-                CoverFragment.newInstance(it.cover_photo!!, arrayListOf(it)).show(
-                    childFragmentManager, null
-                )
+
+                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+                    putExtra("collection", it)
+                })
             }
         })
 

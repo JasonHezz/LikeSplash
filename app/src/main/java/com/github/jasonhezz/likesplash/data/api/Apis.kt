@@ -221,7 +221,7 @@ interface CollectionService {
         @Query("per_page") perPage: Int = 10
     ): Call<List<Collection>>
 
-    @GET("collections/curated/{id}")
+    @GET("collections/{id}")
     fun getACollection(
         @Path("id") id: String, @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10
@@ -237,13 +237,13 @@ interface CollectionService {
     fun getCollectionPhotos(
         @Path("id") id: String, @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10
-    ): Single<List<Photo>>
+    ): Call<List<Photo>>
 
     @GET("collections/curated/{id}/photos")
     fun getCuratedCollectionPhotos(
         @Path("id") id: String, @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10
-    ): Single<List<Photo>>
+    ): Call<List<Photo>>
 
     @GET("collections/{id}/related")
     fun getRelatedCollections(@Path("id") id: String)

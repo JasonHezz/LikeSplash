@@ -8,6 +8,7 @@ import com.github.jasonhezz.likesplash.data.TrendingFeed
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.TrendingService
 import retrofit2.Call
+import retrofit2.HttpException
 import retrofit2.Response
 import java.util.concurrent.Executor
 
@@ -76,6 +77,29 @@ class PagedTrendingPhotoDataSource(
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<String, Photo>) {
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
+        try {
+            val response = api.getTrendingFeed(per_page = params.requestedLoadSize).execute()
+            if (response.isSuccessful) {
+                val uri = Uri.parse(response.body()?.next_page)
+                val items = response.body()?.photos ?: emptyList()
+                val page = uri.getQueryParameter("after")
+                callback.onResult(items, null, page)
+                retry = null
+            } else {
+                retry = { loadInitial(params, callback) }
+                networkState.postValue(
+                    Resource.error("error code: ${response.code()}")
+                )
+            }
+        } catch (e: HttpException) {
+            networkState.postValue(Resource.error(e.message ?: "unknown err"))
+            retry = { loadInitial(params, callback) }
+        } finally {
+            networkState.postValue(Resource.LOADED)
+            initialLoad.postValue(Resource.LOADED)
+        }
+        /*networkState.postValue(Resource.INITIAL)
+        initialLoad.postValue(Resource.INITIAL)
         api.getTrendingFeed(per_page = params.requestedLoadSize).enqueue(object : retrofit2.Callback<TrendingFeed> {
             override fun onFailure(call: Call<TrendingFeed>?, t: Throwable?) {
                 retry = {
@@ -106,7 +130,7 @@ class PagedTrendingPhotoDataSource(
                     )
                 }
             }
-        })
+        })*/
     }
 
     override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, Photo>) {

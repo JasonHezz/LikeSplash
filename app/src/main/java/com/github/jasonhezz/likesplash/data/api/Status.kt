@@ -10,7 +10,7 @@ package com.github.jasonhezz.likesplash.data.api
 enum class Status {
     SUCCESS,
     ERROR,
-    RUNNING,
+    COMPLETE,
     REFRESHING,
     LOADING_MORE
 }
