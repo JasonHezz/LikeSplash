@@ -18,9 +18,9 @@ interface CollectionRepository {
 
     fun getListCuratedCollections(perPage: Int = 20): Listing<Collection>
 
-    fun getListFeaturedCollections(perPage: Int = 10): Listing<Collection>
+    fun getListFeaturedCollections(perPage: Int = 20): Listing<Collection>
 
-    fun getListPhotoCollections(id: String, perPage: Int = 10): Listing<Photo>
+    fun getListPhotoCollections(id: String, perPage: Int = 20): Listing<Photo>
 }
 
 class CollectionRepositoryIml(

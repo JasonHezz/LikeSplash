@@ -17,10 +17,10 @@ import java.util.concurrent.Executor
  */
 interface PhotoRepository {
 
-  fun getListPhotos(page: Int = 1, perPage: Int = 10,
+  fun getListPhotos(page: Int = 1, perPage: Int = 20,
       orderBy: String = LATEST): Listing<Photo>
 
-  fun getListCuratedPhotos(page: Int = 1, perPage: Int = 10,
+  fun getListCuratedPhotos(page: Int = 1, perPage: Int = 20,
       orderBy: String = LATEST): Single<List<Photo>>
 
   fun getAPhoto(id: String, w: Int? = null, h: Int? = null):

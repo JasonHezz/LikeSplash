@@ -16,7 +16,7 @@ import java.util.concurrent.Executor
 interface TrendingRepository {
     fun getTrendingFeed(after: String? = null): Single<TrendingFeed>
 
-    fun getTrendingFeed(after: String? = null, perPage: Int = 10): Listing<Photo>
+    fun getTrendingFeed(after: String? = null, perPage: Int = 20): Listing<Photo>
 
     fun getFollowingFeed(after: String? = null)
 }

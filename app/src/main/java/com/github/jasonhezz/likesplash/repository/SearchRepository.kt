@@ -17,12 +17,12 @@ import java.util.concurrent.Executor
 interface SearchRepository {
 
   fun searchPhotos(query: String,
-      page: Int = 1, per_page: Int = 10): Listing<Photo>
+      page: Int = 1, per_page: Int = 20): Listing<Photo>
 
   fun searchCollections(query: String,
-      page: Int = 1, per_page: Int = 10): Single<List<Collection>>
+      page: Int = 1, per_page: Int = 20): Single<List<Collection>>
 
-  fun searchUsers(query: String, page: Int = 1, per_page: Int = 10): Single<List<User>>
+  fun searchUsers(query: String, page: Int = 1, per_page: Int = 20): Single<List<User>>
 }
 
 class SearchRepositoryIml(private val service: SearchService,

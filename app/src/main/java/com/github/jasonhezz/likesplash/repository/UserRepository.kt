@@ -27,19 +27,19 @@ interface UserRepository {
     fun getUserFollowing(
         username: String,
         page: Int = 1,
-        per_page: Int = 10
+        per_page: Int = 20
     ): Listing<User>
 
     fun getUserFollowers(
         username: String,
         page: Int = 1,
-        per_page: Int = 10
+        per_page: Int = 20
     ): Listing<User>
 
     fun getUserLikes(
         username: String,
         page: Int = 1,
-        per_page: Int = 10,
+        per_page: Int = 20,
         orderBy: String = LATEST
     ): Listing<Photo>
 
@@ -53,7 +53,7 @@ interface UserRepository {
     fun getUserCollection(
         username: String,
         page: Int = 1,
-        per_page: Int = 10,
+        per_page: Int = 20,
         orderBy: String = LATEST
     ): Listing<Collection>
 
