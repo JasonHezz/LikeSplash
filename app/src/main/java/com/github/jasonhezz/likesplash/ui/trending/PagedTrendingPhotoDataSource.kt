@@ -8,7 +8,6 @@ import com.github.jasonhezz.likesplash.data.TrendingFeed
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.TrendingService
 import retrofit2.Call
-import retrofit2.HttpException
 import retrofit2.Response
 import java.util.concurrent.Executor
 
@@ -91,7 +90,7 @@ class PagedTrendingPhotoDataSource(
                     Resource.error("error code: ${response.code()}")
                 )
             }
-        } catch (e: HttpException) {
+        } catch (e: Exception) {
             networkState.postValue(Resource.error(e.message ?: "unknown err"))
             retry = { loadInitial(params, callback) }
         } finally {

@@ -80,7 +80,7 @@ class PagedCollectionDetailDataSource(
                     Resource.error("error code: ${response.code()}")
                 )
             }
-        } catch (e: HttpException) {
+        } catch (e: Exception) {
             networkState.postValue(Resource.error(e.message ?: "unknown err"))
             retry = { loadAfter(params, callback) }
         } finally {
