@@ -18,7 +18,7 @@ class BaseViewHolder : EpoxyHolder(), LayoutContainer {
         get() = containerViewBridge
 
     @CallSuper
-    override fun bindView(itemView: View?) {
+    override fun bindView(itemView: View) {
         containerViewBridge = itemView
     }
 }

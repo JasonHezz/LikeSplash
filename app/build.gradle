@@ -72,11 +72,11 @@ dependencies {
     implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
 
     //epoxy
-    implementation('com.airbnb.android:epoxy:2.14.0', {
+    implementation('com.airbnb.android:epoxy:2.16.1', {
         exclude group: 'com.android.support'
     })
-    implementation 'com.airbnb.android:epoxy-paging:2.14.0'
-    kapt 'com.airbnb.android:epoxy-processor:2.14.0'
+    implementation 'com.airbnb.android:epoxy-paging:2.16.1'
+    kapt 'com.airbnb.android:epoxy-processor:2.16.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.11.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
