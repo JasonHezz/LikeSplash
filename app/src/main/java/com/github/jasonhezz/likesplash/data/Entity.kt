@@ -1,6 +1,5 @@
 package com.github.jasonhezz.likesplash.data
 
-import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
@@ -34,23 +33,6 @@ data class Photo(
     var user: User?
 ) : Serializable, Parcelable
 
-data class CoverPhoto(
-    var id: String?,
-    var width: Int?,
-    var height: Int?,
-    val createdAt: String? = null,
-    val updatedAt: String? = null,
-    var color: String?,
-    var likes: Int?,
-    var liked_by_user: Boolean?,
-    var description: String?,
-    var user: User?,
-    var urls: Urls?,
-    var links: PhotoLinks?,
-    var categories: List<Categories>?
-)
-
-
 @Parcelize
 data class Location(
     val country: String? = null,
@@ -59,7 +41,6 @@ data class Location(
     val position: Position? = null,
     val title: String? = null
 ) : Parcelable
-
 
 @Parcelize
 data class Position(
@@ -75,13 +56,11 @@ data class RelatedCollections(
     val results: List<Collection>? = null
 ) : Parcelable
 
-
 @Parcelize
 data class Story(
     val description: String? = null,
     val title: String? = null
 ) : Parcelable
-
 
 @Parcelize
 data class Exif(
@@ -92,7 +71,6 @@ data class Exif(
     val model: String? = null,
     val make: String? = null
 ) : Parcelable
-
 
 @Parcelize
 data class User(
@@ -114,13 +92,12 @@ data class User(
     var links: UserLinks? = null
 ) : Parcelable
 
-
 @Parcelize
 data class Tag(
     val title: String? = null,
-    val url: String? = null, val description: String? = null
+    val url: String? = null,
+    val description: String? = null
 ) : Parcelable
-
 
 @Parcelize
 data class Me(
@@ -142,14 +119,12 @@ data class Me(
     var links: UserLinks? = null
 ) : Parcelable
 
-
 @Parcelize
 data class ProfileImage(
     var small: String?,
     var medium: String?,
     var large: String
 ) : Parcelable
-
 
 @Parcelize
 data class Urls(
@@ -170,7 +145,6 @@ data class PhotoLinks(
     var download_location: String? = null
 ) : Parcelable
 
-
 @Parcelize
 data class CollectionLinks(
     var self: String?,
@@ -187,7 +161,6 @@ data class Categories(
     var photo_count: Int?,
     var links: PhotoLinks
 ) : Parcelable
-
 
 @Parcelize
 data class Collection(
@@ -208,7 +181,6 @@ data class Collection(
     val tags: List<Tag>? = null
 ) : Parcelable
 
-
 @Parcelize
 data class AccessToken(
     var access_token: String?,
@@ -217,10 +189,8 @@ data class AccessToken(
     var created_at: String?
 ) : Parcelable
 
-
 @Parcelize
 data class DownLoadLink(var url: String) : Parcelable
-
 
 @Parcelize
 data class UserLinks(
@@ -260,16 +230,25 @@ data class MonthStats(
     var new_requests: Int?
 )
 
-data class TrendingFeed(var next_page: String?, var photos: List<Photo>?)
+data class TrendingFeed(
+    var next_page: String?,
+    var photos: List<Photo>?
+)
 
-data class SearchPhotoResult(var total: Int?, var total_pages: Int?, var results: List<Photo>?)
+data class SearchPhotoResult(
+    var total: Int?,
+    var total_pages: Int?,
+    var results: List<Photo>?
+)
 
 data class ExplorePhoto(
-    val name: String? = null, val descriptionFragment: String? = null,
+    val name: String? = null,
+    val descriptionFragment: String? = null,
     val related: List<Tag>? = null
 )
 
 data class ExploreCollection(
-    val name: String? = null, val descriptionFragment: String? = null,
+    val name: String? = null,
+    val descriptionFragment: String? = null,
     val collections: List<Collection>? = null
 )
