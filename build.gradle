@@ -21,6 +21,7 @@ buildscript {
                     'test_rules'       : '1.0.2',
                     'work'             : '1.0.0-alpha06'
             ],
+            'koin'           : '1.0.0-beta-4',
             'epoxy'          : '2.16.1',
             'glide'          : '4.7.1',
             'kotlin'         : '1.2.60',

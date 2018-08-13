@@ -68,6 +68,11 @@ dependencies {
     implementation "com.airbnb.android:epoxy-paging:${versions.epoxy}"
     kapt "com.airbnb.android:epoxy-processor:${versions.epoxy}"
 
+    //koin
+    implementation "org.koin:koin-android:${versions.koin}"
+    implementation "org.koin:koin-android-scope:${versions.koin}"
+    implementation "org.koin:koin-android-viewmodel:${versions.koin}"
+
     //others
     implementation 'com.jakewharton.timber:timber:4.6.0'
     implementation 'me.zhanghai.android.materialedittext:library:1.0.5'
