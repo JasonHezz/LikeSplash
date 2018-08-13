@@ -32,6 +32,7 @@ class CollectionTabFragment : Fragment() {
     }
 
     private fun initToolbar() {
+        toolbar.inflateMenu(R.menu.menu_search)
         toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
     }
 
