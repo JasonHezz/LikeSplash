@@ -192,13 +192,45 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
     )
 
     var businessPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var girlPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var naturePhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var technologyPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var foodPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var travelPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var happyPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
     var coolPhoto = List<Photo?>(3) { null }
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
 
     companion object {
         const val BUSINESS_PHOTO = "businessPhoto"
