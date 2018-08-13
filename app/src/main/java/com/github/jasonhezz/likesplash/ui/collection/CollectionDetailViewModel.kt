@@ -16,9 +16,9 @@ class CollectionDetailViewModel(
 ) : ViewModel() {
 
     private val result = MutableLiveData<Listing<Photo>>()
-    val photos = Transformations.switchMap(result, { it.pagedList })!!
-    val networkState = Transformations.switchMap(result, { it.networkState })!!
-    val refreshState = Transformations.switchMap(result, { it.refreshState })!!
+    val photos = Transformations.switchMap(result) { it.pagedList }!!
+    val networkState = Transformations.switchMap(result) { it.networkState }!!
+    val refreshState = Transformations.switchMap(result) { it.refreshState }!!
 
     init {
         result.postValue(repository.getListPhotoCollections(id))

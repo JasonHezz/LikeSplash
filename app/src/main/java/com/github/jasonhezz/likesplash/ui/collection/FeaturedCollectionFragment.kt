@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,9 +9,9 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PreviewCollectionPagedController
 import kotlinx.android.synthetic.main.fragment_featured_collection.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -22,22 +19,20 @@ import timber.log.Timber
  */
 class FeaturedCollectionFragment : Fragment() {
 
-    private lateinit var model: FeaturedCollectionViewModel
-    private var controller = PreviewCollectionPagedController()
+    private val model: FeaturedCollectionViewModel by viewModel()
+    private val controller = PreviewCollectionPagedController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
 
         }
-        model = getViewModel()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_featured_collection, container, false)
     }
 
@@ -78,16 +73,6 @@ class FeaturedCollectionFragment : Fragment() {
         })
     }
 
-    private fun getViewModel(): FeaturedCollectionViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeCollectionRepository()
-                @Suppress("UNCHECKED_CAST")
-                return FeaturedCollectionViewModel(repo) as T
-            }
-        })[FeaturedCollectionViewModel::class.java]
-    }
-
     companion object {
 
         fun newInstance(): FeaturedCollectionFragment {
@@ -97,4 +82,4 @@ class FeaturedCollectionFragment : Fragment() {
             return fragment
         }
     }
-}// Required empty public constructor
+}

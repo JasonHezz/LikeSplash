@@ -6,30 +6,23 @@ import android.support.v7.app.AppCompatActivity
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
-import com.github.jasonhezz.likesplash.util.extension.getViewModel
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_collection_detail.*
+import org.koin.android.ext.android.setProperty
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class CollectionDetailActivity : AppCompatActivity() {
 
     private val collection: Collection? by lazy { intent.getParcelableExtra<Collection?>("collection") }
-    private lateinit var viewModel: CollectionDetailViewModel
-    private var controller = PhotoPagedController().apply { setFilterDuplicates(true) }
+    private val viewModel: CollectionDetailViewModel by viewModel()
+    private val controller = PhotoPagedController().apply { setFilterDuplicates(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collection_detail)
-
-        viewModel =
-            getViewModel {
-                CollectionDetailViewModel(
-                    "${collection?.id}",
-                    RepositoryFactory.makeCollectionRepository()
-                )
-            }
+        setProperty("id", "${collection?.id}")
         initUI()
         initController()
     }

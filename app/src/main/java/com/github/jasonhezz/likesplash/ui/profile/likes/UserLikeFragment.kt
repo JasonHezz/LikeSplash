@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile.likes
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,16 +12,18 @@ import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_like.*
+import org.koin.android.ext.android.setProperty
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class UserLikeFragment : Fragment() {
 
-    private lateinit var model: UserLikeViewModel
-    private var controller = PhotoPagedController(
+    private val model: UserLikeViewModel by viewModel()
+    private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
+    private val controller = PhotoPagedController(
         object : PhotoPagedController.Companion.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
@@ -39,14 +38,11 @@ class UserLikeFragment : Fragment() {
             }
         }).apply { setFilterDuplicates(true) }
 
-    private var user: User? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            user = arguments?.getParcelable(ARG_PARAM_USER)
+            user?.id?.let { setProperty("id", it) }
         }
-        model = getViewModel()
     }
 
     override fun onCreateView(
@@ -90,16 +86,6 @@ class UserLikeFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun getViewModel(): UserLikeViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeUserRepository()
-                @Suppress("UNCHECKED_CAST")
-                return UserLikeViewModel(user?.username ?: "", repo) as T
-            }
-        })[UserLikeViewModel::class.java]
     }
 
     companion object {

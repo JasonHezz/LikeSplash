@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.repository.TrendingRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class TrendingViewModel(repository: TrendingRepository) : ViewModel() {
+class TrendingViewModel(val repository: TrendingRepository) : ViewModel() {
     private val result = MutableLiveData<Listing<Photo>>()
     val photos = Transformations.switchMap(result) { it.pagedList }!!
     val networkState = Transformations.switchMap(result) { it.networkState }!!

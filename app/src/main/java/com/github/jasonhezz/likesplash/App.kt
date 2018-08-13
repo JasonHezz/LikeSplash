@@ -3,6 +3,8 @@ package com.github.jasonhezz.likesplash
 import android.app.Application
 import android.content.Context
 import android.support.v7.app.AppCompatDelegate
+import com.github.jasonhezz.likesplash.inject.appModule
+import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 
 /**
@@ -19,6 +21,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        startKoin(this, listOf(appModule))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 

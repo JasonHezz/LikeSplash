@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.repository.PhotoRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class TimelineViewModel(private val repository: PhotoRepository) : ViewModel() {
+class TimelineViewModel(val repository: PhotoRepository) : ViewModel() {
 
     private val result = MutableLiveData<Listing<Photo>>()
     val photos = Transformations.switchMap(result, { it.pagedList })!!

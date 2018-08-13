@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.timeline
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,16 +12,16 @@ import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_timeline.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class TimelineFragment : Fragment() {
 
-    private lateinit var model: TimelineViewModel
-    private var controller = PhotoPagedController(
+    private val model: TimelineViewModel by viewModel()
+    private val controller = PhotoPagedController(
         object : PhotoPagedController.Companion.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
@@ -35,14 +32,8 @@ class TimelineFragment : Fragment() {
                 )
             }
 
-            override fun onPhotoClick(it: Photo) {
-            }
+            override fun onPhotoClick(it: Photo) {}
         }).apply { setFilterDuplicates(true) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        model = getViewModel()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +47,6 @@ class TimelineFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initSwipeToRefresh()
         initController()
-    }
-
-    private fun getViewModel(): TimelineViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makePhotoRepository()
-                @Suppress("UNCHECKED_CAST")
-                return TimelineViewModel(repo) as T
-            }
-        })[TimelineViewModel::class.java]
     }
 
     private fun initSwipeToRefresh() {

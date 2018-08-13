@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
@@ -14,9 +11,9 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import kotlinx.android.synthetic.main.fragment_curated_collection.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -24,8 +21,8 @@ import timber.log.Timber
  */
 class CuratedCollectionFragment : DialogFragment() {
 
-    private lateinit var model: CuratedCollectionViewModel
-    private var controller: CollectionPagedController = CollectionPagedController(
+    private val model: CuratedCollectionViewModel by viewModel()
+    private val controller: CollectionPagedController = CollectionPagedController(
         object : CollectionPagedController.Companion.AdapterCallbacks {
             override fun onAvatarClick() {
             }
@@ -43,14 +40,12 @@ class CuratedCollectionFragment : DialogFragment() {
         if (arguments != null) {
 
         }
-        model = getViewModel()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_curated_collection, container, false)
     }
 
@@ -91,16 +86,6 @@ class CuratedCollectionFragment : DialogFragment() {
         })
     }
 
-    private fun getViewModel(): CuratedCollectionViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeCollectionRepository()
-                @Suppress("UNCHECKED_CAST")
-                return CuratedCollectionViewModel(repo) as T
-            }
-        })[CuratedCollectionViewModel::class.java]
-    }
-
     companion object {
 
         fun newInstance(): CuratedCollectionFragment {
@@ -110,4 +95,4 @@ class CuratedCollectionFragment : DialogFragment() {
             return fragment
         }
     }
-}// Required empty public constructor
+}
