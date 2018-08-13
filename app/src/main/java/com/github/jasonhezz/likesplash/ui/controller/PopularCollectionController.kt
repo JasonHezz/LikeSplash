@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
 import android.content.Context
-import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.TypedEpoxyController
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.ExploreCollection
 import com.github.jasonhezz.likesplash.data.model.exploreCollection
@@ -12,16 +12,9 @@ import com.github.jasonhezz.likesplash.util.recyclerview.NumItemsInGridRow
 /**
  * Created by JavaCoder on 2018/1/10.
  */
-class PopularCollectionController(val context: Context) : EpoxyController() {
-
-    var explores = emptyList<ExploreCollection>()
-        set(value) {
-            field = value
-            requestModelBuild()
-        }
-
-    override fun buildModels() {
-        explores.forEach {
+class PopularCollectionController(val context: Context) : TypedEpoxyController<List<ExploreCollection>>() {
+    override fun buildModels(data: List<ExploreCollection>?) {
+        data?.forEach {
             exploreTitle {
                 id(it.name ?: "error")
                 title(it.name)

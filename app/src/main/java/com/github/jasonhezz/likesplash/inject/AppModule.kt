@@ -10,6 +10,8 @@ import com.github.jasonhezz.likesplash.data.api.UNSPLASH_NEW_BASE_URL
 import com.github.jasonhezz.likesplash.data.api.UserService
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
 import com.github.jasonhezz.likesplash.repository.CollectionRepositoryIml
+import com.github.jasonhezz.likesplash.repository.ExploreRepository
+import com.github.jasonhezz.likesplash.repository.ExploreRepositoryIml
 import com.github.jasonhezz.likesplash.repository.PhotoRepository
 import com.github.jasonhezz.likesplash.repository.PhotoRepositoryIml
 import com.github.jasonhezz.likesplash.repository.SearchRepository
@@ -21,12 +23,17 @@ import com.github.jasonhezz.likesplash.repository.UserRepositoryIml
 import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionViewModel
+import com.github.jasonhezz.likesplash.ui.explore.ExploreViewModel
+import com.github.jasonhezz.likesplash.ui.explore.PopularCollectionViewModel
+import com.github.jasonhezz.likesplash.ui.follower.FollowerViewModel
+import com.github.jasonhezz.likesplash.ui.following.FollowingViewModel
 import com.github.jasonhezz.likesplash.ui.profile.ProfileViewModel
+import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
+import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
 import com.github.jasonhezz.likesplash.ui.timeline.TimelineViewModel
 import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
-import com.github.jasonhezz.likesplash.util.network.NetModule
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -64,7 +71,7 @@ val appModule = module {
         Retrofit.Builder()
             .baseUrl(UNSPLASH_NEW_BASE_URL)
             .client(get())
-            .addConverterFactory(GsonConverterFactory.create(NetModule.provideGson()))
+            .addConverterFactory(GsonConverterFactory.create(get()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
@@ -113,11 +120,20 @@ val appModule = module {
     single {
         CollectionRepositoryIml(get()) as CollectionRepository
     }
+    single {
+        ExploreRepositoryIml(get()) as ExploreRepository
+    }
     viewModel { TrendingViewModel(get()) }
     viewModel { TimelineViewModel(get()) }
     viewModel { CuratedCollectionViewModel(get()) }
     viewModel { FeaturedCollectionViewModel(get()) }
-    viewModel { ProfileViewModel() }
-    viewModel { UserLikeViewModel(getProperty("id"), get()) }
+    viewModel { ProfileViewModel(get()) }
+    viewModel { ExploreViewModel(get()) }
+    viewModel { FollowerViewModel(getProperty("id"), get()) }
+    viewModel { FollowingViewModel(getProperty("id"), get()) }
     viewModel { CollectionDetailViewModel(getProperty("id"), get()) }
+    viewModel { UserLikeViewModel(getProperty("id"), get()) }
+    viewModel { UserCollectionViewModel(getProperty("id"), get()) }
+    viewModel { UserPhotoViewModel(getProperty("id"), get()) }
+    viewModel { PopularCollectionViewModel(get()) }
 }

@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,11 +13,11 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_explore.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class ExploreFragment : Fragment() {
@@ -29,8 +26,8 @@ class ExploreFragment : Fragment() {
         "Business", "Girl", "Nature", "Technology", "Food", "Travel", "Happy",
         "Cool"
     )
-    private lateinit var model: ExploreViewModel
-    private var controller = PhotoPagedController(
+    private val model: ExploreViewModel by viewModel()
+    private val controller = PhotoPagedController(
         object : PhotoPagedController.Companion.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
@@ -50,7 +47,6 @@ class ExploreFragment : Fragment() {
         if (arguments != null) {
 
         }
-        model = getViewModel()
     }
 
     override fun onCreateView(
@@ -83,16 +79,6 @@ class ExploreFragment : Fragment() {
             }
         }
         spinner_nav.setSelection(0)
-    }
-
-    private fun getViewModel(): ExploreViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeSearchRepository()
-                @Suppress("UNCHECKED_CAST")
-                return ExploreViewModel(repo) as T
-            }
-        })[ExploreViewModel::class.java]
     }
 
     private fun initController() {

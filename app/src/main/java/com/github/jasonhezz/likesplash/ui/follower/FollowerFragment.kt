@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.follower
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +10,10 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.UserPagedController
 import kotlinx.android.synthetic.main.fragment_following.*
+import org.koin.android.ext.android.setProperty
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -25,8 +23,8 @@ class FollowerFragment : Fragment() {
 
     private var user: User? = null
 
-    private lateinit var model: FollowerViewModel
-    private var controller = UserPagedController().apply { setFilterDuplicates(true) }
+    private val model: FollowerViewModel by viewModel()
+    private val controller = UserPagedController().apply { setFilterDuplicates(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +32,8 @@ class FollowerFragment : Fragment() {
             user = arguments?.getParcelable(
                 ARG_USER_NAME
             )
+            setProperty("id", user?.username ?: "")
         }
-        model = getViewModel()
     }
 
     override fun onCreateView(
@@ -81,16 +79,6 @@ class FollowerFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun getViewModel(): FollowerViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeUserRepository()
-                @Suppress("UNCHECKED_CAST")
-                return FollowerViewModel(user?.username ?: "", repo) as T
-            }
-        })[FollowerViewModel::class.java]
     }
 
     companion object {

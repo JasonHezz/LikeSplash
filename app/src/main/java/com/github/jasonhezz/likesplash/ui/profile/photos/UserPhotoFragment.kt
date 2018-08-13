@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile.photos
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -14,15 +11,16 @@ import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import kotlinx.android.synthetic.main.fragment_like.*
+import org.koin.android.ext.android.setProperty
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class UserPhotoFragment : Fragment() {
 
-    private lateinit var model: UserPhotoViewModel
-    private var controller = PhotoPagedController(
+    private val model: UserPhotoViewModel by viewModel()
+    private val controller = PhotoPagedController(
         object : PhotoPagedController.Companion.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
             }
@@ -38,7 +36,7 @@ class UserPhotoFragment : Fragment() {
         if (arguments != null) {
             user = arguments?.getParcelable(ARG_PARAM_USER)
         }
-        model = getViewModel()
+        setProperty("id", user?.username ?: "")
     }
 
     override fun onCreateView(
@@ -82,16 +80,6 @@ class UserPhotoFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun getViewModel(): UserPhotoViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeUserRepository()
-                @Suppress("UNCHECKED_CAST")
-                return UserPhotoViewModel(user?.username ?: "", repo) as T
-            }
-        })[UserPhotoViewModel::class.java]
     }
 
     companion object {

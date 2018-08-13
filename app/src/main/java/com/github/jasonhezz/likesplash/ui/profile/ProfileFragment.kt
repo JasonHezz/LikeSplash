@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
@@ -18,19 +17,20 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionFragment
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeFragment
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoFragment
+import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 import com.github.jasonhezz.likesplash.util.extension.loadUrl
 import com.github.jasonhezz.likesplash.util.extension.showSnackbar
-import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by JavaCoder on 2017/6/28.
  */
 class ProfileFragment : Fragment() {
 
-    private lateinit var viewModel: ProfileViewModel
+    private val viewModel: ProfileViewModel by viewModel()
     private lateinit var tabAdapter: TabFragmentAdapter
     private var user: User? = null
 
@@ -39,7 +39,6 @@ class ProfileFragment : Fragment() {
         if (arguments != null) {
             user = arguments?.getParcelable(ARG_PARAM_USER)
         }
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.loadUser(user)
     }
 

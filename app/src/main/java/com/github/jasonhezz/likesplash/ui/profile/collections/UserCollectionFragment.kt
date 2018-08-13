@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile.collections
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +10,10 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
-import com.github.jasonhezz.likesplash.repository.RepositoryFactory
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import kotlinx.android.synthetic.main.fragment_like.*
+import org.koin.android.ext.android.setProperty
+import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 /**
@@ -23,8 +21,8 @@ import timber.log.Timber
  */
 class UserCollectionFragment : Fragment() {
 
-    private lateinit var model: UserCollectionViewModel
-    private var controller = CollectionPagedController().apply { setFilterDuplicates(true) }
+    private val model: UserCollectionViewModel by viewModel()
+    private val controller = CollectionPagedController().apply { setFilterDuplicates(true) }
 
     private var user: User? = null
 
@@ -33,7 +31,7 @@ class UserCollectionFragment : Fragment() {
         if (arguments != null) {
             user = arguments?.getParcelable(ARG_PARAM_USER)
         }
-        model = getViewModel()
+        setProperty("id", user?.username ?: "")
     }
 
     override fun onCreateView(
@@ -77,16 +75,6 @@ class UserCollectionFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun getViewModel(): UserCollectionViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = RepositoryFactory.makeUserRepository()
-                @Suppress("UNCHECKED_CAST")
-                return UserCollectionViewModel(user?.username ?: "", repo) as T
-            }
-        })[UserCollectionViewModel::class.java]
     }
 
     companion object {
