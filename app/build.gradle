@@ -43,7 +43,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:${versions.androidx.constraint_layout}"
 
     //Android KTX
-    implementation 'androidx.core:core-ktx:0.2'
+    implementation 'androidx.core:core-ktx:0.3'
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

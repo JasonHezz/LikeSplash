@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.data.model
 
 import android.view.View
-import androidx.view.isVisible
+import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder

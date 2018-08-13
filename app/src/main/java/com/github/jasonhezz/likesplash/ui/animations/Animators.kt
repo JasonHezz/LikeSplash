@@ -23,7 +23,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.view.View
-import androidx.animation.doOnEnd
+import androidx.core.animation.doOnEnd
 import com.github.jasonhezz.likesplash.ui.graphics.ImageLoadingColorMatrix
 import kotlin.math.roundToLong
 
