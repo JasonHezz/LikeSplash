@@ -23,7 +23,6 @@ import com.github.jasonhezz.likesplash.repository.UserRepositoryIml
 import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionViewModel
-import com.github.jasonhezz.likesplash.ui.explore.ExploreViewModel
 import com.github.jasonhezz.likesplash.ui.explore.PopularCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.follower.FollowerViewModel
 import com.github.jasonhezz.likesplash.ui.following.FollowingViewModel
@@ -128,7 +127,6 @@ val appModule = module {
     viewModel { CuratedCollectionViewModel(get()) }
     viewModel { FeaturedCollectionViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
-    viewModel { ExploreViewModel(get()) }
     viewModel { FollowerViewModel(getProperty("id"), get()) }
     viewModel { FollowingViewModel(getProperty("id"), get()) }
     viewModel { CollectionDetailViewModel(getProperty("id"), get()) }
