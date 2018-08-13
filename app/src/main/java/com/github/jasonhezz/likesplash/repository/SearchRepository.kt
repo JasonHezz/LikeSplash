@@ -25,16 +25,12 @@ interface SearchRepository {
   fun searchUsers(query: String, page: Int = 1, per_page: Int = 20): Single<List<User>>
 }
 
-class SearchRepositoryIml(private val service: SearchService,
-    private val networkExecutor: Executor) : SearchRepository {
+class SearchRepositoryIml(private val service: SearchService) : SearchRepository {
 
   override fun searchPhotos(query: String, page: Int, per_page: Int): Listing<Photo> {
-    val sourceFactory = SearchPhotoDataSourceFactory(query, service, networkExecutor)
+    val sourceFactory = SearchPhotoDataSourceFactory(query, service)
     val livePagedList = LivePagedListBuilder(sourceFactory,
         PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build())
-        // provide custom executor for network requests, otherwise it will default to
-        // Arch Components' IO pool which is also used for disk access
-        .setFetchExecutor(networkExecutor)
         .build()
     val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
       it.initialLoad

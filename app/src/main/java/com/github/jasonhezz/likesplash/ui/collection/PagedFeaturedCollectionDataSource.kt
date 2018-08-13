@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
+import android.annotation.SuppressLint
+import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.Collection
@@ -14,9 +16,7 @@ import java.util.concurrent.Executor
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedFeaturedCollectionDataSource(
-    val api: CollectionService,
-    private val retryExecutor: Executor
-) : PageKeyedDataSource<Int, Collection>() {
+    val api: CollectionService) : PageKeyedDataSource<Int, Collection>() {
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
@@ -27,11 +27,12 @@ class PagedFeaturedCollectionDataSource(
     val networkState = MutableLiveData<Resource>()
     val initialLoad = MutableLiveData<Resource>()
 
+    @SuppressLint("RestrictedApi")
     fun retryAllFailed() {
         val prevRetry = retry
         retry = null
         prevRetry?.let {
-            retryExecutor.execute {
+            ArchTaskExecutor.getIOThreadExecutor().execute {
                 it.invoke()
             }
         }

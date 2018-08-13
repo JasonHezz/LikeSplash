@@ -8,7 +8,6 @@ import com.github.jasonhezz.likesplash.data.TrendingFeed
 import com.github.jasonhezz.likesplash.data.api.TrendingService
 import com.github.jasonhezz.likesplash.ui.trending.TrendingPhotoDataSourceFactory
 import io.reactivex.Single
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/11/27.
@@ -21,34 +20,33 @@ interface TrendingRepository {
     fun getFollowingFeed(after: String? = null)
 }
 
-class TrendingRepositoryIml(val trendingService: TrendingService, private val networkExecutor: Executor) : TrendingRepository {
+class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepository {
     override fun getTrendingFeed(after: String?): Single<TrendingFeed> =
-            trendingService.getTrendingFeed(after)
+        trendingService.getTrendingFeed(after)
 
     override fun getFollowingFeed(after: String?) = trendingService.getFollowingFeed(after)
 
     override fun getTrendingFeed(after: String?, perPage: Int): Listing<Photo> {
-        val sourceFactory = TrendingPhotoDataSourceFactory(trendingService, networkExecutor)
-        val livePagedList = LivePagedListBuilder(sourceFactory, PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build())
-                // provide custom executor for network requests, otherwise it will default to
-                // Arch Components' IO pool which is also used for disk access
-                .setFetchExecutor(networkExecutor)
-                .build()
+        val sourceFactory = TrendingPhotoDataSourceFactory(trendingService)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
         return Listing(
-                pagedList = livePagedList,
-                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                  it.networkState
-                },
-                retry = {
-                    sourceFactory.sourceLiveData.value?.retryAllFailed()
-                },
-                refresh = {
-                    sourceFactory.sourceLiveData.value?.invalidate()
-                },
-                refreshState = refreshState
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
         )
     }
 }

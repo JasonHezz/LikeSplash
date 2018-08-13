@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.timeline
 
+import android.annotation.SuppressLint
+import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.Photo
@@ -8,14 +10,12 @@ import com.github.jasonhezz.likesplash.data.api.PhotoService
 import com.github.jasonhezz.likesplash.data.api.Resource
 import retrofit2.Call
 import retrofit2.Response
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedTimelinePhotoDataSource(
-    val api: PhotoService,
-    private val retryExecutor: Executor
+    val api: PhotoService
 ) : PageKeyedDataSource<Int, Photo>() {
 
     // keep a function reference for the retry event
@@ -27,11 +27,12 @@ class PagedTimelinePhotoDataSource(
     val networkState = MutableLiveData<Resource>()
     val initialLoad = MutableLiveData<Resource>()
 
+    @SuppressLint("RestrictedApi")
     fun retryAllFailed() {
         val prevRetry = retry
         retry = null
         prevRetry?.let {
-            retryExecutor.execute {
+            ArchTaskExecutor.getIOThreadExecutor().execute {
                 it.invoke()
             }
         }

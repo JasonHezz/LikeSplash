@@ -11,12 +11,11 @@ import java.util.concurrent.Executor
  */
 class UserFollowingDataSourceFactory(
     private val userName: String,
-    private val api: UserService,
-    private val retryExecutor: Executor
+    private val api: UserService
 ) : DataSource.Factory<Int, User>() {
     val sourceLiveData = MutableLiveData<PagedUserFollowingDataSource>()
     override fun create(): DataSource<Int, User> {
-        val source = PagedUserFollowingDataSource(userName, api, retryExecutor)
+        val source = PagedUserFollowingDataSource(userName, api)
         sourceLiveData.postValue(source)
         return source
     }

@@ -11,12 +11,11 @@ import java.util.concurrent.Executor
  */
 class CollectionDetailDataSourceFactory(
     private val id: String,
-    private val api: CollectionService,
-    private val retryExecutor: Executor
+    private val api: CollectionService
 ) : DataSource.Factory<Int, Photo>() {
     val sourceLiveData = MutableLiveData<PagedCollectionDetailDataSource>()
     override fun create(): DataSource<Int, Photo> {
-        val source = PagedCollectionDetailDataSource(id, api, retryExecutor)
+        val source = PagedCollectionDetailDataSource(id, api)
         sourceLiveData.postValue(source)
         return source
     }

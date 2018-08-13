@@ -12,22 +12,22 @@ object RepositoryFactory {
     private val NETWORK_IO = Executors.newFixedThreadPool(5)
 
     fun makeTrendingRepository(): TrendingRepository {
-        return TrendingRepositoryIml(NetModule.provideTrendingService(), NETWORK_IO)
+        return TrendingRepositoryIml(NetModule.provideTrendingService())
     }
 
     fun makePhotoRepository(): PhotoRepository {
-        return PhotoRepositoryIml(NetModule.providePhotoService(), NETWORK_IO)
+        return PhotoRepositoryIml(NetModule.providePhotoService())
     }
 
     fun makeUserRepository(): UserRepository {
-        return UserRepositoryIml(NetModule.provideUserService(), NETWORK_IO)
+        return UserRepositoryIml(NetModule.provideUserService())
     }
 
     fun makeSearchRepository(): SearchRepository {
-        return SearchRepositoryIml(NetModule.provideSearchService(), NETWORK_IO)
+        return SearchRepositoryIml(NetModule.provideSearchService())
     }
 
     fun makeCollectionRepository(): CollectionRepository {
-        return CollectionRepositoryIml(NetModule.provideCollectionService(), NETWORK_IO)
+        return CollectionRepositoryIml(NetModule.provideCollectionService())
     }
 }

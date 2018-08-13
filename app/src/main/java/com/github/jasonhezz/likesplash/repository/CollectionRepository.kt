@@ -9,7 +9,6 @@ import com.github.jasonhezz.likesplash.data.api.CollectionService
 import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionDataSourceFactory
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/13.
@@ -24,20 +23,15 @@ interface CollectionRepository {
 }
 
 class CollectionRepositoryIml(
-    private val api: CollectionService,
-    private val networkExecutor: Executor
+    private val api: CollectionService
 ) : CollectionRepository {
 
     override fun getListCuratedCollections(perPage: Int): Listing<Collection> {
-        val sourceFactory = CuratedCollectionDataSourceFactory(api, networkExecutor)
+        val sourceFactory = CuratedCollectionDataSourceFactory(api)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
-        )
-            // provide custom executor for network requests, otherwise it will default to
-            // Arch Components' IO pool which is also used for disk access
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
@@ -57,14 +51,11 @@ class CollectionRepositoryIml(
     }
 
     override fun getListFeaturedCollections(perPage: Int): Listing<Collection> {
-        val sourceFactory = FeaturedCollectionDataSourceFactory(api, networkExecutor)
+        val sourceFactory = FeaturedCollectionDataSourceFactory(api)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         )
-            // provide custom executor for network requests, otherwise it will default to
-            // Arch Components' IO pool which is also used for disk access
-            .setFetchExecutor(networkExecutor)
             .build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
@@ -85,14 +76,11 @@ class CollectionRepositoryIml(
     }
 
     override fun getListPhotoCollections(id: String, perPage: Int): Listing<Photo> {
-        val sourceFactory = CollectionDetailDataSourceFactory(id, api, networkExecutor)
+        val sourceFactory = CollectionDetailDataSourceFactory(id, api)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         )
-            // provide custom executor for network requests, otherwise it will default to
-            // Arch Components' IO pool which is also used for disk access
-            .setFetchExecutor(networkExecutor)
             .build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad

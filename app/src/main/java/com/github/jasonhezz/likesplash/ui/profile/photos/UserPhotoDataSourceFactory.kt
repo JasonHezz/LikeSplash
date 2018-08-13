@@ -4,19 +4,17 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource
 import com.github.jasonhezz.likesplash.data.Photo
 import com.github.jasonhezz.likesplash.data.api.UserService
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/12.
  */
 class UserPhotoDataSourceFactory(
     private val userName: String,
-    private val api: UserService,
-    private val retryExecutor: Executor
+    private val api: UserService
 ) : DataSource.Factory<Int, Photo>() {
     val sourceLiveData = MutableLiveData<PagedUserPhotoDataSource>()
     override fun create(): DataSource<Int, Photo> {
-        val source = PagedUserPhotoDataSource(userName, api, retryExecutor)
+        val source = PagedUserPhotoDataSource(userName, api)
         sourceLiveData.postValue(source)
         return source
     }

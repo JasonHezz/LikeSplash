@@ -10,12 +10,11 @@ import java.util.concurrent.Executor
  * Created by JavaCoder on 2017/12/12.
  */
 class CuratedCollectionDataSourceFactory(
-    private val api: CollectionService,
-    private val retryExecutor: Executor
+    private val api: CollectionService
 ) : DataSource.Factory<Int, Collection>() {
     val sourceLiveData = MutableLiveData<PagedCuratedCollectionDataSource>()
     override fun create(): DataSource<Int, Collection> {
-        val source = PagedCuratedCollectionDataSource(api, retryExecutor)
+        val source = PagedCuratedCollectionDataSource(api)
         sourceLiveData.postValue(source)
         return source
     }

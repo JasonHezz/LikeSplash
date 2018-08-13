@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.trending
 
+import android.annotation.SuppressLint
+import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import android.net.Uri
@@ -9,14 +11,12 @@ import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.TrendingService
 import retrofit2.Call
 import retrofit2.Response
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedTrendingPhotoDataSource(
-    val api: TrendingService,
-    private val retryExecutor: Executor
+    val api: TrendingService
 ) : PageKeyedDataSource<String, Photo>() {
 
     // keep a function reference for the retry event
@@ -28,11 +28,12 @@ class PagedTrendingPhotoDataSource(
     val networkState = MutableLiveData<Resource>()
     val initialLoad = MutableLiveData<Resource>()
 
+    @SuppressLint("RestrictedApi")
     fun retryAllFailed() {
         val prevRetry = retry
         retry = null
         prevRetry?.let {
-            retryExecutor.execute {
+            ArchTaskExecutor.getIOThreadExecutor().execute {
                 it.invoke()
             }
         }

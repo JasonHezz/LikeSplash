@@ -15,7 +15,6 @@ import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionData
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoDataSourceFactory
 import io.reactivex.Single
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/1.
@@ -68,21 +67,18 @@ interface UserRepository {
 }
 
 class UserRepositoryIml(
-    private val service: UserService,
-    private val networkExecutor: Executor
+    private val service: UserService
 ) : UserRepository {
     override fun getUserProfile(username: String, w: Int?, h: Int?): Single<User> {
         return service.getUserProfile(username, w, h)
     }
 
     override fun getUserFollowing(username: String, page: Int, per_page: Int): Listing<User> {
-        val sourceFactory = UserFollowingDataSourceFactory(username, service, networkExecutor)
+        val sourceFactory = UserFollowingDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
-        )
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
@@ -102,13 +98,11 @@ class UserRepositoryIml(
     }
 
     override fun getUserFollowers(username: String, page: Int, per_page: Int): Listing<User> {
-        val sourceFactory = UserFollowerDataSourceFactory(username, service, networkExecutor)
+        val sourceFactory = UserFollowerDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
-        )
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
@@ -131,13 +125,11 @@ class UserRepositoryIml(
         username: String, page: Int, per_page: Int,
         orderBy: String
     ): Listing<Photo> {
-        val sourceFactory = UserLikeDataSourceFactory(username, service, networkExecutor)
+        val sourceFactory = UserLikeDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
-        )
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
@@ -160,13 +152,11 @@ class UserRepositoryIml(
         username: String, page: Int, per_page: Int,
         orderBy: String
     ): Listing<Photo> {
-        val sourceFactory = UserPhotoDataSourceFactory(username, service, networkExecutor)
+        val sourceFactory = UserPhotoDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
-        )
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
@@ -189,13 +179,11 @@ class UserRepositoryIml(
         username: String, page: Int, per_page: Int,
         orderBy: String
     ): Listing<Collection> {
-        val sourceFactory = UserCollectionDataSourceFactory(username, service, networkExecutor)
+        val sourceFactory = UserCollectionDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
-        )
-            .setFetchExecutor(networkExecutor)
-            .build()
+        ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
         }
