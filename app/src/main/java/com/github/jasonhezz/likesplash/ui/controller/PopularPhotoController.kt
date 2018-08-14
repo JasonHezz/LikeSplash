@@ -10,12 +10,15 @@ import com.github.jasonhezz.likesplash.data.model.exploreMore
 import com.github.jasonhezz.likesplash.data.model.explorePhoto
 import com.github.jasonhezz.likesplash.data.model.exploreTag
 import com.github.jasonhezz.likesplash.data.model.exploreTitle
+import com.github.jasonhezz.likesplash.data.model.space
 import com.github.jasonhezz.likesplash.util.recyclerview.NumItemsInGridRow
 
 /**
  * Created by JavaCoder on 2018/1/3.
  */
 class PopularPhotoController(val context: Context) : EpoxyController() {
+
+    private val ifAddSpace = context.resources.getBoolean(R.bool.ifAddSpace)
 
     private val businessExplore = ExplorePhoto(
         "Business",
@@ -114,14 +117,14 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
                 "https://images.unsplash.com/photo-1499961524705-bfd103e65a6d?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
                 "A teal coffee cup with latte art in the shape of a heart."
             ), Tag(
-                "Dessert",
-                "https://images.unsplash.com/photo-1497681204192-eb12c0702305?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
-                "A white cheesecake dessert with a fork."
-            ), Tag(
-                "Cake",
-                "https://images.unsplash.com/photo-1464347744102-11db6282f854?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
-                "A birthday cake with colored sprinkles."
-            )
+            "Dessert",
+            "https://images.unsplash.com/photo-1497681204192-eb12c0702305?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
+            "A white cheesecake dessert with a fork."
+        ), Tag(
+            "Cake",
+            "https://images.unsplash.com/photo-1464347744102-11db6282f854?dpr=2&auto=format&crop=entropy&fit=crop&w=376&h=251&q=60&cs=tinysrgb",
+            "A birthday cake with colored sprinkles."
+        )
         )
     )
 
@@ -260,6 +263,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
             }
         }
 
+        if (ifAddSpace) space { id(1) }
+
         businessExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
@@ -287,6 +292,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
                 spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
             }
         }
+
+        if (ifAddSpace) space { id(2) }
 
         girlExplore.related?.forEach {
             exploreTag {
@@ -317,6 +324,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
             }
         }
 
+        if (ifAddSpace) space { id(3) }
+
         natureExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
@@ -345,6 +354,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
             }
         }
 
+        if (ifAddSpace) space { id(4) }
+
         technologyExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
@@ -371,6 +382,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
                 spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
             }
         }
+
+        if (ifAddSpace) space { id(5) }
 
         foodExplore.related?.forEach {
             exploreTag {
@@ -400,6 +413,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
             }
         }
 
+        if (ifAddSpace) space { id(6) }
+
         travelExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
@@ -428,6 +443,8 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
             }
         }
 
+        if (ifAddSpace) space { id(7) }
+
         happyExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
@@ -455,7 +472,7 @@ class PopularPhotoController(val context: Context) : EpoxyController() {
                 spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_photo_per_row))
             }
         }
-
+        if (ifAddSpace) space { id(8) }
         coolExplore.related?.forEach {
             exploreTag {
                 id(it.description ?: "error")
