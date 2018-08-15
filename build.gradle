@@ -22,7 +22,7 @@ buildscript {
                     'work'             : '1.0.0-alpha06'
             ],
             'koin'           : '1.0.0-beta-4',
-            'epoxy'          : '2.16.1',
+            'epoxy'          : '2.10.0',
             'glide'          : '4.7.1',
             'kotlin'         : '1.2.60',
             'material_design': '28.0.0-rc01',
