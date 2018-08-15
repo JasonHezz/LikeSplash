@@ -56,7 +56,7 @@ class UserCollectionFragment : Fragment() {
     }
 
     private fun initController() {
-        rv.adapter = controller.adapter
+        rv.setController(controller)
         model.collections.observe(this, Observer {
             controller.setList(it)
         })

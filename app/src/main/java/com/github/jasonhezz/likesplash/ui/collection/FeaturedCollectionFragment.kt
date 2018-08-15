@@ -20,7 +20,7 @@ import timber.log.Timber
 class FeaturedCollectionFragment : Fragment() {
 
     private val model: FeaturedCollectionViewModel by viewModel()
-    private val controller = PreviewCollectionPagedController()
+    private val controller = PreviewCollectionPagedController().apply { setFilterDuplicates(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class FeaturedCollectionFragment : Fragment() {
     }
 
     private fun initController() {
-        list.adapter = controller.adapter
+        list.setController(controller)
         model.collections.observe(this, Observer {
             controller.setList(it)
         })

@@ -61,7 +61,7 @@ class UserPhotoFragment : Fragment() {
     }
 
     private fun initController() {
-        rv.adapter = controller.adapter
+        rv.setController(controller)
         model.photos.observe(this, Observer {
             controller.setList(it)
         })

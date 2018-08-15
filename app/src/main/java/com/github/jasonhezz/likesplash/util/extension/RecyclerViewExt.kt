@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.util.extension
 
+import android.support.v7.widget.RecyclerView
 import com.airbnb.epoxy.CarouselModelBuilder
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
@@ -36,4 +37,10 @@ fun EpoxyRecyclerView.withModels(buildModelsCallback: EpoxyController.() -> Unit
             buildModelsCallback()
         }
     })
+}
+
+fun RecyclerView.clearItemDecoration() {
+    while (itemDecorationCount > 0) {
+        removeItemDecorationAt(0)
+    }
 }

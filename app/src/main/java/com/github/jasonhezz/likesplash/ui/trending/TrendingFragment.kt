@@ -64,7 +64,7 @@ class TrendingFragment : Fragment() {
     }
 
     private fun initController() {
-        rv.adapter = controller.adapter
+        rv.setController(controller)
 
         viewModel.photos.observe(this, Observer {
             controller.setList(it)

@@ -23,5 +23,6 @@
     android:layout_gravity="center"
     android:indeterminate="true"
     android:indeterminateTint="?android:textColorSecondary"
+    android:padding="16dp"
     android:indeterminateTintMode="src_in"
     />

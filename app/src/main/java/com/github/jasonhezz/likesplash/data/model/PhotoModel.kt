@@ -28,7 +28,6 @@ abstract class PhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
-
         photo?.let {
             val aspectRatio = it.height.toFloat() / it.width.toFloat()
             holder.photo_iv.aspectRatio = aspectRatio

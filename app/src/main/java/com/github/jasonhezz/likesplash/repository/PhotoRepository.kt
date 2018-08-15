@@ -40,7 +40,7 @@ interface PhotoRepository {
         count: Int = 1
     ): Single<List<Photo>>
 
-    fun getAPhotoStatistics(id: Int, resolution: String = DAYS, quantity: Int = 30)
+    fun getAPhotoStatistics(id: Int, resolution: String = DAYS, quantity: Int = 20)
 
     fun getAPhotoDownloadLink(id: String): Single<DownLoadLink>
 

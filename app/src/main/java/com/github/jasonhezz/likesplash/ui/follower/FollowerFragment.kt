@@ -60,7 +60,7 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initController() {
-        rv.adapter = controller.adapter
+        rv.setController(controller)
         model.follwers.observe(this, Observer {
             controller.setList(it)
         })

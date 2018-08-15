@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <integer name="space_visibility">2</integer>
+  <integer name="stagger_column">1</integer>
+  <integer name="grid_column">1</integer>
   <integer name="grid_explore_photo_span">1</integer>
   <integer name="gird_explore_collection_span">1</integer>
   <integer name="grid_explore_collection_per_row">1</integer>

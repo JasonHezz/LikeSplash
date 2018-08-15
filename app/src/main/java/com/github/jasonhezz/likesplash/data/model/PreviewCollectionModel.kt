@@ -13,6 +13,7 @@ import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
+import com.github.jasonhezz.likesplash.util.extension.clearItemDecoration
 import com.github.jasonhezz.likesplash.util.extension.withModels
 import com.google.android.flexbox.FlexboxItemDecoration
 import kotlinx.android.synthetic.main.item_preview.*
@@ -51,6 +52,10 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
             holder.title_tv.text = it.title
             holder.description_tv.text = "${it.total_photos
                 ?: 0} photos · Curated by ${it.user?.name}"
+            while (holder.tag_rv.itemDecorationCount > 0) {
+                holder.tag_rv.removeItemDecorationAt(0)
+            }
+            holder.tag_rv.clearItemDecoration()
             holder.tag_rv.addItemDecoration(tagDivider)
             holder.tag_rv.withModels {
                 it.tags?.take(3)
@@ -67,6 +72,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
                 spans = 3
             )
             holder.preview_rv.setOnClickListener(collectionClickListener)
+            holder.preview_rv.clearItemDecoration()
             holder.preview_rv.addItemDecoration(previewImagHDivider)
             holder.preview_rv.addItemDecoration(previewImagVDivider)
             holder.preview_rv.withModels {

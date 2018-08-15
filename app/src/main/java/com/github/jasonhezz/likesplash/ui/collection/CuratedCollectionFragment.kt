@@ -33,7 +33,7 @@ class CuratedCollectionFragment : DialogFragment() {
                     putExtra("collection", it)
                 })
             }
-        })
+        }).apply { setFilterDuplicates(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +65,7 @@ class CuratedCollectionFragment : DialogFragment() {
     }
 
     private fun initController() {
-        list.adapter = controller.adapter
+        list.setController(controller)
         model.collections.observe(this, Observer {
             controller.setList(it)
         })
