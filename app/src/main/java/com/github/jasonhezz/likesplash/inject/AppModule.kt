@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.inject
 import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.data.api.UNSPLASH_NEW_BASE_URL
 import com.github.jasonhezz.likesplash.data.service.CollectionService
-import com.github.jasonhezz.likesplash.data.service.ExploreService
+import com.github.jasonhezz.likesplash.data.service.MockService
 import com.github.jasonhezz.likesplash.data.service.PhotoService
 import com.github.jasonhezz.likesplash.data.service.SearchService
 import com.github.jasonhezz.likesplash.data.service.TrendingService
@@ -102,7 +102,7 @@ val appModule = module {
     }
     single {
         get<Retrofit>().create(
-            ExploreService::class.java
+            MockService::class.java
         )
     }
     single {
