@@ -1,14 +1,8 @@
 package com.github.jasonhezz.likesplash.repository
 
-import android.arch.lifecycle.Transformations
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
-import com.github.jasonhezz.likesplash.data.DownLoadLink
-import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.data.api.DAYS
-import com.github.jasonhezz.likesplash.data.api.LATEST
-import com.github.jasonhezz.likesplash.data.api.PhotoService
-import com.github.jasonhezz.likesplash.ui.timeline.TimelinePhotoDataSourceFactory
+import com.github.jasonhezz.likesplash.data.entities.DownLoadLink
+import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.data.enumerations.OrderBy
 import io.reactivex.Single
 
 /**
@@ -18,12 +12,12 @@ interface PhotoRepository {
 
     fun getListPhotos(
         page: Int = 1, perPage: Int = 20,
-        orderBy: String = LATEST
+        orderBy: OrderBy = OrderBy.LATEST
     ): Listing<Photo>
 
     fun getListCuratedPhotos(
         page: Int = 1, perPage: Int = 20,
-        orderBy: String = LATEST
+        orderBy: OrderBy = OrderBy.LATEST
     ): Single<List<Photo>>
 
     fun getAPhoto(id: String, w: Int? = null, h: Int? = null):
@@ -40,7 +34,7 @@ interface PhotoRepository {
         count: Int = 1
     ): Single<List<Photo>>
 
-    fun getAPhotoStatistics(id: Int, resolution: String = DAYS, quantity: Int = 20)
+    fun getAPhotoStatistics(id: Int, resolution: String? = null, quantity: Int = 20)
 
     fun getAPhotoDownloadLink(id: String): Single<DownLoadLink>
 
@@ -49,70 +43,4 @@ interface PhotoRepository {
     fun likeAPhoto(id: String)
 
     fun unlikeAPhoto(id: String)
-}
-
-class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
-    override fun getListPhotos(
-        page: Int, perPage: Int,
-        orderBy: String
-    ): Listing<Photo> {
-        val sourceFactory = TimelinePhotoDataSourceFactory(service)
-        val livePagedList = LivePagedListBuilder(
-            sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
-        )
-            .build()
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
-        return Listing(
-            pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                it.networkState
-            },
-            retry = {
-                sourceFactory.sourceLiveData.value?.retryAllFailed()
-            },
-            refresh = {
-                sourceFactory.sourceLiveData.value?.invalidate()
-            },
-            refreshState = refreshState
-        )
-    }
-
-    override fun getListCuratedPhotos(
-        page: Int, perPage: Int,
-        orderBy: String
-    ): Single<List<Photo>> =
-        service.getListCuratedPhotos(
-            page, perPage,
-            orderBy
-        )
-
-    override fun getAPhoto(id: String, w: Int?, h: Int?): Single<Photo> =
-        service.getAPhoto(id, w, h)
-
-    override fun getListRandomPhoto(
-        collections: String?, featured: String?, username: String?,
-        query: String?, orientation: String?, w: Int?, h: Int?,
-        count: Int
-    ): Single<List<Photo>> =
-        service.getListRandomPhoto(
-            collections, featured,
-            username, query, orientation, w, h, count
-        )
-
-    override fun getAPhotoStatistics(id: Int, resolution: String, quantity: Int) =
-        service.getAPhotoStatistics(id, resolution, quantity)
-
-    override fun getAPhotoDownloadLink(id: String): Single<DownLoadLink> =
-        service.getAPhotoDownloadLink(id)
-
-    override fun updateAPhoto(id: String) = service.updateAPhoto(id)
-
-    override fun likeAPhoto(id: String) {
-        service.likeAPhoto(id)
-    }
-
-    override fun unlikeAPhoto(id: String) = service.unlikeAPhoto(id)
 }

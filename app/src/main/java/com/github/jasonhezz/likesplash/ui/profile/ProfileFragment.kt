@@ -12,7 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionFragment
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeFragment
@@ -57,11 +57,11 @@ class ProfileFragment : Fragment() {
             collapsing_toolbar.title = it?.name
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
             bio.text = it?.bio
-            tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.total_photos)
-            tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.total_likes)
+            tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.totalPhotos)
+            tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.totalLikes)
             tab_layout.getTabAt(2)?.text = String.format(
                 getString(R.string.collections),
-                it?.total_collections
+                it?.totalCollections
             )
         })
 

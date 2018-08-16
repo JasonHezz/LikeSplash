@@ -7,7 +7,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.arasthel.spannedgridlayoutmanager.SpanLayoutParams
 import com.arasthel.spannedgridlayoutmanager.SpanSize
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_grid_img.*

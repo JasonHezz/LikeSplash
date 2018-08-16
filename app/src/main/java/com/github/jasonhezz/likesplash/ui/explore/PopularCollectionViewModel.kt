@@ -2,7 +2,7 @@ package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.github.jasonhezz.likesplash.data.ExploreCollection
+import com.github.jasonhezz.likesplash.data.entities.ExploreCollection
 import com.github.jasonhezz.likesplash.repository.ExploreRepository
 
 /**

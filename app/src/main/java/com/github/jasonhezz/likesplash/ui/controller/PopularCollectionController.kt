@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 import android.content.Context
 import com.airbnb.epoxy.TypedEpoxyController
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.ExploreCollection
+import com.github.jasonhezz.likesplash.data.entities.ExploreCollection
 import com.github.jasonhezz.likesplash.data.model.exploreCollection
 import com.github.jasonhezz.likesplash.data.model.exploreCollectionThumb
 import com.github.jasonhezz.likesplash.data.model.exploreTitle

@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.ui.collection
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
 import com.github.jasonhezz.likesplash.repository.Listing
 

@@ -2,7 +2,7 @@ package com.github.jasonhezz.likesplash.ui.controller
 
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.paging.PagingEpoxyController
-import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.user
 

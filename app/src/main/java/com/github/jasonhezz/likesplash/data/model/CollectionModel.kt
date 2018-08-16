@@ -6,7 +6,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_collection.*
@@ -29,19 +29,19 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         collection?.let {
-            if (it.cover_photo?.height != null && it.cover_photo?.width != null) {
-                val aspectRatio = it.cover_photo?.height?.toFloat()!! / it.cover_photo?.width?.toFloat()!!
+            if (it.coverPhoto?.height != null && it.coverPhoto?.width != null) {
+                val aspectRatio = it.coverPhoto?.height?.toFloat()!! / it.coverPhoto?.width?.toFloat()!!
                 holder.collection_iv.aspectRatio = aspectRatio
             }
-            val count = it.total_photos ?: 0
+            val count = it.totalPhotos ?: 0
             holder.count_tv.text =
                 holder.count_tv.context.resources.getQuantityString(R.plurals.photo_plural, count, count)
             holder.title_tv.text = it.title
             holder.user_name.text = it.user?.name
             GlideApp.with(holder.collection_iv.context)
                 .saturateOnLoad()
-                .load(it.cover_photo?.urls?.regular)
-                .thumbnail(Glide.with(holder.user_avatar.context).load(it.cover_photo?.urls?.thumb))
+                .load(it.coverPhoto?.urls?.regular)
+                .thumbnail(Glide.with(holder.user_avatar.context).load(it.coverPhoto?.urls?.thumb))
                 .into(holder.collection_iv)
             GlideApp.with(holder.user_avatar.context)
                 .load(it.user?.profile_image?.medium)

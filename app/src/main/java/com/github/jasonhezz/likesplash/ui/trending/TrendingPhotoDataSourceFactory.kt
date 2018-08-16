@@ -2,9 +2,8 @@ package com.github.jasonhezz.likesplash.ui.trending
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource
-import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.data.api.TrendingService
-import java.util.concurrent.Executor
+import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.data.service.TrendingService
 
 /**
  * Created by JavaCoder on 2017/12/12.

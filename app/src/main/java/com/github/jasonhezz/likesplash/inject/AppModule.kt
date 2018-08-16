@@ -1,13 +1,13 @@
 package com.github.jasonhezz.likesplash.inject
 
 import com.github.jasonhezz.likesplash.App
-import com.github.jasonhezz.likesplash.data.api.CollectionService
-import com.github.jasonhezz.likesplash.data.api.ExploreService
-import com.github.jasonhezz.likesplash.data.api.PhotoService
-import com.github.jasonhezz.likesplash.data.api.SearchService
-import com.github.jasonhezz.likesplash.data.api.TrendingService
 import com.github.jasonhezz.likesplash.data.api.UNSPLASH_NEW_BASE_URL
-import com.github.jasonhezz.likesplash.data.api.UserService
+import com.github.jasonhezz.likesplash.data.service.CollectionService
+import com.github.jasonhezz.likesplash.data.service.ExploreService
+import com.github.jasonhezz.likesplash.data.service.PhotoService
+import com.github.jasonhezz.likesplash.data.service.SearchService
+import com.github.jasonhezz.likesplash.data.service.TrendingService
+import com.github.jasonhezz.likesplash.data.service.UserService
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
 import com.github.jasonhezz.likesplash.repository.CollectionRepositoryIml
 import com.github.jasonhezz.likesplash.repository.ExploreRepository
@@ -44,9 +44,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val DEFAULT_CONNECT_TIMEOUT_MILLIS = 15L
-const val DEFAULT_READ_TIMEOUT_MILLIS = 20L
-const val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
+private const val DEFAULT_CONNECT_TIMEOUT_MILLIS = 15L
+private const val DEFAULT_READ_TIMEOUT_MILLIS = 20L
+private const val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
 
 val appModule = module {
     single {

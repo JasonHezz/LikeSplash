@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.ui.following
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.repository.Listing
 import com.github.jasonhezz.likesplash.repository.UserRepository
 

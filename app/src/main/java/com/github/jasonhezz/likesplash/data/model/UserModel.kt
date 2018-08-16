@@ -4,7 +4,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.extension.loadUrl
 import kotlinx.android.synthetic.main.item_user.*

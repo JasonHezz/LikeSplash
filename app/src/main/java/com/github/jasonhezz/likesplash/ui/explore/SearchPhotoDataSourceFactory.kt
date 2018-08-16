@@ -2,8 +2,8 @@ package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource
-import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.data.api.SearchService
+import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.data.service.SearchService
 
 /**
  * Created by JavaCoder on 2017/12/12.

@@ -11,7 +11,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager
 import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.Collection
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.util.extension.clearItemDecoration
 import com.github.jasonhezz.likesplash.util.extension.withModels
@@ -50,7 +50,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
         super.bind(holder)
         collection?.let {
             holder.title_tv.text = it.title
-            holder.description_tv.text = "${it.total_photos
+            holder.description_tv.text = "${it.totalPhotos
                 ?: 0} photos · Curated by ${it.user?.name}"
             while (holder.tag_rv.itemDecorationCount > 0) {
                 holder.tag_rv.removeItemDecorationAt(0)
@@ -76,7 +76,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
             holder.preview_rv.addItemDecoration(previewImagHDivider)
             holder.preview_rv.addItemDecoration(previewImagVDivider)
             holder.preview_rv.withModels {
-                it.preview_photos?.take(3)
+                it.previewPhotos?.take(3)
                     ?.forEachIndexed { index, photo ->
                         gridImg {
                             id(photo.id)

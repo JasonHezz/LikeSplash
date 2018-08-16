@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
-import com.github.jasonhezz.likesplash.data.Collection
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
-import com.github.jasonhezz.likesplash.data.api.CollectionService
 import com.github.jasonhezz.likesplash.data.api.Resource
+import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.service.CollectionService
 import retrofit2.Call
 import retrofit2.Response
-import java.util.concurrent.Executor
 
 /**
  * Created by JavaCoder on 2017/12/12.

@@ -3,9 +3,9 @@ package com.github.jasonhezz.likesplash.ui.controller
 import android.content.Context
 import com.airbnb.epoxy.EpoxyController
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.ExplorePhoto
-import com.github.jasonhezz.likesplash.data.Photo
-import com.github.jasonhezz.likesplash.data.Tag
+import com.github.jasonhezz.likesplash.data.entities.ExplorePhoto
+import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.data.entities.Tag
 import com.github.jasonhezz.likesplash.data.model.exploreMore
 import com.github.jasonhezz.likesplash.data.model.explorePhoto
 import com.github.jasonhezz.likesplash.data.model.exploreTag

@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.profile
 
 import android.arch.lifecycle.MutableLiveData
-import com.github.jasonhezz.likesplash.data.User
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.repository.UserRepository

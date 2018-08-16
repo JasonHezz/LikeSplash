@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
 import com.airbnb.epoxy.TypedEpoxyController
-import com.github.jasonhezz.likesplash.data.Photo
+import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.model.RelatedCollectionModel_
 import com.github.jasonhezz.likesplash.data.model.TagModel_
 import com.github.jasonhezz.likesplash.data.model.photoDetail
