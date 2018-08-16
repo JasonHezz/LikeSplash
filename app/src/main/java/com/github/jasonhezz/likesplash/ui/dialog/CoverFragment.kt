@@ -1,9 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.dialog
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +13,7 @@ import kotlinx.android.synthetic.main.dialog_add_cover.*
 /**
  * Created by JavaCoder on 2018/1/18.
  */
-class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callbacks,
+class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Companion.Callbacks,
     CreateCollectionFragment.Companion.Callbacks {
 
     private var photo: Photo? = null
@@ -34,7 +31,6 @@ class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callback
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.dialog_add_cover, container, false)
     }
 
@@ -64,8 +60,10 @@ class CoverFragment : DialogFragment(), AddCollectionFragment.Companion.Callback
 
     override fun onCreateCollectionClick() {
         childFragmentManager.beginTransaction().setCustomAnimations(
-            R.anim.slide_in_right,
-            0, R.anim.slide_in_left, 0
+            R.anim.enter_from_right,
+            R.anim.exit_to_left,
+            R.anim.enter_from_left,
+            R.anim.exit_to_right
         ).replace(
             R.id.action_panel,
             CreateCollectionFragment.newInstance()

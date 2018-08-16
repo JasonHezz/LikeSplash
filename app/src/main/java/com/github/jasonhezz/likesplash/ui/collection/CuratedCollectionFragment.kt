@@ -1,17 +1,17 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.Observer
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
+import com.github.jasonhezz.likesplash.ui.dialog.CoverFragment
 import kotlinx.android.synthetic.main.fragment_curated_collection.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -29,9 +29,10 @@ class CuratedCollectionFragment : DialogFragment() {
 
             override fun onCollectionClick(it: Collection) {
 
-                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
-                    putExtra("collection", it)
-                })
+//                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+//                    putExtra("collection", it)
+//                })
+                CoverFragment.newInstance(it.coverPhoto!!, arrayListOf(it)).show(childFragmentManager, "dialog")
             }
         }).apply { setFilterDuplicates(true) }
 
