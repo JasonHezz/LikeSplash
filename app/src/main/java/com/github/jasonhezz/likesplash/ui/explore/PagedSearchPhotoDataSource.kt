@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
-import com.github.jasonhezz.likesplash.data.SearchPhotoResult
+import com.github.jasonhezz.likesplash.data.entities.SearchPhotoResponse
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -46,8 +46,8 @@ class PagedSearchPhotoDataSource(
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         api.searchPhotos(query, 1, params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<SearchPhotoResult> {
-                override fun onFailure(call: Call<SearchPhotoResult>, t: Throwable) {
+            object : retrofit2.Callback<SearchPhotoResponse> {
+                override fun onFailure(call: Call<SearchPhotoResponse>, t: Throwable) {
                     retry = {
                         loadInitial(params, callback)
                     }
@@ -57,8 +57,8 @@ class PagedSearchPhotoDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<SearchPhotoResult>,
-                    response: Response<SearchPhotoResult>
+                    call: Call<SearchPhotoResponse>,
+                    response: Response<SearchPhotoResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)
@@ -85,8 +85,8 @@ class PagedSearchPhotoDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         networkState.postValue(Resource.MORE)
         api.searchPhotos(query, params.key, params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<SearchPhotoResult> {
-                override fun onFailure(call: Call<SearchPhotoResult>, t: Throwable) {
+            object : retrofit2.Callback<SearchPhotoResponse> {
+                override fun onFailure(call: Call<SearchPhotoResponse>, t: Throwable) {
                     retry = {
                         loadAfter(params, callback)
                     }
@@ -94,8 +94,8 @@ class PagedSearchPhotoDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<SearchPhotoResult>,
-                    response: Response<SearchPhotoResult>
+                    call: Call<SearchPhotoResponse>,
+                    response: Response<SearchPhotoResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)

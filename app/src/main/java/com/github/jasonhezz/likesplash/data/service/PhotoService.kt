@@ -16,18 +16,24 @@ import retrofit2.http.Query
 interface PhotoService {
     @GET("photos/")
     fun getListPhotos(
-        @Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
         @Query("order_by") orderBy: OrderBy = OrderBy.LATEST
     ): Call<List<Photo>>
 
     @GET("photos/curated")
     fun getListCuratedPhotos(
-        @Query("page") page: Int = 1, @Query("per_page") perPage: Int = 10,
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
         @Query("order_by") orderBy: OrderBy
     ): Single<List<Photo>>
 
     @GET("photos/{id}")
-    fun getAPhoto(@Path("id") id: String, @Query("w") w: Int? = null, @Query("h") h: Int? = null):
+    fun getAPhoto(
+        @Path("id") id: String,
+        @Query("w") w: Int? = null,
+        @Query("h") h: Int? = null
+    ):
         Single<Photo>
 
     @GET("photos/random")
@@ -39,19 +45,20 @@ interface PhotoService {
         @Query("orientation") orientation: String? = null,
         @Query("w") w: Int? = null,
         @Query("h") h: Int? = null,
-        @IntRange(from = 1, to = 30) @Query(
-            "count"
-        ) count: Int = 1
+        @IntRange(from = 1, to = 30) @Query("count") count: Int = 1
     ): Single<List<Photo>>
 
     @GET("photos/{id}/statistics")
     fun getAPhotoStatistics(
-        @Path("id") id: Int, @Query("resolution") resolution: String? = null,
+        @Path("id") id: Int,
+        @Query("resolution") resolution: String? = null,
         @Query("quantity") quantity: Int = 30
     )
 
     @GET("photos/{id}/download")
-    fun getAPhotoDownloadLink(@Path("id") id: String): Single<DownLoadLink>
+    fun getAPhotoDownloadLink(
+        @Path("id") id: String
+    ): Single<DownLoadLink>
 
     //Update a photo on behalf of the logged-in user. This requires the write_photos scope.
     @PUT("photos/{id}")

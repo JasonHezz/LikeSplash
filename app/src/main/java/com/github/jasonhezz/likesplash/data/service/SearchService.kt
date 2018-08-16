@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.data.service
 
-import com.github.jasonhezz.likesplash.data.SearchPhotoResult
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.SearchPhotoResponse
 import com.github.jasonhezz.likesplash.data.entities.User
 import io.reactivex.Single
 import retrofit2.Call
@@ -13,20 +13,20 @@ interface SearchService {
     fun searchPhotos(
         @Query("query") query: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int
-    ): Call<SearchPhotoResult>
+        @Query("per_page") perPage: Int
+    ): Call<SearchPhotoResponse>
 
     @GET("search/photos")
     fun searchCollections(
         @Query("query") query: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int
+        @Query("per_page") perPage: Int
     ): Single<List<Collection>>
 
     @GET("search/users")
     fun searchUsers(
         @Query("query") query: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int
+        @Query("per_page") perPage: Int
     ): Single<List<User>>
 }

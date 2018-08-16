@@ -72,14 +72,14 @@ interface CollectionService {
 
     @POST("collections/collection_id/add")
     fun addPhotoToCollection(
-        @Path("collection_id") collection_id: Int,
-        @Query("photo_id") photo_id: String
+        @Path("collection_id") collectionId: Int,
+        @Query("photo_id") photoId: String
     ): Single<ResponseBody>
 
     //Remove a photo from one of the logged-in user’s collections. Requires the write_collections scope
     @POST("collections/collection_id/remove")
     fun removePhotoToCollection(
-        @Path("collection_id") collection_id: Int,
-        @Query("photo_id") photo_id: String
+        @Path("collection_id") collectionId: Int,
+        @Query("photo_id") photoId: String
     ): Single<ResponseBody>
 }

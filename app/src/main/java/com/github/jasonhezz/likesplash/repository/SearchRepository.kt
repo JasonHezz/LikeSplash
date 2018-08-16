@@ -14,18 +14,18 @@ interface SearchRepository {
 
     fun searchPagePhotos(
         query: String,
-        page: Int = 1, per_page: Int = 20
+        page: Int = 1, perPage: Int = 20
     ): Listing<Photo>
 
     fun searchPhotos(
         query: String,
-        page: Int = 1, per_page: Int = 20
+        page: Int = 1, perPage: Int = 20
     ): LiveData<List<Photo>>
 
     fun searchPageCollections(
         query: String,
-        page: Int = 1, per_page: Int = 20
+        page: Int = 1, perPage: Int = 20
     ): Single<List<Collection>>
 
-    fun searchUsers(query: String, page: Int = 1, per_page: Int = 20): Single<List<User>>
+    fun searchUsers(query: String, page: Int = 1, perPage: Int = 20): Single<List<User>>
 }

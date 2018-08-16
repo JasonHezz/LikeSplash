@@ -24,21 +24,21 @@ interface UserService {
     fun getUserFollowing(
         @Path("username") username: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int
+        @Query("per_page") perPage: Int
     ): Single<List<User>>
 
     @GET("users/{username}/followers")
     fun getUserFollowers(
         @Path("username") username: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int
+        @Query("per_page") perPage: Int
     ): Call<List<User>>
 
     @GET("users/{username}/likes")
     fun getUserLikes(
         @Path("username") username: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int,
+        @Query("per_page") perPage: Int,
         @Query("order_by") orderBy: OrderBy = OrderBy.LATEST
     ): Call<List<Photo>>
 
@@ -46,7 +46,7 @@ interface UserService {
     fun getUserPhotos(
         @Path("username") username: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int,
+        @Query("per_page") perPage: Int,
         @Query("order_by") orderBy: OrderBy = OrderBy.LATEST
     ): Call<List<Photo>>
 
@@ -54,7 +54,7 @@ interface UserService {
     fun getUserCollection(
         @Path("username") username: String,
         @Query("page") page: Int,
-        @Query("per_page") per_page: Int,
+        @Query("per_page") perPage: Int,
         @Query("order_by") orderBy: OrderBy = OrderBy.LATEST
     ): Call<List<Collection>>
 

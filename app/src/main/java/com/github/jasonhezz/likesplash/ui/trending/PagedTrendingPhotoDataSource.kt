@@ -5,7 +5,7 @@ import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import android.net.Uri
-import com.github.jasonhezz.likesplash.data.TrendingFeed
+import com.github.jasonhezz.likesplash.data.entities.TrendingResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.TrendingService
@@ -41,9 +41,9 @@ class PagedTrendingPhotoDataSource(
 
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Photo>) {
         networkState.postValue(Resource.MORE)
-        api.getTrendingFeed(params.key, per_page = params.requestedLoadSize)
-            .enqueue(object : retrofit2.Callback<TrendingFeed> {
-                override fun onFailure(call: Call<TrendingFeed>?, t: Throwable?) {
+        api.getTrendingFeed(params.key, perPage = params.requestedLoadSize)
+            .enqueue(object : retrofit2.Callback<TrendingResponse> {
+                override fun onFailure(call: Call<TrendingResponse>?, t: Throwable?) {
                     retry = {
                         loadAfter(params, callback)
                     }
@@ -52,9 +52,9 @@ class PagedTrendingPhotoDataSource(
                     networkState.postValue(Resource.error(t?.message ?: "unknown err"))
                 }
 
-                override fun onResponse(call: Call<TrendingFeed>?, response: Response<TrendingFeed>) {
+                override fun onResponse(call: Call<TrendingResponse>?, response: Response<TrendingResponse>) {
                     if (response.isSuccessful) {
-                        val uri = Uri.parse(response.body()?.next_page)
+                        val uri = Uri.parse(response.body()?.nextPage)
                         val page = uri.getQueryParameter("after")
                         retry = null
                         networkState.postValue(Resource.LOADED)
@@ -78,9 +78,9 @@ class PagedTrendingPhotoDataSource(
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         try {
-            val response = api.getTrendingFeed(per_page = params.requestedLoadSize).execute()
+            val response = api.getTrendingFeed(perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
-                val uri = Uri.parse(response.body()?.next_page)
+                val uri = Uri.parse(response.body()?.nextPage)
                 val items = response.body()?.photos ?: emptyList()
                 val page = uri.getQueryParameter("after")
                 callback.onResult(items, null, page)
@@ -100,8 +100,8 @@ class PagedTrendingPhotoDataSource(
         }
         /*networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
-        api.getTrendingFeed(per_page = params.requestedLoadSize).enqueue(object : retrofit2.Callback<TrendingFeed> {
-            override fun onFailure(call: Call<TrendingFeed>?, t: Throwable?) {
+        api.getTrendingFeed(per_page = params.requestedLoadSize).enqueue(object : retrofit2.Callback<TrendingResponse> {
+            override fun onFailure(call: Call<TrendingResponse>?, t: Throwable?) {
                 retry = {
                     loadInitial(params, callback)
                 }
@@ -110,9 +110,9 @@ class PagedTrendingPhotoDataSource(
                 networkState.postValue(Resource.error(t?.message ?: "unknown err"))
             }
 
-            override fun onResponse(call: Call<TrendingFeed>?, response: Response<TrendingFeed>) {
+            override fun onResponse(call: Call<TrendingResponse>?, response: Response<TrendingResponse>) {
                 if (response.isSuccessful) {
-                    val uri = Uri.parse(response.body()?.next_page)
+                    val uri = Uri.parse(response.body()?.nextPage)
                     val items = response.body()?.photos ?: emptyList()
                     val page = uri.getQueryParameter("after")
                     retry = null

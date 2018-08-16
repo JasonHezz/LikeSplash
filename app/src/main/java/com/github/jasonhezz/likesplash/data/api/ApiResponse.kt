@@ -23,9 +23,6 @@ import java.io.IOException
 import java.util.Collections
 import java.util.regex.Pattern
 
-/**
- * Created by JavaCoder on 2017/11/27.
- */
 class ApiResponse<T> {
     private val code: Int
     val body: T?

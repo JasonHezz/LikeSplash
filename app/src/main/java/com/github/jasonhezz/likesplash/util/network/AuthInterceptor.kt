@@ -1,6 +1,6 @@
 package com.github.jasonhezz.likesplash.util.network
 
-import com.github.jasonhezz.likesplash.data.api.CLIENT_ID
+import com.github.jasonhezz.likesplash.data.api.SplashConstants.CLIENT_ID
 import okhttp3.Interceptor
 import okhttp3.Response
 

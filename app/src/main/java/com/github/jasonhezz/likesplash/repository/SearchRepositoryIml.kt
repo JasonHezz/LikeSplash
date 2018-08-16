@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import com.github.jasonhezz.likesplash.data.SearchPhotoResult
+import com.github.jasonhezz.likesplash.data.entities.SearchPhotoResponse
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -19,11 +19,11 @@ import retrofit2.Response
 
 class SearchRepositoryIml(private val service: SearchService) : SearchRepository {
 
-    override fun searchPagePhotos(query: String, page: Int, per_page: Int): Listing<Photo> {
+    override fun searchPagePhotos(query: String, page: Int, perPage: Int): Listing<Photo> {
         val sourceFactory = SearchPhotoDataSourceFactory(query, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         )
             .build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
@@ -44,13 +44,13 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
         )
     }
 
-    override fun searchPhotos(query: String, page: Int, per_page: Int): LiveData<List<Photo>> {
+    override fun searchPhotos(query: String, page: Int, perPage: Int): LiveData<List<Photo>> {
         val result = MutableLiveData<List<Photo>>()
-        service.searchPhotos(query, page, per_page).enqueue(object : Callback<SearchPhotoResult> {
-            override fun onFailure(call: Call<SearchPhotoResult>?, t: Throwable?) {
+        service.searchPhotos(query, page, perPage).enqueue(object : Callback<SearchPhotoResponse> {
+            override fun onFailure(call: Call<SearchPhotoResponse>?, t: Throwable?) {
             }
 
-            override fun onResponse(call: Call<SearchPhotoResult>?, response: Response<SearchPhotoResult>?) {
+            override fun onResponse(call: Call<SearchPhotoResponse>?, response: Response<SearchPhotoResponse>?) {
                 response?.body()?.results?.let { result.value = it }
             }
         })
@@ -59,12 +59,12 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
 
     override fun searchPageCollections(
         query: String, page: Int,
-        per_page: Int
+        perPage: Int
     ): Single<List<Collection>> {
-        return service.searchCollections(query, page, per_page)
+        return service.searchCollections(query, page, perPage)
     }
 
-    override fun searchUsers(query: String, page: Int, per_page: Int): Single<List<User>> {
-        return service.searchUsers(query, page, per_page)
+    override fun searchUsers(query: String, page: Int, perPage: Int): Single<List<User>> {
+        return service.searchUsers(query, page, perPage)
     }
 }

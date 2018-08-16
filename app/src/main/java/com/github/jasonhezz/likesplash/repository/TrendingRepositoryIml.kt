@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.repository
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import com.github.jasonhezz.likesplash.data.TrendingFeed
+import com.github.jasonhezz.likesplash.data.entities.TrendingResponse
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.TrendingService
@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.ui.trending.TrendingPhotoDataSourceFactor
 import io.reactivex.Single
 
 class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepository {
-    override fun getTrendingFeed(after: String?): Single<TrendingFeed> =
+    override fun getTrendingFeed(after: String?): Single<TrendingResponse> =
         trendingService.getTrendingFeed(after)
 
     override fun getFollowingFeed(after: String?) = trendingService.getFollowingFeed(after)

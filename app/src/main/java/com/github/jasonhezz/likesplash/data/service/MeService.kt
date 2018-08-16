@@ -15,8 +15,8 @@ interface MeService {
     @PUT("me")
     fun updateMeProfile(
         @Query("username") username: String? = null,
-        @Query("first_name") first_name: String? = null,
-        @Query("last_name") last_name: String? = null,
+        @Query("first_name") firstName: String? = null,
+        @Query("last_name") lastName: String? = null,
         @Query("email") email: String? = null,
         @Query("url") url: String? = null,
         @Query("location") location: String? = null,

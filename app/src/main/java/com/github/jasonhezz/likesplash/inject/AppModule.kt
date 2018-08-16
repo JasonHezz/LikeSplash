@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.inject
 
 import com.github.jasonhezz.likesplash.App
-import com.github.jasonhezz.likesplash.data.api.UNSPLASH_NEW_BASE_URL
+import com.github.jasonhezz.likesplash.data.api.SplashConstants.UNSPLASH_NEW_BASE_URL
 import com.github.jasonhezz.likesplash.data.service.CollectionService
 import com.github.jasonhezz.likesplash.data.service.MockService
 import com.github.jasonhezz.likesplash.data.service.PhotoService
