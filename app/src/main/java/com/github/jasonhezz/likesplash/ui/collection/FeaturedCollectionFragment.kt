@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.ui.controller.PreviewCollectionPagedController
 import kotlinx.android.synthetic.main.fragment_featured_collection.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -20,7 +22,14 @@ import timber.log.Timber
 class FeaturedCollectionFragment : Fragment() {
 
     private val model: FeaturedCollectionViewModel by viewModel()
-    private val controller = PreviewCollectionPagedController().apply { setFilterDuplicates(true) }
+    private val controller =
+        PreviewCollectionPagedController(object : PreviewCollectionPagedController.AdapterCallbacks {
+            override fun onCollectionClick(it: Collection) {
+                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+                    putExtra("collection", it)
+                })
+            }
+        }).apply { setFilterDuplicates(true) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -25,7 +25,7 @@ abstract class GridImgModel : EpoxyModelWithHolder<BaseViewHolder>() {
     var spans = 1
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    var tagClickListener: View.OnClickListener? = null
+    var onClickListener: View.OnClickListener? = null
 
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
@@ -33,6 +33,7 @@ abstract class GridImgModel : EpoxyModelWithHolder<BaseViewHolder>() {
             .saturateOnLoad()
             .load(photo?.urls?.regular)
             .into(holder.photo_iv)
+        holder.photo_iv.setOnClickListener(onClickListener)
         holder.containerView?.layoutParams = SpanLayoutParams(SpanSize(spans, spans))
     }
 }

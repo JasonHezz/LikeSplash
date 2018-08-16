@@ -7,8 +7,9 @@ import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.CollectionService
-import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.collection.CollectionPhotosDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionPhotosDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionDataSourceFactory
 
 class CollectionRepositoryIml(
@@ -64,8 +65,33 @@ class CollectionRepositoryIml(
         )
     }
 
-    override fun getListPhotoCollections(id: String, perPage: Int): Listing<Photo> {
-        val sourceFactory = CollectionDetailDataSourceFactory(id, api)
+    override fun getCuratedCollectionPhotos(id: String, perPage: Int): Listing<Photo> {
+        val sourceFactory = CuratedCollectionPhotosDataSourceFactory(id, api)
+        val livePagedList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+        )
+            .build()
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
+    }
+
+    override fun getCollectionPhotos(id: String, perPage: Int): Listing<Photo> {
+        val sourceFactory = CollectionPhotosDataSourceFactory(id, api)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()

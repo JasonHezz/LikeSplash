@@ -13,7 +13,7 @@ data class Collection(
     @SerializedName("published_at") val publishedAt: String? = null,
     @SerializedName("updated_at") val updatedAt: String? = null,
     @SerializedName("curated") val curated: Boolean = false,
-    @SerializedName("totalPhotos") val totalPhotos: Int? = null,
+    @SerializedName("total_photos") val totalPhotos: Int? = null,
     @SerializedName("private") val private: Boolean = false,
     @SerializedName("share_key") val shareKey: String? = null,
     @SerializedName("cover_photo") val coverPhoto: Photo? = null,

@@ -13,17 +13,12 @@ import retrofit2.HttpException
 /**
  * Created by JavaCoder on 2017/12/12.
  */
-class PagedCollectionDetailDataSource(
+class PagedCollectionPhotosDataSource(
     val id: String,
     val api: CollectionService
 ) : PageKeyedDataSource<Int, Photo>() {
 
-    // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
-    /**
-     * There is no sync on the state because paging will always call loadInitial first then wait
-     * for it to return some success value before calling loadAfter.
-     */
     val networkState = MutableLiveData<Resource>()
     val initialLoad = MutableLiveData<Resource>()
 
@@ -45,7 +40,7 @@ class PagedCollectionDetailDataSource(
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         try {
-            val response = api.getCuratedCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
+            val response = api.getCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
                 val apiResponse = ApiResponse(response)
                 val items = apiResponse.body ?: emptyList()
@@ -69,7 +64,7 @@ class PagedCollectionDetailDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         networkState.postValue(Resource.MORE)
         try {
-            val response = api.getCuratedCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
+            val response = api.getCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
                 val apiResponse = ApiResponse(response)
                 val items = apiResponse.body ?: emptyList()

@@ -50,11 +50,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
         super.bind(holder)
         collection?.let {
             holder.title_tv.text = it.title
-            holder.description_tv.text = "${it.totalPhotos
-                ?: 0} photos · Curated by ${it.user?.name}"
-            while (holder.tag_rv.itemDecorationCount > 0) {
-                holder.tag_rv.removeItemDecorationAt(0)
-            }
+            holder.description_tv.text = "${it.totalPhotos ?: 0} photos · Curated by ${it.user?.name}"
             holder.tag_rv.clearItemDecoration()
             holder.tag_rv.addItemDecoration(tagDivider)
             holder.tag_rv.withModels {
@@ -71,7 +67,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
                 orientation = SpannedGridLayoutManager.Orientation.VERTICAL,
                 spans = 3
             )
-            holder.preview_rv.setOnClickListener(collectionClickListener)
+
             holder.preview_rv.clearItemDecoration()
             holder.preview_rv.addItemDecoration(previewImagHDivider)
             holder.preview_rv.addItemDecoration(previewImagVDivider)
@@ -81,10 +77,10 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
                         gridImg {
                             id(photo.id)
                             photo(photo)
+                            onClickListener(collectionClickListener)
                             spans(if (index == 0) 2 else 1)
                         }
                     }
-
             }
         }
     }

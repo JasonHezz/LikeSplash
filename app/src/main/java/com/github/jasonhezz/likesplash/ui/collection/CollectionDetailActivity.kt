@@ -3,6 +3,8 @@ package com.github.jasonhezz.likesplash.ui.collection
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
+import androidx.core.view.isVisible
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Collection
@@ -22,9 +24,14 @@ class CollectionDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collection_detail)
-        setProperty("id", "${collection?.id}")
+        inject()
         initUI()
         initController()
+    }
+
+    private fun inject() {
+        setProperty("id", "${collection?.id}")
+        setProperty("isCurated", intent.getBooleanExtra("isCurated", false))
     }
 
     private fun initController() {
@@ -54,7 +61,8 @@ class CollectionDetailActivity : AppCompatActivity() {
         toolbar.title = collection?.title
         toolbar.setNavigationOnClickListener { finish() }
         user_name.text = collection?.user?.name
-        description_tv.text = collection?.description
+        if (TextUtils.isEmpty(collection?.description)) description_tv.isVisible = false
+        else description_tv.text = collection?.description
         GlideApp
             .with(this)
             .load(collection?.user?.profile_image?.medium)

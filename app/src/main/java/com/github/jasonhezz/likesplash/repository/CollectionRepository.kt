@@ -13,6 +13,8 @@ interface CollectionRepository {
 
     fun getListFeaturedCollections(perPage: Int = 20): Listing<Collection>
 
-    fun getListPhotoCollections(id: String, perPage: Int = 20): Listing<Photo>
+    fun getCuratedCollectionPhotos(id: String, perPage: Int = 20): Listing<Photo>
+
+    fun getCollectionPhotos(id: String, perPage: Int = 20): Listing<Photo>
 }
 

@@ -3,15 +3,16 @@ package com.github.jasonhezz.likesplash.ui.collection
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
-import com.github.jasonhezz.likesplash.data.entities.Listing
 
 /**
  * Created by JavaCoder on 2017/12/12.
  */
 class CollectionDetailViewModel(
     val id: String,
+    val isCurated: Boolean,
     repository: CollectionRepository
 ) : ViewModel() {
 
@@ -21,7 +22,7 @@ class CollectionDetailViewModel(
     val refreshState = Transformations.switchMap(result) { it.refreshState }!!
 
     init {
-        result.postValue(repository.getListPhotoCollections(id))
+        result.postValue(if (isCurated) repository.getCuratedCollectionPhotos(id) else repository.getCollectionPhotos(id))
     }
 
     fun refresh() {

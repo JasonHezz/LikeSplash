@@ -131,7 +131,7 @@ val appModule = module {
     viewModel { PopularPhotoViewModel(get()) }
     viewModel { FollowerViewModel(getProperty("id"), get()) }
     viewModel { FollowingViewModel(getProperty("id"), get()) }
-    viewModel { CollectionDetailViewModel(getProperty("id"), get()) }
+    viewModel { CollectionDetailViewModel(getProperty("id"), getProperty("isCurated", false), get()) }
     viewModel { UserLikeViewModel(getProperty("id"), get()) }
     viewModel { UserCollectionViewModel(getProperty("id"), get()) }
     viewModel { UserPhotoViewModel(getProperty("id"), get()) }
