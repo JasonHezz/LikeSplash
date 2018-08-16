@@ -4,6 +4,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.enumerations.OrderBy

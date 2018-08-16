@@ -12,16 +12,16 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionFragment
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeFragment
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoFragment
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
-import com.github.jasonhezz.likesplash.util.extension.loadUrl
 import com.github.jasonhezz.likesplash.util.extension.showSnackbar
+import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -53,7 +53,10 @@ class ProfileFragment : Fragment() {
         initToolbar()
         initViewPager()
         viewModel.liveUser.observe(this, Observer {
-            user_avatar.loadUrl(it?.profile_image?.large)
+            GlideApp
+                .with(this)
+                .load(user?.profile_image)
+                .into(user_avatar)
             collapsing_toolbar.title = it?.name
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
             bio.text = it?.bio

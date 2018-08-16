@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.repository
 
 import android.arch.lifecycle.LiveData
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import io.reactivex.Single

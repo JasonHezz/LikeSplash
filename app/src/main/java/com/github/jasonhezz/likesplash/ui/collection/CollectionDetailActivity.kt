@@ -4,8 +4,8 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_collection_detail.*
@@ -55,7 +55,13 @@ class CollectionDetailActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { finish() }
         user_name.text = collection?.user?.name
         description_tv.text = collection?.description
-        GlideApp.with(this).load(collection?.user?.profile_image?.medium).into(user_avatar)
-        GlideApp.with(this).load(collection?.coverPhoto?.urls?.regular).into(cover)
+        GlideApp
+            .with(this)
+            .load(collection?.user?.profile_image?.medium)
+            .into(user_avatar)
+        GlideApp
+            .with(this)
+            .load(collection?.coverPhoto?.urls?.regular)
+            .into(cover)
     }
 }

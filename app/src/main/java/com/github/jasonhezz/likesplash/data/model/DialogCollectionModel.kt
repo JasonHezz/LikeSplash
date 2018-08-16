@@ -32,7 +32,9 @@ abstract class DialogCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
                 R.plurals.photo_plural, count, count
             )
             holder.title_tv.text = it.title
-            GlideApp.with(holder.collection_iv.context).load(it.coverPhoto?.urls?.regular)
+            GlideApp
+                .with(holder.collection_iv)
+                .load(it.coverPhoto?.urls?.regular)
                 .into(holder.collection_iv)
             holder.card.setOnClickListener(collectionClickListener)
         }

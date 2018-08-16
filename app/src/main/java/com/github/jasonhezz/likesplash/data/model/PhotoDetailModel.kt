@@ -25,11 +25,12 @@ abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
             val aspectRatio = it.height.toFloat() / it.width.toFloat()
             holder.photo_iv.aspectRatio = aspectRatio
             holder.user_name.text = it.user?.name
-            GlideApp.with(holder.photo_iv.context)
+            GlideApp
+                .with(holder.photo_iv)
                 .load(it.urls?.regular)
-                .thumbnail(Glide.with(holder.user_avatar.context).load(it.urls?.thumb))
+                .thumbnail(Glide.with(holder.user_avatar).load(it.urls?.thumb))
                 .into(holder.photo_iv)
-            GlideApp.with(holder.user_avatar.context)
+            GlideApp.with(holder.user_avatar)
                 .load(it.user?.profile_image?.large)
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(holder.user_avatar)

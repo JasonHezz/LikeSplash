@@ -28,7 +28,8 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         if (photo != null) {
-            GlideApp.with(holder.photo_iv.context)
+            GlideApp
+                .with(holder.photo_iv)
                 .saturateOnLoad()
                 .load(photo?.urls?.regular)
                 .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))

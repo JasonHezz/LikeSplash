@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.repository
 
 import com.github.jasonhezz.likesplash.data.TrendingFeed
+import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import io.reactivex.Single
 

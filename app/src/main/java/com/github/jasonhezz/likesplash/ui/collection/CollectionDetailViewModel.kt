@@ -5,7 +5,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
-import com.github.jasonhezz.likesplash.repository.Listing
+import com.github.jasonhezz.likesplash.data.entities.Listing
 
 /**
  * Created by JavaCoder on 2017/12/12.

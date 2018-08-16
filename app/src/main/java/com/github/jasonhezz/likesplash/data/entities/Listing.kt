@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.jasonhezz.likesplash.repository
+package com.github.jasonhezz.likesplash.data.entities
 
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
