@@ -27,6 +27,9 @@ class CollectionDetailActivity : AppCompatActivity() {
         inject()
         initUI()
         initController()
+        fab.setOnClickListener {
+            fabProgressCircle.show()
+        }
     }
 
     private fun inject() {
