@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -29,10 +30,10 @@ class CuratedCollectionFragment : DialogFragment() {
 
             override fun onCollectionClick(it: Collection) {
 
-//                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
-//                    putExtra("collection", it)
-//                })
-                CoverFragment.newInstance(it.coverPhoto!!, arrayListOf(it)).show(childFragmentManager, "dialog")
+                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+                    putExtra("collection", it)
+                })
+//                CoverFragment.newInstance(it.coverPhoto!!, arrayListOf(it)).show(childFragmentManager, "dialog")
             }
         }).apply { setFilterDuplicates(true) }
 

@@ -16,7 +16,7 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="snap">
+                app:layout_scrollFlags="scroll">
 
             <ImageView
                     android:id="@+id/cover"
