@@ -55,7 +55,7 @@ class ProfileFragment : Fragment() {
         viewModel.liveUser.observe(this, Observer {
             GlideApp
                 .with(this)
-                .load(user?.profile_image)
+                .load(user?.profile_image?.medium)
                 .into(user_avatar)
             collapsing_toolbar.title = it?.name
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
