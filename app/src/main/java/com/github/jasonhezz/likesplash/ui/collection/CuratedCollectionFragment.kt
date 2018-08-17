@@ -31,7 +31,7 @@ class CuratedCollectionFragment : DialogFragment() {
 
                 startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
                     putExtra("collection", it)
-                    putExtra("isCurated", false)
+                    putExtra("isCurated", true)
                 })
 //                CoverFragment.newInstance(it.coverPhoto!!, arrayListOf(it)).show(childFragmentManager, "dialog")
             }
