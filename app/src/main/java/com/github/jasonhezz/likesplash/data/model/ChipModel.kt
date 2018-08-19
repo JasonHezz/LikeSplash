@@ -8,6 +8,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Tag
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
+import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import kotlinx.android.synthetic.main.item_chip.*
 
 /**
@@ -24,10 +25,9 @@ abstract class ChipModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         tag?.let {
-            holder.chip.chipText = it.title?.capitalize()
-            //holder.chip.setOnClickListener(tagClickListener)
+            holder.chip.text = it.title?.capitalize()
             holder.chip.setOnClickListener {
-                Toast.makeText(it.context, tag?.title, Toast.LENGTH_SHORT).show()
+                it.showSnackbar(tag?.title ?: "")
             }
         }
     }
