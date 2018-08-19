@@ -29,6 +29,7 @@
         android:background="@color/colorPrimary"
         app:tabBackground="@android:color/transparent"
         app:tabGravity="fill"
+        app:tabIndicator="@drawable/tab_indicator"
         style="@style/Widget.Splash.UserTabLayout"
         >
 

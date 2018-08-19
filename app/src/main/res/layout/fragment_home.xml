@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_scrollFlags="scroll"
+        app:tabIndicator="@drawable/tab_indicator"
         app:tabBackground="@android:color/transparent"
         app:tabGravity="fill"
         style="@style/Widget.Splash.UserTabLayout"
