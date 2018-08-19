@@ -1,7 +1,5 @@
 package com.github.jasonhezz.likesplash.data.model
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -35,8 +33,6 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
                 .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
                 .into(holder.photo_iv)
             holder.photo_iv.setOnClickListener(photoClickListener)
-        } else {
-            holder.photo_iv.background = ColorDrawable(Color.parseColor("#9e9e9e"))
         }
     }
 }

@@ -6,7 +6,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="4dp"
     app:cardElevation="0dp"
     >
   <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Food"
         style="@style/TextAppearance.Splash.Subhead"
         />
   </android.support.constraint.ConstraintLayout>
