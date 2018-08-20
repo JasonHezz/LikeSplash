@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
@@ -55,11 +56,16 @@ class ProfileFragment : Fragment() {
         viewModel.liveUser.observe(this, Observer {
             GlideApp
                 .with(this)
-                .load(user?.profile_image?.medium)
+                .load(user?.profile_image?.large)
                 .into(user_avatar)
             collapsing_toolbar.title = it?.name
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
+            if (it?.bio == null) bio.isVisible = false
+            if (it?.location == null) location.isVisible = false
+            if (it?.portfolioUrl == null) web_link.isVisible = false
             bio.text = it?.bio
+            location.text = it?.location
+            web_link.text = it?.portfolioUrl
             tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.totalPhotos)
             tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.totalLikes)
             tab_layout.getTabAt(2)?.text = String.format(
