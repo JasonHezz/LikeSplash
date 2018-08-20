@@ -23,11 +23,11 @@ class UserRepositoryIml(
         return service.getUserProfile(username, w, h)
     }
 
-    override fun getUserFollowing(username: String, page: Int, per_page: Int): Listing<User> {
+    override fun getUserFollowing(username: String, page: Int, perPage: Int): Listing<User> {
         val sourceFactory = UserFollowingDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
@@ -47,11 +47,11 @@ class UserRepositoryIml(
         )
     }
 
-    override fun getUserFollowers(username: String, page: Int, per_page: Int): Listing<User> {
+    override fun getUserFollowers(username: String, page: Int, perPage: Int): Listing<User> {
         val sourceFactory = UserFollowerDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
@@ -72,13 +72,13 @@ class UserRepositoryIml(
     }
 
     override fun getUserLikes(
-        username: String, page: Int, per_page: Int,
+        username: String, page: Int, perPage: Int,
         orderBy: OrderBy
     ): Listing<Photo> {
         val sourceFactory = UserLikeDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
@@ -99,13 +99,13 @@ class UserRepositoryIml(
     }
 
     override fun getUserPhotos(
-        username: String, page: Int, per_page: Int,
+        username: String, page: Int, perPage: Int,
         orderBy: OrderBy
     ): Listing<Photo> {
         val sourceFactory = UserPhotoDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
@@ -126,13 +126,13 @@ class UserRepositoryIml(
     }
 
     override fun getUserCollection(
-        username: String, page: Int, per_page: Int,
+        username: String, page: Int, perPage: Int,
         orderBy: OrderBy
     ): Listing<Collection> {
         val sourceFactory = UserCollectionDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(per_page).setPageSize(per_page).build()
+            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.initialLoad
