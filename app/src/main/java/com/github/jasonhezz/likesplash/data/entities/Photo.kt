@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
@@ -10,6 +11,7 @@ import java.io.Serializable
  */
 //@Parcelize not work under lolipop will throw install_failed_uid_changed
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Photo(
     @Json(name = "id") val id: String,
     @Json(name = "created_at") val createdAt: String? = null,

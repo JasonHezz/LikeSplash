@@ -1,7 +1,9 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class TotalStats(
     @Json(name = "photos") val photos: Int?,
     @Json(name = "download") val download: Int?,

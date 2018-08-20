@@ -36,7 +36,6 @@ import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -70,7 +69,7 @@ val appModule = module {
             .baseUrl(UNSPLASH_NEW_BASE_URL)
             .client(get())
             .addConverterFactory(MoshiConverterFactory.create(
-                Moshi.Builder().add(KotlinJsonAdapterFactory()).build()).asLenient())
+                Moshi.Builder().build()).asLenient())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
