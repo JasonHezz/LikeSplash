@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'me.zhanghai.android.materialedittext:library:1.0.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.google.android:flexbox:0.3.2'
+    implementation 'com.google.android:flexbox:1.0.0'
     implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
     implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
 
