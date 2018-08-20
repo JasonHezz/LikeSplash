@@ -1,12 +1,12 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RelatedCollections(
-    @SerializedName("total") val total: Int? = null,
-    @SerializedName("type") val type: String? = null,
-    @SerializedName("results") val results: List<Collection>? = null
+    @Json(name = "total") val total: Int? = null,
+    @Json(name = "type") val type: String? = null,
+    @Json(name = "results") val results: List<Collection>? = null
 ) : Parcelable

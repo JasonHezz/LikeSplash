@@ -1,9 +1,9 @@
 package com.github.jasonhezz.likesplash.data.entities
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class ExplorePhoto(
-    @SerializedName("name") val name: String? = null,
-    @SerializedName("descriptionFragment") val descriptionFragment: String? = null,
-    @SerializedName("related") val related: List<Tag>? = null
+    @Json(name = "name") val name: String? = null,
+    @Json(name = "descriptionFragment") val descriptionFragment: String? = null,
+    @Json(name = "related") val related: List<Tag>? = null
 )

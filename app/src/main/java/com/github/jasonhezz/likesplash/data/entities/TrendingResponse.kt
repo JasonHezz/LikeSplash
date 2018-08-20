@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.data.entities
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class TrendingResponse(
-    @SerializedName("next_page") val nextPage: String?,
-    @SerializedName("photos") val photos: List<Photo>?
+    @Json(name = "next_page") val nextPage: String?,
+    @Json(name = "photos") val photos: List<Photo>?
 )

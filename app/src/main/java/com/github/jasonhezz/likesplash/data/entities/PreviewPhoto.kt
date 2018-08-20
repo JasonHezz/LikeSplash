@@ -5,9 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Categories(
+data class PreviewPhoto(
     @Json(name = "id") val id: Int?,
-    @Json(name = "title") val title: String?,
-    @Json(name = "photo_count") val photoCount: Int?,
-    @Json(name = "links") val links: PhotoLinks
-) : Parcelable
+    @Json(name = "urls") val urls: Urls?
+):Parcelable

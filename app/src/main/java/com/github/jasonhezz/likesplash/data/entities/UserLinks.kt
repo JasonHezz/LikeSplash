@@ -1,16 +1,16 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UserLinks(
-    @SerializedName("self") val self: String?,
-    @SerializedName("html") val html: String?,
-    @SerializedName("photos") val photos: String?,
-    @SerializedName("likes") val likes: String?,
-    @SerializedName("portfolio") val portfolio: String?,
-    @SerializedName("following") val following: String?,
-    @SerializedName("followers") val followers: String?
+    @Json(name = "self") val self: String?,
+    @Json(name = "html") val html: String?,
+    @Json(name = "photos") val photos: String?,
+    @Json(name = "likes") val likes: String?,
+    @Json(name = "portfolio") val portfolio: String?,
+    @Json(name = "following") val following: String?,
+    @Json(name = "followers") val followers: String?
 ) : Parcelable

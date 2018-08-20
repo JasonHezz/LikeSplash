@@ -1,13 +1,13 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CollectionLinks(
-    @SerializedName("self") val self: String?,
-    @SerializedName("html") val html: String?,
-    @SerializedName("photos") val photos: String?,
-    @SerializedName("related") val related: String?
+    @Json(name = "self") val self: String?,
+    @Json(name = "html") val html: String?,
+    @Json(name = "photos") val photos: String?,
+    @Json(name = "related") val related: String?
 ) : Parcelable

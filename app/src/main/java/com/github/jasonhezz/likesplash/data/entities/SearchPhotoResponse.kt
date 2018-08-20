@@ -1,8 +1,10 @@
 package com.github.jasonhezz.likesplash.data.entities
 
+import com.squareup.moshi.Json
+
 data class SearchPhotoResponse(
-    var total: Int?,
-    var total_pages: Int?,
-    var results: List<Photo>?
+    @Json(name = "total") val total: Int?,
+    @Json(name = "total_pages") val totalPages: Int?,
+    @Json(name = "results") val results: List<Photo>?
 )
 

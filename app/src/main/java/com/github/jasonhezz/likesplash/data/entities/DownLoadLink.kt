@@ -1,10 +1,10 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DownLoadLink(
-    @SerializedName("url") val url: String
+    @Json(name = "url") val url: String
 ) : Parcelable

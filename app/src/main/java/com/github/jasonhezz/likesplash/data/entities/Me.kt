@@ -1,25 +1,25 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Me(
-    @SerializedName("id") val id: String? = null,
-    @SerializedName("username") val username: String? = null,
-    @SerializedName("first_name") val firstName: String? = null,
-    @SerializedName("last_name") val lastName: String? = null,
-    @SerializedName("portfolio_url") val portfolioUrl: String? = null,
-    @SerializedName("bio") val bio: String? = null,
-    @SerializedName("location") val location: String?,
-    @SerializedName("totalLikes") val totalLikes: Int = 0,
-    @SerializedName("totalPhotos") val totalPhotos: Int = 0,
-    @SerializedName("total_collections") val totalCollections: Int = 0,
-    @SerializedName("followed_by_user") val followedByUser: Boolean = false,
-    @SerializedName("downloads") val downloads: Int = 0,
-    @SerializedName("uploads_remaining") val uploadsRemaining: Int = 0,
-    @SerializedName("instagram_username") val instagramUsername: String? = null,
-    @SerializedName("email") val email: String? = null,
-    @SerializedName("links") val links: UserLinks? = null
+    @Json(name = "id") val id: String? = null,
+    @Json(name = "username") val username: String? = null,
+    @Json(name = "first_name") val firstName: String? = null,
+    @Json(name = "last_name") val lastName: String? = null,
+    @Json(name = "portfolio_url") val portfolioUrl: String? = null,
+    @Json(name = "bio") val bio: String? = null,
+    @Json(name = "location") val location: String?,
+    @Json(name = "totalLikes") val totalLikes: Int = 0,
+    @Json(name = "totalPhotos") val totalPhotos: Int = 0,
+    @Json(name = "total_collections") val totalCollections: Int = 0,
+    @Json(name = "followed_by_user") val followedByUser: Boolean = false,
+    @Json(name = "downloads") val downloads: Int = 0,
+    @Json(name = "uploads_remaining") val uploadsRemaining: Int = 0,
+    @Json(name = "instagram_username") val instagramUsername: String? = null,
+    @Json(name = "email") val email: String? = null,
+    @Json(name = "links") val links: UserLinks? = null
 ) : Parcelable

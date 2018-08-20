@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
@@ -11,25 +11,25 @@ import java.io.Serializable
 //@Parcelize not work under lolipop will throw install_failed_uid_changed
 @Parcelize
 data class Photo(
-    @SerializedName("id") val id: String,
-    @SerializedName("created_at")val createdAt: String? = null,
-    @SerializedName("updated_at")val updatedAt: String? = null,
-    @SerializedName("width")val width: Int,
-    @SerializedName("height")val height: Int,
-    @SerializedName("color")val color: String?,
-    @SerializedName("downloads")val downloads: Int? = 0,
-    @SerializedName("likes")val likes: Int? = 0,
-    @SerializedName("views")val views: Int? = 0,
-    @SerializedName("liked_by_user")val likedByUser: Boolean? = false,
-    @SerializedName("description")val description: String? = null,
-    @SerializedName("exif")val exif: Exif? = null,
-    @SerializedName("location")val location: String? = null,
-    @SerializedName("current_user_collections")val currentUserCollections: List<Collection>? = null,
-    @SerializedName("urls")val urls: Urls? = null,
-    @SerializedName("categories")val categories: List<Categories>? = null,
-    @SerializedName("links")val links: PhotoLinks? = null,
-    @SerializedName("story")val story: Story? = null,
-    @SerializedName("tags")val tags: List<Tag>? = null,
-    @SerializedName("relatedCollections")val relatedCollections: RelatedCollections? = null,
-    @SerializedName("user")val user: User?
+    @Json(name = "id") val id: String,
+    @Json(name = "created_at") val createdAt: String? = null,
+    @Json(name = "updated_at") val updatedAt: String? = null,
+    @Json(name = "width") val width: Int,
+    @Json(name = "height") val height: Int,
+    @Json(name = "color") val color: String?,
+    @Json(name = "downloads") val downloads: Int? = 0,
+    @Json(name = "likes") val likes: Int? = 0,
+    @Json(name = "views") val views: Int? = 0,
+    @Json(name = "liked_by_user") val likedByUser: Boolean? = false,
+    @Json(name = "description") val description: String? = null,
+    @Json(name = "exif") val exif: Exif? = null,
+    @Json(name = "location") val location: String? = null,
+    @Json(name = "current_user_collections") val currentUserCollections: List<Collection>? = null,
+    @Json(name = "urls") val urls: Urls? = null,
+    @Json(name = "categories") val categories: List<Categories>? = null,
+    @Json(name = "links") val links: PhotoLinks? = null,
+    @Json(name = "story") val story: Story? = null,
+    @Json(name = "tags") val tags: List<Tag>? = null,
+    @Json(name = "relatedCollections") val relatedCollections: RelatedCollections? = null,
+    @Json(name = "user") val user: User?
 ) : Serializable, Parcelable

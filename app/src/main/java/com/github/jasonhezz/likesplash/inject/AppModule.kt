@@ -35,13 +35,14 @@ import com.github.jasonhezz.likesplash.ui.timeline.TimelineViewModel
 import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val DEFAULT_CONNECT_TIMEOUT_MILLIS = 15L
@@ -49,9 +50,6 @@ private const val DEFAULT_READ_TIMEOUT_MILLIS = 20L
 private const val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
 
 val appModule = module {
-    single {
-        GsonBuilder().setLenient().create()
-    }
     single {
         FakeInterceptor(App.applicationContext())
     }
@@ -71,7 +69,8 @@ val appModule = module {
         Retrofit.Builder()
             .baseUrl(UNSPLASH_NEW_BASE_URL)
             .client(get())
-            .addConverterFactory(GsonConverterFactory.create(get()))
+            .addConverterFactory(MoshiConverterFactory.create(
+                Moshi.Builder().add(KotlinJsonAdapterFactory()).build()).asLenient())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }

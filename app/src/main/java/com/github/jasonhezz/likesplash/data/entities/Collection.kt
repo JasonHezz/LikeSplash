@@ -1,25 +1,25 @@
 package com.github.jasonhezz.likesplash.data.entities
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Collection(
-    @SerializedName("id") val id: Int?,
-    @SerializedName("featured") val featured: Boolean? = null,
-    @SerializedName("title") val title: String? = null,
-    @SerializedName("description") val description: String? = null,
-    @SerializedName("published_at") val publishedAt: String? = null,
-    @SerializedName("updated_at") val updatedAt: String? = null,
-    @SerializedName("curated") val curated: Boolean = false,
-    @SerializedName("total_photos") val totalPhotos: Int? = null,
-    @SerializedName("private") val private: Boolean = false,
-    @SerializedName("share_key") val shareKey: String? = null,
-    @SerializedName("cover_photo") val coverPhoto: Photo? = null,
-    @SerializedName("preview_photos") val previewPhotos: List<Photo>? = null,
-    @SerializedName("user") val user: User? = null,
-    @SerializedName("links") val links: CollectionLinks? = null,
-    @SerializedName("tags") val tags: List<Tag>? = null
+    @Json(name = "id") val id: Int?,
+    @Json(name = "featured") val featured: Boolean? = null,
+    @Json(name = "title") val title: String? = null,
+    @Json(name = "description") val description: String? = null,
+    @Json(name = "published_at") val publishedAt: String? = null,
+    @Json(name = "updated_at") val updatedAt: String? = null,
+    @Json(name = "curated") val curated: Boolean = false,
+    @Json(name = "total_photos") val totalPhotos: Int? = null,
+    @Json(name = "private") val private: Boolean = false,
+    @Json(name = "share_key") val shareKey: String? = null,
+    @Json(name = "cover_photo") val coverPhoto: Photo? = null,
+    @Json(name = "preview_photos") val previewPhotos: List<PreviewPhoto>? = null,
+    @Json(name = "user") val user: User? = null,
+    @Json(name = "links") val links: CollectionLinks? = null,
+    @Json(name = "tags") val tags: List<Tag>? = null
 ) : Parcelable
 
