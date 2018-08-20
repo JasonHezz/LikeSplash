@@ -1,176 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      app:contentInsetStartWithNavigation="0dp"
-      app:navigationIcon="@drawable/ic_close"
-      app:title="Edit"
-      >
+    android:layout_height="match_parent">
 
-  </android.support.v7.widget.Toolbar>
-  <ImageView
-      android:id="@+id/user_avatar"
-      android:layout_width="48dp"
-      android:layout_height="48dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:src="@drawable/avatar_placeholder"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/toolbar"
-      />
-  <!-- <android.support.v7.widget.AppCompatEditText
-       android:id="@+id/user_name_et"
-       android:layout_width="0dp"
-       android:layout_height="wrap_content"
-       android:layout_marginEnd="16dp"
-       android:layout_marginStart="16dp"
-       android:textSize="14sp"
-       app:backgroundTint="@color/mtrl_divider_color"
-       app:layout_constraintBottom_toBottomOf="@id/user_avatar"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintRight_toRightOf="parent"
-       app:layout_constraintStart_toEndOf="@+id/user_avatar"
-       app:layout_constraintTop_toTopOf="@+id/user_avatar"
-       app:layout_constraintWidth_default="spread"
-       tools:hint="JasonHezz"
-       />-->
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
-      android:hint="Name"
-      app:counterEnabled="false"
-      app:errorEnabled="false"
-      app:hintEnabled="false"
-      app:layout_constraintBottom_toBottomOf="@id/user_avatar"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/user_avatar"
-      app:layout_constraintTop_toTopOf="@+id/user_avatar"
-
-      >
-    <android.support.design.widget.TextInputEditText
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="JsonHezz"
-        android:textSize="14sp"
-        />
-  </android.support.design.widget.TextInputLayout>
-  <ImageView
-      android:id="@+id/location"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:contentDescription="@string/app_name"
-      android:src="@drawable/ic_edit_location"
-      app:layout_constraintBottom_toBottomOf="@+id/location_et"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/location_et"
-      />
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_close"
+        app:title="Edit">
 
-  <android.support.design.widget.TextInputLayout
-      android:id="@+id/location_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="16dp"
-      android:hint="Name"
-      app:counterEnabled="false"
-      app:errorEnabled="false"
-      app:hintEnabled="false"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/location"
-      app:layout_constraintTop_toBottomOf="@+id/user_avatar"
-      tools:hint="China"
+    </android.support.v7.widget.Toolbar>
 
-      >
-    <android.support.design.widget.TextInputEditText
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/avatar_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+    <!-- <android.support.v7.widget.AppCompatEditText
+         android:id="@+id/user_name_et"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginEnd="16dp"
+         android:layout_marginStart="16dp"
+         android:textSize="14sp"
+         app:backgroundTint="@color/mtrl_divider_color"
+         app:layout_constraintBottom_toBottomOf="@id/user_avatar"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         app:layout_constraintStart_toEndOf="@+id/user_avatar"
+         app:layout_constraintTop_toTopOf="@+id/user_avatar"
+         app:layout_constraintWidth_default="spread"
+         tools:hint="JasonHezz"
+         />-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Name"
+        app:counterEnabled="false"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toBottomOf="@id/user_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_avatar"
+        app:layout_constraintTop_toTopOf="@+id/user_avatar"
+
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="JsonHezz"
+            android:textSize="14sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_edit_location"
+        app:layout_constraintBottom_toBottomOf="@+id/location_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/location_et" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/location_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Name"
+        app:counterEnabled="false"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/location"
+        app:layout_constraintTop_toBottomOf="@+id/user_avatar"
         tools:hint="China"
 
-        />
-  </android.support.design.widget.TextInputLayout>
+        >
 
-  <ImageView
-      android:id="@+id/email"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:hint="@string/app_name"
-      android:src="@drawable/ic_email"
-      app:layout_constraintBottom_toBottomOf="@+id/email_et"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/email_et"
-      />
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            tools:hint="China"
 
+            />
+    </android.support.design.widget.TextInputLayout>
 
-  <android.support.design.widget.TextInputLayout
-      android:id="@+id/email_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="16dp"
-      app:backgroundTint="@color/material_divider_color"
-      app:counterEnabled="false"
-      app:errorEnabled="false"
-      app:hintEnabled="false"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/email"
-      app:layout_constraintTop_toBottomOf="@+id/location_et"
-      >
-    <android.support.design.widget.TextInputEditText
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        tools:hint="mnihuzhe@163.com"
-        />
-  </android.support.design.widget.TextInputLayout>
-  <ImageView
-      android:id="@+id/bio"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:hint="@string/app_name"
-      android:src="@drawable/ic_bio"
-      app:layout_constraintBottom_toBottomOf="@+id/bio_et"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/bio_et"
-      />
+        android:layout_marginStart="16dp"
+        android:hint="@string/app_name"
+        android:src="@drawable/ic_email"
+        app:layout_constraintBottom_toBottomOf="@+id/email_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/email_et" />
 
-  <android.support.design.widget.TextInputLayout
-      android:id="@+id/bio_et"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="16dp"
-      app:backgroundTint="@color/material_divider_color"
-      app:counterEnabled="false"
-      app:errorEnabled="false"
-      app:hintEnabled="false"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/email"
-      app:layout_constraintTop_toBottomOf="@+id/email_et"
-      >
-    <android.support.design.widget.TextInputEditText
-        android:layout_width="match_parent"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/email_et"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        tools:hint="Personal"
-        />
-  </android.support.design.widget.TextInputLayout>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:backgroundTint="@color/material_divider_color"
+        app:counterEnabled="false"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/location_et">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            tools:hint="mnihuzhe@163.com" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:hint="@string/app_name"
+        android:src="@drawable/ic_bio"
+        app:layout_constraintBottom_toBottomOf="@+id/bio_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bio_et" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/bio_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:backgroundTint="@color/material_divider_color"
+        app:counterEnabled="false"
+        app:errorEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email_et">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            tools:hint="Personal" />
+    </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>

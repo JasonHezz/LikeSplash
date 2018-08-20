@@ -23,158 +23,158 @@ import com.github.jasonhezz.likesplash.R
  * subsequent views start on the grid.
  */
 class BaselineGridTextView @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = android.R.attr.textViewStyle
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = android.R.attr.textViewStyle
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-  var lineHeightMultiplierHint = 1f
-    set(value) {
-      if (field != value) {
-        field = value
+    var lineHeightMultiplierHint = 1f
+        set(value) {
+            if (field != value) {
+                field = value
+                computeLineHeight()
+            }
+        }
+
+    var lineHeightHint = 0
+        set(value) {
+            if (field != value) {
+                field = value
+                computeLineHeight()
+            }
+        }
+
+    var maxLinesByHeight = true
+        set(value) {
+            if (field != value) {
+                field = value
+                computeLineHeight()
+            }
+        }
+
+    private var extraTopPadding = 0
+    private var extraBottomPadding = 0
+    private val fourDipInPx: Float
+
+    init {
+        val a = context.obtainStyledAttributes(
+            attrs, R.styleable.BaselineGridTextView, defStyleAttr, 0
+        )
+
+        // first check TextAppearance for line height & font attributes
+        if (a.hasValue(R.styleable.BaselineGridTextView_android_textAppearance)) {
+            val textAppearanceId = a.getResourceId(
+                R.styleable.BaselineGridTextView_android_textAppearance, android.R.style.TextAppearance
+            )
+            val ta = context.obtainStyledAttributes(
+                textAppearanceId, R.styleable.BaselineGridTextView
+            )
+            parseTextAttrs(ta)
+            ta.recycle()
+        }
+
+        // then check view attrs
+        parseTextAttrs(a)
+        maxLinesByHeight = a.getBoolean(R.styleable.BaselineGridTextView_maxLinesByHeight, false)
+        a.recycle()
+
+        fourDipInPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, 4f,
+            resources.displayMetrics
+        )
         computeLineHeight()
-      }
     }
 
-  var lineHeightHint = 0
-    set(value) {
-      if (field != value) {
-        field = value
-        computeLineHeight()
-      }
+    override fun getCompoundPaddingTop(): Int {
+        // include extra padding to place the first line's baseline on the grid
+        return super.getCompoundPaddingTop() + extraTopPadding
     }
 
-  var maxLinesByHeight = true
-    set(value) {
-      if (field != value) {
-        field = value
-        computeLineHeight()
-      }
+    override fun getCompoundPaddingBottom(): Int {
+        // include extra padding to make the height a multiple of 4dp
+        return super.getCompoundPaddingBottom() + extraBottomPadding
     }
 
-  private var extraTopPadding = 0
-  private var extraBottomPadding = 0
-  private val fourDipInPx: Float
+    override fun onMeasure(
+        widthMeasureSpec: Int,
+        heightMeasureSpec: Int
+    ) {
+        extraTopPadding = 0
+        extraBottomPadding = 0
 
-  init {
-    val a = context.obtainStyledAttributes(
-        attrs, R.styleable.BaselineGridTextView, defStyleAttr, 0
-    )
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-    // first check TextAppearance for line height & font attributes
-    if (a.hasValue(R.styleable.BaselineGridTextView_android_textAppearance)) {
-      val textAppearanceId = a.getResourceId(
-          R.styleable.BaselineGridTextView_android_textAppearance, android.R.style.TextAppearance
-      )
-      val ta = context.obtainStyledAttributes(
-          textAppearanceId, R.styleable.BaselineGridTextView
-      )
-      parseTextAttrs(ta)
-      ta.recycle()
+        var height = measuredHeight
+        height += ensureBaselineOnGrid()
+        height += ensureHeightGridAligned(height)
+        setMeasuredDimension(measuredWidth, height)
+        checkMaxLines(height, View.MeasureSpec.getMode(heightMeasureSpec))
     }
 
-    // then check view attrs
-    parseTextAttrs(a)
-    maxLinesByHeight = a.getBoolean(R.styleable.BaselineGridTextView_maxLinesByHeight, false)
-    a.recycle()
-
-    fourDipInPx = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, 4f,
-        resources.displayMetrics
-    )
-    computeLineHeight()
-  }
-
-  override fun getCompoundPaddingTop(): Int {
-    // include extra padding to place the first line's baseline on the grid
-    return super.getCompoundPaddingTop() + extraTopPadding
-  }
-
-  override fun getCompoundPaddingBottom(): Int {
-    // include extra padding to make the height a multiple of 4dp
-    return super.getCompoundPaddingBottom() + extraBottomPadding
-  }
-
-  override fun onMeasure(
-    widthMeasureSpec: Int,
-    heightMeasureSpec: Int
-  ) {
-    extraTopPadding = 0
-    extraBottomPadding = 0
-
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
-    var height = measuredHeight
-    height += ensureBaselineOnGrid()
-    height += ensureHeightGridAligned(height)
-    setMeasuredDimension(measuredWidth, height)
-    checkMaxLines(height, View.MeasureSpec.getMode(heightMeasureSpec))
-  }
-
-  private fun parseTextAttrs(a: TypedArray) {
-    if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightMultiplierHint)) {
-      lineHeightMultiplierHint = a.getFloat(
-          R.styleable.BaselineGridTextView_lineHeightMultiplierHint, 1f
-      )
+    private fun parseTextAttrs(a: TypedArray) {
+        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightMultiplierHint)) {
+            lineHeightMultiplierHint = a.getFloat(
+                R.styleable.BaselineGridTextView_lineHeightMultiplierHint, 1f
+            )
+        }
+        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightHint)) {
+            lineHeightHint = a.getDimensionPixelSize(
+                R.styleable.BaselineGridTextView_lineHeightHint, 0
+            )
+        }
     }
-    if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightHint)) {
-      lineHeightHint = a.getDimensionPixelSize(
-          R.styleable.BaselineGridTextView_lineHeightHint, 0
-      )
+
+    /**
+     * Ensures line height is a multiple of 4dp.
+     */
+    private fun computeLineHeight() {
+        val fm = paint.fontMetrics
+        val fontHeight = Math.abs(fm.ascent - fm.descent) + fm.leading
+        val desiredLineHeight =
+            if (lineHeightHint > 0) lineHeightHint.toFloat() else lineHeightMultiplierHint * fontHeight
+
+        val baselineAlignedLineHeight = Math.round(
+            fourDipInPx * Math.ceil((desiredLineHeight / fourDipInPx).toDouble())
+        )
+        setLineSpacing(baselineAlignedLineHeight - fontHeight, 1f)
     }
-  }
 
-  /**
-   * Ensures line height is a multiple of 4dp.
-   */
-  private fun computeLineHeight() {
-    val fm = paint.fontMetrics
-    val fontHeight = Math.abs(fm.ascent - fm.descent) + fm.leading
-    val desiredLineHeight =
-      if (lineHeightHint > 0) lineHeightHint.toFloat() else lineHeightMultiplierHint * fontHeight
-
-    val baselineAlignedLineHeight = Math.round(
-        fourDipInPx * Math.ceil((desiredLineHeight / fourDipInPx).toDouble())
-    )
-    setLineSpacing(baselineAlignedLineHeight - fontHeight, 1f)
-  }
-
-  /**
-   * Ensure that the first line of text sits on the 4dp grid.
-   */
-  private fun ensureBaselineOnGrid(): Int {
-    val baseline = baseline.toFloat()
-    val gridAlign = baseline % fourDipInPx
-    if (gridAlign != 0f) {
-      extraTopPadding = (fourDipInPx - Math.ceil(gridAlign.toDouble())).toInt()
+    /**
+     * Ensure that the first line of text sits on the 4dp grid.
+     */
+    private fun ensureBaselineOnGrid(): Int {
+        val baseline = baseline.toFloat()
+        val gridAlign = baseline % fourDipInPx
+        if (gridAlign != 0f) {
+            extraTopPadding = (fourDipInPx - Math.ceil(gridAlign.toDouble())).toInt()
+        }
+        return extraTopPadding
     }
-    return extraTopPadding
-  }
 
-  /**
-   * Ensure that height is a multiple of 4dp.
-   */
-  private fun ensureHeightGridAligned(height: Int): Int {
-    val gridOverhang = height % fourDipInPx
-    if (gridOverhang != 0f) {
-      extraBottomPadding = (fourDipInPx - Math.ceil(gridOverhang.toDouble())).toInt()
+    /**
+     * Ensure that height is a multiple of 4dp.
+     */
+    private fun ensureHeightGridAligned(height: Int): Int {
+        val gridOverhang = height % fourDipInPx
+        if (gridOverhang != 0f) {
+            extraBottomPadding = (fourDipInPx - Math.ceil(gridOverhang.toDouble())).toInt()
+        }
+        return extraBottomPadding
     }
-    return extraBottomPadding
-  }
 
-  /**
-   * When measured with an exact height, text can be vertically clipped mid-line. Prevent
-   * this by setting the `maxLines` property based on the available space.
-   */
-  private fun checkMaxLines(
-    height: Int,
-    heightMode: Int
-  ) {
-    if (!maxLinesByHeight || heightMode != View.MeasureSpec.EXACTLY) return
+    /**
+     * When measured with an exact height, text can be vertically clipped mid-line. Prevent
+     * this by setting the `maxLines` property based on the available space.
+     */
+    private fun checkMaxLines(
+        height: Int,
+        heightMode: Int
+    ) {
+        if (!maxLinesByHeight || heightMode != View.MeasureSpec.EXACTLY) return
 
-    val textHeight = height - compoundPaddingTop - compoundPaddingBottom
-    val completeLines = Math.floor((textHeight / lineHeight).toDouble())
-        .toInt()
-    maxLines = completeLines
-  }
+        val textHeight = height - compoundPaddingTop - compoundPaddingBottom
+        val completeLines = Math.floor((textHeight / lineHeight).toDouble())
+            .toInt()
+        maxLines = completeLines
+    }
 }

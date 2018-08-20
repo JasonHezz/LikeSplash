@@ -42,7 +42,7 @@ class SearchFragment : Fragment() {
             })
         }
         search_nav?.setOnClickListener {
-//            search_nav.foreground = null
+            //            search_nav.foreground = null
             activity?.supportFinishAfterTransition()
         }
 

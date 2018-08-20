@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2015 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +14,12 @@
   limitations under the License.
   -->
 
-<ProgressBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/loading"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:indeterminate="true"
     android:indeterminateTint="?android:textColorSecondary"
-    android:padding="16dp"
     android:indeterminateTintMode="src_in"
-    />
+    android:padding="16dp" />

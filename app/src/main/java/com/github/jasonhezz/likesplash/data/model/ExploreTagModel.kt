@@ -1,7 +1,5 @@
 package com.github.jasonhezz.likesplash.data.model
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass

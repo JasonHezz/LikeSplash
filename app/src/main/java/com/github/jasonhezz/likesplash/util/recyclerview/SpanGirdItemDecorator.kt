@@ -21,7 +21,7 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         val adapterPosition = parent.getChildAdapterPosition(view)
         when (adapterPosition) {
             0 -> outRect.set(0, 0, divider.intrinsicWidth, 0)
-            1 ->  outRect.set(0, 0, 0, divider.intrinsicHeight)
+            1 -> outRect.set(0, 0, 0, divider.intrinsicHeight)
             else -> outRect.set(0, 0, 0, 0)
         }
         /*val spanCount = getSpanCount(parent)

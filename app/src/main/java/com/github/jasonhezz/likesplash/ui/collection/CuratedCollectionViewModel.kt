@@ -4,8 +4,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.entities.Collection
-import com.github.jasonhezz.likesplash.repository.CollectionRepository
 import com.github.jasonhezz.likesplash.data.entities.Listing
+import com.github.jasonhezz.likesplash.repository.CollectionRepository
 
 /**
  * Created by JavaCoder on 2017/12/12.

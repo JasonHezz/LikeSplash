@@ -5,9 +5,9 @@ import android.arch.core.executor.ArchTaskExecutor
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import android.net.Uri
-import com.github.jasonhezz.likesplash.data.entities.TrendingResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.data.entities.TrendingResponse
 import com.github.jasonhezz.likesplash.data.service.TrendingService
 import retrofit2.Call
 import retrofit2.Response

@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash.data.model
 
 import android.view.View
-import android.widget.Toast
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
