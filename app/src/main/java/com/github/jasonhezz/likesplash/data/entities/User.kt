@@ -15,7 +15,7 @@ data class User(
     @SerializedName("twitter_username") val twitterUsername: String? = null,
     @SerializedName("portfolio_url") val portfolioUrl: String? = null,
     @SerializedName("bio") val bio: String? = null,
-    @SerializedName("location") val location: Location? = null,
+    @SerializedName("location") val location: String? = null,
     @SerializedName("links") val links: UserLinks? = null,
     @SerializedName("profile_image") val profile_image: ProfileImage? = null,
     @SerializedName("instagram_username") val instagramUsername: String?,

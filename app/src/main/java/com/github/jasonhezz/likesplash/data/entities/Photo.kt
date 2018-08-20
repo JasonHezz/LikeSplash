@@ -23,7 +23,7 @@ data class Photo(
     @SerializedName("liked_by_user")val likedByUser: Boolean? = false,
     @SerializedName("description")val description: String? = null,
     @SerializedName("exif")val exif: Exif? = null,
-    @SerializedName("location")val location: Location? = null,
+    @SerializedName("location")val location: String? = null,
     @SerializedName("current_user_collections")val currentUserCollections: List<Collection>? = null,
     @SerializedName("urls")val urls: Urls? = null,
     @SerializedName("categories")val categories: List<Categories>? = null,
