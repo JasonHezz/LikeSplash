@@ -33,8 +33,7 @@ interface PhotoService {
         @Path("id") id: String,
         @Query("w") w: Int? = null,
         @Query("h") h: Int? = null
-    ):
-        Single<Photo>
+    ): Single<Photo>
 
     @GET("photos/random")
     fun getListRandomPhoto(
