@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.timeline
+package com.github.jasonhezz.likesplash.ui.editorial
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
@@ -19,9 +19,9 @@ import kotlinx.android.synthetic.main.fragment_timeline.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class TimelineFragment : Fragment() {
+class EditorialFragment : Fragment() {
 
-    private val model: TimelineViewModel by viewModel()
+    private val model: EditorialViewModel by viewModel()
     private val controller = PhotoPagedController(
         object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
@@ -83,8 +83,8 @@ class TimelineFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): TimelineFragment {
-            val fragment = TimelineFragment()
+        fun newInstance(): EditorialFragment {
+            val fragment = EditorialFragment()
             val args = Bundle()
             fragment.arguments = args
             return fragment

@@ -31,7 +31,7 @@ import com.github.jasonhezz.likesplash.ui.profile.ProfileViewModel
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
-import com.github.jasonhezz.likesplash.ui.timeline.TimelineViewModel
+import com.github.jasonhezz.likesplash.ui.editorial.EditorialViewModel
 import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
@@ -122,7 +122,7 @@ val appModule = module {
         ExploreRepositoryIml(get()) as ExploreRepository
     }
     viewModel { TrendingViewModel(get()) }
-    viewModel { TimelineViewModel(get()) }
+    viewModel { EditorialViewModel(get()) }
     viewModel { CuratedCollectionViewModel(get()) }
     viewModel { FeaturedCollectionViewModel(get()) }
     viewModel { ProfileViewModel(get()) }

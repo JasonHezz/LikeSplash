@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.timeline.TimelineFragment
+import com.github.jasonhezz.likesplash.ui.editorial.EditorialFragment
 import com.github.jasonhezz.likesplash.ui.trending.TrendingFragment
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
 
     private fun initViewPager() {
         tabAdapter = TabFragmentAdapter(childFragmentManager)
+        tabAdapter.addFragment(EditorialFragment.newInstance())
         tabAdapter.addFragment(TrendingFragment.newInstance())
-        tabAdapter.addFragment(TimelineFragment.newInstance())
         tabAdapter.addFragment(BlankFragment.newInstance())
         view_pager.apply {
             adapter = tabAdapter

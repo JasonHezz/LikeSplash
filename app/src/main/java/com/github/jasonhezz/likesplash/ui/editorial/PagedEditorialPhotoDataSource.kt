@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.timeline
+package com.github.jasonhezz.likesplash.ui.editorial
 
 import android.annotation.SuppressLint
 import android.arch.core.executor.ArchTaskExecutor
@@ -14,7 +14,7 @@ import retrofit2.Response
 /**
  * Created by JavaCoder on 2017/12/12.
  */
-class PagedTimelinePhotoDataSource(
+class PagedEditorialPhotoDataSource(
     val api: PhotoService
 ) : PageKeyedDataSource<Int, Photo>() {
 

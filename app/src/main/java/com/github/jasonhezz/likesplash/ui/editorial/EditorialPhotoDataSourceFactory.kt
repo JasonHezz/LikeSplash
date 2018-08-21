@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.timeline
+package com.github.jasonhezz.likesplash.ui.editorial
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource
@@ -8,12 +8,12 @@ import com.github.jasonhezz.likesplash.data.service.PhotoService
 /**
  * Created by JavaCoder on 2017/12/12.
  */
-class TimelinePhotoDataSourceFactory(
+class EditorialPhotoDataSourceFactory(
     private val api: PhotoService
 ) : DataSource.Factory<Int, Photo>() {
-    val sourceLiveData = MutableLiveData<PagedTimelinePhotoDataSource>()
+    val sourceLiveData = MutableLiveData<PagedEditorialPhotoDataSource>()
     override fun create(): DataSource<Int, Photo> {
-        val source = PagedTimelinePhotoDataSource(api)
+        val source = PagedEditorialPhotoDataSource(api)
         sourceLiveData.postValue(source)
         return source
     }

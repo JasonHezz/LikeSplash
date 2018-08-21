@@ -8,7 +8,7 @@ import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.enumerations.OrderBy
 import com.github.jasonhezz.likesplash.data.service.PhotoService
-import com.github.jasonhezz.likesplash.ui.timeline.TimelinePhotoDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.editorial.EditorialPhotoDataSourceFactory
 import io.reactivex.Single
 
 class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
@@ -16,7 +16,7 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
         page: Int, perPage: Int,
         orderBy: OrderBy
     ): Listing<Photo> {
-        val sourceFactory = TimelinePhotoDataSourceFactory(service)
+        val sourceFactory = EditorialPhotoDataSourceFactory(service)
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()

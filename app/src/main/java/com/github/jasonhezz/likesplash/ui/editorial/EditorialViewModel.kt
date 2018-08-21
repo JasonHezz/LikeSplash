@@ -1,4 +1,4 @@
-package com.github.jasonhezz.likesplash.ui.timeline
+package com.github.jasonhezz.likesplash.ui.editorial
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.repository.PhotoRepository
 /**
  * Created by JavaCoder on 2017/11/27.
  */
-class TimelineViewModel(val repository: PhotoRepository) : ViewModel() {
+class EditorialViewModel(val repository: PhotoRepository) : ViewModel() {
 
     private val result = MutableLiveData<Listing<Photo>>()
     val photos = Transformations.switchMap(result, { it.pagedList })!!
