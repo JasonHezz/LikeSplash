@@ -55,9 +55,9 @@
                     android:drawableStart="@drawable/asl_follow"
                     android:drawablePadding="8dp"
                     android:text="Follow"
-                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:theme="@style/Widget.Splash.BrandButton"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +100,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
                     android:textColor="?android:attr/textColorPrimary"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/location"
