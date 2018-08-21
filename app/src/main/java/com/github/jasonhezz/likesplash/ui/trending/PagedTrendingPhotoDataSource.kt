@@ -54,12 +54,16 @@ class PagedTrendingPhotoDataSource(
 
                 override fun onResponse(call: Call<TrendingResponse>?, response: Response<TrendingResponse>) {
                     if (response.isSuccessful) {
-                        val uri = Uri.parse(response.body()?.nextPage)
-                        val page = uri.getQueryParameter("after")
+                        val nextPage = response.body()?.nextPage
+                        var parsePage: String? = null
+                        if (nextPage != null) {
+                            val uri = Uri.parse(response.body()?.nextPage)
+                            parsePage = uri.getQueryParameter("after")
+                        }
                         retry = null
                         networkState.postValue(Resource.LOADED)
                         initialLoad.postValue(Resource.LOADED)
-                        callback.onResult(response.body()?.photos ?: emptyList(), page)
+                        callback.onResult(response.body()?.photos ?: emptyList(), parsePage)
                     } else {
                         networkState.postValue(Resource.LOADED)
                         initialLoad.postValue(Resource.LOADED)
