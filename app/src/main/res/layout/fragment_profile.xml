@@ -55,6 +55,7 @@
                     android:drawableStart="@drawable/asl_follow"
                     android:drawablePadding="8dp"
                     android:text="Follow"
+                    android:visibility="gone"
                     android:textAllCaps="false"
                     android:theme="@style/Widget.Splash.BrandButton"
                     app:layout_constraintEnd_toEndOf="parent"

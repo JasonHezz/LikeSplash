@@ -97,6 +97,7 @@ class ProfileFragment : Fragment() {
 
     private fun initToolbar() {
         profile_toolbar?.apply {
+            inflateMenu(R.menu.menu_share)
             setNavigationOnClickListener { activity?.supportFinishAfterTransition() }
         }
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {

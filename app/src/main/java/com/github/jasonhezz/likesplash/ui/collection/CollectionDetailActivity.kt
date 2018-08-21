@@ -60,7 +60,7 @@ class CollectionDetailActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        toolbar.inflateMenu(R.menu.menu_collection_detail)
+        toolbar.inflateMenu(R.menu.menu_share)
         toolbar.title = collection?.title
         toolbar.setNavigationOnClickListener { finish() }
         user_name.text = collection?.user?.name
