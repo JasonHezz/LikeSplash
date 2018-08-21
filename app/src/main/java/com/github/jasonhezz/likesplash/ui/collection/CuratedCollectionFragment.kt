@@ -24,7 +24,7 @@ class CuratedCollectionFragment : DialogFragment() {
 
     private val model: CuratedCollectionViewModel by viewModel()
     private val controller: CollectionPagedController = CollectionPagedController(
-        object : CollectionPagedController.Companion.AdapterCallbacks {
+        object : CollectionPagedController.AdapterCallbacks {
             override fun onAvatarClick() {
             }
 

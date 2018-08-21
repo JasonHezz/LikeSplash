@@ -37,10 +37,9 @@ class CollectionPagedController(
         loadingModel.addIf(isLoading, this)
     }
 
-    companion object {
-        interface AdapterCallbacks {
-            fun onAvatarClick()
-            fun onCollectionClick(it: Collection)
-        }
+
+    interface AdapterCallbacks {
+        fun onAvatarClick()
+        fun onCollectionClick(it: Collection)
     }
 }

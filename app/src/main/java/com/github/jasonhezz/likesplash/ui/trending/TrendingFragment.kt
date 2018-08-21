@@ -23,7 +23,7 @@ class TrendingFragment : Fragment() {
 
     private val viewModel: TrendingViewModel by viewModel()
     private val controller = PhotoPagedController(
-        object : PhotoPagedController.Companion.AdapterCallbacks {
+        object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
                     Intent(context, ProfileActivity::class.java).putExtra(

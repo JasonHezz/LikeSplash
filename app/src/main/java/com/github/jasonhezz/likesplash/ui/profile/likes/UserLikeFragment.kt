@@ -25,7 +25,7 @@ class UserLikeFragment : Fragment() {
     private val model: UserLikeViewModel by viewModel()
     private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
     private val controller = PhotoPagedController(
-        object : PhotoPagedController.Companion.AdapterCallbacks {
+        object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
                     Intent(context, ProfileActivity::class.java).putExtra(

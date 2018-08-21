@@ -22,7 +22,7 @@ class UserPhotoFragment : Fragment() {
 
     private val model: UserPhotoViewModel by viewModel()
     private val controller = PhotoPagedController(
-        object : PhotoPagedController.Companion.AdapterCallbacks {
+        object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
             }
 

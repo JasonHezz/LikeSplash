@@ -21,7 +21,7 @@ class AddCollectionFragment : DialogFragment() {
     private var data: List<Collection>? = null
     private var photo: Photo? = null
     private val controller = DialogCollectionController(
-        object : DialogCollectionController.Companion.AdapterCallbacks {
+        object : DialogCollectionController.AdapterCallbacks {
             override fun onCollectionClick() {
                 callback?.onCollectionClick()
             }

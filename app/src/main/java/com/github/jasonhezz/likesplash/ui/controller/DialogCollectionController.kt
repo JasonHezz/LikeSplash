@@ -39,11 +39,11 @@ class DialogCollectionController(
         }
     }
 
-    companion object {
-        interface AdapterCallbacks {
-            fun onCollectionClick()
-            fun onCreateCollectionClick()
-        }
+
+    interface AdapterCallbacks {
+        fun onCollectionClick()
+        fun onCreateCollectionClick()
     }
+
 }
 

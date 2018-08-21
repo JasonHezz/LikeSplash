@@ -45,10 +45,10 @@ class PhotoPagedController(
         loadingModel.addIf(isLoading, this)
     }
 
-    companion object {
-        interface AdapterCallbacks {
-            fun onAvatarClick(user: User?)
-            fun onPhotoClick(it: Photo)
-        }
+
+    interface AdapterCallbacks {
+        fun onAvatarClick(user: User?)
+        fun onPhotoClick(it: Photo)
     }
+
 }
