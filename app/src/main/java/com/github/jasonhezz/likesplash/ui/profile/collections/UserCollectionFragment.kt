@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.profile.collections
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.User
+import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailActivity
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
@@ -23,7 +26,17 @@ import timber.log.Timber
 class UserCollectionFragment : Fragment() {
 
     private val model: UserCollectionViewModel by viewModel()
-    private val controller = CollectionPagedController().apply { setFilterDuplicates(true) }
+    private val controller = CollectionPagedController(object : CollectionPagedController.AdapterCallbacks {
+        override fun onAvatarClick() {
+
+        }
+
+        override fun onCollectionClick(it: Collection) {
+            startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+                putExtra("collection", it)
+            })
+        }
+    }).apply { setFilterDuplicates(true) }
 
     private var user: User? = null
 
