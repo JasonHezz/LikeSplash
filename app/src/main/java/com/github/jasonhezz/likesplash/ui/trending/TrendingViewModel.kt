@@ -17,7 +17,7 @@ class TrendingViewModel(val repository: TrendingRepository) : ViewModel() {
     val refreshState = Transformations.switchMap(result) { it.refreshState }!!
 
     init {
-        result.postValue(repository.getTrendingFeed(null, 10))
+        result.postValue(repository.getTrendingFeed())
     }
 
     fun refresh() {
