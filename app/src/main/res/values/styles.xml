@@ -1,68 +1,26 @@
 <resources>
 
-  <style name="TextAppearance.Splash.Caption" parent="TextAppearance.AppCompat.Caption">
-    <item name="android:textSize">14sp</item>
-  </style>
+    <style name="Widget.Splash.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@null</item>
+        <item name="tabIndicatorColor">@color/splash_brand</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Splash.Tab</item>
+    </style>
 
-  <style name="TextAppearance.Splash.Chip" parent="TextAppearance.AppCompat.Caption">
-    <item name="android:textSize">14sp</item>
-  </style>
+    <style name="Widget.Splash.Chip.Action" parent="Widget.MaterialComponents.Chip.Action">
+    </style>
 
-  <style name="TextAppearance.Splash.Title" parent="Base.TextAppearance.AppCompat.Title">
-    <item name="android:fontFamily">sans-serif-medium</item>
-  </style>
+    <style name="Widget.Splash.BrandButton" parent="Widget.MaterialComponents.Button">
+        <item name="colorButtonNormal">@color/splash_brand</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
-  <style name="TextAppearance.Splash.Subhead" parent="Base.TextAppearance.AppCompat.Subhead">
-    <item name="android:fontFamily">sans-serif-medium</item>
-  </style>
+    <style name="Widget.Splash.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="colorButtonNormal">@color/splash_brand</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
-  <style name="TextAppearance.Splash.Tab" parent="TextAppearance.Design.Tab">
-    <item name="textAllCaps">false</item>
-  </style>
-
-  <style name="TextAppearance.Splash.ListItemSecondary" parent="TextAppearance.Splash.Caption">
-
-  </style>
-
-  <style name="TextAppearance.Splash.ListItem" parent="TextAppearance.AppCompat.Body1">
-  </style>
-
-  <style name="Widget.Splash.UserTabLayout" parent="Widget.MaterialComponents.TabLayout">
-    <item name="android:background">@null</item>
-    <item name="tabIndicatorColor">@color/splash_brand</item>
-    <item name="tabTextAppearance">@style/TextAppearance.Splash.Tab</item>
-  </style>
-
-  <style name="Widget.Splash.BrandButton" parent="Widget.AppCompat.Button.Colored">
-    <item name="colorButtonNormal">@color/splash_brand</item>
-    <item name="android:textColor">@android:color/white</item>
-  </style>
-
-  <style name="HomeWindowAnimation">
-    <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-    <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-  </style>
-
-  <style name="SearchWindowAnimations">
-    <item name="android:windowEnterAnimation">@null</item>
-    <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-  </style>
-
-  <style name="Widget.Splash.TextView.ExploreSpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
-    <item name="android:textAppearance">
-      @style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem
-    </item>
-  </style>
-
-  <style name="TextAppearance.Splash.Hint" parent="TextAppearance.Design.Hint">
-    <item name="android:textColor">?android:attr/textColorSecondary</item>
-  </style>
-
-  <style name="TextAppearance.Splash.Error" parent="TextAppearance.Design.Error">
-    <item name="android:textColor">@color/material_text_fields_error</item>
-  </style>
-
-  <style name="TextAppearance.Splash.Counter.Overflow" parent="TextAppearance.Design.Counter.Overflow">
-    <item name="android:textColor">@color/material_text_fields_error</item>
-  </style>
+    <style name="SearchWindowAnimations">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
 </resources>

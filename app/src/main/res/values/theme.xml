@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
+        <!--fixme https://issuetracker.google.com/issues/112714499-->
+        <item name="actionBarSize">@dimen/mtrl_toolbar_default_height</item>
     </style>
 
-    <style name="AppTheme.Main">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowContentTransitions">true</item>
-    </style>
-
-    <style name="AppTheme.Translucent">
+    <style name="Theme.Splash.Translucent">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="AppTheme.Search">
+    <style name="Theme.Splash.Search">
         <item name="android:windowAnimationStyle">@style/SearchWindowAnimations</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementsUseOverlay">false</item>
@@ -34,8 +30,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="AppTheme.Dialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
+    <style name="Theme.Splash.Dialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
 </resources>

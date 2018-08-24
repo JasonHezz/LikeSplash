@@ -7,17 +7,14 @@
     tools:layout_height="400dp"
     tools:layout_width="600dp">
 
-    <TextView
-        android:id="@+id/headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Create new collection"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textStyle="bold"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Create new collection"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:navigationIcon="@drawable/ic_close" />
 
     <me.zhanghai.android.materialedittext.MaterialTextInputLayout
         android:id="@+id/name"
@@ -28,11 +25,9 @@
         android:layout_marginEnd="16dp"
         app:counterEnabled="true"
         app:counterMaxLength="60"
-        app:counterOverflowTextAppearance="@style/TextAppearance.Splash.Counter.Overflow"
-        app:hintTextAppearance="@style/TextAppearance.Splash.Hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headline">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <me.zhanghai.android.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -51,9 +46,7 @@
         android:layout_marginEnd="16dp"
         app:counterEnabled="true"
         app:counterMaxLength="250"
-        app:counterOverflowTextAppearance="@style/TextAppearance.Splash.Counter.Overflow"
         app:errorEnabled="true"
-        app:hintTextAppearance="@style/TextAppearance.Splash.Hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name">
@@ -62,8 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description(optional)"
-            android:maxLines="3"
-            tools:text="@tools:sample/lorem/random" />
+            android:maxLines="3" />
     </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
 
     <CheckBox
@@ -91,11 +83,12 @@
 
     <Button
         android:id="@+id/cancel_btn"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/Widget.Splash.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stateListAnimator="@null"
         android:text="Cancel"
+        android:layout_marginEnd="8dp"
         android:textAllCaps="false"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="@id/create_btn"

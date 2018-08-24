@@ -21,7 +21,7 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
-            style="@style/Widget.Splash.UserTabLayout"
+            style="@style/Widget.Splash.TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"

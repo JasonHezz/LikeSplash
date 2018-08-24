@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/tag_name"
-            style="@style/TextAppearance.Splash.Subhead"
+            style="@style/TextAppearance.Splash.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"

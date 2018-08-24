@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             app:expandedTitleGravity="center|top"
             app:expandedTitleMarginTop="112dp"
-            app:expandedTitleTextAppearance="@style/TextAppearance.Splash.Title"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Splash.Headline6"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:title=" "
             app:titleEnabled="true">
@@ -93,13 +93,13 @@
 
                 <com.github.jasonhezz.likesplash.view.BaselineGridTextView
                     android:id="@+id/bio"
+                    style="@style/TextAppearance.Splash.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
-                    android:textColor="?android:attr/textColorPrimary"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
-            style="@style/Widget.Splash.UserTabLayout"
+            style="@style/Widget.Splash.TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
@@ -156,7 +156,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:src="@drawable/avatar_placeholder"
-        app:civ_border_color="@color/material_divider_color"
+        app:civ_border_color="@color/mtrl_divider_color"
         app:civ_border_overlay="true"
         app:civ_border_width="0.1dp"
         app:layout_behavior="android.support.design.widget.ProfileAvatarBehavior" />
@@ -166,10 +166,10 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/badge_editorial"
+        android:visibility="gone"
         app:layout_anchor="@id/user_avatar"
         app:layout_anchorGravity="end"
-        android:visibility="gone"
-        app:layout_behavior="android.support.design.widget.BadgeBehavior"/>
+        app:layout_behavior="android.support.design.widget.BadgeBehavior" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
