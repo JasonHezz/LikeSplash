@@ -168,6 +168,7 @@
         android:src="@drawable/badge_editorial"
         app:layout_anchor="@id/user_avatar"
         app:layout_anchorGravity="end"
+        android:visibility="gone"
         app:layout_behavior="android.support.design.widget.BadgeBehavior"/>
 
     <android.support.v4.view.ViewPager
