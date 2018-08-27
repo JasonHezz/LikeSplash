@@ -7,13 +7,14 @@
     tools:layout_height="400dp"
     tools:layout_width="600dp">
 
-    <android.support.v7.widget.Toolbar
+    <com.github.jasonhezz.likesplash.view.TintingToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         app:title="Add to collection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:tintIconColor="?android:attr/colorControlNormal"
         app:navigationIcon="@drawable/ic_close" />
 
 

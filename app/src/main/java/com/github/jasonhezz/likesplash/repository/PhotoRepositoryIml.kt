@@ -1,5 +1,7 @@
 package com.github.jasonhezz.likesplash.repository
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
@@ -10,6 +12,10 @@ import com.github.jasonhezz.likesplash.data.enumerations.OrderBy
 import com.github.jasonhezz.likesplash.data.service.PhotoService
 import com.github.jasonhezz.likesplash.ui.editorial.EditorialPhotoDataSourceFactory
 import io.reactivex.Single
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import timber.log.Timber
 
 class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
     override fun getListPhotos(
@@ -49,8 +55,22 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
             orderBy
         )
 
-    override fun getAPhoto(id: String, w: Int?, h: Int?): Single<Photo> =
-        service.getAPhoto(id, w, h)
+    override fun getAPhoto(id: String, w: Int?, h: Int?): LiveData<Photo> {
+        val result = MutableLiveData<Photo>()
+        service.getAPhoto(id, w, h).enqueue(object : Callback<Photo> {
+            override fun onFailure(call: Call<Photo>, t: Throwable) {
+                Timber.d(t)
+            }
+
+            override fun onResponse(call: Call<Photo>, response: Response<Photo>) {
+                response.body()?.let {
+                    result.postValue(it)
+                }
+            }
+        })
+        return result
+    }
+
 
     override fun getListRandomPhoto(
         collections: String?, featured: String?, username: String?,

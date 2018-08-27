@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.support.v7.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -16,8 +17,18 @@ abstract class TitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
     @EpoxyAttribute
     var title: String? = null
 
+    override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int = totalSpanCount
+
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         holder.title?.text = title
+    }
+
+    override fun onViewAttachedToWindow(holder: BaseViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        val layoutParams = holder.containerView?.layoutParams
+        if (layoutParams is StaggeredGridLayoutManager.LayoutParams) {
+            layoutParams.isFullSpan = true
+        }
     }
 }

@@ -16,12 +16,13 @@
         android:layout_height="wrap_content"
         android:stateListAnimator="@animator/appbar_always_elevated">
 
-        <android.support.v7.widget.Toolbar
+        <com.github.jasonhezz.likesplash.view.TintingToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="@dimen/status_bar_height"
             app:navigationIcon="@drawable/ic_nav_menu"
+            app:tintIconColor="?android:attr/colorControlNormal"
             app:title="Home" />
 
         <android.support.design.widget.TabLayout

@@ -28,12 +28,12 @@ interface PhotoService {
         @Query("order_by") orderBy: OrderBy
     ): Single<List<Photo>>
 
-    @GET("photos/{id}")
+    @GET("photos/{id}/info?")
     fun getAPhoto(
         @Path("id") id: String,
         @Query("w") w: Int? = null,
         @Query("h") h: Int? = null
-    ): Single<Photo>
+    ): Call<Photo>
 
     @GET("photos/random")
     fun getListRandomPhoto(

@@ -6,6 +6,7 @@ import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.github.jasonhezz.likesplash.view.FlexCarouselModelBuilder
 
 /**
  * Created by JavaCoder on 2017/11/15.
@@ -25,6 +26,13 @@ inline fun EpoxyController.carousel(modelInitializer: CarouselModelBuilder.() ->
  * @param modelBuilder A function that take an item and returns a new EpoxyModel for that item.
  */
 inline fun <T> CarouselModelBuilder.withModelsFrom(
+    items: List<T>,
+    modelBuilder: (T) -> EpoxyModel<*>
+) {
+    models(items.map { modelBuilder(it) })
+}
+
+inline fun <T> FlexCarouselModelBuilder.withModelsFrom(
     items: List<T>,
     modelBuilder: (T) -> EpoxyModel<*>
 ) {

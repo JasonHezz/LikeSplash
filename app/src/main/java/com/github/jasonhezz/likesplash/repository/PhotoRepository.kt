@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.repository
 
+import android.arch.lifecycle.LiveData
 import com.github.jasonhezz.likesplash.data.entities.DownLoadLink
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -22,7 +23,7 @@ interface PhotoRepository {
     ): Single<List<Photo>>
 
     fun getAPhoto(id: String, w: Int? = null, h: Int? = null):
-        Single<Photo>
+        LiveData<Photo>
 
     fun getListRandomPhoto(
         collections: String? = null,

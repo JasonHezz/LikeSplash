@@ -23,15 +23,16 @@ import com.github.jasonhezz.likesplash.repository.UserRepositoryIml
 import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionViewModel
+import com.github.jasonhezz.likesplash.ui.editorial.EditorialViewModel
 import com.github.jasonhezz.likesplash.ui.explore.PopularCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.explore.PopularPhotoViewModel
 import com.github.jasonhezz.likesplash.ui.follower.FollowerViewModel
 import com.github.jasonhezz.likesplash.ui.following.FollowingViewModel
+import com.github.jasonhezz.likesplash.ui.photodetail.PhotoDetailViewModel
 import com.github.jasonhezz.likesplash.ui.profile.ProfileViewModel
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
-import com.github.jasonhezz.likesplash.ui.editorial.EditorialViewModel
 import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
@@ -134,4 +135,5 @@ val appModule = module {
     viewModel { UserCollectionViewModel(getProperty("id"), get()) }
     viewModel { UserPhotoViewModel(getProperty("id"), get()) }
     viewModel { PopularCollectionViewModel(get()) }
+    viewModel { (id: String) -> PhotoDetailViewModel(id, get()) }
 }

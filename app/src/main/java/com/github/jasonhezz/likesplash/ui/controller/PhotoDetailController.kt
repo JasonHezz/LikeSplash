@@ -1,19 +1,36 @@
 package com.github.jasonhezz.likesplash.ui.controller
 
+import android.support.v4.content.ContextCompat
+import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.TypedEpoxyController
+import com.github.jasonhezz.likesplash.App
+import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Photo
-import com.github.jasonhezz.likesplash.data.model.RelatedCollectionModel_
-import com.github.jasonhezz.likesplash.data.model.TagModel_
+import com.github.jasonhezz.likesplash.data.model.ChipModel_
+import com.github.jasonhezz.likesplash.data.model.LoadingModel_
 import com.github.jasonhezz.likesplash.data.model.photoDetail
+import com.github.jasonhezz.likesplash.data.model.previewCollection
 import com.github.jasonhezz.likesplash.data.model.title
-import com.github.jasonhezz.likesplash.util.extension.carousel
 import com.github.jasonhezz.likesplash.util.extension.withModelsFrom
+import com.github.jasonhezz.likesplash.view.flexCarousel
+import com.google.android.flexbox.FlexboxItemDecoration
 
 /**
  * Created by JavaCoder on 2017/10/16.
  */
 
 class PhotoDetailController : TypedEpoxyController<Photo>() {
+
+    @AutoModel
+    lateinit var loadingModel: LoadingModel_
+
+    var isLoading: Boolean = true
+        set(value) {
+            if (field != value) {
+                field = value
+                requestModelBuild()
+            }
+        }
 
     override fun buildModels(data: Photo?) {
         data?.let {
@@ -22,33 +39,45 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
                 photo(it)
             }
 
-            it.tags?.let {
-                title {
-                    id("tag_title")
-                    title("Related tags")
-                }
-                carousel {
-                    id("tag_carousel")
-                    paddingDp(16)
-                    withModelsFrom(it) {
-                        TagModel_().id(it.title ?: "error").tag(it)
-                    }
-                }
+            title {
+                id("relate_photo_title")
+                title("Related photos")
             }
+
+            loadingModel.addIf(isLoading,this)
 
             it.relatedCollections?.let {
                 title {
                     id("collection_title")
-                    title("Featured in ${it.total ?: 0} photos")
+                    title("Featured in ${it.total ?: 0} collections")
                 }
                 it.results?.let {
-                    carousel {
-                        id("collection_carousel")
-                        numViewsToShowOnScreen(2.5f)
-                        paddingDp(16)
-                        withModelsFrom(it) {
-                            RelatedCollectionModel_().id(it.id).collection(it)
+                    it.forEach {
+                        previewCollection {
+                            id(it.id)
+                            collection(it)
                         }
+                    }
+                }
+            }
+
+            it.tags?.let {
+                title {
+                    id("related_tag_title")
+                    title("Related tags")
+                }
+                flexCarousel {
+                    id("tag_carousel")
+                    addItemDecoration {
+                        FlexboxItemDecoration(it).apply {
+                            setDrawable(
+                                ContextCompat.getDrawable(App.applicationContext(), R.drawable.chip_divider)
+                            )
+                        }
+                    }
+                    isFullSpan(true)
+                    withModelsFrom(it) {
+                        ChipModel_().id(it.title).tag(it)
                     }
                 }
             }

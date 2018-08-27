@@ -13,6 +13,7 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
+import com.github.jasonhezz.likesplash.ui.photodetail.PhotoDetailActivity
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_timeline.*
@@ -26,14 +27,15 @@ class EditorialFragment : Fragment() {
         object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
                 startActivity(
-                    Intent(context, ProfileActivity::class.java).putExtra(
-                        ProfileActivity.ARG_PARAM_USER,
-                        user
-                    )
+                    Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER, user)
                 )
             }
 
-            override fun onPhotoClick(it: Photo) {}
+            override fun onPhotoClick(it: Photo) {
+                startActivity(
+                    Intent(context, PhotoDetailActivity::class.java).putExtra("id", it.id)
+                )
+            }
         }).apply { setFilterDuplicates(true) }
 
     override fun onCreateView(

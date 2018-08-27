@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:stateListAnimator="@animator/appbar_always_elevated">
 
-        <android.support.v7.widget.Toolbar
+        <com.github.jasonhezz.likesplash.view.TintingToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll"
+            app:tintIconColor="?android:attr/colorControlNormal"
             app:navigationIcon="@drawable/ic_nav_menu">
             <!--not satisfied with popupBackground!!http://inloop.github.io/shadow4android/ -->
             <!--android:overlapAnchor="false"-->
@@ -26,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:popupElevation="8dp" />
-        </android.support.v7.widget.Toolbar>
+        </com.github.jasonhezz.likesplash.view.TintingToolbar>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView

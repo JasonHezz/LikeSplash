@@ -25,13 +25,13 @@ data class Photo(
     @Json(name = "liked_by_user") val likedByUser: Boolean? = false,
     @Json(name = "description") val description: String? = null,
     @Json(name = "exif") val exif: Exif? = null,
-    @Json(name = "location") val location: String? = null,
+    @Json(name = "location") val location: Location? = null,
     @Json(name = "current_user_collections") val currentUserCollections: List<Collection>? = null,
     @Json(name = "urls") val urls: Urls? = null,
     @Json(name = "categories") val categories: List<Categories>? = null,
     @Json(name = "links") val links: PhotoLinks? = null,
     @Json(name = "story") val story: Story? = null,
     @Json(name = "tags") val tags: List<Tag>? = null,
-    @Json(name = "relatedCollections") val relatedCollections: RelatedCollections? = null,
+    @Json(name = "related_collections") val relatedCollections: RelatedCollections? = null,
     @Json(name = "user") val user: User?
 ) : Serializable, Parcelable

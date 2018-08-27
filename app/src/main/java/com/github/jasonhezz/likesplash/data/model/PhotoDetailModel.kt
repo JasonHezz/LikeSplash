@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.data.model
 
+import android.support.v7.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -24,16 +25,18 @@ abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
         photo?.let {
             val aspectRatio = it.height.toFloat() / it.width.toFloat()
             holder.photo_iv.aspectRatio = aspectRatio
-            holder.user_name.text = it.user?.name
             GlideApp
                 .with(holder.photo_iv)
                 .load(it.urls?.regular)
-                .thumbnail(Glide.with(holder.user_avatar).load(it.urls?.thumb))
                 .into(holder.photo_iv)
-            GlideApp.with(holder.user_avatar)
-                .load(it.user?.profile_image?.large)
-                .placeholder(R.drawable.avatar_placeholder)
-                .into(holder.user_avatar)
+        }
+    }
+
+    override fun onViewAttachedToWindow(holder: BaseViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        val layoutParams = holder.containerView?.layoutParams
+        if (layoutParams is StaggeredGridLayoutManager.LayoutParams) {
+            layoutParams.isFullSpan = true
         }
     }
 }

@@ -25,11 +25,14 @@
         </activity>
         <activity
             android:name=".ui.search.SearchActivity"
-            android:theme="@style/Theme.Splash.Search"></activity>
-        <activity android:name=".ui.profile.ProfileActivity"></activity>
+            android:theme="@style/Theme.Splash.Search" />
+        <activity android:name=".ui.profile.ProfileActivity" />
         <activity
             android:name=".ui.collection.CollectionDetailActivity"
-            android:theme="@style/Theme.Splash.Translucent"></activity>
+            android:theme="@style/Theme.Splash.Translucent" />
+        <activity
+            android:name=".ui.photodetail.PhotoDetailActivity"
+            android:theme="@style/Theme.Splash.Translucent" />
     </application>
 
 </manifest>

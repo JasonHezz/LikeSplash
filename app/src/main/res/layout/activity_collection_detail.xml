@@ -32,7 +32,7 @@
                 tools:scaleType="centerCrop"
                 tools:src="@sample/tag" />
 
-            <android.support.v7.widget.Toolbar
+            <com.github.jasonhezz.likesplash.view.TintingToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="0dp"
                 android:layout_height="?actionBarSize"
@@ -42,6 +42,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/ic_arrow_back"
+                app:tintIconColor="?android:attr/colorControlNormal"
                 app:title="Houseplant heaven" />
 
             <de.hdodenhof.circleimageview.CircleImageView

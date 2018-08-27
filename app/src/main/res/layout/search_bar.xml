@@ -18,6 +18,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:focusable="true"
+            android:tint="?android:attr/colorControlNormal"
             android:foreground="@drawable/circle_ripple"
             android:src="@drawable/ic_arrow_back"
             android:transitionName="search_back" />

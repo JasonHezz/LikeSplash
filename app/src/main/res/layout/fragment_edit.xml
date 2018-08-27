@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <com.github.jasonhezz.likesplash.view.TintingToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_close"
+        app:tintIconColor="?android:attr/colorControlNormal"
         app:title="Edit">
 
-    </android.support.v7.widget.Toolbar>
+    </com.github.jasonhezz.likesplash.view.TintingToolbar>
 
     <ImageView
         android:id="@+id/user_avatar"
