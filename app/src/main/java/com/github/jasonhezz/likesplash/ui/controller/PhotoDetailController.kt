@@ -34,6 +34,7 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
 
     override fun buildModels(data: Photo?) {
         data?.let {
+
             photoDetail {
                 id(it.id)
                 photo(it)
@@ -44,28 +45,30 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
                 title("Related photos")
             }
 
-            loadingModel.addIf(isLoading,this)
+            loadingModel.addIf(isLoading, this)
 
-            it.relatedCollections?.let {
+            if (it.relatedCollections?.results?.isEmpty() == false) {
+
                 title {
                     id("collection_title")
-                    title("Featured in ${it.total ?: 0} collections")
+                    title("Related collections")
                 }
-                it.results?.let {
-                    it.forEach {
-                        previewCollection {
-                            id(it.id)
-                            collection(it)
-                        }
+
+                it.relatedCollections.results.forEach {
+                    previewCollection {
+                        id(it.id)
+                        collection(it)
                     }
                 }
             }
 
-            it.tags?.let {
+            if (it.tags?.isEmpty() == false) {
+
                 title {
                     id("related_tag_title")
                     title("Related tags")
                 }
+
                 flexCarousel {
                     id("tag_carousel")
                     addItemDecoration {
@@ -76,7 +79,7 @@ class PhotoDetailController : TypedEpoxyController<Photo>() {
                         }
                     }
                     isFullSpan(true)
-                    withModelsFrom(it) {
+                    withModelsFrom(it.tags) {
                         ChipModel_().id(it.title).tag(it)
                     }
                 }
