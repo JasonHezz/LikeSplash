@@ -17,33 +17,33 @@ interface UserRepository {
     fun getUserFollowing(
         username: String,
         page: Int = 1,
-        perPage: Int = 20
+        perPage: Int = 24
     ): Listing<User>
 
     fun getUserFollowers(
         username: String,
         page: Int = 1,
-        perPage: Int = 20
+        perPage: Int = 24
     ): Listing<User>
 
     fun getUserLikes(
         username: String,
         page: Int = 1,
-        perPage: Int = 20,
+        perPage: Int = 24,
         orderBy: OrderBy = OrderBy.LATEST
     ): Listing<Photo>
 
     fun getUserPhotos(
         username: String,
         page: Int = 1,
-        perPage: Int = 10,
+        perPage: Int = 24,
         orderBy: OrderBy = OrderBy.LATEST
     ): Listing<Photo>
 
     fun getUserCollection(
         username: String,
         page: Int = 1,
-        perPage: Int = 20,
+        perPage: Int = 24,
         orderBy: OrderBy = OrderBy.LATEST
     ): Listing<Collection>
 

@@ -8,7 +8,7 @@ import com.github.jasonhezz.likesplash.data.entities.Photo
  */
 interface TrendingRepository {
 
-    fun getTrendingFeed(after: String? = null, perPage: Int = 150): Listing<Photo>
+    fun getTrendingFeed(after: String? = null, perPage: Int = 24): Listing<Photo>
 
     fun getFollowingFeed(after: String? = null)
 }

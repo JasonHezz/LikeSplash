@@ -9,12 +9,12 @@ import com.github.jasonhezz.likesplash.data.entities.Photo
  */
 interface CollectionRepository {
 
-    fun getListCuratedCollections(perPage: Int = 20): Listing<Collection>
+    fun getListCuratedCollections(perPage: Int = 24): Listing<Collection>
 
-    fun getListFeaturedCollections(perPage: Int = 20): Listing<Collection>
+    fun getListFeaturedCollections(perPage: Int = 24): Listing<Collection>
 
-    fun getCuratedCollectionPhotos(id: String, perPage: Int = 20): Listing<Photo>
+    fun getCuratedCollectionPhotos(id: String, perPage: Int = 24): Listing<Photo>
 
-    fun getCollectionPhotos(id: String, perPage: Int = 20): Listing<Photo>
+    fun getCollectionPhotos(id: String, perPage: Int = 24): Listing<Photo>
 }
 
