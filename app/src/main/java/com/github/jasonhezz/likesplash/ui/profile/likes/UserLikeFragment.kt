@@ -16,14 +16,14 @@ import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
-import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class UserLikeFragment : Fragment() {
 
-    private val model: UserLikeViewModel by viewModel()
     private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
+    private val model: UserLikeViewModel by viewModel { parametersOf(user?.username ?: "") }
     private val controller = PhotoPagedController(
         object : PhotoPagedController.AdapterCallbacks {
             override fun onAvatarClick(user: User?) {
@@ -38,13 +38,6 @@ class UserLikeFragment : Fragment() {
             override fun onPhotoClick(it: Photo) {
             }
         }).apply { setFilterDuplicates(true) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            user?.id?.let { setProperty("id", it) }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

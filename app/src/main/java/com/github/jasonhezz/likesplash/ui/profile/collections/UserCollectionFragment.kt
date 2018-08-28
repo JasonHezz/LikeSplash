@@ -16,8 +16,8 @@ import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailActivity
 import com.github.jasonhezz.likesplash.ui.controller.CollectionPagedController
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
-import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 /**
@@ -25,7 +25,8 @@ import timber.log.Timber
  */
 class UserCollectionFragment : Fragment() {
 
-    private val model: UserCollectionViewModel by viewModel()
+    private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
+    private val model: UserCollectionViewModel by viewModel { parametersOf(user?.username ?: "") }
     private val controller = CollectionPagedController(object : CollectionPagedController.AdapterCallbacks {
         override fun onAvatarClick() {
 
@@ -37,16 +38,6 @@ class UserCollectionFragment : Fragment() {
             })
         }
     }).apply { setFilterDuplicates(true) }
-
-    private var user: User? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            user = arguments?.getParcelable(ARG_PARAM_USER)
-        }
-        setProperty("id", user?.username ?: "")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

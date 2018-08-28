@@ -7,17 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.bumptech.glide.Glide
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.controller.PhotoDetailController
-import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.fragment_photo_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PhotoDetailFragment : Fragment() {
 
-    val vm by viewModel<PhotoDetailViewModel> { parametersOf(arguments?.get("id")!!) }
+    val vm by viewModel<PhotoDetailViewModel> { parametersOf(arguments?.get("id") ?: "") }
     val controller = PhotoDetailController()
 
     override fun onCreate(savedInstanceState: Bundle?) {

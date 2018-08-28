@@ -4,7 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.support.v7.app.AppCompatDelegate
 import com.github.jasonhezz.likesplash.inject.appModule
+import com.github.jasonhezz.likesplash.inject.dataModule
+import com.github.jasonhezz.likesplash.inject.netModule
 import org.koin.android.ext.android.startKoin
+import org.koin.log.EmptyLogger
 import timber.log.Timber
 
 /**
@@ -21,7 +24,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        startKoin(this, listOf(appModule))
+        startKoin(this, listOf(appModule, dataModule, netModule),logger = EmptyLogger())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 

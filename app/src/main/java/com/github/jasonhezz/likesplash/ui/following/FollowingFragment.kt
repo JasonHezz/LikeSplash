@@ -12,8 +12,8 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.controller.UserPagedController
 import kotlinx.android.synthetic.main.fragment_following.*
-import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 /**
@@ -21,20 +21,11 @@ import timber.log.Timber
  */
 class FollowingFragment : Fragment() {
 
-    private var user: User? = null
+    private val user: User? by lazy { arguments?.getParcelable<User>(ARG_USER_NAME) }
 
-    private val model: FollowingViewModel by viewModel()
+    private val model: FollowingViewModel by viewModel { parametersOf(user?.username ?: "") }
     private val controller = UserPagedController().apply { setFilterDuplicates(true) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            user = arguments?.getParcelable(
-                ARG_USER_NAME
-            )
-            setProperty("id", user?.username ?: "")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

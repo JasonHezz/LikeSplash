@@ -1,25 +1,5 @@
 package com.github.jasonhezz.likesplash.inject
 
-import com.github.jasonhezz.likesplash.App
-import com.github.jasonhezz.likesplash.data.api.SplashConstants.UNSPLASH_NEW_BASE_URL
-import com.github.jasonhezz.likesplash.data.service.CollectionService
-import com.github.jasonhezz.likesplash.data.service.MockService
-import com.github.jasonhezz.likesplash.data.service.PhotoService
-import com.github.jasonhezz.likesplash.data.service.SearchService
-import com.github.jasonhezz.likesplash.data.service.TrendingService
-import com.github.jasonhezz.likesplash.data.service.UserService
-import com.github.jasonhezz.likesplash.repository.CollectionRepository
-import com.github.jasonhezz.likesplash.repository.CollectionRepositoryIml
-import com.github.jasonhezz.likesplash.repository.ExploreRepository
-import com.github.jasonhezz.likesplash.repository.ExploreRepositoryIml
-import com.github.jasonhezz.likesplash.repository.PhotoRepository
-import com.github.jasonhezz.likesplash.repository.PhotoRepositoryIml
-import com.github.jasonhezz.likesplash.repository.SearchRepository
-import com.github.jasonhezz.likesplash.repository.SearchRepositoryIml
-import com.github.jasonhezz.likesplash.repository.TrendingRepository
-import com.github.jasonhezz.likesplash.repository.TrendingRepositoryIml
-import com.github.jasonhezz.likesplash.repository.UserRepository
-import com.github.jasonhezz.likesplash.repository.UserRepositoryIml
 import com.github.jasonhezz.likesplash.ui.collection.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.FeaturedCollectionViewModel
@@ -34,106 +14,22 @@ import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionView
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
 import com.github.jasonhezz.likesplash.ui.trending.TrendingViewModel
-import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
-import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
-import com.squareup.moshi.Moshi
-import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
-
-private const val DEFAULT_CONNECT_TIMEOUT_MILLIS = 15L
-private const val DEFAULT_READ_TIMEOUT_MILLIS = 20L
-private const val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
 
 val appModule = module {
-    single {
-        FakeInterceptor(App.applicationContext())
-    }
-    single {
-        UserAgentInterceptor()
-    }
-    single {
-        OkHttpClient().newBuilder()
-            .connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .addInterceptor(get<UserAgentInterceptor>())
-            .addInterceptor(get<FakeInterceptor>())
-            .build()
-    }
-    single {
-        Retrofit.Builder()
-            .baseUrl(UNSPLASH_NEW_BASE_URL)
-            .client(get())
-            .addConverterFactory(MoshiConverterFactory.create(
-                Moshi.Builder().build()).asLenient())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-    }
-    single {
-        get<Retrofit>().create(
-            TrendingService::class.java
-        )
-    }
-    single {
-        get<Retrofit>().create(
-            PhotoService::class.java
-        )
-    }
-    single {
-        get<Retrofit>().create(
-            CollectionService::class.java
-        )
-    }
-    single {
-        get<Retrofit>().create(
-            UserService::class.java
-        )
-    }
-    single {
-        get<Retrofit>().create(
-            SearchService::class.java
-        )
-    }
-    single {
-        get<Retrofit>().create(
-            MockService::class.java
-        )
-    }
-    single {
-        TrendingRepositoryIml(get()) as TrendingRepository
-    }
-    single {
-        PhotoRepositoryIml(get()) as PhotoRepository
-    }
-    single {
-        UserRepositoryIml(get()) as UserRepository
-    }
-    single {
-        SearchRepositoryIml(get()) as SearchRepository
-    }
-    single {
-        CollectionRepositoryIml(get()) as CollectionRepository
-    }
-    single {
-        ExploreRepositoryIml(get()) as ExploreRepository
-    }
     viewModel { TrendingViewModel(get()) }
     viewModel { EditorialViewModel(get()) }
     viewModel { CuratedCollectionViewModel(get()) }
     viewModel { FeaturedCollectionViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { PopularPhotoViewModel(get()) }
-    viewModel { FollowerViewModel(getProperty("id"), get()) }
-    viewModel { FollowingViewModel(getProperty("id"), get()) }
-    viewModel { CollectionDetailViewModel(getProperty("id"), getProperty("isCurated", false), get()) }
-    viewModel { UserLikeViewModel(getProperty("id"), get()) }
-    viewModel { UserCollectionViewModel(getProperty("id"), get()) }
-    viewModel { UserPhotoViewModel(getProperty("id"), get()) }
+    viewModel { (userName: String) -> FollowerViewModel(userName, get()) }
+    viewModel { (userName: String) -> FollowingViewModel(userName, get()) }
+    viewModel { (collectionId: String, isCurated: Boolean) -> CollectionDetailViewModel(collectionId, isCurated, get()) }
+    viewModel { (userName: String) -> UserLikeViewModel(userName, get()) }
+    viewModel { (userName: String) -> UserCollectionViewModel(userName, get()) }
+    viewModel { (userName: String) -> UserPhotoViewModel(userName, get()) }
     viewModel { PopularCollectionViewModel(get()) }
-    viewModel { (id: String) -> PhotoDetailViewModel(id, get()) }
+    viewModel { (photoId: String) -> PhotoDetailViewModel(photoId, get()) }
 }
