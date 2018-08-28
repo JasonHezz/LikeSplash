@@ -105,7 +105,7 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onOffsetChanged(state: State, fraction: Float) {
-                ViewCompat.setTranslationZ(app_bar_layout, 6f * fraction)
+                ViewCompat.setTranslationZ(app_bar_layout, 4f * fraction)
             }
         })
     }
