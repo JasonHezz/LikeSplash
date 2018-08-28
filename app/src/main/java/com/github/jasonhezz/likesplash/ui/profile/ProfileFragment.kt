@@ -100,6 +100,7 @@ class ProfileFragment : Fragment() {
             inflateMenu(R.menu.menu_share)
             setNavigationOnClickListener { activity?.supportFinishAfterTransition() }
         }
+        user_avatar.outlineProvider = null
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
             }
