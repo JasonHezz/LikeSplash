@@ -1,6 +1,5 @@
 package com.github.jasonhezz.likesplash.inject
 
-import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.data.api.SplashConstants
 import com.github.jasonhezz.likesplash.data.service.CollectionService
 import com.github.jasonhezz.likesplash.data.service.MockService
@@ -12,6 +11,7 @@ import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -24,7 +24,7 @@ private const val DEFAULT_WRITE_TIMEOUT_MILLIS = 20L
 
 val netModule = module {
     single {
-        FakeInterceptor(App.applicationContext())
+        FakeInterceptor(androidContext())
     }
     single {
         UserAgentInterceptor()
