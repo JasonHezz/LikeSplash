@@ -3,7 +3,6 @@ package com.github.jasonhezz.likesplash.ui.collection
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import androidx.core.view.isVisible
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
@@ -60,7 +59,7 @@ class CollectionDetailActivity : AppCompatActivity() {
         toolbar.title = collection?.title
         toolbar.setNavigationOnClickListener { finish() }
         user_name.text = collection?.user?.name
-        if (TextUtils.isEmpty(collection?.description)) description_tv.isVisible = false
+        if (collection?.description.isNullOrEmpty()) description_tv.isVisible = false
         else description_tv.text = collection?.description
         GlideApp
             .with(this)
