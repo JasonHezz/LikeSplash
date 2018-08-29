@@ -2,9 +2,9 @@ package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 import com.github.jasonhezz.likesplash.ui.epoxy.model.createCollection
 import com.github.jasonhezz.likesplash.ui.epoxy.model.dialogCollection
-import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 
 /**
  * Created by JavaCoder on 2017/10/16.

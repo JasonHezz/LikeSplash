@@ -6,12 +6,12 @@ import com.airbnb.epoxy.AutoModel
 import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Photo
+import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 import com.github.jasonhezz.likesplash.ui.epoxy.model.ChipModel_
 import com.github.jasonhezz.likesplash.ui.epoxy.model.LoadingModel_
 import com.github.jasonhezz.likesplash.ui.epoxy.model.photoDetail
 import com.github.jasonhezz.likesplash.ui.epoxy.model.previewCollection
 import com.github.jasonhezz.likesplash.ui.epoxy.model.title
-import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 import com.github.jasonhezz.likesplash.ui.epoxy.withModelsFrom
 import com.github.jasonhezz.likesplash.view.flexCarousel
 import com.google.android.flexbox.FlexboxItemDecoration

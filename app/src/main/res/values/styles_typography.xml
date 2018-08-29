@@ -16,50 +16,35 @@
 
 <resources>
 
-    <style name="TextAppearance.Splash.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-    </style>
+    <style name="TextAppearance.Splash.Headline1" parent="TextAppearance.MaterialComponents.Headline1"></style>
 
-    <style name="TextAppearance.Splash.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
-    </style>
+    <style name="TextAppearance.Splash.Headline2" parent="TextAppearance.MaterialComponents.Headline2"></style>
 
-    <style name="TextAppearance.Splash.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
-    </style>
+    <style name="TextAppearance.Splash.Headline3" parent="TextAppearance.MaterialComponents.Headline3"></style>
 
-    <style name="TextAppearance.Splash.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
-    </style>
+    <style name="TextAppearance.Splash.Headline4" parent="TextAppearance.MaterialComponents.Headline4"></style>
 
-    <style name="TextAppearance.Splash.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-    </style>
+    <style name="TextAppearance.Splash.Headline5" parent="TextAppearance.MaterialComponents.Headline5"></style>
 
-    <style name="TextAppearance.Splash.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-    </style>
+    <style name="TextAppearance.Splash.Headline6" parent="TextAppearance.MaterialComponents.Headline6"></style>
 
-    <style name="TextAppearance.Splash.Body1" parent="TextAppearance.MaterialComponents.Body1">
-    </style>
+    <style name="TextAppearance.Splash.Body1" parent="TextAppearance.MaterialComponents.Body1"></style>
 
-    <style name="TextAppearance.Splash.Body2" parent="TextAppearance.MaterialComponents.Body2">
-    </style>
+    <style name="TextAppearance.Splash.Body2" parent="TextAppearance.MaterialComponents.Body2"></style>
 
-    <style name="TextAppearance.Splash.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-    </style>
+    <style name="TextAppearance.Splash.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1"></style>
 
-    <style name="TextAppearance.Splash.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-    </style>
+    <style name="TextAppearance.Splash.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2"></style>
 
-    <style name="TextAppearance.Splash.Button" parent="TextAppearance.MaterialComponents.Button">
-    </style>
+    <style name="TextAppearance.Splash.Button" parent="TextAppearance.MaterialComponents.Button"></style>
 
-    <style name="TextAppearance.Splash.Caption" parent="TextAppearance.MaterialComponents.Caption">
-    </style>
+    <style name="TextAppearance.Splash.Caption" parent="TextAppearance.MaterialComponents.Caption"></style>
 
-    <style name="TextAppearance.Splash.Overline" parent="TextAppearance.MaterialComponents.Overline">
-    </style>
+    <style name="TextAppearance.Splash.Overline" parent="TextAppearance.MaterialComponents.Overline"></style>
 
-    <style name="TextAppearance.Splash.ListItemSecondary" parent="TextAppearance.Splash.Caption">
-    </style>
+    <style name="TextAppearance.Splash.ListItemSecondary" parent="TextAppearance.Splash.Caption"></style>
 
-    <style name="TextAppearance.Splash.ListItem" parent="TextAppearance.Splash.Body1">
-    </style>
+    <style name="TextAppearance.Splash.ListItem" parent="TextAppearance.Splash.Body1"></style>
 
     <style name="TextAppearance.Splash.Chip" parent="TextAppearance.Splash.Caption">
         <item name="android:textColor">?android:attr/textColorSecondary</item>

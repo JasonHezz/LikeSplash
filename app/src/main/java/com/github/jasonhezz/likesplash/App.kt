@@ -24,7 +24,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        startKoin(this, listOf(appModule, dataModule, netModule),logger = EmptyLogger())
+        startKoin(this, listOf(appModule, dataModule, netModule), logger = EmptyLogger())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 

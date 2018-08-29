@@ -10,8 +10,8 @@ import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
-import com.github.jasonhezz.likesplash.util.extension.clearItemDecoration
 import com.github.jasonhezz.likesplash.ui.epoxy.withModels
+import com.github.jasonhezz.likesplash.util.extension.clearItemDecoration
 import com.github.jasonhezz.likesplash.util.recyclerview.SpanGirdItemDecoration
 import com.google.android.flexbox.FlexboxItemDecoration
 import kotlinx.android.synthetic.main.item_preview.*

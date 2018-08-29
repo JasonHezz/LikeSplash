@@ -4,11 +4,11 @@ import android.content.Context
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.ExploreCollection
+import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
+import com.github.jasonhezz.likesplash.ui.epoxy.NumItemsInGridRow
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreCollection
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreCollectionThumb
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreTitle
-import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
-import com.github.jasonhezz.likesplash.ui.epoxy.NumItemsInGridRow
 
 /**
  * Created by JavaCoder on 2018/1/10.

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2017 Google, Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,13 @@
   -->
 
 <resources>
-    <attr format="dimension" name="lineHeightHint"/>
+    <attr name="lineHeightHint" format="dimension" />
 
     <declare-styleable name="BaselineGridTextView">
-        <attr format="float" name="lineHeightMultiplierHint"/>
-        <attr name="lineHeightHint"/>
-        <attr format="boolean" name="maxLinesByHeight"/>
-        <attr name="android:textAppearance"/>
-        <attr name="android:fontFamily"/>
+        <attr name="lineHeightMultiplierHint" format="float" />
+        <attr name="lineHeightHint" />
+        <attr name="maxLinesByHeight" format="boolean" />
+        <attr name="android:textAppearance" />
+        <attr name="android:fontFamily" />
     </declare-styleable>
 </resources>

@@ -5,28 +5,27 @@
   ~ All Rights Reserved.
   -->
 
-<ripple
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?colorControlHighlight">
 
-  <item android:id="@android:id/mask">
-    <shape android:shape="oval">
-      <solid android:color="@android:color/white"/>
-    </shape>
-  </item>
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
 
-  <item>
-    <selector>
-      <item android:state_activated="true">
-        <shape android:shape="oval">
-          <solid android:color="?colorControlActivated"/>
-        </shape>
-      </item>
-      <item>
-        <shape android:shape="oval">
-          <solid android:color="#CCeeeeee"/>
-        </shape>
-      </item>
-    </selector>
-  </item>
+    <item>
+        <selector>
+            <item android:state_activated="true">
+                <shape android:shape="oval">
+                    <solid android:color="?colorControlActivated" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#CCeeeeee" />
+                </shape>
+            </item>
+        </selector>
+    </item>
 </ripple>

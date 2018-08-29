@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <integer name="stagger_column">3</integer>
-  <integer name="grid_column">2</integer>
-  <integer name="grid_explore_photo_span">2</integer>
-  <integer name="grid_explore_photo_per_row">2</integer>
-  <integer name="grid_explore_tag_per_row">2</integer>
+    <integer name="stagger_column">3</integer>
+    <integer name="grid_column">2</integer>
+    <integer name="grid_explore_photo_span">2</integer>
+    <integer name="grid_explore_photo_per_row">2</integer>
+    <integer name="grid_explore_tag_per_row">2</integer>
 </resources>

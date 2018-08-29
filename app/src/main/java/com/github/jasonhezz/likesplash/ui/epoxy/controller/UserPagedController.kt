@@ -3,9 +3,9 @@ package com.github.jasonhezz.likesplash.ui.epoxy.controller
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.paging.PagingEpoxyController
 import com.github.jasonhezz.likesplash.data.entities.User
+import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 import com.github.jasonhezz.likesplash.ui.epoxy.model.LoadingModel_
 import com.github.jasonhezz.likesplash.ui.epoxy.model.user
-import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 
 /**
  * Created by JavaCoder on 2017/12/8.

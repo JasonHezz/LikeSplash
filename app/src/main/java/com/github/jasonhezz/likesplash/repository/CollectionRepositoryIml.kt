@@ -7,9 +7,9 @@ import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.CollectionService
-import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionPhotosDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionPhotosDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionPhotosDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.collection.featured.FeaturedCollectionDataSourceFactory
 
 class CollectionRepositoryIml(

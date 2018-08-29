@@ -36,8 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:tintIconColor="@android:color/white"
-        />
+        app:tintIconColor="@android:color/white" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <integer name="stagger_column">4</integer>
-  <integer name="grid_column">3</integer>
-  <integer name="grid_explore_photo_span">12</integer>
-  <integer name="grid_explore_photo_per_row">3</integer>
-  <integer name="grid_explore_tag_per_row">4</integer>
-  <integer name="gird_explore_collection_span">4</integer>
-  <integer name="grid_explore_collection_per_row">2</integer>
-  <integer name="grid_explore_collection_thumb_per_row">4</integer>
+    <integer name="stagger_column">4</integer>
+    <integer name="grid_column">3</integer>
+    <integer name="grid_explore_photo_span">12</integer>
+    <integer name="grid_explore_photo_per_row">3</integer>
+    <integer name="grid_explore_tag_per_row">4</integer>
+    <integer name="gird_explore_collection_span">4</integer>
+    <integer name="grid_explore_collection_per_row">2</integer>
+    <integer name="grid_explore_collection_thumb_per_row">4</integer>
 </resources>

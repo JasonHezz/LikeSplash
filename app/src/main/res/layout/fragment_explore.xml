@@ -18,8 +18,8 @@
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll"
-            app:tintIconColor="?android:attr/colorControlNormal"
-            app:navigationIcon="@drawable/ic_nav_menu">
+            app:navigationIcon="@drawable/ic_nav_menu"
+            app:tintIconColor="?android:attr/colorControlNormal">
             <!--not satisfied with popupBackground!!http://inloop.github.io/shadow4android/ -->
             <!--android:overlapAnchor="false"-->
             <Spinner

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2015 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,10 @@
   limitations under the License.
   -->
 
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-  <solid android:color="#ffe0e0e0"/>
-  <size
-      android:height="40dp"
-      android:width="40dp"/>
+    <solid android:color="#ffe0e0e0" />
+    <size
+        android:width="40dp"
+        android:height="40dp" />
 </shape>

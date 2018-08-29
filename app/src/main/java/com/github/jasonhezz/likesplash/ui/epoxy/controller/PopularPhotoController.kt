@@ -6,13 +6,13 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.ExplorePhoto
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.Tag
+import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
+import com.github.jasonhezz.likesplash.ui.epoxy.NumItemsInGridRow
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreMore
 import com.github.jasonhezz.likesplash.ui.epoxy.model.explorePhoto
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreTag
 import com.github.jasonhezz.likesplash.ui.epoxy.model.exploreTitle
 import com.github.jasonhezz.likesplash.ui.epoxy.model.space
-import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
-import com.github.jasonhezz.likesplash.ui.epoxy.NumItemsInGridRow
 
 /**
  * Created by JavaCoder on 2018/1/3.

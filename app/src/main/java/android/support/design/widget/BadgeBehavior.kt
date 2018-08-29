@@ -6,7 +6,6 @@ import android.view.View
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
-import timber.log.Timber
 
 class BadgeBehavior @JvmOverloads constructor(
     context: Context,

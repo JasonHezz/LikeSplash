@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <!--checked:@android:color/colorForeground normal:50%alpha colorForeground-->
-  <item android:color="#ffffffff" android:state_checked="true"/>
-  <item android:color="#ffffffff" android:state_selected="true"/>
-  <item android:color="#7fffffff"/> <!-- not selected -->
+    <!--checked:@android:color/colorForeground normal:50%alpha colorForeground-->
+    <item android:color="#ffffffff" android:state_checked="true" />
+    <item android:color="#ffffffff" android:state_selected="true" />
+    <item android:color="#7fffffff" /> <!-- not selected -->
 </selector>
