@@ -63,6 +63,9 @@ subprojects {
             ktlint(versions.ktlint)
             licenseHeaderFile project.rootProject.file('spotless/copyright.kt')
         }
+        java {
+            googleJavaFormat()
+        }
     }
 }
 
