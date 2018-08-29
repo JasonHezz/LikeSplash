@@ -12,18 +12,11 @@ import io.reactivex.Single
  */
 interface PhotoRepository {
 
-    fun getListPhotos(
-        page: Int = 1, perPage: Int = 24,
-        orderBy: OrderBy = OrderBy.LATEST
-    ): Listing<Photo>
+    fun getListPhotos(page: Int = 1, perPage: Int = 24, orderBy: OrderBy = OrderBy.LATEST): Listing<Photo>
 
-    fun getListCuratedPhotos(
-        page: Int = 1, perPage: Int = 24,
-        orderBy: OrderBy = OrderBy.LATEST
-    ): Single<List<Photo>>
+    fun getListCuratedPhotos(page: Int = 1, perPage: Int = 24, orderBy: OrderBy = OrderBy.LATEST): Single<List<Photo>>
 
-    fun getAPhoto(id: String, w: Int? = null, h: Int? = null):
-        LiveData<Photo>
+    fun getAPhoto(id: String, w: Int? = null, h: Int? = null): LiveData<Photo>
 
     fun getListRandomPhoto(
         collections: String? = null,

@@ -14,17 +14,9 @@ interface UserRepository {
 
     fun getUserProfile(username: String, w: Int? = null, h: Int? = null): Single<User>
 
-    fun getUserFollowing(
-        username: String,
-        page: Int = 1,
-        perPage: Int = 24
-    ): Listing<User>
+    fun getUserFollowing(username: String, page: Int = 1, perPage: Int = 24): Listing<User>
 
-    fun getUserFollowers(
-        username: String,
-        page: Int = 1,
-        perPage: Int = 24
-    ): Listing<User>
+    fun getUserFollowers(username: String, page: Int = 1, perPage: Int = 24): Listing<User>
 
     fun getUserLikes(
         username: String,
@@ -47,10 +39,7 @@ interface UserRepository {
         orderBy: OrderBy = OrderBy.LATEST
     ): Listing<Collection>
 
-    fun getUserStatistics(
-        username: String, resolution: String? = null,
-        quantity: Int = 30
-    )
+    fun getUserStatistics(username: String, resolution: String? = null, quantity: Int = 30)
 
     fun followUser(username: String)
 

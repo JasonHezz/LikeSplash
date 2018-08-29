@@ -26,34 +26,18 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
-        )
-            .build()
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
+        ).build()
         return Listing(
             pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                it.networkState
-            },
-            retry = {
-                sourceFactory.sourceLiveData.value?.retryAllFailed()
-            },
-            refresh = {
-                sourceFactory.sourceLiveData.value?.invalidate()
-            },
-            refreshState = refreshState
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 
-    override fun getListCuratedPhotos(
-        page: Int, perPage: Int,
-        orderBy: OrderBy
-    ): Single<List<Photo>> =
-        service.getListCuratedPhotos(
-            page, perPage,
-            orderBy
-        )
+    override fun getListCuratedPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<Photo>> =
+        service.getListCuratedPhotos(page, perPage, orderBy)
 
     override fun getAPhoto(id: String, w: Int?, h: Int?): LiveData<Photo> {
         val result = MutableLiveData<Photo>()
@@ -71,16 +55,17 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
         return result
     }
 
-
     override fun getListRandomPhoto(
-        collections: String?, featured: String?, username: String?,
-        query: String?, orientation: String?, w: Int?, h: Int?,
+        collections: String?,
+        featured: String?,
+        username: String?,
+        query: String?,
+        orientation: String?,
+        w: Int?,
+        h: Int?,
         count: Int
     ): Single<List<Photo>> =
-        service.getListRandomPhoto(
-            collections, featured,
-            username, query, orientation, w, h, count
-        )
+        service.getListRandomPhoto(collections, featured, username, query, orientation, w, h, count)
 
     override fun getAPhotoStatistics(id: Int, resolution: String?, quantity: Int) =
         service.getAPhotoStatistics(id, resolution, quantity)
@@ -90,9 +75,7 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
 
     override fun updateAPhoto(id: String) = service.updateAPhoto(id)
 
-    override fun likeAPhoto(id: String) {
-        service.likeAPhoto(id)
-    }
+    override fun likeAPhoto(id: String) = service.likeAPhoto(id)
 
     override fun unlikeAPhoto(id: String) = service.unlikeAPhoto(id)
 }

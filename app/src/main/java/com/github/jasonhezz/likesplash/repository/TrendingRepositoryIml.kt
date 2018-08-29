@@ -18,21 +18,12 @@ class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepo
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
         return Listing(
             pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                it.networkState
-            },
-            retry = {
-                sourceFactory.sourceLiveData.value?.retryAllFailed()
-            },
-            refresh = {
-                sourceFactory.sourceLiveData.value?.invalidate()
-            },
-            refreshState = refreshState
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 }

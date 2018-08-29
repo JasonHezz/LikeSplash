@@ -24,23 +24,13 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
-        )
-            .build()
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
+        ).build()
         return Listing(
             pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-                it.networkState
-            },
-            retry = {
-                sourceFactory.sourceLiveData.value?.retryAllFailed()
-            },
-            refresh = {
-                sourceFactory.sourceLiveData.value?.invalidate()
-            },
-            refreshState = refreshState
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 
@@ -57,10 +47,7 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
         return result
     }
 
-    override fun searchPageCollections(
-        query: String, page: Int,
-        perPage: Int
-    ): Single<List<Collection>> {
+    override fun searchPageCollections(query: String, page: Int, perPage: Int): Single<List<Collection>> {
         return service.searchCollections(query, page, perPage)
     }
 

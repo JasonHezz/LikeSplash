@@ -12,7 +12,8 @@ import android.view.MenuItem
  */
 abstract class NavigationViewAdapter(
     val fm: FragmentManager,
-    defaultMenuId: Int, @IdRes val containerId: Int, savedInstanceState: Bundle?
+    defaultMenuId: Int, @IdRes val containerId: Int,
+    savedInstanceState: Bundle?
 ) {
 
     private var currentlyAttachedId = defaultMenuId

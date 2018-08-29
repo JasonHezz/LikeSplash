@@ -5,11 +5,7 @@ import android.support.design.widget.AppBarLayout
 /**
  * Created by JavaCoder on 2017/10/31.
  */
-enum class State {
-    EXPANDED,
-    COLLAPSED,
-    IDLE
-}
+enum class State { EXPANDED, COLLAPSED, IDLE }
 
 abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener {
 
