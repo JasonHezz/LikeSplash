@@ -9,8 +9,8 @@ import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.enumerations.OrderBy
 import com.github.jasonhezz.likesplash.data.service.UserService
-import com.github.jasonhezz.likesplash.ui.follower.UserFollowerDataSourceFactory
-import com.github.jasonhezz.likesplash.ui.following.UserFollowingDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.profile.follower.UserFollowerDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.profile.following.UserFollowingDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.collections.UserCollectionDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeDataSourceFactory
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoDataSourceFactory

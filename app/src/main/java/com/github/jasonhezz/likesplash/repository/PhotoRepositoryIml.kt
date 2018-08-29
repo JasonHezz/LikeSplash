@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.enumerations.OrderBy
 import com.github.jasonhezz.likesplash.data.service.PhotoService
-import com.github.jasonhezz.likesplash.ui.editorial.EditorialPhotoDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.home.editorial.EditorialPhotoDataSourceFactory
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.Callback

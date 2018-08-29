@@ -6,7 +6,7 @@ import android.arch.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.TrendingService
-import com.github.jasonhezz.likesplash.ui.trending.TrendingPhotoDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.home.trending.TrendingPhotoDataSourceFactory
 
 class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepository {
 

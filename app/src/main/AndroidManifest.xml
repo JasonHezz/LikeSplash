@@ -28,7 +28,7 @@
             android:theme="@style/Theme.Splash.Search" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity
-            android:name=".ui.collection.CollectionDetailActivity"
+            android:name=".ui.collection.detail.CollectionDetailActivity"
             android:theme="@style/Theme.Splash.Translucent" />
         <activity
             android:name=".ui.photodetail.PhotoDetailActivity"
