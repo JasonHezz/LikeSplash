@@ -51,7 +51,7 @@ class FollowerFragment : Fragment() {
 
     private fun initController() {
         rv.setController(controller)
-        model.follwers.observe(this, Observer {
+        model.followers.observe(this, Observer {
             controller.setList(it)
         })
         model.networkState.observe(this, Observer {

@@ -16,7 +16,7 @@ class FollowerViewModel(
 ) : ViewModel() {
 
     private val result = MutableLiveData<Listing<User>>()
-    val follwers = Transformations.switchMap(result) { it.pagedList }!!
+    val followers = Transformations.switchMap(result) { it.pagedList }!!
     val networkState = Transformations.switchMap(result) { it.networkState }!!
     val refreshState = Transformations.switchMap(result) { it.refreshState }!!
 
