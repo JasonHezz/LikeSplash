@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
             bio.isVisible = !it?.bio.isNullOrEmpty()
             location.isVisible = !it?.location.isNullOrEmpty()
-            web_link.isVisible = it?.portfolioUrl.isNullOrEmpty()
+            web_link.isVisible = !it?.portfolioUrl.isNullOrEmpty()
             bio.text = it?.bio
             location.text = it?.location
             web_link.text = it?.portfolioUrl
