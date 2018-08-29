@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.controller.PhotoDetailController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoDetailController
 import kotlinx.android.synthetic.main.fragment_photo_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -35,7 +35,7 @@ class PhotoDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rv.setController(controller)
         vm.result.observe(this, Observer {
-            controller.setData(it)
+            controller.data = it
         })
     }
 

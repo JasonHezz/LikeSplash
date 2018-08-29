@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Photo
-import com.github.jasonhezz.likesplash.ui.controller.DialogCollectionController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.DialogCollectionController
 import kotlinx.android.synthetic.main.dialog_add_collection.*
 
 /**

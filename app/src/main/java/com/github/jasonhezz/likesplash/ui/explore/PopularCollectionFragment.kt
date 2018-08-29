@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.controller.PopularCollectionController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.PopularCollectionController
 import kotlinx.android.synthetic.main.fragment_popular_collection.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,7 +34,7 @@ class PopularCollectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rv.setController(controller)
         model.result.observe(this, Observer { it ->
-            controller.setData(it)
+            controller.data = it
         })
     }
 
