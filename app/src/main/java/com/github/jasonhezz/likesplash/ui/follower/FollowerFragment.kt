@@ -10,7 +10,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
-import com.github.jasonhezz.likesplash.ui.controller.UserPagedController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.UserPagedController
 import kotlinx.android.synthetic.main.fragment_following.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

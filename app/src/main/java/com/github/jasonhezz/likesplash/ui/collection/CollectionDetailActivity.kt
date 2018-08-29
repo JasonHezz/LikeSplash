@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Collection
-import com.github.jasonhezz.likesplash.ui.controller.PhotoPagedController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_collection_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.ui.controller.PopularPhotoController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.PopularPhotoController
 import kotlinx.android.synthetic.main.fragment_popular_photo.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

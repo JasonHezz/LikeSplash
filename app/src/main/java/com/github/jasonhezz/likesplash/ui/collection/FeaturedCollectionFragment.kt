@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Collection
-import com.github.jasonhezz.likesplash.ui.controller.PreviewCollectionPagedController
+import com.github.jasonhezz.likesplash.ui.epoxy.controller.PreviewCollectionPagedController
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_featured_collection.*
 import org.koin.android.viewmodel.ext.android.viewModel
