@@ -115,7 +115,6 @@
                 app:layout_collapseMode="pin"
                 app:logo="@drawable/profile_placeholder"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:tintIconColor="?android:attr/colorControlNormal"
                 app:titleMarginStart="16dp" />
 
         </android.support.design.widget.CollapsingToolbarLayout>

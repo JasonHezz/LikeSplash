@@ -14,7 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:navigationIcon="@drawable/ic_close"
-        app:tintIconColor="?android:attr/colorControlNormal"
         app:title="Add to collection" />
 
 
