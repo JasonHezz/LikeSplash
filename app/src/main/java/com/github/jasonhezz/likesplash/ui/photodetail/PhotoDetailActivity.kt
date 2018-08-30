@@ -8,6 +8,8 @@ class PhotoDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        replaceFragmentInActivity(PhotoDetailFragment.newInstance(intent.getStringExtra("id")), android.R.id.content)
+        if (savedInstanceState == null) {
+            replaceFragmentInActivity(PhotoDetailFragment.newInstance(intent.getStringExtra("id")), android.R.id.content)
+        }
     }
 }
