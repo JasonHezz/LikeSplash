@@ -27,7 +27,7 @@ import com.github.jasonhezz.likesplash.R
 /**
  * Dialog with custom background dim.
  */
-class FullScreenDimDialog(context: Context?) : AppCompatDialog(context, R.style.Theme_Splash_Dialog) {
+class FullScreenDialog(context: Context?) : AppCompatDialog(context, R.style.Theme_Splash_Dialog) {
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)

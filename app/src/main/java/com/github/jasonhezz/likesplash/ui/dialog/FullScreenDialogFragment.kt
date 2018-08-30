@@ -23,6 +23,6 @@ import android.support.v7.app.AppCompatDialogFragment
 open class FullScreenDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return FullScreenDimDialog(context)
+        return FullScreenDialog(context)
     }
 }
