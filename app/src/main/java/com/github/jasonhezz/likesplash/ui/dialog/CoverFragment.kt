@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -13,8 +14,8 @@ import kotlinx.android.synthetic.main.dialog_add_cover.*
 /**
  * Created by JavaCoder on 2018/1/18.
  */
-class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Companion.Callbacks,
-    CreateCollectionFragment.Companion.Callbacks {
+class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callbacks,
+    CreateCollectionFragment.Callbacks,CloseCallback {
 
     private var photo: Photo? = null
     private var data: List<Collection>? = null
@@ -70,17 +71,18 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Companio
         ).addToBackStack(null).commit()
     }
 
-    companion object {
+    override fun close() {
+        dismiss()
+    }
 
+    companion object {
         private const val ARG_PARAM_COLLECTION = "collection"
         private const val ARG_PARAM_PHOTO = "photo"
 
         @JvmStatic
         fun newInstance(photo: Photo, data: ArrayList<Collection>? = null): CoverFragment {
             val fragment = CoverFragment()
-            val args = Bundle()
-            args.putSerializable(ARG_PARAM_PHOTO, photo)
-            args.putParcelableArrayList(ARG_PARAM_COLLECTION, data)
+            val args = bundleOf(ARG_PARAM_PHOTO to photo, ARG_PARAM_COLLECTION to data)
             fragment.arguments = args
             return fragment
         }

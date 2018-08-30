@@ -1,97 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout_height="400dp"
-    tools:layout_width="600dp">
+    android:layout_height="match_parent">
 
-    <com.github.jasonhezz.likesplash.view.TintingToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:navigationIcon="@drawable/ic_close"
-        app:title="Create new collection" />
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <me.zhanghai.android.materialedittext.MaterialTextInputLayout
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="60"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        <com.github.jasonhezz.likesplash.view.TintingToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:navigationIcon="@drawable/ic_close"
+            app:title="Create new collection" />
 
-        <me.zhanghai.android.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
+        <me.zhanghai.android.materialedittext.MaterialTextInputLayout
+            android:id="@+id/name_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:maxLines="1"
-            tools:text="@tools:sample/full_names" />
-    </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="60"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <me.zhanghai.android.materialedittext.MaterialTextInputLayout
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="250"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name">
+            <me.zhanghai.android.materialedittext.MaterialEditText
+                android:id="@+id/name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:imeOptions="flagNoExtractUi|actionNext"
+                android:maxLines="1"
+                android:inputType="text"
+                tools:text="@tools:sample/full_names" />
+        </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
 
-        <me.zhanghai.android.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
+        <me.zhanghai.android.materialedittext.MaterialTextInputLayout
+            android:id="@+id/description_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Description(optional)"
-            android:maxLines="3" />
-    </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="250"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_layout">
 
-    <CheckBox
-        android:id="@+id/is_private_cb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Make collection private"
-        android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+            <me.zhanghai.android.materialedittext.MaterialEditText
+                android:id="@+id/description_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description(optional)"
+                android:inputType="text"
+                android:imeOptions="flagNoExtractUi|actionDone"
+                android:maxLines="3" />
+        </me.zhanghai.android.materialedittext.MaterialTextInputLayout>
 
-    <Button
-        android:id="@+id/create_btn"
-        style="@style/Widget.Splash.BrandButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="Create"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/is_private_cb" />
+        <CheckBox
+            android:id="@+id/is_private_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Make collection private"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_layout" />
 
-    <Button
-        android:id="@+id/cancel_btn"
-        style="@style/Widget.Splash.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:stateListAnimator="@null"
-        android:text="Cancel"
-        android:textAllCaps="false"
-        android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="@id/create_btn"
-        app:layout_constraintEnd_toStartOf="@id/create_btn"
-        app:layout_constraintTop_toTopOf="@id/create_btn" />
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/create_btn"
+            style="@style/Widget.Splash.BrandButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="Create"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/is_private_cb" />
+
+        <Button
+            android:id="@+id/cancel_btn"
+            style="@style/Widget.Splash.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:stateListAnimator="@null"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="@id/create_btn"
+            app:layout_constraintEnd_toStartOf="@id/create_btn"
+            app:layout_constraintTop_toTopOf="@id/create_btn" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+

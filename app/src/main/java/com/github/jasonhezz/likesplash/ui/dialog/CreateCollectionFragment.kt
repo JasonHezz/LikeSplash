@@ -2,7 +2,7 @@ package com.github.jasonhezz.likesplash.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,36 +13,39 @@ import kotlinx.android.synthetic.main.dialog_create_collection.*
  * Created by JasonHezz on 2018/1/15.
 
  */
-class CreateCollectionFragment : Fragment() {
+class CreateCollectionFragment : DialogFragment() {
 
-    var call: Callbacks? = null
+    private var callback: Callbacks? = null
+    private var closeCallback: CloseCallback? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is Callbacks) call = context
-        if (parentFragment is Callbacks) call = parentFragment as Callbacks
+        if (context is Callbacks) callback = context
+        if (context is CloseCallback) closeCallback = context
+        if (parentFragment is Callbacks) callback = parentFragment as Callbacks
+        if (parentFragment is CloseCallback) closeCallback = parentFragment as CloseCallback
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.dialog_create_collection, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        create_btn.setOnClickListener { call?.onCreateButtonClick() }
-        cancel_btn.setOnClickListener { call?.onCancelButtonClick() }
+        toolbar.setNavigationOnClickListener { closeCallback?.close() }
+        create_btn.setOnClickListener { callback?.onCreateButtonClick() }
+        cancel_btn.setOnClickListener { callback?.onCancelButtonClick() }
+    }
+
+    interface Callbacks {
+        fun onCreateButtonClick()
+        fun onCancelButtonClick()
     }
 
     companion object {
-
-        interface Callbacks {
-            fun onCreateButtonClick()
-            fun onCancelButtonClick()
-        }
-
         fun newInstance(): CreateCollectionFragment {
             val fragment = CreateCollectionFragment()
             val args = Bundle()
