@@ -3,11 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="long_text">
-        We challenged ourselves to create a visual language for our users that synthesizes the classic principles of
-        good design with the innovation and possibility of technology and science. This is material design. This spec is
-        a living document that will be updated as we continue to develop the tenets and specifics of material design.
-    </string>
+
     <plurals name="photo_plural">
         <item quantity="zero">%d photo</item>
         <item quantity="one">%d photo</item>
@@ -18,16 +14,6 @@
     <string name="likes">%d Likes</string>
     <string name="collections">%d Collections</string>
 
-    <array name="tag_array">
-        <item>Business</item>
-        <item>Girl</item>
-        <item>Nature</item>
-        <item>Technology</item>
-        <item>Food</item>
-        <item>Travel</item>
-        <item>Happy</item>
-        <item>Cool</item>
-    </array>
     <!-- transition shared elements -->
     <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
 

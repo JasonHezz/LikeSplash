@@ -66,8 +66,7 @@ class CollectionRepositoryIml(
         val livePagedList = LivePagedListBuilder(
             sourceFactory,
             PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
-        )
-            .build()
+        ).build()
         return Listing(
             pagedList = livePagedList,
             networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
