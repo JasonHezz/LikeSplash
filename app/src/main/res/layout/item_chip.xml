@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chip"
     style="@style/Widget.Splash.Chip.Action"
@@ -8,5 +7,4 @@
     android:layout_height="wrap_content"
     android:textAppearance="@style/TextAppearance.Splash.Chip"
     android:textColor="?android:attr/textColorSecondary"
-    app:chipCornerRadius="4dp"
     tools:text="@string/app_name" />

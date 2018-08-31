@@ -6,7 +6,9 @@
         <item name="tabTextAppearance">@style/TextAppearance.Splash.Tab</item>
     </style>
 
-    <style name="Widget.Splash.Chip.Action" parent="Widget.MaterialComponents.Chip.Action"></style>
+    <style name="Widget.Splash.Chip.Action" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipCornerRadius">4dp</item>
+    </style>
 
     <style name="Widget.Splash.BrandButton" parent="Widget.MaterialComponents.Button">
         <item name="colorButtonNormal">@color/splash_brand</item>
