@@ -47,17 +47,7 @@ class UserCollectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSwipeToRefresh()
         initController()
-    }
-
-    private fun initSwipeToRefresh() {
-        model.refreshState.observe(this, Observer {
-            swipe_refresh.isRefreshing = it == Resource.INITIAL
-        })
-        swipe_refresh.setOnRefreshListener {
-            model.refresh()
-        }
     }
 
     private fun initController() {

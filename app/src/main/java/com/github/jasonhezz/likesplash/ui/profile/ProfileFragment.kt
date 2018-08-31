@@ -124,17 +124,6 @@ class ProfileFragment : Fragment() {
         tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            android.R.id.home -> {
-                activity?.supportFinishAfterTransition()
-            }
-            else -> {
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     companion object {
         const val ARG_PARAM_USER = "userId"
         @JvmStatic

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
-import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
@@ -25,39 +24,29 @@ class UserLikeFragment : Fragment() {
     private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
     private val model: UserLikeViewModel by viewModel { parametersOf(user?.username ?: "") }
     private val controller = PhotoPagedController(
-        object : PhotoPagedController.AdapterCallbacks {
-            override fun onAvatarClick(user: User?) {
-                startActivity(
-                    Intent(context, ProfileActivity::class.java).putExtra(
-                        ProfileActivity.ARG_PARAM_USER,
-                        user
+            object : PhotoPagedController.AdapterCallbacks {
+                override fun onAvatarClick(user: User?) {
+                    startActivity(
+                            Intent(context, ProfileActivity::class.java).putExtra(
+                                    ProfileActivity.ARG_PARAM_USER,
+                                    user
+                            )
                     )
-                )
-            }
+                }
 
-            override fun onPhotoClick(it: Photo) {
-            }
-        }).apply { setFilterDuplicates(true) }
+                override fun onPhotoClick(it: Photo) {
+                }
+            }).apply { setFilterDuplicates(true) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.fragment_like, container, false)
+            inflater.inflate(R.layout.fragment_like, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSwipeToRefresh()
         initController()
-    }
-
-    private fun initSwipeToRefresh() {
-        model.refreshState.observe(this, Observer<Resource?> {
-            swipe_refresh.isRefreshing = it == Resource.INITIAL
-        })
-        swipe_refresh.setOnRefreshListener {
-            model.refresh()
-        }
     }
 
     private fun initController() {
