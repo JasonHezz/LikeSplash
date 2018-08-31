@@ -2,19 +2,13 @@ package com.github.jasonhezz.likesplash
 
 import android.app.Application
 import android.content.Context
-import android.support.v7.app.AppCompatDelegate
+import com.github.jasonhezz.likesplash.appInitializer.*
 import com.github.jasonhezz.likesplash.inject.appModule
 import com.github.jasonhezz.likesplash.inject.dataModule
 import com.github.jasonhezz.likesplash.inject.netModule
-import io.fabric.sdk.android.Fabric
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
 import org.koin.log.EmptyLogger
-import timber.log.Timber
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsCore
-
-
-
 
 
 /**
@@ -22,21 +16,16 @@ import com.crashlytics.android.core.CrashlyticsCore
  */
 class App : Application() {
 
+    val initializers : AppInitializers by inject()
+
     init {
         instance = this
     }
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
         startKoin(this, listOf(appModule, dataModule, netModule), logger = EmptyLogger())
-        val core = CrashlyticsCore.Builder()
-                .disabled(BuildConfig.DEBUG)
-                .build()
-        Fabric.with(this, Crashlytics.Builder().core(core).build())
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        initializers.init(this)
     }
 
     companion object {

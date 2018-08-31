@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.inject
 
+import com.github.jasonhezz.likesplash.appInitializer.*
 import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.featured.FeaturedCollectionViewModel
@@ -18,6 +19,10 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val appModule = module {
+    single { TimberInitializer() }
+    single { DayNightThemeInitializer() }
+    single { FabricInitializer() }
+    single { AppInitializers(get<TimberInitializer>(), get<DayNightThemeInitializer>(), get<FabricInitializer>()) }
     viewModel { TrendingViewModel(get()) }
     viewModel { EditorialViewModel(get()) }
     viewModel { CuratedCollectionViewModel(get()) }
