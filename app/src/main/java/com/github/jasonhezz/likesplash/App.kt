@@ -6,9 +6,16 @@ import android.support.v7.app.AppCompatDelegate
 import com.github.jasonhezz.likesplash.inject.appModule
 import com.github.jasonhezz.likesplash.inject.dataModule
 import com.github.jasonhezz.likesplash.inject.netModule
+import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.startKoin
 import org.koin.log.EmptyLogger
 import timber.log.Timber
+import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
+
+
+
+
 
 /**
  * Created by JavaCoder on 2017/10/25.
@@ -25,6 +32,10 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
         startKoin(this, listOf(appModule, dataModule, netModule), logger = EmptyLogger())
+        val core = CrashlyticsCore.Builder()
+                .disabled(BuildConfig.DEBUG)
+                .build()
+        Fabric.with(this, Crashlytics.Builder().core(core).build())
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 

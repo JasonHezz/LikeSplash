@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion buildConfig.compileSdk
@@ -76,6 +77,8 @@ dependencies {
     implementation "org.koin:koin-android:${versions.koin}"
     implementation "org.koin:koin-android-scope:${versions.koin}"
     implementation "org.koin:koin-android-viewmodel:${versions.koin}"
+
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
     //others
     implementation 'com.jakewharton.timber:timber:4.7.1'
