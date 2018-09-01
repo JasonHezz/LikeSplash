@@ -1,18 +1,15 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
+import android.content.Context
 import android.support.v4.content.ContextCompat
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.airbnb.epoxy.AutoModel
-import com.github.jasonhezz.likesplash.App
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
-import com.github.jasonhezz.likesplash.ui.epoxy.model.ChipModel_
-import com.github.jasonhezz.likesplash.ui.epoxy.model.LoadingModel_
-import com.github.jasonhezz.likesplash.ui.epoxy.model.photoDetail
-import com.github.jasonhezz.likesplash.ui.epoxy.model.previewCollection
-import com.github.jasonhezz.likesplash.ui.epoxy.model.title
+import com.github.jasonhezz.likesplash.ui.epoxy.model.*
 import com.github.jasonhezz.likesplash.ui.epoxy.withModelsFrom
+import com.github.jasonhezz.likesplash.util.recyclerview.SpanGirdItemDecoration
 import com.github.jasonhezz.likesplash.view.flexCarousel
 import com.google.android.flexbox.FlexboxItemDecoration
 
@@ -20,7 +17,7 @@ import com.google.android.flexbox.FlexboxItemDecoration
  * Created by JavaCoder on 2017/10/16.
  */
 
-class PhotoDetailController : AsyncEpoxyController() {
+class PhotoDetailController(val context: Context) : AsyncEpoxyController() {
 
     @AutoModel
     lateinit var loadingModel: LoadingModel_
@@ -28,6 +25,16 @@ class PhotoDetailController : AsyncEpoxyController() {
     var isLoading by EpoxyModelProperty { false }
 
     var data: Photo? by EpoxyModelProperty { null }
+
+
+    val tagDivider = FlexboxItemDecoration(context).apply {
+        setDrawable(
+                ContextCompat.getDrawable(context, R.drawable.chip_divider)
+        )
+    }
+
+    val previewImgDivider =
+            SpanGirdItemDecoration(ContextCompat.getDrawable(context, R.drawable.preview_img_divider)!!)
 
     override fun buildModels() {
         data?.let {
@@ -54,6 +61,8 @@ class PhotoDetailController : AsyncEpoxyController() {
                 it.relatedCollections.results.forEach {
                     previewCollection {
                         id(it.id)
+                        tagDivider(tagDivider)
+                        previewImgDivider(previewImgDivider)
                         collection(it)
                     }
                 }
@@ -69,11 +78,7 @@ class PhotoDetailController : AsyncEpoxyController() {
                 flexCarousel {
                     id("tag_carousel")
                     addItemDecoration {
-                        FlexboxItemDecoration(it).apply {
-                            setDrawable(
-                                ContextCompat.getDrawable(App.applicationContext(), R.drawable.chip_divider)
-                            )
-                        }
+                        tagDivider
                     }
                     isFullSpan(true)
                     withModelsFrom(it.tags) {

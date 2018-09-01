@@ -15,12 +15,15 @@ val controllerModule = module {
         PhotoPagedController(callback).also { it.setFilterDuplicates(true) }
     }
     factory {
+        PhotoDetailController(androidContext())
+    }
+    factory {
         PopularCollectionController(androidContext()).also { it.setFilterDuplicates(true) }
     }
     factory {
         PopularPhotoController(androidContext()).also { it.setFilterDuplicates(true) }
     }
     factory { (callback: PreviewCollectionPagedController.AdapterCallbacks) ->
-        PreviewCollectionPagedController(callback).also { it.setFilterDuplicates(true) }
+        PreviewCollectionPagedController(androidContext(), callback).also { it.setFilterDuplicates(true) }
     }
 }

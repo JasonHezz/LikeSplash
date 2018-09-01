@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash
 
 import android.app.Application
-import android.content.Context
 import com.github.jasonhezz.likesplash.appInitializer.AppInitializers
 import com.github.jasonhezz.likesplash.inject.appModule
 import com.github.jasonhezz.likesplash.inject.controllerModule
@@ -19,21 +18,9 @@ class App : Application() {
 
     private val initializers: AppInitializers by inject()
 
-    init {
-        instance = this
-    }
-
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(appModule, controllerModule, dataModule, netModule), logger = EmptyLogger())
         initializers.init(this)
-    }
-
-    companion object {
-        private lateinit var instance: App
-
-        fun applicationContext(): Context {
-            return instance.applicationContext
-        }
     }
 }

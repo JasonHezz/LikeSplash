@@ -10,13 +10,16 @@ import androidx.core.os.bundleOf
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoDetailController
 import kotlinx.android.synthetic.main.fragment_photo_detail.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PhotoDetailFragment : Fragment() {
 
-    private val viewModel by viewModel<PhotoDetailViewModel> { parametersOf(arguments?.get("id") ?: "") }
-    private val controller = PhotoDetailController()
+    private val viewModel by viewModel<PhotoDetailViewModel> {
+        parametersOf(arguments?.get("id") ?: "")
+    }
+    private val controller by inject<PhotoDetailController>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +28,8 @@ class PhotoDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_photo_detail, container, false)
     }

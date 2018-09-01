@@ -27,7 +27,7 @@ val netModule = module {
         FakeInterceptor(androidContext())
     }
     single {
-        UserAgentInterceptor()
+        UserAgentInterceptor(androidContext())
     }
     single {
         OkHttpClient().newBuilder()
