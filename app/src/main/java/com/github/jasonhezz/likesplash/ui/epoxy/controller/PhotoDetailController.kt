@@ -81,7 +81,7 @@ class PhotoDetailController(val context: Context) : AsyncEpoxyController() {
                         tagDivider
                     }
                     isFullSpan(true)
-                    withModelsFrom(it.tags) {
+                    withModelsFrom(it.tags.take(12)) {
                         ChipModel_().id(it.title).tag(it)
                     }
                 }
