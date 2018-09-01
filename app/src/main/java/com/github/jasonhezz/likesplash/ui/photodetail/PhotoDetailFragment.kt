@@ -15,8 +15,8 @@ import org.koin.core.parameter.parametersOf
 
 class PhotoDetailFragment : Fragment() {
 
-    val vm by viewModel<PhotoDetailViewModel> { parametersOf(arguments?.get("id") ?: "") }
-    val controller = PhotoDetailController()
+    private val viewModel by viewModel<PhotoDetailViewModel> { parametersOf(arguments?.get("id") ?: "") }
+    private val controller = PhotoDetailController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class PhotoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv.setController(controller)
-        vm.result.observe(this, Observer {
+        viewModel.result.observe(this, Observer {
             controller.data = it
         })
     }

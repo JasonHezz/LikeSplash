@@ -15,6 +15,7 @@ import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoPagedController
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
@@ -22,21 +23,25 @@ import timber.log.Timber
 class UserLikeFragment : Fragment() {
 
     private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
-    private val model: UserLikeViewModel by viewModel { parametersOf(user?.username ?: "") }
-    private val controller = PhotoPagedController(
-            object : PhotoPagedController.AdapterCallbacks {
-                override fun onAvatarClick(user: User?) {
-                    startActivity(
-                            Intent(context, ProfileActivity::class.java).putExtra(
-                                    ProfileActivity.ARG_PARAM_USER,
-                                    user
-                            )
-                    )
-                }
+    private val viewModel by viewModel<UserLikeViewModel> { parametersOf(user?.username ?: "") }
+    private val controller by inject<PhotoPagedController> {
+        parametersOf(
+                object : PhotoPagedController.AdapterCallbacks {
+                    override fun onAvatarClick(user: User?) {
+                        startActivity(
+                                Intent(context, ProfileActivity::class.java).putExtra(
+                                        ProfileActivity.ARG_PARAM_USER,
+                                        user
+                                )
+                        )
+                    }
 
-                override fun onPhotoClick(it: Photo) {
+                    override fun onPhotoClick(it: Photo) {
+
+                    }
                 }
-            }).apply { setFilterDuplicates(true) }
+        )
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -52,10 +57,10 @@ class UserLikeFragment : Fragment() {
     private fun initController() {
         rv.itemAnimator = SlideInItemAnimator()
         rv.setController(controller)
-        model.photos.observe(this, Observer {
+        viewModel.photos.observe(this, Observer {
             controller.setList(it)
         })
-        model.networkState.observe(this, Observer {
+        viewModel.networkState.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING_MORE -> {
                     controller.isLoading = true

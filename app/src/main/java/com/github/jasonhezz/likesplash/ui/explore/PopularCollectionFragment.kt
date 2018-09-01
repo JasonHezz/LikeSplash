@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PopularCollectionController
 import kotlinx.android.synthetic.main.fragment_popular_collection.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PopularCollectionFragment : Fragment() {
 
-    private val model: PopularCollectionViewModel by viewModel()
-    private val controller by lazy { PopularCollectionController(context!!) }
+    private val viewModel by viewModel<PopularCollectionViewModel>()
+    private val controller by inject<PopularCollectionController>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +25,8 @@ class PopularCollectionFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_popular_collection, container, false)
     }
@@ -33,7 +34,7 @@ class PopularCollectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv.setController(controller)
-        model.result.observe(this, Observer { it ->
+        viewModel.result.observe(this, Observer { it ->
             controller.data = it
         })
     }

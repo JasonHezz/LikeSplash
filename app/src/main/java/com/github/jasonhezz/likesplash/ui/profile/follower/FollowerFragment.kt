@@ -23,12 +23,12 @@ class FollowerFragment : Fragment() {
 
     private val user: User? by lazy { arguments?.getParcelable<User>(ARG_USER_NAME) }
 
-    private val model: FollowerViewModel by viewModel { parametersOf(user?.username ?: "") }
+    private val viewModel by viewModel<FollowerViewModel> { parametersOf(user?.username!!) }
     private val controller = UserPagedController().apply { setFilterDuplicates(true) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_following, container, false)
@@ -41,20 +41,20 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        model.refreshState.observe(this, Observer {
+        viewModel.refreshState.observe(this, Observer {
             swipe_refresh.isRefreshing = it == Resource.INITIAL
         })
         swipe_refresh.setOnRefreshListener {
-            model.refresh()
+            viewModel.refresh()
         }
     }
 
     private fun initController() {
         rv.setController(controller)
-        model.followers.observe(this, Observer {
+        viewModel.followers.observe(this, Observer {
             controller.setList(it)
         })
-        model.networkState.observe(this, Observer {
+        viewModel.networkState.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING_MORE -> {
                     controller.isLoading = true
@@ -78,7 +78,7 @@ class FollowerFragment : Fragment() {
             val fragment = FollowerFragment()
             val args = Bundle()
             args.putParcelable(
-                ARG_USER_NAME, user
+                    ARG_USER_NAME, user
             )
             fragment.arguments = args
             return fragment

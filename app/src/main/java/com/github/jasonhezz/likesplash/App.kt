@@ -2,8 +2,9 @@ package com.github.jasonhezz.likesplash
 
 import android.app.Application
 import android.content.Context
-import com.github.jasonhezz.likesplash.appInitializer.*
+import com.github.jasonhezz.likesplash.appInitializer.AppInitializers
 import com.github.jasonhezz.likesplash.inject.appModule
+import com.github.jasonhezz.likesplash.inject.controllerModule
 import com.github.jasonhezz.likesplash.inject.dataModule
 import com.github.jasonhezz.likesplash.inject.netModule
 import org.koin.android.ext.android.inject
@@ -16,7 +17,7 @@ import org.koin.log.EmptyLogger
  */
 class App : Application() {
 
-    val initializers : AppInitializers by inject()
+    private val initializers: AppInitializers by inject()
 
     init {
         instance = this
@@ -24,7 +25,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(appModule, dataModule, netModule), logger = EmptyLogger())
+        startKoin(this, listOf(appModule, controllerModule, dataModule, netModule), logger = EmptyLogger())
         initializers.init(this)
     }
 

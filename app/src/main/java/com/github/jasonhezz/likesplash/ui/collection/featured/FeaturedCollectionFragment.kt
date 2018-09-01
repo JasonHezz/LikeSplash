@@ -15,7 +15,9 @@ import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionDetailActi
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PreviewCollectionPagedController
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_featured_collection.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 /**
@@ -23,15 +25,18 @@ import timber.log.Timber
  */
 class FeaturedCollectionFragment : Fragment() {
 
-    private val model: FeaturedCollectionViewModel by viewModel()
-    private val controller =
-        PreviewCollectionPagedController(object : PreviewCollectionPagedController.AdapterCallbacks {
-            override fun onCollectionClick(it: Collection) {
-                startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
-                    putExtra("collection", it)
-                })
-            }
-        }).apply { setFilterDuplicates(true) }
+    private val viewModel by viewModel<FeaturedCollectionViewModel>()
+    private val controller by inject<PreviewCollectionPagedController> {
+        parametersOf(
+                object : PreviewCollectionPagedController.AdapterCallbacks {
+                    override fun onCollectionClick(it: Collection) {
+                        startActivity(Intent(context, CollectionDetailActivity::class.java).apply {
+                            putExtra("collection", it)
+                        })
+                    }
+                }
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +46,8 @@ class FeaturedCollectionFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_featured_collection, container, false)
     }
@@ -54,21 +59,21 @@ class FeaturedCollectionFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        model.refreshState.observe(this, Observer {
+        viewModel.refreshState.observe(this, Observer {
             swipe_refresh.isRefreshing = it == Resource.INITIAL
         })
         swipe_refresh.setOnRefreshListener {
-            model.refresh()
+            viewModel.refresh()
         }
     }
 
     private fun initController() {
         list.itemAnimator = SlideInItemAnimator()
         list.setController(controller)
-        model.collections.observe(this, Observer {
+        viewModel.collections.observe(this, Observer {
             controller.setList(it)
         })
-        model.networkState.observe(this, Observer {
+        viewModel.networkState.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING_MORE -> {
                     controller.isLoading = true

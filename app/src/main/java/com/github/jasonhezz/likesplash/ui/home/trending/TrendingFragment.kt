@@ -13,42 +13,46 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoPagedController
+import com.github.jasonhezz.likesplash.ui.photodetail.PhotoDetailActivity
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_trending.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class TrendingFragment : Fragment() {
 
-    private val viewModel: TrendingViewModel by viewModel()
-    private val controller = PhotoPagedController(
-        object : PhotoPagedController.AdapterCallbacks {
-            override fun onAvatarClick(user: User?) {
-                startActivity(
-                    Intent(context, ProfileActivity::class.java).putExtra(
-                        ProfileActivity.ARG_PARAM_USER,
-                        user
-                    )
-                )
-            }
+    private val viewModel by viewModel<TrendingViewModel>()
+    private val controller by inject<PhotoPagedController> {
+        parametersOf(
+                object : PhotoPagedController.AdapterCallbacks {
+                    override fun onAvatarClick(user: User?) {
+                        startActivity(Intent(context, ProfileActivity::class.java)
+                                .putExtra(ProfileActivity.ARG_PARAM_USER, user))
+                    }
 
-            override fun onPhotoClick(it: Photo) {
-            }
-        }).apply { setFilterDuplicates(true) }
+                    override fun onPhotoClick(it: Photo) {
+                        startActivity(Intent(context, PhotoDetailActivity::class.java)
+                                .putExtra("id", it.id))
+                    }
+                }
+        )
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? = inflater.inflate(
-        R.layout.fragment_trending, container,
-        false
+            R.layout.fragment_trending, container,
+            false
     )
 
     override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
+            view: View,
+            savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
         initSwipeToRefresh()

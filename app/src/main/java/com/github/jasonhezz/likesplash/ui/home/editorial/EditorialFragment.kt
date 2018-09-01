@@ -17,33 +17,36 @@ import com.github.jasonhezz.likesplash.ui.photodetail.PhotoDetailActivity
 import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_timeline.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class EditorialFragment : Fragment() {
 
-    private val model: EditorialViewModel by viewModel()
-    private val controller = PhotoPagedController(
-        object : PhotoPagedController.AdapterCallbacks {
-            override fun onAvatarClick(user: User?) {
-                startActivity(
-                    Intent(context, ProfileActivity::class.java).putExtra(ProfileActivity.ARG_PARAM_USER, user)
-                )
-            }
+    private val viewModel by viewModel<EditorialViewModel>()
+    private val controller by inject<PhotoPagedController> {
+        parametersOf(
+                object : PhotoPagedController.AdapterCallbacks {
+                    override fun onAvatarClick(user: User?) {
+                        startActivity(Intent(context, ProfileActivity::class.java)
+                                .putExtra(ProfileActivity.ARG_PARAM_USER, user))
+                    }
 
-            override fun onPhotoClick(it: Photo) {
-                startActivity(
-                    Intent(context, PhotoDetailActivity::class.java).putExtra("id", it.id)
-                )
-            }
-        }).apply { setFilterDuplicates(true) }
+                    override fun onPhotoClick(it: Photo) {
+                        startActivity(Intent(context, PhotoDetailActivity::class.java)
+                                .putExtra("id", it.id))
+                    }
+                }
+        )
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? = inflater.inflate(
-        R.layout.fragment_timeline, container,
-        false
+            R.layout.fragment_timeline, container,
+            false
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,21 +56,21 @@ class EditorialFragment : Fragment() {
     }
 
     private fun initSwipeToRefresh() {
-        model.refreshState.observe(this, Observer {
+        viewModel.refreshState.observe(this, Observer {
             swipe_refresh.isRefreshing = it == Resource.INITIAL
         })
         swipe_refresh.setOnRefreshListener {
-            model.refresh()
+            viewModel.refresh()
         }
     }
 
     private fun initController() {
         rv.itemAnimator = SlideInItemAnimator()
         rv.setController(controller)
-        model.photos.observe(this, Observer {
+        viewModel.photos.observe(this, Observer {
             controller.setList(it)
         })
-        model.networkState.observe(this, Observer {
+        viewModel.networkState.observe(this, Observer {
             when (it?.status) {
                 Status.LOADING_MORE -> {
                     controller.isLoading = true
