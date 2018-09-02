@@ -15,7 +15,6 @@
 
     <color name="mtrl_divider_color">#ffe0e0e0</color>
 
-    <color name="item_background_color">#424242</color>
-
+    <color name="item_background_color">#484848</color>
 
 </resources>
