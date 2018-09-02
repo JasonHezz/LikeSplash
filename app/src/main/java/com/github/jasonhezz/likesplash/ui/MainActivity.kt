@@ -45,9 +45,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_day_night -> {
                 if (isInNightMode()) {
-                    delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    recreate()
                 } else {
-                    delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    recreate()
                 }
                 drawer_layout?.closeDrawer(GravityCompat.START)
             }

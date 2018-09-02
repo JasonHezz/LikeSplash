@@ -50,7 +50,7 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.Splash.Tab" parent="TextAppearance.Splash.Button">
+    <style name="TextAppearance.Splash.Tab" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
 
