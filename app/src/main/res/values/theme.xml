@@ -18,22 +18,7 @@
     <style name="Theme.Splash.Main">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
-    </style>
-
-    <style name="Theme.Splash.Search">
-        <item name="android:windowAnimationStyle">@style/SearchWindowAnimations</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowSharedElementsUseOverlay">false</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/expand_searchbar</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/collapse_searchbar</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/FadeWindowAnimationTransition</item>
     </style>
 
     <style name="Theme.Splash.Dialog" parent="@style/Theme.MaterialComponents.Light.Dialog">

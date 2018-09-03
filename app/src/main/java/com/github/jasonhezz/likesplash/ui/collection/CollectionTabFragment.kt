@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.collection
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionFragment
 import com.github.jasonhezz.likesplash.ui.collection.featured.FeaturedCollectionFragment
+import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -21,8 +23,8 @@ class CollectionTabFragment : Fragment() {
     private lateinit var tabAdapter: TabFragmentAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_collection_tab, container, false)
     }
@@ -36,6 +38,10 @@ class CollectionTabFragment : Fragment() {
     private fun initToolbar() {
         toolbar.inflateMenu(R.menu.menu_search)
         toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
+        toolbar.setOnMenuItemClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+            true
+        }
     }
 
     private fun initViewPager() {

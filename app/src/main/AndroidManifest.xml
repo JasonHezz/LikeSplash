@@ -31,8 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.search.SearchActivity"
-            android:theme="@style/Theme.Splash.Search" />
+            android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity
             android:name=".ui.collection.detail.CollectionDetailActivity"
