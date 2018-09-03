@@ -6,27 +6,31 @@ import com.github.jasonhezz.likesplash.data.entities.User
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SearchService {
     @GET("search/photos")
     fun searchPhotos(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
+            @Query("query") query: String,
+            @Query("page") page: Int,
+            @Query("per_page") perPage: Int
     ): Call<SearchPhotoResponse>
 
     @GET("search/photos")
     fun searchCollections(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
+            @Query("query") query: String,
+            @Query("page") page: Int,
+            @Query("per_page") perPage: Int
     ): Single<List<Collection>>
 
     @GET("search/users")
     fun searchUsers(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
+            @Query("query") query: String,
+            @Query("page") page: Int,
+            @Query("per_page") perPage: Int
     ): Single<List<User>>
+
+    @GET("https://unsplash.com/nautocomplete/{keywords}?")
+    fun autoComplete(@Path("keywords") keywords: String)
 }
