@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:liftOnScroll="true">
@@ -95,23 +96,4 @@
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:spanCount="@integer/stagger_column" />
-
-    <com.github.jorgecastilloprz.FABProgressCircle
-        android:id="@+id/fabProgressCircle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:arcWidth="2dp"
-        app:layout_behavior="com.github.jasonhezz.likesplash.util.behavior.ScrollAwareFABBehavior">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_nav_download"
-            app:backgroundTint="@android:color/white"
-            app:fabSize="normal"
-            app:useCompatPadding="true" />
-    </com.github.jorgecastilloprz.FABProgressCircle>
 </android.support.design.widget.CoordinatorLayout>

@@ -86,7 +86,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.google.android:flexbox:1.0.0'
     implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
-    implementation 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.11.0'

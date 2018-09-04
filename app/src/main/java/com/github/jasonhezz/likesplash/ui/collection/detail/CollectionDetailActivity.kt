@@ -47,9 +47,6 @@ class CollectionDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_collection_detail)
         initUI()
         initController()
-        fab.setOnClickListener {
-            fabProgressCircle.show()
-        }
     }
 
     private fun initController() {

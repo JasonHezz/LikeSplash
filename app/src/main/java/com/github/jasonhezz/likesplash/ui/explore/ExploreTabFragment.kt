@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.explore
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.MainActivity
+import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_explore_tab.*
 
@@ -26,8 +28,8 @@ class ExploreTabFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_explore_tab, container, false)
     }
@@ -41,6 +43,10 @@ class ExploreTabFragment : Fragment() {
     private fun initToolbar() {
         toolbar.inflateMenu(R.menu.menu_search)
         toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
+        toolbar.setOnMenuItemClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+            true
+        }
     }
 
     private fun initViewPager() {

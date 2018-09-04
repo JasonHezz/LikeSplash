@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -11,6 +12,7 @@ import com.github.jasonhezz.likesplash.ui.BlankFragment
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.home.editorial.EditorialFragment
 import com.github.jasonhezz.likesplash.ui.home.trending.TrendingFragment
+import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -24,8 +26,8 @@ class HomeFragment : Fragment() {
     private lateinit var tabAdapter: TabFragmentAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -37,8 +39,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun initToolbar() {
-        toolbar.inflateMenu(R.menu.menu_search)
-        toolbar.setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
+        toolbar.run {
+            inflateMenu(R.menu.menu_search)
+            setNavigationOnClickListener { if (activity is MainActivity) (activity as MainActivity).openDrawer() }
+            setOnMenuItemClickListener {
+                startActivity(Intent(context, SearchActivity::class.java))
+                true
+            }
+        }
     }
 
     private fun initViewPager() {
