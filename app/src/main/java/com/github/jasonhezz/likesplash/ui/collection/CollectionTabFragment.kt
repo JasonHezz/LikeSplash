@@ -44,6 +44,7 @@ class CollectionTabFragment : Fragment() {
         }
     }
 
+
     private fun initViewPager() {
         tabAdapter = TabFragmentAdapter(childFragmentManager)
         tabAdapter.addFragment(FeaturedCollectionFragment.newInstance())
