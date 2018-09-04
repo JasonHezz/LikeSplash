@@ -26,4 +26,7 @@ val controllerModule = module {
     factory { (callback: PreviewCollectionPagedController.AdapterCallbacks) ->
         PreviewCollectionPagedController(androidContext(), callback).also { it.setFilterDuplicates(true) }
     }
+    factory {
+        SearchController(androidContext())
+    }
 }

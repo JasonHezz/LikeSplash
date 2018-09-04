@@ -1,38 +1,21 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.model
 
-import android.view.View
-import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
-import kotlinx.android.synthetic.main.item_explore_title.*
+import kotlinx.android.synthetic.main.item_search.*
 
-/**
- * Created by JavaCoder on 2017/10/18.
- */
-@EpoxyModelClass(layout = R.layout.item_explore_title)
-abstract class ExploreTitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
+@EpoxyModelClass(layout = R.layout.item_search)
+abstract class SearchModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
     @EpoxyAttribute
-    var title: String? = null
-
-    @EpoxyAttribute
-    var description: String? = null
-
-    @EpoxyAttribute
-    var showViewMore: Boolean = true
-
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    var moreClickListener: View.OnClickListener? = null
+    var serach: String? = null
 
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
-        holder.title.text = title
-        holder.description.text = description
-        holder.more_btn.isVisible = showViewMore
-        holder.more_btn.setOnClickListener(moreClickListener)
+        holder.tv.text = serach
     }
 
     override fun getSpanSize(totalSpanCount: Int, position: Int, itemCount: Int): Int {

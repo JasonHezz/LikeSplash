@@ -9,19 +9,28 @@ import com.github.jasonhezz.likesplash.ui.epoxy.model.search
 /**
  * Created by JavaCoder on 2018/1/10.
  */
-class SearchCollectionController(val context: Context) : AsyncEpoxyController() {
+class SearchController(val context: Context) : AsyncEpoxyController() {
 
     var data: SearchHints? by EpoxyModelProperty { null }
 
     override fun buildModels() {
         data?.fuzzy?.forEach { model ->
-            search { model.query }
+            search {
+                id(model.priority)
+                serach(model.query)
+            }
         }
         data?.autocomplete?.forEach { model ->
-            search { model.query }
+            search {
+                id(model.priority)
+                serach(model.query)
+            }
         }
         data?.did_you_mean?.forEach { model ->
-            search { model.query }
+            search {
+                id(model.priority)
+                serach(model.query)
+            }
         }
     }
 }

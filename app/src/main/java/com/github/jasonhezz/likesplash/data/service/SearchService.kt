@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.data.service
 
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.SearchHints
 import com.github.jasonhezz.likesplash.data.entities.SearchPhotoResponse
 import com.github.jasonhezz.likesplash.data.entities.User
 import io.reactivex.Single
@@ -32,5 +33,5 @@ interface SearchService {
     ): Single<List<User>>
 
     @GET("https://unsplash.com/nautocomplete/{keywords}?")
-    fun autoComplete(@Path("keywords") keywords: String)
+    fun autoComplete(@Path("keywords") keywords: String): Call<SearchHints>
 }
