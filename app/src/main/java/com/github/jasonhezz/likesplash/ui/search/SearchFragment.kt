@@ -50,24 +50,18 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrBlank()) {
-                    searchController.data = null
-                    return true
-                } else {
-                    autoCompleteFor(newText!!)
-                }
+                viewModel.query.value = newText
                 return true
             }
         })
         search_nav?.setOnClickListener {
             activity?.supportFinishAfterTransition()
         }
-    }
-
-    private fun autoCompleteFor(query: String) {
-        viewModel.autoComplete(query).observe(this, Observer { it ->
+        viewModel.hints.observe(this, Observer {
             searchController.data = it
-            searchController.query = query
+        })
+        viewModel.query.observe(this, Observer {
+            it?.let { searchController.query = it }
         })
     }
 
