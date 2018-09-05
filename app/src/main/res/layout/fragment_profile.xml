@@ -123,9 +123,7 @@
             android:id="@+id/tab_layout"
             style="@style/Widget.Splash.TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabIndicator="@drawable/tab_indicator">
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/home_item"
