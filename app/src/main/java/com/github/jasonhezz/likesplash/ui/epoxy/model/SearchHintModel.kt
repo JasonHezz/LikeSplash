@@ -25,11 +25,12 @@ abstract class SearchHintModel : EpoxyModelWithHolder<BaseViewHolder>() {
         hint?.let {
             val hintSpan = it.toSpannable()
             val start = hintSpan.indexOf(query, ignoreCase = true)
-            hintSpan[start, start + query.length] = StyleSpan(BOLD)
-            holder.hint.text = buildSpannedString {
-                append(hintSpan)
+            if (start != -1) {
+                hintSpan[start, start + query.length] = StyleSpan(BOLD)
+                holder.hint.text = buildSpannedString {
+                    append(hintSpan)
+                }
             }
         }
-
     }
 }
