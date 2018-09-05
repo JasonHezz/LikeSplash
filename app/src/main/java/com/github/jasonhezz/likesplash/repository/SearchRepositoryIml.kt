@@ -5,11 +5,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
+import com.github.jasonhezz.likesplash.data.entities.*
 import com.github.jasonhezz.likesplash.data.entities.Collection
-import com.github.jasonhezz.likesplash.data.entities.Listing
-import com.github.jasonhezz.likesplash.data.entities.Photo
-import com.github.jasonhezz.likesplash.data.entities.SearchPhotoResponse
-import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.service.SearchService
 import com.github.jasonhezz.likesplash.ui.explore.SearchPhotoDataSourceFactory
 import io.reactivex.Single
@@ -22,15 +19,15 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
     override fun searchPagePhotos(query: String, page: Int, perPage: Int): Listing<Photo> {
         val sourceFactory = SearchPhotoDataSourceFactory(query, service)
         val livePagedList = LivePagedListBuilder(
-            sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                sourceFactory,
+                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         return Listing(
-            pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
-            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
-            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
-            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
+                pagedList = livePagedList,
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+                retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+                refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+                refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 
@@ -53,5 +50,18 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
 
     override fun searchUsers(query: String, page: Int, perPage: Int): Single<List<User>> {
         return service.searchUsers(query, page, perPage)
+    }
+
+    override fun autoComplete(query: String): LiveData<SearchHints> {
+        val result = MutableLiveData<SearchHints>()
+        service.autoComplete(query).enqueue(object : Callback<SearchHints> {
+            override fun onFailure(call: Call<SearchHints>?, t: Throwable?) {
+            }
+
+            override fun onResponse(call: Call<SearchHints>?, response: Response<SearchHints>?) {
+                result.value = response?.body()
+            }
+        })
+        return result
     }
 }

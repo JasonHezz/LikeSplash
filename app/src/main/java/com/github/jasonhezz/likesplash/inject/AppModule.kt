@@ -1,6 +1,9 @@
 package com.github.jasonhezz.likesplash.inject
 
-import com.github.jasonhezz.likesplash.appInitializer.*
+import com.github.jasonhezz.likesplash.appInitializer.AppInitializers
+import com.github.jasonhezz.likesplash.appInitializer.DayNightThemeInitializer
+import com.github.jasonhezz.likesplash.appInitializer.FabricInitializer
+import com.github.jasonhezz.likesplash.appInitializer.TimberInitializer
 import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionViewModel
 import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionDetailViewModel
 import com.github.jasonhezz.likesplash.ui.collection.featured.FeaturedCollectionViewModel
@@ -15,6 +18,7 @@ import com.github.jasonhezz.likesplash.ui.profile.follower.FollowerViewModel
 import com.github.jasonhezz.likesplash.ui.profile.following.FollowingViewModel
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
+import com.github.jasonhezz.likesplash.ui.search.SearchViewModel
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
@@ -37,4 +41,5 @@ val appModule = module {
     viewModel { (userName: String) -> UserPhotoViewModel(userName, get()) }
     viewModel { PopularCollectionViewModel(get()) }
     viewModel { (photoId: String) -> PhotoDetailViewModel(photoId, get()) }
+    viewModel { SearchViewModel(get()) }
 }
