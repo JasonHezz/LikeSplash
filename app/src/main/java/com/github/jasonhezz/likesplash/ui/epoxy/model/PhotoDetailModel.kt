@@ -22,12 +22,10 @@ abstract class PhotoDetailModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         photo?.let {
-            val aspectRatio = it.height.toFloat() / it.width.toFloat()
-            holder.photo_iv.aspectRatio = aspectRatio
             GlideApp
-                .with(holder.photo_iv)
-                .load(it.urls?.regular)
-                .into(holder.photo_iv)
+                    .with(holder.photo_iv)
+                    .load(it.urls?.regular)
+                    .into(holder.photo_iv)
         }
     }
 
