@@ -8,7 +8,7 @@ import android.arch.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.*
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.service.SearchService
-import com.github.jasonhezz.likesplash.ui.explore.SearchPhotoDataSourceFactory
+import com.github.jasonhezz.likesplash.ui.search.SearchPhotoDataSourceFactory
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.Callback
