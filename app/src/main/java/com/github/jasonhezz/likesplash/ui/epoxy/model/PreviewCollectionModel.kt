@@ -7,6 +7,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.PreviewPhoto
 import com.github.jasonhezz.likesplash.data.viewholder.BaseViewHolder
 import com.github.jasonhezz.likesplash.ui.epoxy.withModels
 import com.github.jasonhezz.likesplash.util.extension.clearItemDecoration
@@ -32,7 +33,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
     var tagDivider: FlexboxItemDecoration? = null
 
     @EpoxyAttribute
-    var previewImgDivider :SpanGirdItemDecoration? = null
+    var previewImgDivider: SpanGirdItemDecoration? = null
 
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
@@ -41,7 +42,7 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
             holder.description_tv.text = "${it.totalPhotos
                     ?: 0} photos · Curated by ${it.user?.name}"
             holder.tag_rv.clearItemDecoration()
-            tagDivider?.let {  holder.tag_rv.addItemDecoration(it) }
+            tagDivider?.let { holder.tag_rv.addItemDecoration(it) }
             holder.tag_rv.withModels {
                 it.tags?.take(3)
                         ?.forEachIndexed { index, tag ->
@@ -59,15 +60,18 @@ abstract class PreviewCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
             holder.preview_rv.clearItemDecoration()
             previewImgDivider?.let { holder.preview_rv.addItemDecoration(it) }
             holder.preview_rv.withModels {
-                it.previewPhotos?.take(3)
-                        ?.forEachIndexed { index, photo ->
-                            gridImg {
-                                id(photo.id)
-                                photo(photo)
-                                onClickListener(collectionClickListener)
-                                spans(if (index == 0) 2 else 1)
-                            }
-                        }
+                val placeholderPhotos = arrayOfNulls<PreviewPhoto>(3)
+                it.previewPhotos?.take(3)?.forEachIndexed { index, photo ->
+                    placeholderPhotos[index] = photo
+                }
+                placeholderPhotos.forEachIndexed { index, previewPhoto ->
+                    gridImg {
+                        id(previewPhoto?.id)
+                        photo(previewPhoto)
+                        onClickListener(collectionClickListener)
+                        spans(if (index == 0) 2 else 1)
+                    }
+                }
             }
         }
     }

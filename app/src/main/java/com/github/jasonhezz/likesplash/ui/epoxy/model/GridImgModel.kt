@@ -30,10 +30,12 @@ abstract class GridImgModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         GlideApp.with(holder.photo_iv.context)
-            .saturateOnLoad()
-            .load(photo?.urls?.regular)
-            .into(holder.photo_iv)
-        holder.photo_iv.setOnClickListener(onClickListener)
+                .saturateOnLoad()
+                .load(photo?.urls?.regular)
+                .into(holder.photo_iv)
+        if (photo != null) {
+            holder.photo_iv.setOnClickListener(onClickListener)
+        }
         holder.containerView?.layoutParams = SpanLayoutParams(SpanSize(spans, spans))
     }
 }
