@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.home.trending
 
+import android.app.ActivityOptions
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
@@ -29,8 +30,10 @@ class TrendingFragment : Fragment() {
         parametersOf(
                 object : PhotoPagedController.AdapterCallbacks {
                     override fun onAvatarClick(view: View, user: User?) {
+                        val options = ActivityOptions.makeSceneTransitionAnimation(
+                                requireActivity(), view, getString(R.string.transition_avatar))
                         startActivity(Intent(context, ProfileActivity::class.java)
-                                .putExtra(ProfileActivity.ARG_PARAM_USER, user))
+                                .putExtra(ProfileActivity.ARG_PARAM_USER, user), options.toBundle())
                     }
 
                     override fun onPhotoClick(it: Photo) {
