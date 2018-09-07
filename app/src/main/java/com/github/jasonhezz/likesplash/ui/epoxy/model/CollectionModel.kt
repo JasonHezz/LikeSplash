@@ -29,7 +29,7 @@ abstract class CollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         collection?.let {
-            if (it.coverPhoto?.height != null && it.coverPhoto.width != null) {
+            if (it.coverPhoto != null) {
                 val aspectRatio = it.coverPhoto.height.toFloat() / it.coverPhoto.width.toFloat()
                 holder.collection_iv.aspectRatio = aspectRatio
             }
