@@ -26,4 +26,15 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="Theme.Splash.Profile">
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/avatar_shared_enter
+        </item>
+        <item name="android:windowSharedElementReturnTransition">
+            @transition/avatar_shared_return
+        </item>
+        <item name="android:windowEnterTransition">@transition/profile_enter</item>
+        <item name="android:windowReturnTransition">@transition/profile_return</item>
+    </style>
+
 </resources>

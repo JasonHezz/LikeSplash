@@ -30,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity
-            android:name=".ui.search.SearchActivity" />
-        <activity android:name=".ui.profile.ProfileActivity" />
+            android:name=".ui.profile.ProfileActivity"
+            android:theme="@style/Theme.Splash.Profile" />
         <activity
             android:name=".ui.collection.detail.CollectionDetailActivity"
             android:theme="@style/Theme.Splash.Translucent" />
