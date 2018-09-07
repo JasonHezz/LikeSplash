@@ -15,6 +15,7 @@
     <string name="collections">%d Collections</string>
 
     <!-- transition shared elements -->
-    <string name="transition_player_avatar" translatable="false">transition_player_avatar</string>
-
+    <string name="transition_avatar" translatable="false">transition_avatar</string>
+    <string name="transition_photo" translatable="false">transition_photo</string>
+    <string name="transition_collection" translatable="false">transition_collection</string>
 </resources>
