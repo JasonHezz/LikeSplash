@@ -1,7 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile.photos
 
 import android.arch.lifecycle.Observer
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PhotoPagedController
-import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
 import org.koin.android.ext.android.inject
@@ -27,13 +25,8 @@ class UserPhotoFragment : Fragment() {
     private val controller by inject<PhotoPagedController> {
         parametersOf(
                 object : PhotoPagedController.AdapterCallbacks {
-                    override fun onAvatarClick(user: User?) {
-                        startActivity(
-                                Intent(context, ProfileActivity::class.java).putExtra(
-                                        ProfileActivity.ARG_PARAM_USER,
-                                        user
-                                )
-                        )
+                    override fun onAvatarClick(view: View, user: User?) {
+
                     }
 
                     override fun onPhotoClick(it: Photo) {

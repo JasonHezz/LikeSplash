@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import androidx.core.view.isVisible
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
@@ -29,7 +30,7 @@ class CollectionDetailActivity : AppCompatActivity() {
     private val controller by inject<PhotoPagedController> {
         parametersOf(
                 object : PhotoPagedController.AdapterCallbacks {
-                    override fun onAvatarClick(user: User?) {
+                    override fun onAvatarClick(view: View, user: User?) {
                         startActivity(Intent(this@CollectionDetailActivity, ProfileActivity::class.java)
                                 .putExtra(ProfileActivity.ARG_PARAM_USER, user))
                     }
