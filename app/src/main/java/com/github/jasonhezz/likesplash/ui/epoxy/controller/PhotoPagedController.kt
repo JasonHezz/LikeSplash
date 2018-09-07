@@ -1,5 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
+import android.view.View
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.paging.PagingEpoxyController
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -13,7 +14,7 @@ import com.github.jasonhezz.likesplash.ui.epoxy.model.photo
  */
 
 class PhotoPagedController(
-    var callback: AdapterCallbacks? = null
+        var callback: AdapterCallbacks? = null
 ) : PagingEpoxyController<Photo>() {
 
     @AutoModel
@@ -27,7 +28,7 @@ class PhotoPagedController(
                 id(it.id)
                 photo(it)
                 avatarClickListener { model, parentView, clickedView, position ->
-                    callback?.onAvatarClick(it.user)
+                    callback?.onAvatarClick(clickedView, it.user)
                 }
                 photoClickListener { model, parentView, clickedView, position ->
                     callback?.onPhotoClick(it)
@@ -38,7 +39,7 @@ class PhotoPagedController(
     }
 
     interface AdapterCallbacks {
-        fun onAvatarClick(user: User?)
+        fun onAvatarClick(view: View, user: User?)
         fun onPhotoClick(it: Photo)
     }
 
