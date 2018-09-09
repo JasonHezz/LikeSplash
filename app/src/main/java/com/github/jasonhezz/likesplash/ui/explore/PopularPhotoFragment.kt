@@ -1,6 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.explore
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,14 +9,25 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PopularPhotoController
+import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_popular_photo.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PopularPhotoFragment : Fragment() {
 
     private val viewModel by viewModel<PopularPhotoViewModel>()
-    private val controller by inject<PopularPhotoController>()
+    private val controller by inject<PopularPhotoController>{
+        parametersOf(
+                object : PopularPhotoController.AdapterCallbacks{
+                    override fun onMore(it: String) {
+                        startActivity(Intent(context, SearchActivity::class.java).apply {
+                            putExtra("key", it)
+                        })
+                    }
+                })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

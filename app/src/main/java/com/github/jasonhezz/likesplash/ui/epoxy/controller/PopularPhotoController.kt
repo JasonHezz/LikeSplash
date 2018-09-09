@@ -1,8 +1,10 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
 import android.content.Context
+import android.view.View
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.github.jasonhezz.likesplash.R
+import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.ExplorePhoto
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.entities.Tag
@@ -17,7 +19,7 @@ import com.github.jasonhezz.likesplash.ui.epoxy.model.space
 /**
  * Created by JavaCoder on 2018/1/3.
  */
-class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
+class PopularPhotoController(val context: Context , var callback: AdapterCallbacks? = null) : AsyncEpoxyController() {
 
     private val ifAddSpace = context.resources.getBoolean(R.bool.ifAddSpace)
 
@@ -244,6 +246,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${BUSINESS_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(businessExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -274,6 +277,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${GIRL_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(girlExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -305,6 +309,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${NATURE_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(natureExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -335,6 +340,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${TECHNOLOGY_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(technologyExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -364,6 +370,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${FOOD_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(foodExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -394,6 +401,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${TRAVEL_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(travelExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -424,6 +432,7 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${HAPPY_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(happyExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
 
@@ -454,7 +463,12 @@ class PopularPhotoController(val context: Context) : AsyncEpoxyController() {
 
         exploreMore {
             id("${COOL_PHOTO}_more")
+            clickListener(View.OnClickListener { callback?.onMore(coolExplore.name!!) })
             spanSizeOverride(NumItemsInGridRow(context, R.integer.grid_explore_tag_per_row))
         }
+    }
+
+    interface AdapterCallbacks {
+        fun onMore(it: String)
     }
 }

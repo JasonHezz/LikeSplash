@@ -21,7 +21,8 @@ val controllerModule = module {
         PopularCollectionController(androidContext()).also { it.setFilterDuplicates(true) }
     }
     factory {
-        PopularPhotoController(androidContext()).also { it.setFilterDuplicates(true) }
+        (callback: PopularPhotoController.AdapterCallbacks) ->
+        PopularPhotoController(androidContext() , callback).also { it.setFilterDuplicates(true) }
     }
     factory { (callback: PreviewCollectionPagedController.AdapterCallbacks) ->
         PreviewCollectionPagedController(androidContext(), callback).also { it.setFilterDuplicates(true) }

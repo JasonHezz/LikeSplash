@@ -1,9 +1,7 @@
-package com.github.jasonhezz.likesplash.ui.collection.featured
+package com.github.jasonhezz.likesplash.ui.search
 
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.chip.Chip
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,23 +9,21 @@ import android.view.ViewGroup
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
+import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
+import timber.log.Timber
+import android.arch.lifecycle.Observer
+import android.support.design.chip.Chip
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.ui.collection.detail.CollectionDetailActivity
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PreviewCollectionPagedController
-import com.github.jasonhezz.likesplash.ui.search.SearchActivity
-import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
-import kotlinx.android.synthetic.main.fragment_featured_collection.*
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
-import timber.log.Timber
+import kotlinx.android.synthetic.main.fragment_pictures.*
 
-/**
- * Created by JavaCoder on 2017/12/7.
- */
-class FeaturedCollectionFragment : Fragment() {
+class CollectionsFragment : Fragment(){
 
-    private val viewModel by viewModel<FeaturedCollectionViewModel>()
+    private val viewModel by inject<CollectionsViewModel>()
+    private val query by lazy { arguments?.getString(KEY_PARAM) }
     private val controller by inject<PreviewCollectionPagedController> {
         parametersOf(
                 object : PreviewCollectionPagedController.AdapterCallbacks {
@@ -40,22 +36,17 @@ class FeaturedCollectionFragment : Fragment() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-
-        }
-    }
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_featured_collection, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_collections, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.querySubmit.value = query
+
         initSwipeToRefresh()
         initController()
     }
@@ -70,9 +61,10 @@ class FeaturedCollectionFragment : Fragment() {
     }
 
     private fun initController() {
-        list.itemAnimator = SlideInItemAnimator()
-        list.setController(controller)
-        viewModel.collections.observe(this, Observer {
+        rv.itemAnimator = SlideInItemAnimator()
+        rv.setController(controller)
+
+        viewModel.photos.observe(this, Observer {
             controller.setList(it)
         })
         viewModel.networkState.observe(this, Observer {
@@ -93,10 +85,12 @@ class FeaturedCollectionFragment : Fragment() {
     }
 
     companion object {
+        const val KEY_PARAM = "key"
 
-        fun newInstance(): FeaturedCollectionFragment {
-            val fragment = FeaturedCollectionFragment()
+        fun newInstance(query : String) : CollectionsFragment{
+            val fragment = CollectionsFragment()
             val args = Bundle()
+            args.putString(KEY_PARAM , query)
             fragment.arguments = args
             return fragment
         }
