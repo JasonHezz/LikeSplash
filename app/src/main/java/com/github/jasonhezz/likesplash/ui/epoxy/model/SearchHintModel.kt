@@ -2,6 +2,7 @@ package com.github.jasonhezz.likesplash.ui.epoxy.model
 
 import android.graphics.Typeface.BOLD
 import android.text.style.StyleSpan
+import android.view.View
 import androidx.core.text.buildSpannedString
 import androidx.core.text.set
 import androidx.core.text.toSpannable
@@ -20,6 +21,9 @@ abstract class SearchHintModel : EpoxyModelWithHolder<BaseViewHolder>() {
     @EpoxyAttribute
     var query: String = ""
 
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var clickListener: View.OnClickListener? = null
+
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         hint?.let {
@@ -31,6 +35,7 @@ abstract class SearchHintModel : EpoxyModelWithHolder<BaseViewHolder>() {
                     append(hintSpan)
                 }
             }
+            holder.hint.setOnClickListener(clickListener)
         }
     }
 }

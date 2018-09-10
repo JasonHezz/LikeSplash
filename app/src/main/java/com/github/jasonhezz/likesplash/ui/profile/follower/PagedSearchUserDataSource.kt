@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
+import com.github.jasonhezz.likesplash.data.entities.SearchUserResponse
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.data.service.SearchService
 import retrofit2.Call
@@ -46,8 +47,8 @@ class PagedSearchUserDataSource(
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         api.searchUsers(query, 1, params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<List<User>> {
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            object : retrofit2.Callback<SearchUserResponse> {
+                override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
                     retry = {
                         loadInitial(params, callback)
                     }
@@ -57,12 +58,12 @@ class PagedSearchUserDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<List<User>>,
-                    response: Response<List<User>>
+                    call: Call<SearchUserResponse>,
+                    response: Response<SearchUserResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)
-                        val items = apiResponse.body ?: emptyList()
+                        val items = apiResponse.body ?.results?: emptyList()
                         retry = null
                         networkState.postValue(Resource.LOADED)
                         initialLoad.postValue(Resource.LOADED)
@@ -85,8 +86,8 @@ class PagedSearchUserDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         networkState.postValue(Resource.MORE)
         api.searchUsers(query, params.key, params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<List<User>> {
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            object : retrofit2.Callback<SearchUserResponse> {
+                override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
                     retry = {
                         loadAfter(params, callback)
                     }
@@ -94,12 +95,12 @@ class PagedSearchUserDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<List<User>>,
-                    response: Response<List<User>>
+                    call: Call<SearchUserResponse>,
+                    response: Response<SearchUserResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)
-                        val items = apiResponse.body ?: emptyList()
+                        val items = apiResponse.body ?.results?: emptyList()
                         retry = null
                         networkState.postValue(Resource.LOADED)
                         callback.onResult(items, apiResponse.nextPage)

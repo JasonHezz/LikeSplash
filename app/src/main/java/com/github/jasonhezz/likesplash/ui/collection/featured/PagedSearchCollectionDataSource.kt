@@ -7,6 +7,7 @@ import android.arch.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.SearchCollectionResponse
 import com.github.jasonhezz.likesplash.data.service.SearchService
 import retrofit2.Call
 import retrofit2.Response
@@ -45,8 +46,8 @@ class PagedSearchCollectionDataSource(
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
         api.searchCollections(query , 1 , perPage = params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<List<Collection>> {
-                override fun onFailure(call: Call<List<Collection>>, t: Throwable) {
+            object : retrofit2.Callback<SearchCollectionResponse> {
+                override fun onFailure(call: Call<SearchCollectionResponse>, t: Throwable) {
                     retry = {
                         loadInitial(params, callback)
                     }
@@ -56,12 +57,12 @@ class PagedSearchCollectionDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<List<Collection>>,
-                    response: Response<List<Collection>>
+                    call: Call<SearchCollectionResponse>,
+                    response: Response<SearchCollectionResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)
-                        val items = apiResponse.body ?: emptyList()
+                        val items = apiResponse.body?.results ?: emptyList()
                         retry = null
                         networkState.postValue(Resource.LOADED)
                         initialLoad.postValue(Resource.LOADED)
@@ -73,7 +74,7 @@ class PagedSearchCollectionDataSource(
                             loadInitial(params, callback)
                         }
                         networkState.postValue(
-                            Resource.error("error code: ${response.code()}")
+                                Resource.error("error code: ${response.code()}")
                         )
                     }
                 }
@@ -84,8 +85,8 @@ class PagedSearchCollectionDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Collection>) {
         networkState.postValue(Resource.MORE)
         api.searchCollections(query , params.key, params.requestedLoadSize).enqueue(
-            object : retrofit2.Callback<List<Collection>> {
-                override fun onFailure(call: Call<List<Collection>>, t: Throwable) {
+            object : retrofit2.Callback<SearchCollectionResponse> {
+                override fun onFailure(call: Call<SearchCollectionResponse>, t: Throwable) {
                     retry = {
                         loadAfter(params, callback)
                     }
@@ -93,12 +94,12 @@ class PagedSearchCollectionDataSource(
                 }
 
                 override fun onResponse(
-                    call: Call<List<Collection>>,
-                    response: Response<List<Collection>>
+                    call: Call<SearchCollectionResponse>,
+                    response: Response<SearchCollectionResponse>
                 ) {
                     if (response.isSuccessful) {
                         val apiResponse = ApiResponse(response)
-                        val items = apiResponse.body ?: emptyList()
+                        val items = apiResponse.body?.results ?: emptyList()
                         retry = null
                         networkState.postValue(Resource.LOADED)
                         callback.onResult(items, apiResponse.nextPage)
@@ -108,7 +109,7 @@ class PagedSearchCollectionDataSource(
                             loadAfter(params, callback)
                         }
                         networkState.postValue(
-                            Resource.error("error code: ${response.code()}")
+                                Resource.error("error code: ${response.code()}")
                         )
                     }
                 }

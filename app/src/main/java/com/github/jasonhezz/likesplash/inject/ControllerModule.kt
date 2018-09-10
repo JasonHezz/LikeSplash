@@ -28,6 +28,6 @@ val controllerModule = module {
         PreviewCollectionPagedController(androidContext(), callback).also { it.setFilterDuplicates(true) }
     }
     factory {
-        SearchHintController()
+        (callback: SearchHintController.AdapterCallbacks) -> SearchHintController(callback).also { it.setFilterDuplicates(true)}
     }
 }
