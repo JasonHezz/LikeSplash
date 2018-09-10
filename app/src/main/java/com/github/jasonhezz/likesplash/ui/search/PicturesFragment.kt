@@ -28,7 +28,7 @@ class PicturesFragment : Fragment(){
     private val controller by inject<PhotoPagedController> {
         parametersOf(
                 object : PhotoPagedController.AdapterCallbacks {
-                    override fun onAvatarClick(user: User?) {
+                    override fun onAvatarClick(view: View, user: User?) {
                         startActivity(Intent(context, ProfileActivity::class.java)
                                 .putExtra(ProfileActivity.ARG_PARAM_USER, user))
                     }

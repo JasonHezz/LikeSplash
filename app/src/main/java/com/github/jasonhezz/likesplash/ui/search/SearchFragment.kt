@@ -36,7 +36,8 @@ class SearchFragment : Fragment() {
         bindEvent()
 
         if (TextUtils.isEmpty(query)) return
-        initViewPager(query!!)
+
+        search_view.setQuery(query , true)
     }
 
     private fun bindView() {
