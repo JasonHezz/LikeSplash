@@ -6,11 +6,13 @@ import com.github.jasonhezz.likesplash.util.extension.replaceFragmentInActivity
 
 class SearchActivity : AppCompatActivity() {
 
+    private val query by lazy { intent?.getStringExtra("key") }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //    setContentView(R.layout.fragment_search)
         if (savedInstanceState == null) replaceFragmentInActivity(
-            SearchFragment.newInstance(),
+            SearchFragment.newInstance(query),
             android.R.id.content
         )
         //don't know why...if not,transition not working

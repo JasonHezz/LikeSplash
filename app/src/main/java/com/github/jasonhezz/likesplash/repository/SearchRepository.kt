@@ -10,13 +10,13 @@ import io.reactivex.Single
  */
 interface SearchRepository {
 
-    fun searchPagePhotos(query: String, page: Int = 1, perPage: Int = 24): Listing<Photo>
+    fun searchPagePhotos(query: String, page: Int = 1, perPage: Int = 24): LiveData<Listing<Photo>>
 
     fun searchPhotos(query: String, page: Int = 1, perPage: Int = 24): LiveData<List<Photo>>
 
-    fun searchPageCollections(query: String, page: Int = 1, perPage: Int = 24): Single<List<Collection>>
+    fun searchPageCollections(query: String, page: Int = 1, perPage: Int = 24): LiveData<Listing<Collection>>
 
-    fun searchUsers(query: String, page: Int = 1, perPage: Int = 20): Single<List<User>>
+    fun searchUsers(query: String, page: Int = 1, perPage: Int = 20): LiveData<Listing<User>>
 
     fun autoComplete(query: String): LiveData<SearchHints>
 }

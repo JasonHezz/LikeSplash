@@ -18,7 +18,10 @@ import com.github.jasonhezz.likesplash.ui.profile.follower.FollowerViewModel
 import com.github.jasonhezz.likesplash.ui.profile.following.FollowingViewModel
 import com.github.jasonhezz.likesplash.ui.profile.likes.UserLikeViewModel
 import com.github.jasonhezz.likesplash.ui.profile.photos.UserPhotoViewModel
+import com.github.jasonhezz.likesplash.ui.search.CollectionsViewModel
+import com.github.jasonhezz.likesplash.ui.search.PicturesViewModel
 import com.github.jasonhezz.likesplash.ui.search.SearchViewModel
+import com.github.jasonhezz.likesplash.ui.search.UserViewModel
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
@@ -42,4 +45,7 @@ val appModule = module {
     viewModel { PopularCollectionViewModel(get()) }
     viewModel { (photoId: String) -> PhotoDetailViewModel(photoId, get()) }
     viewModel { SearchViewModel(get()) }
+    viewModel { PicturesViewModel(get()) }
+    viewModel { CollectionsViewModel(get()) }
+    viewModel { UserViewModel(get()) }
 }

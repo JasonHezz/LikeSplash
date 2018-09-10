@@ -23,14 +23,14 @@ interface SearchService {
             @Query("query") query: String,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ): Single<List<Collection>>
+    ): Call<List<Collection>>
 
     @GET("search/users")
     fun searchUsers(
             @Query("query") query: String,
             @Query("page") page: Int,
             @Query("per_page") perPage: Int
-    ): Single<List<User>>
+    ): Call<List<User>>
 
     @GET("https://unsplash.com/nautocomplete/{keywords}?")
     fun autoComplete(@Path("keywords") keywords: String): Call<SearchHints>
