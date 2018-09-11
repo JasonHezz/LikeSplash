@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/stagger_margin"
+            android:paddingTop="@dimen/stagger_margin"
+            android:paddingRight="@dimen/stagger_margin"
+            app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+            app:spanCount="@integer/stagger_column"
+            tools:listitem="@layout/item_photo" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>
+
+
+
+

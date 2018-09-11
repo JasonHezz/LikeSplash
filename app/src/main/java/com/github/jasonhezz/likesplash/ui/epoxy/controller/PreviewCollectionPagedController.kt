@@ -1,12 +1,14 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
 import android.content.Context
+import android.support.design.chip.Chip
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.paging.PagingEpoxyController
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
+import com.github.jasonhezz.likesplash.data.entities.Tag
 import com.github.jasonhezz.likesplash.ui.epoxy.EpoxyModelProperty
 import com.github.jasonhezz.likesplash.ui.epoxy.model.LoadingModel_
 import com.github.jasonhezz.likesplash.ui.epoxy.model.previewCollection
