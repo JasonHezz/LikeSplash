@@ -26,7 +26,8 @@ class SearchFragment : Fragment() {
                 object : SearchHintController.AdapterCallbacks {
                     override fun onClick(it: String?) {
                         if (TextUtils.isEmpty(it)) return
-                        initViewPager(it!!, tab_layout.selectedTabPosition)
+
+                        search_view.setQuery(it, true)
                     }
                 })
     }
