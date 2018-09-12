@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Wallpaper
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.search.SearchActivity
-import kotlinx.android.synthetic.main.fragment_wallpaper.*
+import kotlinx.android.synthetic.main.fragment_tab_wallpaper.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -22,7 +22,7 @@ class WallpaperTabFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_wallpaper, container, false)
+        return inflater.inflate(R.layout.fragment_tab_wallpaper, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
