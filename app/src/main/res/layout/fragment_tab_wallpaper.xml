@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="@dimen/status_bar_height"
             app:navigationIcon="@drawable/ic_nav_menu"
-            app:title="Wallper" />
+            app:title="Wallpaper" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
