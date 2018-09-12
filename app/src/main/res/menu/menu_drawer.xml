@@ -14,8 +14,11 @@
         <item
             android:id="@+id/nav_collection"
             android:icon="@drawable/ic_nav_collection"
-            android:title="Collection" />
-
+            android:title="Collections" />
+        <item
+            android:id="@+id/nav_wallpaper"
+            android:icon="@drawable/ic_nav_wallpaper"
+            android:title="Wallpapers" />
         <item
             android:id="@+id/nav_tag"
             android:icon="@drawable/ic_nav_explore"
