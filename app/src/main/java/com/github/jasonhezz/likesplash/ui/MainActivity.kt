@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_collection -> {
                 drawer_layout?.closeDrawer(GravityCompat.START)
             }
+            R.id.nav_wallpaper -> {
+                drawer_layout?.closeDrawer(GravityCompat.START)
+            }
             R.id.nav_tag -> {
                 drawer_layout?.closeDrawer(GravityCompat.START)
             }

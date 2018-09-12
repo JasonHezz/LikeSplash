@@ -2,8 +2,8 @@ package com.github.jasonhezz.likesplash.inject
 
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
 import com.github.jasonhezz.likesplash.repository.CollectionRepositoryIml
-import com.github.jasonhezz.likesplash.repository.ExploreRepository
-import com.github.jasonhezz.likesplash.repository.ExploreRepositoryIml
+import com.github.jasonhezz.likesplash.repository.MockRepository
+import com.github.jasonhezz.likesplash.repository.MockRepositoryIml
 import com.github.jasonhezz.likesplash.repository.PhotoRepository
 import com.github.jasonhezz.likesplash.repository.PhotoRepositoryIml
 import com.github.jasonhezz.likesplash.repository.SearchRepository
@@ -30,7 +30,7 @@ val dataModule = module {
     single<CollectionRepository> {
         CollectionRepositoryIml(get())
     }
-    single<ExploreRepository> {
-        ExploreRepositoryIml(get())
+    single<MockRepository> {
+        MockRepositoryIml(get())
     }
 }
