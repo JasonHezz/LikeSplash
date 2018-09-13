@@ -14,8 +14,8 @@ import retrofit2.HttpException
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedCollectionPhotosDataSource(
-    val id: String,
-    val api: CollectionService
+        val id: String,
+        val api: CollectionService
 ) : PageKeyedDataSource<Int, Photo>() {
 
     private var retry: (() -> Any)? = null
@@ -34,8 +34,8 @@ class PagedCollectionPhotosDataSource(
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, Photo>
+            params: LoadInitialParams<Int>,
+            callback: LoadInitialCallback<Int, Photo>
     ) {
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
@@ -49,7 +49,7 @@ class PagedCollectionPhotosDataSource(
             } else {
                 retry = { loadInitial(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: HttpException) {
@@ -64,7 +64,7 @@ class PagedCollectionPhotosDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Photo>) {
         networkState.postValue(Resource.MORE)
         try {
-            val response = api.getCollectionPhotos(id, perPage = params.requestedLoadSize).execute()
+            val response = api.getCollectionPhotos(id, page = params.key, perPage = params.requestedLoadSize).execute()
             if (response.isSuccessful) {
                 val apiResponse = ApiResponse(response)
                 val items = apiResponse.body ?: emptyList()
@@ -73,7 +73,7 @@ class PagedCollectionPhotosDataSource(
             } else {
                 retry = { loadAfter(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: Exception) {
