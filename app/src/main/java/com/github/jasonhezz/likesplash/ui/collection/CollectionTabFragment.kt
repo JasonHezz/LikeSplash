@@ -13,7 +13,7 @@ import com.github.jasonhezz.likesplash.ui.collection.curated.CuratedCollectionFr
 import com.github.jasonhezz.likesplash.ui.collection.featured.FeaturedCollectionFragment
 import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_collection_tab.*
 
 /**
  * Created by JasonHezz on 2017/10/15.
