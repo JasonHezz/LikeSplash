@@ -90,5 +90,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.11.0'
     androidTestImplementation "com.android.support.test:runner:${versions.androidx.test_runner}"
+    androidTestImplementation "com.android.support.test:rules:${versions.androidx.test_rules}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-web:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${versions.espresso}"
 }
