@@ -1,12 +1,11 @@
 package com.github.jasonhezz.likesplash.ui.profile.likes
 
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -16,11 +15,11 @@ import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_like.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class UserLikeFragment : Fragment() {
+class UserLikeFragment : androidx.fragment.app.Fragment() {
 
     private val user by lazy { arguments?.getParcelable<User>(ARG_PARAM_USER) }
     private val viewModel by viewModel<UserLikeViewModel> { parametersOf(user?.username ?: "") }

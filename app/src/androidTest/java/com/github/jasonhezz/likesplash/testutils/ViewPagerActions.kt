@@ -1,15 +1,15 @@
 package com.github.jasonhezz.likesplash.testutils
 
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 
 import org.hamcrest.Matcher
 
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 
 object ViewPagerActions {
     /**
@@ -28,7 +28,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 val current = viewPager.currentItem
                 viewPager.setCurrentItem(current + 1, false)
 
@@ -53,7 +53,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 val current = viewPager.currentItem
                 viewPager.setCurrentItem(current - 1, false)
 
@@ -78,7 +78,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 val size = viewPager.adapter!!.count
                 if (size > 0) {
                     viewPager.setCurrentItem(size - 1, false)
@@ -105,7 +105,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 val size = viewPager.adapter!!.count
                 if (size > 0) {
                     viewPager.setCurrentItem(0, false)
@@ -132,7 +132,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 viewPager.setCurrentItem(page, false)
 
                 uiController.loopMainThreadUntilIdle()
@@ -143,10 +143,10 @@ object ViewPagerActions {
     /**
      * Sets the specified adapter on `ViewPager`.
      */
-    fun setAdapter(adapter: PagerAdapter?): ViewAction {
+    fun setAdapter(adapter: androidx.viewpager.widget.PagerAdapter?): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {
-                return isAssignableFrom(ViewPager::class.java)
+                return isAssignableFrom(androidx.viewpager.widget.ViewPager::class.java)
             }
 
             override fun getDescription(): String {
@@ -156,7 +156,7 @@ object ViewPagerActions {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadUntilIdle()
 
-                val viewPager = view as ViewPager
+                val viewPager = view as androidx.viewpager.widget.ViewPager
                 viewPager.adapter = adapter
 
                 uiController.loopMainThreadUntilIdle()

@@ -1,6 +1,5 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.model
 
-import android.support.v7.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -27,7 +26,7 @@ abstract class TitleModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun onViewAttachedToWindow(holder: BaseViewHolder) {
         super.onViewAttachedToWindow(holder)
         val layoutParams = holder.containerView?.layoutParams
-        if (layoutParams is StaggeredGridLayoutManager.LayoutParams) {
+        if (layoutParams is androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams) {
             layoutParams.isFullSpan = true
         }
     }

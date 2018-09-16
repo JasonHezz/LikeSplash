@@ -1,17 +1,14 @@
 package com.github.jasonhezz.likesplash.ui.profile
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewCompat
 import android.transition.TransitionManager
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
@@ -23,15 +20,16 @@ import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 import com.github.jasonhezz.likesplash.util.extension.showSnackbar
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_profile.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by JavaCoder on 2017/6/28.
  */
 class ProfileFragment : Fragment() {
 
-    private val viewModel: ProfileViewModel by viewModel()
+    private val viewModel by viewModel<ProfileViewModel>()
     private lateinit var tabAdapter: TabFragmentAdapter
     private var user: User? = null
 
@@ -44,10 +42,10 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.fragment_profile, container, false)
+            inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,9 +53,9 @@ class ProfileFragment : Fragment() {
         initViewPager()
         viewModel.liveUser.observe(this, Observer {
             GlideApp
-                .with(this)
-                .load(user?.profile_image?.large)
-                .into(user_avatar)
+                    .with(this)
+                    .load(user?.profile_image?.large)
+                    .into(user_avatar)
             collapsing_toolbar.title = it?.name
             follow_btn.text = if (it?.followedByUser == true) "Following" else "Follow"
             bio.isVisible = !it?.bio.isNullOrEmpty()
@@ -69,8 +67,8 @@ class ProfileFragment : Fragment() {
             tab_layout.getTabAt(0)?.text = String.format(getString(R.string.photos), it?.totalPhotos)
             tab_layout.getTabAt(1)?.text = String.format(getString(R.string.likes), it?.totalLikes)
             tab_layout.getTabAt(2)?.text = String.format(
-                getString(R.string.collections),
-                it?.totalCollections
+                    getString(R.string.collections),
+                    it?.totalCollections
             )
         })
 
@@ -102,7 +100,7 @@ class ProfileFragment : Fragment() {
         }
         user_avatar.outlineProvider = null
         app_bar_layout.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
+            override fun onStateChanged(appBarLayout: com.google.android.material.appbar.AppBarLayout, state: State) {
             }
 
             override fun onOffsetChanged(state: State, fraction: Float) {
@@ -119,9 +117,9 @@ class ProfileFragment : Fragment() {
         view_pager.apply {
             adapter = tabAdapter
             offscreenPageLimit = 3
-            addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+            addOnPageChangeListener(com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener(tab_layout))
         }
-        tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
+        tab_layout?.addOnTabSelectedListener(com.google.android.material.tabs.TabLayout.ViewPagerOnTabSelectedListener(view_pager))
     }
 
     companion object {

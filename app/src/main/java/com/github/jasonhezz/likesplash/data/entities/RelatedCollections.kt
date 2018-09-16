@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class RelatedCollections(
-    @Json(name = "total") val total: Int? = null,
-    @Json(name = "type") val type: String? = null,
-    @Json(name = "results") val results: List<Collection>? = null
+        @Json(name = "total") val total: Int? = null,
+        @Json(name = "type") val type: String? = null,
+        @Json(name = "results") val results: List<Collection>? = null
 ) : Parcelable

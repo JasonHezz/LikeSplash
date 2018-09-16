@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:liftOnScroll="true">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,8 +83,8 @@
                 app:layout_constraintStart_toEndOf="@+id/user_avatar"
                 app:layout_constraintTop_toTopOf="@+id/user_avatar"
                 tools:text="Mickey Gast" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.design.widget.AppBarLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
@@ -93,7 +93,7 @@
         android:paddingLeft="@dimen/stagger_margin"
         android:paddingTop="@dimen/stagger_margin"
         android:paddingRight="@dimen/stagger_margin"
-        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+        app:layoutManager="StaggeredGridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:spanCount="@integer/stagger_column" />
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

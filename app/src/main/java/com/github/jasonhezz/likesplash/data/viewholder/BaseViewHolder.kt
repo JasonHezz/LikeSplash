@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.data.viewholder
 
-import android.support.annotation.CallSuper
 import android.view.View
+import androidx.annotation.CallSuper
 import com.airbnb.epoxy.EpoxyHolder
 import kotlinx.android.extensions.LayoutContainer
 

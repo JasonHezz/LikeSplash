@@ -1,6 +1,6 @@
 package com.github.jasonhezz.likesplash.ui
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 /**

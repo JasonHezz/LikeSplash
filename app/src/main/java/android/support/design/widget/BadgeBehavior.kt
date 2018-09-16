@@ -8,27 +8,27 @@ import com.github.jasonhezz.likesplash.util.extension.AppBarStateChangeListener
 import com.github.jasonhezz.likesplash.util.extension.State
 
 class BadgeBehavior @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null
-) : CoordinatorLayout.Behavior<View>(context, attrs) {
+        context: Context,
+        attrs: AttributeSet? = null
+) : androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior<View>(context, attrs) {
     private var fraction = 0f
     private var appbarChangeListener: AppBarStateChangeListener? = null
 
-    override fun layoutDependsOn(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
-        if (dependency is AppBarLayout) {
+    override fun layoutDependsOn(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: View, dependency: View): Boolean {
+        if (dependency is com.google.android.material.appbar.AppBarLayout) {
             return true
         }
         return super.layoutDependsOn(parent, child, dependency)
     }
 
     override fun onLayoutChild(
-        parent: CoordinatorLayout, child: View,
-        layoutDirection: Int
+            parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: View,
+            layoutDirection: Int
     ): Boolean {
-        val appbarLayout = parent.findViewById<AppBarLayout?>(R.id.app_bar_layout)
+        val appbarLayout = parent.findViewById<com.google.android.material.appbar.AppBarLayout?>(R.id.app_bar_layout)
         if (appbarChangeListener == null) {
             appbarChangeListener = object : AppBarStateChangeListener() {
-                override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {}
+                override fun onStateChanged(appBarLayout: com.google.android.material.appbar.AppBarLayout, state: State) {}
 
                 override fun onOffsetChanged(state: State, fraction: Float) {
                     this@BadgeBehavior.fraction = fraction
@@ -40,7 +40,7 @@ class BadgeBehavior @JvmOverloads constructor(
     }
 
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
+    override fun onDependentViewChanged(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: View, dependency: View): Boolean {
         scaleBadge(child)
         return super.onDependentViewChanged(parent, child, dependency)
     }

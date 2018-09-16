@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.ui.epoxy.model.dialogCollection
  */
 
 class DialogCollectionController(
-    var callback: AdapterCallbacks? = null
+        var callback: AdapterCallbacks? = null
 ) : AsyncEpoxyController() {
 
     var collections by EpoxyModelProperty { emptyList<Collection>() }

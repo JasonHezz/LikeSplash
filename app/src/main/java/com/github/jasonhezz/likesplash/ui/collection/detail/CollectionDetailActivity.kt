@@ -1,12 +1,12 @@
 package com.github.jasonhezz.likesplash.ui.collection.detail
 
 import android.app.ActivityOptions
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.Collection
@@ -18,7 +18,7 @@ import com.github.jasonhezz.likesplash.ui.profile.ProfileActivity
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_collection_detail.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 

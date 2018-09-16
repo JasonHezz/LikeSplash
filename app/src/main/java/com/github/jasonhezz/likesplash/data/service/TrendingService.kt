@@ -12,8 +12,8 @@ interface TrendingService {
 
     @GET("feeds/home")
     fun getTrendingFeed(
-        @Query("after") after: String? = null,
-        @Query("per_page") perPage: Int
+            @Query("after") after: String? = null,
+            @Query("per_page") perPage: Int
     ): Call<TrendingResponse>
 
     @GET("feeds/following")

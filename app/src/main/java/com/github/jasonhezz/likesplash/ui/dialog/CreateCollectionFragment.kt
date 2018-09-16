@@ -2,7 +2,6 @@ package com.github.jasonhezz.likesplash.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.dialog_create_collection.*
  * Created by JasonHezz on 2018/1/15.
 
  */
-class CreateCollectionFragment : DialogFragment() {
+class CreateCollectionFragment : androidx.fragment.app.DialogFragment() {
 
     private var callback: Callbacks? = null
     private var closeCallback: CloseCallback? = null

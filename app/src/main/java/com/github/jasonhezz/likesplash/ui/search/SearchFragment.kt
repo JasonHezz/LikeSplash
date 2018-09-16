@@ -1,19 +1,19 @@
 package com.github.jasonhezz.likesplash.ui.search
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.SearchHintController
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.include_search_bar.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
     private val viewModel by viewModel<SearchViewModel>()

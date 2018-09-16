@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,8 +18,8 @@
             android:paddingTop="@dimen/stagger_margin"
             android:paddingRight="@dimen/stagger_margin"
             android:scrollbars="vertical"
-            app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+            app:layoutManager="StaggeredGridLayoutManager"
             app:spanCount="@integer/stagger_column"
             tools:listitem="@layout/item_collection" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class SearchHints (
+data class SearchHints(
         @Json(name = "fuzzy") val fuzzy: List<SearchHint>? = null,
         @Json(name = "autocomplete") val autocomplete: List<SearchHint>? = null,
         @Json(name = "did_you_mean") val didYouMean: List<SearchHint>? = null

@@ -12,7 +12,7 @@ android {
         targetSdkVersion buildConfig.targetSdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -36,15 +36,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
 
-    implementation "com.android.support:appcompat-v7:${versions.androidx.appcompat}"
-    implementation "com.android.support:design:${versions.material_design}"
-    implementation "com.android.support:recyclerview-v7:${versions.androidx.recyclerview}"
-    implementation "com.android.support:cardview-v7:${versions.androidx.recyclerview}"
+    implementation "androidx.appcompat:appcompat:${versions.androidx.appcompat}"
+    implementation "com.google.android.material:material:${versions.material_design}"
+    implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
+    implementation "androidx.cardview:cardview:${versions.androidx.cardview}"
 
-    implementation "com.android.support.constraint:constraint-layout:${versions.androidx.constraint_layout}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.androidx.constraint_layout}"
 
     //Android KTX
-    implementation 'androidx.core:core-ktx:0.3'
+    implementation "androidx.core:core-ktx:${versions.androidx.core_ktx}"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
@@ -57,8 +57,8 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
 
     //arch
-    implementation "android.arch.lifecycle:extensions:${versions.androidx.lifecycle}"
-    implementation "android.arch.paging:runtime:${versions.androidx.paging}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}"
+    implementation "androidx.paging:paging-runtime:${versions.androidx.paging}"
 
     //rx
     implementation "io.reactivex.rxjava2:rxjava:${versions.rx}"
@@ -75,8 +75,8 @@ dependencies {
 
     //koin
     implementation "org.koin:koin-android:${versions.koin}"
-    implementation "org.koin:koin-android-scope:${versions.koin}"
-    implementation "org.koin:koin-android-viewmodel:${versions.koin}"
+    implementation "org.koin:koin-androidx-scope:${versions.koin}"
+    implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
@@ -84,15 +84,15 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'me.zhanghai.android.materialedittext:library:1.0.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.google.android:flexbox:1.0.0'
+    implementation 'com.google.android:flexbox:1.1.0-beta1'
     implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.11.0'
-    androidTestImplementation "com.android.support.test:runner:${versions.androidx.test_runner}"
-    androidTestImplementation "com.android.support.test:rules:${versions.androidx.test_rules}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-web:${versions.espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${versions.espresso}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${versions.espresso}"
+    androidTestImplementation "androidx.test:runner:${versions.androidx.test_runner}"
+    androidTestImplementation "androidx.test:rules:${versions.androidx.test_rules}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-web:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
 }

@@ -2,8 +2,6 @@ package com.github.jasonhezz.likesplash.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +12,15 @@ import com.github.jasonhezz.likesplash.ui.home.editorial.EditorialFragment
 import com.github.jasonhezz.likesplash.ui.home.trending.TrendingFragment
 import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
 
-typealias V4Pair<F, S> = android.support.v4.util.Pair<F, S>
+typealias V4Pair<F, S> = androidx.core.util.Pair<F, S>
 
 /**
  * Created by JasonHezz on 2017/10/15.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var tabAdapter: TabFragmentAdapter
 
@@ -57,9 +56,9 @@ class HomeFragment : Fragment() {
         view_pager.apply {
             adapter = tabAdapter
             offscreenPageLimit = 3
-            addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+            addOnPageChangeListener(com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener(tab_layout))
         }
-        tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
+        tab_layout?.addOnTabSelectedListener(com.google.android.material.tabs.TabLayout.ViewPagerOnTabSelectedListener(view_pager))
     }
 
     companion object {

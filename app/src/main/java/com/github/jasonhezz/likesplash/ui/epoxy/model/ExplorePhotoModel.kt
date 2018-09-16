@@ -27,11 +27,11 @@ abstract class ExplorePhotoModel : EpoxyModelWithHolder<BaseViewHolder>() {
         super.bind(holder)
         if (photo != null) {
             GlideApp
-                .with(holder.photo_iv)
-                .saturateOnLoad()
-                .load(photo?.urls?.regular)
-                .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
-                .into(holder.photo_iv)
+                    .with(holder.photo_iv)
+                    .saturateOnLoad()
+                    .load(photo?.urls?.regular)
+                    .thumbnail(Glide.with(holder.photo_iv.context).load(photo?.urls?.thumb))
+                    .into(holder.photo_iv)
             holder.photo_iv.setOnClickListener(photoClickListener)
         }
     }

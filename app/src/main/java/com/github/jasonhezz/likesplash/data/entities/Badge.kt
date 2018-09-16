@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Badge(
-    @Json(name = "title") val title: String?,
-    @Json(name = "primary") val primary: Boolean?,
-    @Json(name = "slug") val slug: String?,
-    @Json(name = "link") val link: String?
+        @Json(name = "title") val title: String?,
+        @Json(name = "primary") val primary: Boolean?,
+        @Json(name = "slug") val slug: String?,
+        @Json(name = "link") val link: String?
 ) : Parcelable

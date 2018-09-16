@@ -1,9 +1,9 @@
 package com.github.jasonhezz.likesplash.ui.collection.detail
 
 import android.annotation.SuppressLint
-import android.arch.core.executor.ArchTaskExecutor
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.arch.core.executor.ArchTaskExecutor
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -14,8 +14,8 @@ import retrofit2.HttpException
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedCuratedCollectionPhotosDataSource(
-    val id: String,
-    val api: CollectionService
+        val id: String,
+        val api: CollectionService
 ) : PageKeyedDataSource<Int, Photo>() {
 
     private var retry: (() -> Any)? = null
@@ -34,8 +34,8 @@ class PagedCuratedCollectionPhotosDataSource(
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, Photo>
+            params: LoadInitialParams<Int>,
+            callback: LoadInitialCallback<Int, Photo>
     ) {
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
@@ -49,7 +49,7 @@ class PagedCuratedCollectionPhotosDataSource(
             } else {
                 retry = { loadInitial(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: HttpException) {
@@ -73,7 +73,7 @@ class PagedCuratedCollectionPhotosDataSource(
             } else {
                 retry = { loadAfter(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: Exception) {

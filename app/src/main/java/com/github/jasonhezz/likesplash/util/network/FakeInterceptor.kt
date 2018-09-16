@@ -1,11 +1,7 @@
 package com.github.jasonhezz.likesplash.util.network
 
 import android.content.Context
-import okhttp3.Interceptor
-import okhttp3.MediaType
-import okhttp3.Protocol
-import okhttp3.Response
-import okhttp3.ResponseBody
+import okhttp3.*
 import java.io.IOException
 
 /**
@@ -26,18 +22,18 @@ class FakeInterceptor(val context: Context) : Interceptor {
                     inputStream.close()
                     val json = String(buffer, Charsets.UTF_8)
                     return Response.Builder()
-                        .code(200)
-                        .message(MESSAGE)
-                        .request(chain.request())
-                        .protocol(Protocol.HTTP_1_0)
-                        .body(
-                            ResponseBody.create(
-                                MediaType.parse(CONTENT_TYPE),
-                                json
+                            .code(200)
+                            .message(MESSAGE)
+                            .request(chain.request())
+                            .protocol(Protocol.HTTP_1_0)
+                            .body(
+                                    ResponseBody.create(
+                                            MediaType.parse(CONTENT_TYPE),
+                                            json
+                                    )
                             )
-                        )
-                        .addHeader("content-type", CONTENT_TYPE)
-                        .build()
+                            .addHeader("content-type", CONTENT_TYPE)
+                            .build()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }

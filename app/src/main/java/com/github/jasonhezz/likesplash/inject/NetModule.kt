@@ -1,12 +1,7 @@
 package com.github.jasonhezz.likesplash.inject
 
 import com.github.jasonhezz.likesplash.data.api.SplashConstants
-import com.github.jasonhezz.likesplash.data.service.CollectionService
-import com.github.jasonhezz.likesplash.data.service.MockService
-import com.github.jasonhezz.likesplash.data.service.PhotoService
-import com.github.jasonhezz.likesplash.data.service.SearchService
-import com.github.jasonhezz.likesplash.data.service.TrendingService
-import com.github.jasonhezz.likesplash.data.service.UserService
+import com.github.jasonhezz.likesplash.data.service.*
 import com.github.jasonhezz.likesplash.util.network.FakeInterceptor
 import com.github.jasonhezz.likesplash.util.network.UserAgentInterceptor
 import com.squareup.moshi.Moshi
@@ -31,50 +26,50 @@ val netModule = module {
     }
     single {
         OkHttpClient().newBuilder()
-            .connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.SECONDS)
-            .addInterceptor(get<UserAgentInterceptor>())
-            .addInterceptor(get<FakeInterceptor>())
-            .build()
+                .connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLIS, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.SECONDS)
+                .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.SECONDS)
+                .addInterceptor(get<UserAgentInterceptor>())
+                .addInterceptor(get<FakeInterceptor>())
+                .build()
     }
     single {
         Retrofit.Builder()
-            .baseUrl(SplashConstants.UNSPLASH_NEW_BASE_URL)
-            .client(get())
-            .addConverterFactory(MoshiConverterFactory.create(
-                Moshi.Builder().build()).asLenient())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+                .baseUrl(SplashConstants.UNSPLASH_NEW_BASE_URL)
+                .client(get())
+                .addConverterFactory(MoshiConverterFactory.create(
+                        Moshi.Builder().build()).asLenient())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
     }
     single {
         get<Retrofit>().create(
-            TrendingService::class.java
+                TrendingService::class.java
         )
     }
     single {
         get<Retrofit>().create(
-            PhotoService::class.java
+                PhotoService::class.java
         )
     }
     single {
         get<Retrofit>().create(
-            CollectionService::class.java
+                CollectionService::class.java
         )
     }
     single {
         get<Retrofit>().create(
-            UserService::class.java
+                UserService::class.java
         )
     }
     single {
         get<Retrofit>().create(
-            SearchService::class.java
+                SearchService::class.java
         )
     }
     single {
         get<Retrofit>().create(
-            MockService::class.java
+                MockService::class.java
         )
     }
 }

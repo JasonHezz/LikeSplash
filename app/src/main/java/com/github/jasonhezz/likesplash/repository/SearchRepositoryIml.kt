@@ -1,10 +1,10 @@
 package com.github.jasonhezz.likesplash.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.*
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.service.SearchService

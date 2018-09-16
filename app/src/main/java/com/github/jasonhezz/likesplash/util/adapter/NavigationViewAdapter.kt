@@ -1,30 +1,27 @@
 package com.github.jasonhezz.likesplash.util.adapter
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.MenuItem
+import androidx.annotation.IdRes
 
 /**
  * Created by JavaCoder on 2017/6/29.
  */
 abstract class NavigationViewAdapter(
-    val fm: FragmentManager,
-    defaultMenuId: Int, @IdRes val containerId: Int,
-    savedInstanceState: Bundle?
+        val fm: androidx.fragment.app.FragmentManager,
+        defaultMenuId: Int, @IdRes val containerId: Int,
+        savedInstanceState: Bundle?
 ) {
 
     private var currentlyAttachedId = defaultMenuId
     private var isAttached = false
-    private var listener: NavigationView.OnNavigationItemSelectedListener? = null
+    private var listener: com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener? = null
 
     init {
         savedInstanceState?.let {
             if (!savedInstanceState.containsKey(KEY_CURRENT_ID)) {
                 throw IllegalStateException(
-                    "You must call NavigationViewFragmentAdapter.onSaveInstanceState() in your Activity onSaveInstanceState()"
+                        "You must call NavigationViewFragmentAdapter.onSaveInstanceState() in your Activity onSaveInstanceState()"
                 )
             } else {
                 currentlyAttachedId = savedInstanceState.getInt(KEY_CURRENT_ID)
@@ -33,20 +30,20 @@ abstract class NavigationViewAdapter(
     }
 
     fun setNavigationItemSelectedListener(
-        listener: NavigationView.OnNavigationItemSelectedListener?
+            listener: com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener?
     ) {
         this.listener = listener
     }
 
     fun onSaveInstanceState(outState: Bundle) = outState.putInt(KEY_CURRENT_ID, currentlyAttachedId)
 
-    abstract fun getFragment(@IdRes menuItemId: Int): Fragment
+    abstract fun getFragment(@IdRes menuItemId: Int): androidx.fragment.app.Fragment
 
     fun getTag(@IdRes menuItemId: Int) = "itemId:$menuItemId"
 
     open fun shouldHandleMenuItem(@IdRes menuItemId: Int) = true
 
-    fun attachTo(view: NavigationView) {
+    fun attachTo(view: com.google.android.material.navigation.NavigationView) {
         if (isAttached) throw IllegalStateException("The adapter can only be attached once.")
         else {
             view.setCheckedItem(currentlyAttachedId)
@@ -56,7 +53,7 @@ abstract class NavigationViewAdapter(
         }
     }
 
-    inner class FragmentAdapterItemSelectedListener : NavigationView.OnNavigationItemSelectedListener {
+    inner class FragmentAdapterItemSelectedListener : com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             if (shouldHandleMenuItem((item.itemId))) {
                 val attachTag = getTag(item.itemId)

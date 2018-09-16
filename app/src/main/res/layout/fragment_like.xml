@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/stagger_margin"
         android:paddingTop="@dimen/stagger_margin"
         android:paddingRight="@dimen/stagger_margin"
-        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+        app:layoutManager="StaggeredGridLayoutManager"
         app:spanCount="@integer/stagger_column"
         tools:listitem="@layout/item_photo" />
 </FrameLayout>

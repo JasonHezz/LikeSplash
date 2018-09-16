@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Tags(
-    @Json(name = "custom") val customTags: List<Tag>?,
-    @Json(name = "aggregated") val aggregatedTags: List<Tag>?
+        @Json(name = "custom") val customTags: List<Tag>?,
+        @Json(name = "aggregated") val aggregatedTags: List<Tag>?
 ) : Parcelable

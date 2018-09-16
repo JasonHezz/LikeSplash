@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.github.jasonhezz.likesplash.data.entities.ExploreCollection
 import com.github.jasonhezz.likesplash.data.entities.Wallpaper
 import com.github.jasonhezz.likesplash.data.service.MockService

@@ -1,6 +1,6 @@
 package com.github.jasonhezz.likesplash.util.retrofit
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Created by JavaCoder on 2017/11/27.
  */
 class LiveDataCallAdapter<R>(
-    private val responseType: Type
+        private val responseType: Type
 ) : CallAdapter<R, LiveData<ApiResponse<R>>> {
 
     override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
@@ -24,15 +24,15 @@ class LiveDataCallAdapter<R>(
                 if (started.compareAndSet(false, true)) {
                     call.enqueue(object : Callback<R> {
                         override fun onResponse(
-                            call: Call<R>,
-                            response: Response<R>
+                                call: Call<R>,
+                                response: Response<R>
                         ) {
                             postValue(ApiResponse(response))
                         }
 
                         override fun onFailure(
-                            call: Call<R>,
-                            throwable: Throwable
+                                call: Call<R>,
+                                throwable: Throwable
                         ) {
                             postValue(ApiResponse(throwable))
                         }

@@ -1,18 +1,17 @@
 package com.github.jasonhezz.likesplash.ui
 
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.util.adapter.DrawerNavViewAdapter
 import com.github.jasonhezz.likesplash.util.extension.isInNightMode
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var navViewAdapter: DrawerNavViewAdapter
 
@@ -20,8 +19,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navViewAdapter = DrawerNavViewAdapter(
-            supportFragmentManager, R.id.nav_home,
-            R.id.frame_container, savedInstanceState
+                supportFragmentManager, R.id.nav_home,
+                R.id.frame_container, savedInstanceState
         )
         navViewAdapter.setNavigationItemSelectedListener(this)
         navViewAdapter.attachTo(nav_view)

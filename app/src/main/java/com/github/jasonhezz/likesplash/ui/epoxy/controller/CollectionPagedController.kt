@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.ui.epoxy.model.collection
  * Created by JavaCoder on 2017/12/13.
  */
 class CollectionPagedController(
-    var callback: AdapterCallbacks? = null
+        var callback: AdapterCallbacks? = null
 ) : PagingEpoxyController<Collection>() {
 
     @AutoModel

@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Story(
-    @Json(name = "description") val description: String? = null,
-    @Json(name = "title") val title: String? = null
+        @Json(name = "description") val description: String? = null,
+        @Json(name = "title") val title: String? = null
 ) : Parcelable

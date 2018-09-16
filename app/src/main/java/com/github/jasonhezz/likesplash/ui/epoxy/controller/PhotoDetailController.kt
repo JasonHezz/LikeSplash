@@ -1,7 +1,7 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.airbnb.epoxy.AutoModel
 import com.github.jasonhezz.likesplash.R

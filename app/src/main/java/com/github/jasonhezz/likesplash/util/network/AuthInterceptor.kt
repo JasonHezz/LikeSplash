@@ -10,18 +10,18 @@ class AuthInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request().newBuilder()
-            .addHeader(
-                AUTHORIZATION_HEADER,
-                "${AUTHORIZATION_PREFIX}${CLIENT_ID}"
-            )
-            .build()
+                .addHeader(
+                        AUTHORIZATION_HEADER,
+                        "${AUTHORIZATION_PREFIX}${CLIENT_ID}"
+                )
+                .build()
         if (accessToken != null) {
             request = chain.request()?.newBuilder()
-                ?.addHeader(
-                    AUTHORIZATION_HEADER,
-                    "${BEARER}$accessToken"
-                )
-                ?.build()
+                    ?.addHeader(
+                            AUTHORIZATION_HEADER,
+                            "${BEARER}$accessToken"
+                    )
+                    ?.build()
         }
         return chain.proceed(request)
     }

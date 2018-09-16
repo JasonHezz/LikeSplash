@@ -1,19 +1,20 @@
 package com.github.jasonhezz.likesplash.ui.profile.follower
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.UserPagedController
 import kotlinx.android.synthetic.main.fragment_following.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
 import timber.log.Timber
 
 /**

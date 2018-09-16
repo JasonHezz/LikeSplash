@@ -1,16 +1,17 @@
 package com.github.jasonhezz.likesplash.ui.explore
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.PopularCollectionController
 import kotlinx.android.synthetic.main.fragment_popular_collection.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class PopularCollectionFragment : Fragment() {
 

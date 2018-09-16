@@ -18,7 +18,7 @@ package com.github.jasonhezz.likesplash.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatDialog
+import androidx.appcompat.app.AppCompatDialog
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager

@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.ui.collection.featured
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.repository.CollectionRepository

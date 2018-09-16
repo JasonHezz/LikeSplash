@@ -20,9 +20,9 @@ abstract class UserModel : EpoxyModelWithHolder<BaseViewHolder>() {
     override fun bind(holder: BaseViewHolder) {
         super.bind(holder)
         GlideApp
-            .with(holder.avatar)
-            .load(user?.profile_image)
-            .into(holder.avatar)
+                .with(holder.avatar)
+                .load(user?.profile_image)
+                .into(holder.avatar)
         holder.name?.text = user?.name
         holder.bio?.text = user?.bio
     }

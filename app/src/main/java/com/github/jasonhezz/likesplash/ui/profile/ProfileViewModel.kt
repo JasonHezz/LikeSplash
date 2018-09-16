@@ -1,6 +1,6 @@
 package com.github.jasonhezz.likesplash.ui.profile
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
@@ -21,10 +21,10 @@ class ProfileViewModel(val userRepository: UserRepository) : RxAwareViewModel() 
     fun loadUser(user: User?) {
         liveUser.value = user
         disposables += userRepository.getUserProfile(user?.username ?: "")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }
-            .subscribe(this::onSuccess, this::onError)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { messages.value = Resource(Status.REFRESHING) }
+                .subscribe(this::onSuccess, this::onError)
     }
 
     private fun onError(t: Throwable) {

@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.ui.profile.collections
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.repository.UserRepository
@@ -11,8 +11,8 @@ import com.github.jasonhezz.likesplash.repository.UserRepository
  * Created by JavaCoder on 2017/11/27.
  */
 class UserCollectionViewModel(
-    userName: String,
-    repository: UserRepository
+        userName: String,
+        repository: UserRepository
 ) : ViewModel() {
 
     private val result = MutableLiveData<Listing<Collection>>()

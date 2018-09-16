@@ -1,5 +1,5 @@
 package com.github.jasonhezz.likesplash.ui.dialog
 
-interface CloseCallback{
+interface CloseCallback {
     fun close()
 }

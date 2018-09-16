@@ -24,19 +24,19 @@ abstract class RelatedCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
         collection?.let {
             val count = it.totalPhotos ?: 0
             holder.count_tv.text = holder.count_tv.context.resources
-                .getQuantityString(R.plurals.photo_plural, count, count)
+                    .getQuantityString(R.plurals.photo_plural, count, count)
             holder.title_tv.text = it.title
             holder.user_name.text = it.user?.name
             GlideApp
-                .with(holder.collection_iv)
-                .saturateOnLoad()
-                .load(it.coverPhoto?.urls?.regular)
-                .thumbnail(Glide.with(holder.user_avatar.context).load(it.coverPhoto?.urls?.thumb))
-                .materialPlaceHolder(it.coverPhoto?.color ?: "#26292c")
-                .into(holder.collection_iv)
+                    .with(holder.collection_iv)
+                    .saturateOnLoad()
+                    .load(it.coverPhoto?.urls?.regular)
+                    .thumbnail(Glide.with(holder.user_avatar.context).load(it.coverPhoto?.urls?.thumb))
+                    .materialPlaceHolder(it.coverPhoto?.color ?: "#26292c")
+                    .into(holder.collection_iv)
             GlideApp.with(holder.user_avatar)
-                .load(it.user?.profile_image?.medium)
-                .into(holder.user_avatar)
+                    .load(it.user?.profile_image?.medium)
+                    .into(holder.user_avatar)
         }
     }
 }

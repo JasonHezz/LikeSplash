@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class PreviewPhoto(
-    @Json(name = "id") val id: Int?,
-    @Json(name = "urls") val urls: Urls?
+        @Json(name = "id") val id: Int?,
+        @Json(name = "urls") val urls: Urls?
 ) : Parcelable

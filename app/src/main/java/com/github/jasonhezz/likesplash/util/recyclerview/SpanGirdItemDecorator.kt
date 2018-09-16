@@ -3,20 +3,19 @@ package com.github.jasonhezz.likesplash.util.recyclerview
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.arasthel.spannedgridlayoutmanager.SpanLayoutParams
 import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager
 
-class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemDecoration() {
+class SpanGirdItemDecoration(private var divider: Drawable) : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
 
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.onDraw(c, parent, state)
         drawHorizontal(c, parent)
         drawVertical(c, parent)
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         val adapterPosition = parent.getChildAdapterPosition(view)
         when (adapterPosition) {
@@ -35,7 +34,7 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         }*/
     }
 
-    private fun getSpanCount(parent: RecyclerView): Int {
+    private fun getSpanCount(parent: androidx.recyclerview.widget.RecyclerView): Int {
         // 列数
         val layoutManager = parent.layoutManager
         if (layoutManager is SpannedGridLayoutManager) {
@@ -45,11 +44,11 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         throw RuntimeException("SpanGirdItemDecoration only support SpannedGridLayoutManager")
     }
 
-    private fun drawHorizontal(c: Canvas, parent: RecyclerView) {
+    private fun drawHorizontal(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView) {
         val childCount = parent.childCount
         for (i in 0 until childCount) {
             val child = parent.getChildAt(i)
-            val params = child.layoutParams as RecyclerView.LayoutParams
+            val params = child.layoutParams as androidx.recyclerview.widget.RecyclerView.LayoutParams
             val left = child.left - params.leftMargin
             val right = (child.right + params.rightMargin + divider.intrinsicWidth)
             val top = child.bottom + params.bottomMargin
@@ -59,11 +58,11 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         }
     }
 
-    private fun drawVertical(c: Canvas, parent: RecyclerView) {
+    private fun drawVertical(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView) {
         val childCount = parent.childCount
         for (i in 0 until childCount) {
             val child = parent.getChildAt(i)
-            val params = child.layoutParams as RecyclerView.LayoutParams
+            val params = child.layoutParams as androidx.recyclerview.widget.RecyclerView.LayoutParams
             val top = child.top - params.topMargin
             val bottom = child.bottom + params.bottomMargin
             val left = child.right + params.rightMargin
@@ -73,20 +72,20 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         }
     }
 
-    private fun isLastRow(parent: RecyclerView, view: View, spanCount: Int): Boolean {
+    private fun isLastRow(parent: androidx.recyclerview.widget.RecyclerView, view: View, spanCount: Int): Boolean {
         val totalHeightSpan = getTotalHeightSpan(parent, spanCount)
         val childHeightSpan = getSpanGroupHeightIndex(parent, view, spanCount)
         if (childHeightSpan == totalHeightSpan) return true
         return false
     }
 
-    private fun isLastColumn(parent: RecyclerView, view: View, spanCount: Int): Boolean {
+    private fun isLastColumn(parent: androidx.recyclerview.widget.RecyclerView, view: View, spanCount: Int): Boolean {
         val totalChildSpan = getSpanGroupWidthIndex(parent, view, spanCount)
         if (totalChildSpan == spanCount) return true
         return false
     }
 
-    private fun getTotalHeightSpan(parent: RecyclerView, spanCount: Int): Int {
+    private fun getTotalHeightSpan(parent: androidx.recyclerview.widget.RecyclerView, spanCount: Int): Int {
         var span = 0
         var groupIndex = -1
         for (i in 0 until parent.childCount) {
@@ -100,7 +99,7 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
         return span
     }
 
-    private fun getSpanGroupWidthIndex(parent: RecyclerView, child: View, spanCount: Int): Int {
+    private fun getSpanGroupWidthIndex(parent: androidx.recyclerview.widget.RecyclerView, child: View, spanCount: Int): Int {
         var span = 0
         val positionSpanSize = getSpanWidthSize(child)
         val adapterPosition = parent.getChildAdapterPosition(child)
@@ -120,7 +119,7 @@ class SpanGirdItemDecoration(private var divider: Drawable) : RecyclerView.ItemD
     /**
      * FIX ME 计算跨列错误
      */
-    private fun getSpanGroupHeightIndex(parent: RecyclerView, child: View, spanCount: Int): Int {
+    private fun getSpanGroupHeightIndex(parent: androidx.recyclerview.widget.RecyclerView, child: View, spanCount: Int): Int {
         var span = 0
         var group = 0
         val positionSpanSize = getSpanWidthSize(child)

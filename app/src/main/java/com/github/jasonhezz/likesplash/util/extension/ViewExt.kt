@@ -15,12 +15,11 @@
  */
 package com.github.jasonhezz.likesplash.util.extension
 
-import android.support.design.widget.Snackbar
 import android.view.View
 
 //support library 25.3.1 is different from 26.1.0 under lolipop
 fun View.showSnackbar(snackbarText: String, timeLength: Int = 250) {
-    Snackbar.make(this, snackbarText, timeLength).show()
+    com.google.android.material.snackbar.Snackbar.make(this, snackbarText, timeLength).show()
 }
 
 

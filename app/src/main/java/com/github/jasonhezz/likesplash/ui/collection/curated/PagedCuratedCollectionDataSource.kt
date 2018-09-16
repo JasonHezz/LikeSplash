@@ -1,9 +1,9 @@
 package com.github.jasonhezz.likesplash.ui.collection.curated
 
 import android.annotation.SuppressLint
-import android.arch.core.executor.ArchTaskExecutor
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.arch.core.executor.ArchTaskExecutor
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Collection
@@ -14,7 +14,7 @@ import retrofit2.HttpException
  * Created by JavaCoder on 2017/12/12.
  */
 class PagedCuratedCollectionDataSource(
-    val api: CollectionService
+        val api: CollectionService
 ) : PageKeyedDataSource<Int, Collection>() {
 
     // keep a function reference for the retry event
@@ -38,8 +38,8 @@ class PagedCuratedCollectionDataSource(
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, Collection>
+            params: LoadInitialParams<Int>,
+            callback: LoadInitialCallback<Int, Collection>
     ) {
         networkState.postValue(Resource.INITIAL)
         initialLoad.postValue(Resource.INITIAL)
@@ -53,7 +53,7 @@ class PagedCuratedCollectionDataSource(
             } else {
                 retry = { loadInitial(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: Exception) {
@@ -77,7 +77,7 @@ class PagedCuratedCollectionDataSource(
             } else {
                 retry = { loadAfter(params, callback) }
                 networkState.postValue(
-                    Resource.error("error code: ${response.code()}")
+                        Resource.error("error code: ${response.code()}")
                 )
             }
         } catch (e: HttpException) {

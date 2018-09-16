@@ -3,23 +3,23 @@
 buildscript {
 
     ext.versions = [
-            'android_gradle' : '3.2.0-rc03',
+            'android_gradle' : '3.3.0-alpha10',
             'androidx'       : [
-                    'appcompat'        : '28.0.0-rc02',
-                    'browser'          : '28.0.0-rc02',
-                    'core'             : '1.1.1',
+                    'appcompat'        : '1.0.0-rc02',
+                    'browser'          : '1.0.0-rc02',
                     'constraint_layout': '2.0.0-alpha2',
-                    'core_ktx'         : '0.3',
-                    'fragment'         : '28.0.0-rc02',
-                    'emoji'            : '28.0.0-rc02',
-                    'lifecycle'        : '1.1.1',
-                    'paging'           : '1.0.1',
+                    'core_ktx'         : '1.0.0-rc02',
+                    'fragment_ktx'     : '1.0.0-rc02',
+                    'emoji'            : '1.0.0-rc02',
+                    'lifecycle'        : '2.0.0-beta01',
+                    'paging'           : '2.0.0-beta01',
                     'palette'          : '28.0.0-rc02',
-                    'recyclerview'     : '28.0.0-rc02',
-                    'room'             : '1.1.1',
-                    'test_runner'      : '1.0.2',
-                    'test_rules'       : '1.0.2',
-                    'work'             : '1.0.0-alpha06'
+                    'recyclerview'     : '1.0.0-rc02',
+                    'cardview'         : '1.0.0-rc02',
+                    'room'             : '2.o.o-rc01',
+                    'test_runner'      : '1.1.0-alpha4',
+                    'test_rules'       : '1.1.0-alpha4',
+                    'work'             : '1.0.0-alpha08'
             ],
             'koin'           : '1.0.0',
             'epoxy'          : '2.17.0',
@@ -27,8 +27,8 @@ buildscript {
             'kotlin'         : '1.2.70',
             'ktlint'         : '0.27.0',
             'moshi'          : '1.6.0',
-            'material_design': '28.0.0-rc01',
-            'espresso'       : '3.0.2',
+            'material_design': '1.0.0-rc02',
+            'espresso'       : '3.1.0-alpha4',
             'retrofit'       : '2.4.0'
     ]
 

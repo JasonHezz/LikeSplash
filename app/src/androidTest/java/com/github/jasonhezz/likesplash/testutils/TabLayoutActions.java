@@ -1,16 +1,16 @@
 package com.github.jasonhezz.likesplash.testutils;
 
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import org.hamcrest.Matcher;
 
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 
 public class TabLayoutActions {
     /**

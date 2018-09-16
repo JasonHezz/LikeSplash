@@ -14,12 +14,12 @@ interface MeService {
 
     @PUT("me")
     fun updateMeProfile(
-        @Query("username") username: String? = null,
-        @Query("first_name") firstName: String? = null,
-        @Query("last_name") lastName: String? = null,
-        @Query("email") email: String? = null,
-        @Query("url") url: String? = null,
-        @Query("location") location: String? = null,
-        @Query("bio") bio: String? = null
+            @Query("username") username: String? = null,
+            @Query("first_name") firstName: String? = null,
+            @Query("last_name") lastName: String? = null,
+            @Query("email") email: String? = null,
+            @Query("url") url: String? = null,
+            @Query("location") location: String? = null,
+            @Query("bio") bio: String? = null
     ): Single<Me>
 }

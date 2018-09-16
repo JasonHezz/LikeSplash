@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
@@ -24,10 +24,10 @@
             android:paddingLeft="@dimen/stagger_margin"
             android:paddingTop="@dimen/stagger_margin"
             android:paddingRight="@dimen/stagger_margin"
-            app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+            app:layoutManager="StaggeredGridLayoutManager"
             app:spanCount="@integer/stagger_column"
             tools:listitem="@layout/item_photo" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>
 
 

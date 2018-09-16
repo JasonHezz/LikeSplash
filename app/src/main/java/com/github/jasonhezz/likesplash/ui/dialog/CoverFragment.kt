@@ -9,13 +9,13 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
-import kotlinx.android.synthetic.main.dialog_add_cover.*
+import kotlinx.android.synthetic.main.activity_collection_detail.*
 
 /**
  * Created by JavaCoder on 2018/1/18.
  */
 class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callbacks,
-    CreateCollectionFragment.Callbacks,CloseCallback {
+        CreateCollectionFragment.Callbacks, CloseCallback {
 
     private var photo: Photo? = null
     private var data: List<Collection>? = null
@@ -29,8 +29,8 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callback
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.dialog_add_cover, container, false)
     }
@@ -38,13 +38,13 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callback
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlideApp
-            .with(view)
-            .load(photo?.urls?.regular)
-            .into(cover)
+                .with(view)
+                .load(photo?.urls?.regular)
+                .into(cover)
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction().add(
-                R.id.action_panel,
-                AddCollectionFragment.newInstance(photo!!, data as ArrayList<Collection>)
+                    R.id.action_panel,
+                    AddCollectionFragment.newInstance(photo!!, data as ArrayList<Collection>)
             ).commit()
         }
     }
@@ -61,13 +61,13 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callback
 
     override fun onCreateCollectionClick() {
         childFragmentManager.beginTransaction().setCustomAnimations(
-            R.anim.enter_from_right,
-            R.anim.exit_to_left,
-            R.anim.enter_from_left,
-            R.anim.exit_to_right
+                R.anim.enter_from_right,
+                R.anim.exit_to_left,
+                R.anim.enter_from_left,
+                R.anim.exit_to_right
         ).replace(
-            R.id.action_panel,
-            CreateCollectionFragment.newInstance()
+                R.id.action_panel,
+                CreateCollectionFragment.newInstance()
         ).addToBackStack(null).commit()
     }
 

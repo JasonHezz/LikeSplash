@@ -36,7 +36,7 @@ class PopularCollectionController(val context: Context) : AsyncEpoxyController()
                         id(collection.id)
                         collection(collection)
                         spanSizeOverride(
-                            NumItemsInGridRow(context, R.integer.grid_explore_collection_thumb_per_row)
+                                NumItemsInGridRow(context, R.integer.grid_explore_collection_thumb_per_row)
                         )
                     }
                 }

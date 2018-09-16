@@ -1,9 +1,9 @@
 package com.github.jasonhezz.likesplash.ui.collection.detail
 
 import android.annotation.SuppressLint
-import android.arch.core.executor.ArchTaskExecutor
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.arch.core.executor.ArchTaskExecutor
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import com.github.jasonhezz.likesplash.data.api.ApiResponse
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.entities.Photo

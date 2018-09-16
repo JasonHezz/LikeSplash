@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class PhotoLinks(
-    @Json(name = "self") val self: String? = null,
-    @Json(name = "html") val html: String? = null,
-    @Json(name = "download") val download: String? = null,
-    @Json(name = "download_location") val downloadLocation: String? = null
+        @Json(name = "self") val self: String? = null,
+        @Json(name = "html") val html: String? = null,
+        @Json(name = "download") val download: String? = null,
+        @Json(name = "download_location") val downloadLocation: String? = null
 ) : Parcelable

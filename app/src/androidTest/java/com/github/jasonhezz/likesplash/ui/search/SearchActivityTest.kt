@@ -1,10 +1,10 @@
 package com.github.jasonhezz.likesplash.ui.search
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.typeText
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.github.jasonhezz.likesplash.R
 import org.junit.Rule
 import org.junit.Test

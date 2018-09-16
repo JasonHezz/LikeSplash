@@ -1,20 +1,20 @@
 package com.github.jasonhezz.likesplash.ui.wallpaper
 
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Wallpaper
 import com.github.jasonhezz.likesplash.ui.MainActivity
 import com.github.jasonhezz.likesplash.ui.search.SearchActivity
 import com.github.jasonhezz.likesplash.util.adapter.TabFragmentAdapter
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_tab_wallpaper.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class WallpaperTabFragment : Fragment() {
@@ -40,9 +40,9 @@ class WallpaperTabFragment : Fragment() {
                 }
                 view_pager.apply {
                     adapter = tabAdapter
-                    addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+                    addOnPageChangeListener(com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener(tab_layout))
                 }
-                tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager))
+                tab_layout?.addOnTabSelectedListener(com.google.android.material.tabs.TabLayout.ViewPagerOnTabSelectedListener(view_pager))
             }
         })
         toolbar.run {

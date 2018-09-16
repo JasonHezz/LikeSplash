@@ -17,16 +17,16 @@
 package com.github.jasonhezz.likesplash.view
 
 import android.content.Context
-import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.util.extension.resolveThemeColor
 
 class TintingToolbar @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = R.attr.toolbarStyle
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = R.attr.toolbarStyle
 ) : Toolbar(context, attrs, defStyleAttr) {
 
     var iconTint: Int = 0
@@ -48,11 +48,11 @@ class TintingToolbar @JvmOverloads constructor(
 
     init {
         val a = context.obtainStyledAttributes(
-            attrs, R.styleable.TintingToolbar, defStyleAttr, 0
+                attrs, R.styleable.TintingToolbar, defStyleAttr, 0
         )
         iconTint = a.getColor(
-            R.styleable.TintingToolbar_tintIconColor,
-            context.resolveThemeColor(android.R.attr.colorControlNormal)
+                R.styleable.TintingToolbar_tintIconColor,
+                context.resolveThemeColor(android.R.attr.colorControlNormal)
         )
         a.recycle()
     }

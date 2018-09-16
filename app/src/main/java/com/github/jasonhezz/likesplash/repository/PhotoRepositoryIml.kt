@@ -1,10 +1,10 @@
 package com.github.jasonhezz.likesplash.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.DownLoadLink
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
@@ -19,25 +19,25 @@ import timber.log.Timber
 
 class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
     override fun getListPhotos(
-        page: Int, perPage: Int,
-        orderBy: OrderBy
+            page: Int, perPage: Int,
+            orderBy: OrderBy
     ): Listing<Photo> {
         val sourceFactory = EditorialPhotoDataSourceFactory(service)
         val livePagedList = LivePagedListBuilder(
-            sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                sourceFactory,
+                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         return Listing(
-            pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
-            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
-            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
-            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
+                pagedList = livePagedList,
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+                retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+                refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+                refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 
     override fun getListCuratedPhotos(page: Int, perPage: Int, orderBy: OrderBy): Single<List<Photo>> =
-        service.getListCuratedPhotos(page, perPage, orderBy)
+            service.getListCuratedPhotos(page, perPage, orderBy)
 
     override fun getAPhoto(id: String, w: Int?, h: Int?): LiveData<Photo> {
         val result = MutableLiveData<Photo>()
@@ -56,22 +56,22 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
     }
 
     override fun getListRandomPhoto(
-        collections: String?,
-        featured: String?,
-        username: String?,
-        query: String?,
-        orientation: String?,
-        w: Int?,
-        h: Int?,
-        count: Int
+            collections: String?,
+            featured: String?,
+            username: String?,
+            query: String?,
+            orientation: String?,
+            w: Int?,
+            h: Int?,
+            count: Int
     ): Single<List<Photo>> =
-        service.getListRandomPhoto(collections, featured, username, query, orientation, w, h, count)
+            service.getListRandomPhoto(collections, featured, username, query, orientation, w, h, count)
 
     override fun getAPhotoStatistics(id: Int, resolution: String?, quantity: Int) =
-        service.getAPhotoStatistics(id, resolution, quantity)
+            service.getAPhotoStatistics(id, resolution, quantity)
 
     override fun getAPhotoDownloadLink(id: String): Single<DownLoadLink> =
-        service.getAPhotoDownloadLink(id)
+            service.getAPhotoDownloadLink(id)
 
     override fun updateAPhoto(id: String) = service.updateAPhoto(id)
 

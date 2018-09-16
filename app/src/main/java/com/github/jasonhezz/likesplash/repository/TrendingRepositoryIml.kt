@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.repository
 
-import android.arch.lifecycle.Transformations
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.data.service.TrendingService
@@ -15,15 +15,15 @@ class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepo
     override fun getTrendingFeed(after: String?, perPage: Int): Listing<Photo> {
         val sourceFactory = TrendingPhotoDataSourceFactory(trendingService)
         val livePagedList = LivePagedListBuilder(
-            sourceFactory,
-            PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                sourceFactory,
+                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
         ).build()
         return Listing(
-            pagedList = livePagedList,
-            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
-            retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
-            refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
-            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
+                pagedList = livePagedList,
+                networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },
+                retry = { sourceFactory.sourceLiveData.value?.retryAllFailed() },
+                refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+                refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         )
     }
 }

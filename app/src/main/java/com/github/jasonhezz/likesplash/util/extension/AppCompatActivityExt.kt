@@ -19,18 +19,15 @@ package com.github.jasonhezz.likesplash.util.extension
  * Various extension functions for AppCompatActivity.
  */
 
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.IdRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
  * performed by the `fragmentManager`.
  */
-fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
+fun AppCompatActivity.replaceFragmentInActivity(fragment: androidx.fragment.app.Fragment, frameId: Int) {
     supportFragmentManager.transact {
         replace(frameId, fragment)
     }
@@ -40,7 +37,7 @@ fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int
  * The `fragment` is added to the container view with tag. The operation is
  * performed by the `fragmentManager`.
  */
-fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
+fun AppCompatActivity.addFragmentToActivity(fragment: androidx.fragment.app.Fragment, tag: String) {
     supportFragmentManager.transact {
         add(fragment, tag)
     }
@@ -56,7 +53,7 @@ fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.()
 /**
  * Runs a FragmentTransaction, then calls commit().
  */
-inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
+inline fun androidx.fragment.app.FragmentManager.transact(action: androidx.fragment.app.FragmentTransaction.() -> Unit) {
     beginTransaction().apply {
         action()
     }.commit()

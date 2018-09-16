@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Tag(
-    @Json(name = "title") val title: String? = null,
-    @Json(name = "url") val url: String? = null,
-    @Json(name = "description") val description: String? = null
+        @Json(name = "title") val title: String? = null,
+        @Json(name = "url") val url: String? = null,
+        @Json(name = "description") val description: String? = null
 ) : Parcelable

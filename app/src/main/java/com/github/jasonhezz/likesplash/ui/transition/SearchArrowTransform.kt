@@ -3,7 +3,7 @@ package com.github.jasonhezz.likesplash.ui.transition
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.support.v7.graphics.drawable.DrawerArrowDrawable
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import android.transition.Transition
 import android.transition.TransitionValues
 import android.util.AttributeSet

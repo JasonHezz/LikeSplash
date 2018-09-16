@@ -8,5 +8,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class DownLoadLink(
-    @Json(name = "url") val url: String
+        @Json(name = "url") val url: String
 ) : Parcelable

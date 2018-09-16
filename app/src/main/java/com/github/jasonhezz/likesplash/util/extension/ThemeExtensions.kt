@@ -18,8 +18,8 @@ package com.github.jasonhezz.likesplash.util.extension
 
 import android.content.Context
 import android.graphics.Color
-import android.support.annotation.AttrRes
 import android.util.TypedValue
+import androidx.annotation.AttrRes
 
 private val typedValue = TypedValue()
 

@@ -1,11 +1,10 @@
 package com.github.jasonhezz.likesplash.ui.collection.curated
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
@@ -15,14 +14,14 @@ import com.github.jasonhezz.likesplash.ui.epoxy.controller.CollectionPagedContro
 import com.github.jasonhezz.likesplash.util.recyclerview.SlideInItemAnimator
 import kotlinx.android.synthetic.main.fragment_curated_collection.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 /**
  * Created by JavaCoder on 2017/12/7.
  */
-class CuratedCollectionFragment : DialogFragment() {
+class CuratedCollectionFragment : androidx.fragment.app.DialogFragment() {
 
     private val viewModel by viewModel<CuratedCollectionViewModel>()
     private val controller by inject<CollectionPagedController> {

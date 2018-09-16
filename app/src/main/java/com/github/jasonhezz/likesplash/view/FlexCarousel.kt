@@ -1,8 +1,7 @@
 package com.github.jasonhezz.likesplash.view
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
@@ -29,8 +28,8 @@ internal class FlexCarousel(context: Context) : Carousel(context) {
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (layoutParams is StaggeredGridLayoutManager.LayoutParams && isFullSpan) {
-            (layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+        if (layoutParams is androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams && isFullSpan) {
+            (layoutParams as androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
         }
     }
 }

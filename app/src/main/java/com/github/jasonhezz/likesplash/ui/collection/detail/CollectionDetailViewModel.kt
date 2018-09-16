@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.ui.collection.detail
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.github.jasonhezz.likesplash.data.entities.Listing
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.repository.CollectionRepository
@@ -11,9 +11,9 @@ import com.github.jasonhezz.likesplash.repository.CollectionRepository
  * Created by JavaCoder on 2017/12/12.
  */
 class CollectionDetailViewModel(
-    val id: String,
-    val isCurated: Boolean,
-    repository: CollectionRepository
+        val id: String,
+        val isCurated: Boolean,
+        repository: CollectionRepository
 ) : ViewModel() {
 
     private val result = MutableLiveData<Listing<Photo>>()

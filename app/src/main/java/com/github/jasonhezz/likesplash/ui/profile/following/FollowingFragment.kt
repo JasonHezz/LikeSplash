@@ -1,35 +1,35 @@
 package com.github.jasonhezz.likesplash.ui.profile.following
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.api.Resource
 import com.github.jasonhezz.likesplash.data.api.Status
 import com.github.jasonhezz.likesplash.data.entities.User
 import com.github.jasonhezz.likesplash.ui.epoxy.controller.UserPagedController
 import kotlinx.android.synthetic.main.fragment_following.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+
 
 /**
  * Created by JavaCoder on 2017/12/8.
  */
-class FollowingFragment : Fragment() {
+class FollowingFragment : androidx.fragment.app.Fragment() {
 
     private val user: User? by lazy { arguments?.getParcelable<User>(ARG_USER_NAME) }
 
-    private val model: FollowingViewModel by viewModel { parametersOf(user?.username ?: "") }
+    private val model by viewModel<FollowingViewModel> { parametersOf(user?.username ?: "") }
     private val controller = UserPagedController().apply { setFilterDuplicates(true) }
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_following, container, false)
@@ -79,7 +79,7 @@ class FollowingFragment : Fragment() {
             val fragment = FollowingFragment()
             val args = Bundle()
             args.putParcelable(
-                ARG_USER_NAME, user
+                    ARG_USER_NAME, user
             )
             fragment.arguments = args
             return fragment

@@ -1,8 +1,8 @@
 package com.github.jasonhezz.likesplash.ui.epoxy.controller
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.paging.PagingEpoxyController
 import com.github.jasonhezz.likesplash.R

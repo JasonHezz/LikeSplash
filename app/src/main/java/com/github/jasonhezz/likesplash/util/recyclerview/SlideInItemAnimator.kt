@@ -19,28 +19,27 @@ package com.github.jasonhezz.likesplash.util.recyclerview
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
-import java.util.ArrayList
+import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 /**
  * A [RecyclerView.ItemAnimator] that fades & slides newly added items in from a given
  * direction.
  */
 class SlideInItemAnimator @JvmOverloads constructor(slideFromEdge: Int = Gravity.BOTTOM, layoutDirection: Int = -1) :
-    DefaultItemAnimator() {
+        androidx.recyclerview.widget.DefaultItemAnimator() {
 
-    private val pendingAdds = ArrayList<RecyclerView.ViewHolder>()
+    private val pendingAdds = ArrayList<androidx.recyclerview.widget.RecyclerView.ViewHolder>()
     private val slideFromEdge: Int = Gravity.getAbsoluteGravity(slideFromEdge, layoutDirection)
 
     init {
         addDuration = 160L
     }
 
-    override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
+    override fun animateAdd(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder): Boolean {
         holder.itemView.alpha = 0f
         when (slideFromEdge) {
             Gravity.LEFT -> holder.itemView.translationX = (-holder.itemView.width / 3).toFloat()
@@ -59,32 +58,32 @@ class SlideInItemAnimator @JvmOverloads constructor(slideFromEdge: Int = Gravity
             for (i in pendingAdds.indices.reversed()) {
                 val holder = pendingAdds[i]
                 holder.itemView.animate()
-                    .alpha(1f)
-                    .translationX(0f)
-                    .translationY(0f)
-                    .setDuration(addDuration)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationStart(animation: Animator) {
-                            dispatchAddStarting(holder)
-                        }
+                        .alpha(1f)
+                        .translationX(0f)
+                        .translationY(0f)
+                        .setDuration(addDuration)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationStart(animation: Animator) {
+                                dispatchAddStarting(holder)
+                            }
 
-                        override fun onAnimationEnd(animation: Animator) {
-                            animation.listeners.remove(this)
-                            dispatchAddFinished(holder)
-                            dispatchFinishedWhenDone()
-                        }
+                            override fun onAnimationEnd(animation: Animator) {
+                                animation.listeners.remove(this)
+                                dispatchAddFinished(holder)
+                                dispatchFinishedWhenDone()
+                            }
 
-                        override fun onAnimationCancel(animation: Animator) {
-                            clearAnimatedValues(holder.itemView)
-                        }
-                    }).interpolator =
-                    AnimationUtils.loadInterpolator(holder.itemView.context, android.R.interpolator.linear_out_slow_in)
+                            override fun onAnimationCancel(animation: Animator) {
+                                clearAnimatedValues(holder.itemView)
+                            }
+                        }).interpolator =
+                        AnimationUtils.loadInterpolator(holder.itemView.context, android.R.interpolator.linear_out_slow_in)
                 pendingAdds.removeAt(i)
             }
         }
     }
 
-    override fun endAnimation(holder: RecyclerView.ViewHolder) {
+    override fun endAnimation(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
         holder.itemView.animate().cancel()
         if (pendingAdds.remove(holder)) {
             dispatchAddFinished(holder)

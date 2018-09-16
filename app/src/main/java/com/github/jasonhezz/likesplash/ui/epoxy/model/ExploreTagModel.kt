@@ -26,9 +26,9 @@ abstract class ExploreTagModel : EpoxyModelWithHolder<BaseViewHolder>() {
         tag?.let {
             holder.tag_name.text = it.title?.capitalize()
             GlideApp
-                .with(holder.tag_thumbnail)
-                .load(it.url)
-                .into(holder.tag_thumbnail)
+                    .with(holder.tag_thumbnail)
+                    .load(it.url)
+                    .into(holder.tag_thumbnail)
             holder.card.setOnClickListener(tagClickListener)
         }
     }

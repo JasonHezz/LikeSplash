@@ -1,32 +1,27 @@
 package com.github.jasonhezz.likesplash.util.adapter
 
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-
 /**
  * Created by JavaCoder on 2017/6/16.
  */
-class TabFragmentAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class TabFragmentAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
-    private val fragments: MutableList<Fragment> = mutableListOf()
+    private val fragments: MutableList<androidx.fragment.app.Fragment> = mutableListOf()
     private val titles: MutableList<CharSequence> = mutableListOf()
 
-    fun addFragment(fm: Fragment) {
+    fun addFragment(fm: androidx.fragment.app.Fragment) {
         fragments.add(fm)
     }
 
-    fun addFragment(fm: Fragment, title: CharSequence) {
+    fun addFragment(fm: androidx.fragment.app.Fragment, title: CharSequence) {
         fragments.add(fm)
         titles.add(title)
     }
 
-    fun addFragment(position: Int, fm: Fragment) {
+    fun addFragment(position: Int, fm: androidx.fragment.app.Fragment) {
         fragments.add(position, fm)
     }
 
-    fun removeFragment(fm: Fragment) {
+    fun removeFragment(fm: androidx.fragment.app.Fragment) {
         fragments.remove(fm)
     }
 
@@ -34,7 +29,7 @@ class TabFragmentAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         fragments.removeAt(position)
     }
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         return fragments[position]
     }
 
@@ -46,7 +41,7 @@ class TabFragmentAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         return titles[position]
     }
 
-    fun setPageTitle(tabLayout: TabLayout, position: Int, title: CharSequence) {
+    fun setPageTitle(tabLayout: com.google.android.material.tabs.TabLayout, position: Int, title: CharSequence) {
 
         setPageTitle(position, title)
         if (position < tabLayout.tabCount) {

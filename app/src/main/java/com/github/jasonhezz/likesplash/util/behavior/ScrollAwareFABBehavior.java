@@ -1,15 +1,16 @@
 package com.github.jasonhezz.likesplash.util.behavior;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 public class ScrollAwareFABBehavior extends CoordinatorLayout.Behavior<View> {
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();

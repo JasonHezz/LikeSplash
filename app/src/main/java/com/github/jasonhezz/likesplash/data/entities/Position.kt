@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Position(
-    @Json(name = "latitude") val latitude: Double? = null,
-    @Json(name = "longitude") val longitude: Double? = null
+        @Json(name = "latitude") val latitude: Double? = null,
+        @Json(name = "longitude") val longitude: Double? = null
 ) : Parcelable

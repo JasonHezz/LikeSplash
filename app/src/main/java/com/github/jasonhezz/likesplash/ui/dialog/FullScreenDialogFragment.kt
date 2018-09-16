@@ -18,7 +18,7 @@ package com.github.jasonhezz.likesplash.ui.dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v7.app.AppCompatDialogFragment
+import androidx.appcompat.app.AppCompatDialogFragment
 
 open class FullScreenDialogFragment : AppCompatDialogFragment() {
 

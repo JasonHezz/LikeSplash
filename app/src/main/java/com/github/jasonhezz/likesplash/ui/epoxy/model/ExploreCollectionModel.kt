@@ -28,12 +28,12 @@ abstract class ExploreCollectionModel : EpoxyModelWithHolder<BaseViewHolder>() {
 
             val count = it.totalPhotos ?: 0
             holder.count_tv.text =
-                holder.count_tv.context.resources.getQuantityString(R.plurals.photo_plural, count, count)
+                    holder.count_tv.context.resources.getQuantityString(R.plurals.photo_plural, count, count)
             holder.title_tv.text = it.title
             GlideApp
-                .with(holder.collection_iv)
-                .load(it.coverPhoto?.urls?.regular)
-                .into(holder.collection_iv)
+                    .with(holder.collection_iv)
+                    .load(it.coverPhoto?.urls?.regular)
+                    .into(holder.collection_iv)
             holder.card.setOnClickListener(collectionClickListener)
         }
     }
