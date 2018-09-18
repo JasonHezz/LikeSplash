@@ -1,9 +1,11 @@
 package com.github.jasonhezz.likesplash.ui.dialog
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
 import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
@@ -14,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_collection_detail.*
 /**
  * Created by JavaCoder on 2018/1/18.
  */
-class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callbacks,
+class CoverFragment : AppCompatDialogFragment(), AddCollectionFragment.Callbacks,
         CreateCollectionFragment.Callbacks, CloseCallback {
 
     private var photo: Photo? = null
@@ -35,6 +37,10 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callback
         return inflater.inflate(R.layout.dialog_add_cover, container, false)
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return CustomDimDialog(context, resources.getBoolean(R.bool.isCoverDialogFullScreen))
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlideApp
@@ -42,10 +48,11 @@ class CoverFragment : FullScreenDialogFragment(), AddCollectionFragment.Callback
                 .load(photo?.urls?.regular)
                 .into(cover)
         if (savedInstanceState == null) {
-            childFragmentManager.beginTransaction().add(
-                    R.id.action_panel,
-                    AddCollectionFragment.newInstance(photo!!, data as ArrayList<Collection>)
-            ).commit()
+            childFragmentManager.beginTransaction()
+                    .add(
+                            R.id.action_panel,
+                            AddCollectionFragment.newInstance(photo!!, data as ArrayList<Collection>)
+                    ).commit()
         }
     }
 

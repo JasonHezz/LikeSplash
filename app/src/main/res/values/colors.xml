@@ -17,4 +17,5 @@
 
     <color name="item_background_color">#484848</color>
 
+    <color name="scrim">#33000000</color> <!-- 20% black -->
 </resources>

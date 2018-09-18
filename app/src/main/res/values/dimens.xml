@@ -4,4 +4,7 @@
     <!--https://android.googlesource.com/platform/frameworks/base/+/master/core/res/res/values/dimens.xml-->
     <dimen name="status_bar_height">24dp</dimen>
     <dimen name="stagger_margin">0dp</dimen>
+
+    <dimen name="dialog_rounded_corner">8dp</dimen>
+    <dimen name="dialog_elevation">24dp</dimen>
 </resources>

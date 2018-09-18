@@ -14,6 +14,7 @@
         android:maxWidth="200dp"
         android:scaleType="centerCrop"
         android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="2:4"
         app:layout_constraintTop_toTopOf="parent"

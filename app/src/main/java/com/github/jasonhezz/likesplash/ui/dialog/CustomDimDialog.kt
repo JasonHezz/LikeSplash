@@ -18,16 +18,16 @@ package com.github.jasonhezz.likesplash.ui.dialog
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDialog
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDialog
 import com.github.jasonhezz.likesplash.R
 
 /**
  * Dialog with custom background dim.
  */
-class FullScreenDialog(context: Context?) : AppCompatDialog(context, R.style.Theme_Splash_Dialog) {
+class CustomDimDialog(context: Context?, private val isFullScreen: Boolean = false) : AppCompatDialog(context, R.style.Theme_Splash_Dialog) {
 
     init {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -38,8 +38,12 @@ class FullScreenDialog(context: Context?) : AppCompatDialog(context, R.style.The
         window?.run {
             // Spread the dialog as large as the screen.
             addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if (isFullScreen) {
+                setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            } else {
+                setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            }
         }
     }
 }

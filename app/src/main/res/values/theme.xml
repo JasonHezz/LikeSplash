@@ -21,9 +21,9 @@
         <item name="android:windowAnimationStyle">@style/FadeWindowAnimationTransition</item>
     </style>
 
-    <style name="Theme.Splash.Dialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
+    <style name="Theme.Splash.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
     <style name="Theme.Splash.Profile">

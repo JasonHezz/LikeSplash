@@ -2,4 +2,5 @@
 <resources>
     <bool name="isInNightMode">false</bool>
     <bool name="ifAddSpace">false</bool>
+    <bool name="isCoverDialogFullScreen">true</bool>
 </resources>

@@ -20,9 +20,11 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialogFragment
 
-open class FullScreenDialogFragment : AppCompatDialogFragment() {
+open class CustomDimDialogFragment : AppCompatDialogFragment() {
+
+    open val isFullScreen = false
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return FullScreenDialog(context)
+        return CustomDimDialog(context, isFullScreen)
     }
 }

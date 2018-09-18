@@ -1,5 +1,7 @@
 <resources>
 
+    <style name="Widget.Splash" parent="@android:style/Widget" />
+
     <style name="Widget.Splash.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:background">@null</item>
         <item name="tabIndicatorColor">@color/splash_brand</item>
@@ -25,6 +27,11 @@
 
     <style name="Widget.Splash.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="colorButtonNormal">@color/splash_brand</item>
+    </style>
+
+    <style name="Widget.Splash.Dialog">
+        <item name="android:background">@drawable/dialog_bg</item>
+        <item name="android:elevation">@dimen/dialog_elevation</item>
     </style>
 
     <style name="FadeWindowAnimationTransition">
