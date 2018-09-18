@@ -11,7 +11,7 @@ import com.github.jasonhezz.likesplash.R
 import com.github.jasonhezz.likesplash.data.entities.Collection
 import com.github.jasonhezz.likesplash.data.entities.Photo
 import com.github.jasonhezz.likesplash.util.glide.GlideApp
-import kotlinx.android.synthetic.main.activity_collection_detail.*
+import kotlinx.android.synthetic.main.dialog_add_cover.*
 
 /**
  * Created by JavaCoder on 2018/1/18.
@@ -43,10 +43,12 @@ class CoverFragment : AppCompatDialogFragment(), AddCollectionFragment.Callbacks
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        GlideApp
-                .with(view)
-                .load(photo?.urls?.regular)
-                .into(cover)
+        cover?.let {
+            GlideApp
+                    .with(view)
+                    .load(photo?.urls?.regular)
+                    .into(it)
+        }
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction()
                     .add(
