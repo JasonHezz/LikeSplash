@@ -41,7 +41,7 @@ class PreviewCollectionPagedController(
                 .collection(item)
                 .tagDivider(tagDivider)
                 .previewImgDivider(previewImgDivider)
-                .collectionClickListener { model, parentView, clickedView, position ->
+                .collectionClickListener { view ->
                     callback?.onCollectionClick(item!!)
                 }
     }
