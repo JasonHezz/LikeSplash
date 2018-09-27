@@ -72,7 +72,7 @@ class CuratedCollectionFragment : androidx.fragment.app.DialogFragment() {
         list.itemAnimator = SlideInItemAnimator()
         list.setController(controller)
         viewModel.collections.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         viewModel.networkState.observe(this, Observer {
             when (it?.status) {

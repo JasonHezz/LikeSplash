@@ -20,7 +20,11 @@ class CollectionRepositoryIml(
         val sourceFactory = CuratedCollectionDataSourceFactory(api)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config
+                        .Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage).build()
         ).build()
         return Listing(
                 pagedList = livePagedList,
@@ -35,7 +39,11 @@ class CollectionRepositoryIml(
         val sourceFactory = FeaturedCollectionDataSourceFactory(api)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config.Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,
@@ -50,7 +58,11 @@ class CollectionRepositoryIml(
         val sourceFactory = CuratedCollectionPhotosDataSourceFactory(id, api)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config.Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setPageSize(perPage)
+                        .setEnablePlaceholders(false)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,
@@ -65,7 +77,11 @@ class CollectionRepositoryIml(
         val sourceFactory = CollectionPhotosDataSourceFactory(id, api)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config.Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setPageSize(perPage)
+                        .setEnablePlaceholders(false)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,

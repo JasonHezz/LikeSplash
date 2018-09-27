@@ -53,7 +53,7 @@ class FollowerFragment : Fragment() {
     private fun initController() {
         rv.setController(controller)
         viewModel.followers.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         viewModel.networkState.observe(this, Observer {
             when (it?.status) {

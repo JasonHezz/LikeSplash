@@ -56,7 +56,7 @@ class CollectionDetailActivity : AppCompatActivity() {
     private fun initController() {
         rv.setController(controller)
         viewModel.photos.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         viewModel.networkState.observe(this, Observer {
             when (it?.status) {

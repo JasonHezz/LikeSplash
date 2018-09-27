@@ -53,7 +53,7 @@ class FollowingFragment : androidx.fragment.app.Fragment() {
     private fun initController() {
         rv.setController(controller)
         model.follwers.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         model.networkState.observe(this, Observer {
             when (it?.status) {

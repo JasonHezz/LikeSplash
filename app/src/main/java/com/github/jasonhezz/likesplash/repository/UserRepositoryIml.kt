@@ -27,9 +27,13 @@ class UserRepositoryIml(
         val sourceFactory = UserFollowingDataSourceFactory(username, service)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config
+                        .Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage)
+                        .build()
         ).build()
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.initialLoad }
         return Listing(
                 pagedList = livePagedList,
                 networkState = Transformations.switchMap(sourceFactory.sourceLiveData) { it.networkState },

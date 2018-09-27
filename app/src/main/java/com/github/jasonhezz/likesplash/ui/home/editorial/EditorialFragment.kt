@@ -71,7 +71,7 @@ class EditorialFragment : Fragment() {
         rv.itemAnimator = SlideInItemAnimator()
         rv.setController(controller)
         viewModel.photos.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         viewModel.networkState.observe(this, Observer {
             when (it?.status) {

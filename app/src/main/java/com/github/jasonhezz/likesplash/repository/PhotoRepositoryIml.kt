@@ -25,7 +25,11 @@ class PhotoRepositoryIml(val service: PhotoService) : PhotoRepository {
         val sourceFactory = EditorialPhotoDataSourceFactory(service)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config.Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,

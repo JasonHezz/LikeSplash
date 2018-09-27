@@ -16,7 +16,11 @@ class TrendingRepositoryIml(val trendingService: TrendingService) : TrendingRepo
         val sourceFactory = TrendingPhotoDataSourceFactory(trendingService)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config.Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,

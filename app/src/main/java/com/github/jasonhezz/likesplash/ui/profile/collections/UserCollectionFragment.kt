@@ -60,7 +60,7 @@ class UserCollectionFragment : Fragment() {
         rv.itemAnimator = SlideInItemAnimator()
         rv.setController(controller)
         viewModel.collections.observe(this, Observer {
-            controller.setList(it)
+            controller.submitList(it)
         })
         viewModel.networkState.observe(this, Observer {
             when (it?.status) {

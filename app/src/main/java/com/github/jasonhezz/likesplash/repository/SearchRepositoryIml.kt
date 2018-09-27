@@ -20,7 +20,12 @@ class SearchRepositoryIml(private val service: SearchService) : SearchRepository
         val sourceFactory = SearchPhotoDataSourceFactory(query, service)
         val livePagedList = LivePagedListBuilder(
                 sourceFactory,
-                PagedList.Config.Builder().setInitialLoadSizeHint(perPage).setPageSize(perPage).build()
+                PagedList.Config
+                        .Builder()
+                        .setInitialLoadSizeHint(perPage)
+                        .setEnablePlaceholders(false)
+                        .setPageSize(perPage)
+                        .build()
         ).build()
         return Listing(
                 pagedList = livePagedList,
