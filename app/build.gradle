@@ -78,13 +78,13 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:${versions.koin}"
     implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
 
     //others
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'me.zhanghai.android.materialedittext:library:1.0.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.google.android:flexbox:1.1.0-beta1'
+    implementation 'com.google.android:flexbox:1.1.0'
     implementation 'com.arasthel:spannedgridlayoutmanager:2.0.2'
 
     testImplementation 'junit:junit:4.12'
